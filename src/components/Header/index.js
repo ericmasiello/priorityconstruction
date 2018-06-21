@@ -5,8 +5,6 @@ import Link from 'gatsby-link';
 import styled from 'styled-components';
 import Img from 'gatsby-image';
 
-import logo from '../../images/logo.svg';
-
 const HeaderWrapper = styled.div`
   background: #524763;
   margin-bottom: 1.45rem;
@@ -30,6 +28,22 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
 `;
 
+const Logo = styled.h1`
+  ${props => `background-image: url('${props.image}');`}
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  text-indent: -9999px;
+  overflow: hidden;
+  margin: 0;
+`;
+
+const LogoLink = styled(Link)`
+  display: inline-block;
+  height: 100px;
+  width: 440px;
+`;
+
 const MainNav = styled.nav`
   ul {
     list-style: none;
@@ -51,11 +65,15 @@ const MainNav = styled.nav`
 
 export default class Header extends Component {
   static propTypes = {
+    title: PropTypes.string,
     location: PropTypes.shape({
       pathname: PropTypes.string,
     }).isRequired,
     data: PropTypes.shape({
       background: PropTypes.shape({
+        sizes: PropTypes.shape({}),
+      }),
+      logo: PropTypes.shape({
         sizes: PropTypes.shape({}),
       }),
     }).isRequired,
@@ -82,7 +100,7 @@ export default class Header extends Component {
   };
 
   render() {
-    const { data, location } = this.props;
+    const { title, data, location } = this.props;
     return (
       <HeaderWrapper
         isHome={location.pathname === '/'}
@@ -93,17 +111,11 @@ export default class Header extends Component {
         }}
       >
         <HeaderContainer>
-          <h1 style={{ margin: 0 }}>
-            <Link
-              to="/"
-              style={{
-                color: 'white',
-                textDecoration: 'none',
-              }}
-            >
-              <img src={logo} alt="Level Up Logo" />
-            </Link>
-          </h1>
+          <LogoLink to="/">
+            <Logo image={data.logo.sizes.src}>
+              {title}
+            </Logo>
+          </LogoLink>
           <MainNav>
             <ul>
               <li>
