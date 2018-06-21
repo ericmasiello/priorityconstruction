@@ -14,7 +14,11 @@ const TemplateWrapper = ({ children, data, location }) => (
         { name: 'keywords', content: 'sample, something' },
       ]}
     />
-    <Header data={data} location={location} />
+    <Header
+      title={data.site.siteMetadata.title}
+      data={data}
+      location={location}
+    />
     <div
       style={{
         margin: '0 auto',
@@ -31,7 +35,16 @@ const TemplateWrapper = ({ children, data, location }) => (
 TemplateWrapper.propTypes = {
   children: PropTypes.func.isRequired,
   data: PropTypes.shape({
+    site: PropTypes.shape({
+      siteMetadata: PropTypes.shape({
+        title: PropTypes.string,
+        desc: PropTypes.string,
+      }),
+    }),
     background: PropTypes.shape({
+      sizes: PropTypes.shape({}),
+    }),
+    logo: PropTypes.shape({
       sizes: PropTypes.shape({}),
     }),
   }).isRequired,
@@ -50,8 +63,15 @@ export const query = graphql`
         desc
       }
     }
+
     background: imageSharp(id: { regex: "/bg.jpeg/" }) {
       sizes(maxWidth: 1240) {
+        ...GatsbyImageSharpSizes
+      }
+    }
+
+    logo: imageSharp(id: { regex: "/priorityconstructionlogo.jpg/" }) {
+      sizes(maxWidth: 800) {
         ...GatsbyImageSharpSizes
       }
     }
