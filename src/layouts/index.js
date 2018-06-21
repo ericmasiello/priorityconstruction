@@ -29,7 +29,15 @@ const TemplateWrapper = ({ children, data, location }) => (
 );
 
 TemplateWrapper.propTypes = {
-  children: PropTypes.func,
+  children: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    background: PropTypes.shape({
+      sizes: PropTypes.shape({}),
+    }),
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
 };
 
 export default TemplateWrapper;

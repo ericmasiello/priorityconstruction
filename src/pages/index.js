@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'gatsby-link';
+import PropTypes from 'prop-types';
 import PostListing from '../components/Posts/PostListing';
 
 const IndexPage = ({ data }) => (
@@ -10,6 +10,14 @@ const IndexPage = ({ data }) => (
     ))}
   </div>
 );
+
+IndexPage.propTypes = {
+  data: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
+      edges: PropTypes.arrayOf(PropTypes.shape({})),
+    }),
+  }).isRequired,
+};
 
 export default IndexPage;
 

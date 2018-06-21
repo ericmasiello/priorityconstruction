@@ -1,22 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class PostPage extends Component {
-  render() {
-    const { data } = this.props;
-    if (!data) return null;
-    return (
-      <div>
-        <span>{data.markdownRemark.frontmatter.date}</span>
-        <h1>{data.markdownRemark.frontmatter.title}</h1>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: data.markdownRemark.html,
-          }}
-        />
-      </div>
-    );
-  }
-}
+const PostPage = ({ data }) => {
+  if (!data) return null;
+  return (
+    <div>
+      <span>{data.markdownRemark.frontmatter.date}</span>
+      <h1>{data.markdownRemark.frontmatter.title}</h1>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: data.markdownRemark.html,
+        }}
+      />
+    </div>
+  );
+};
+
+PostPage.propTypes = {
+  data: PropTypes.shape({
+    markdownRemark: PropTypes.shape({
+      frontmatter: PropTypes.shape({
+        date: PropTypes.string,
+        title: PropTypes.string,
+      }),
+      html: PropTypes.string,
+    }),
+  }),
+};
+
+export default PostPage;
 
 export const query = graphql`
   query BlogPostQuery($slug: String!) {

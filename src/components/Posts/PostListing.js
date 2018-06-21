@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
 const PostListing = ({ post }) => (
@@ -10,5 +11,18 @@ const PostListing = ({ post }) => (
     <p>{post.excerpt}</p>
   </article>
 );
+
+PostListing.propTypes = {
+  post: PropTypes.shape({
+    fields: PropTypes.shape({
+      slug: PropTypes.string,
+    }),
+    frontmatter: PropTypes.shape({
+      title: PropTypes.string,
+      date: PropTypes.string,
+    }),
+    excerpt: PropTypes.string,
+  }).isRequired,
+};
 
 export default PostListing;
