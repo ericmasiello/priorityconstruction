@@ -27,7 +27,7 @@
     "develop": "gatsby develop",
     "lint": "eslint . '**/.*.js' --cache || true",
     "format": "prettier-eslint --write --ignore **/node_modules/** \"**/*.{js,jsx}\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "deploy": "gatsby build && gh-pages -d public -b master"
   },
   "devDependencies": {
