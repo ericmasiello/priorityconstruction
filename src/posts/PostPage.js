@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class PostPage extends Component {
   render() {
@@ -10,7 +10,7 @@ export default class PostPage extends Component {
         <h1>{data.markdownRemark.frontmatter.title}</h1>
         <div
           dangerouslySetInnerHTML={{
-            __html: data.markdownRemark.html
+            __html: data.markdownRemark.html,
           }}
         />
       </div>
