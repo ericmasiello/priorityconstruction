@@ -14,6 +14,8 @@ module.exports = {
   },
   rules: {
     'react/no-danger': 'off',
+    'jsx-a11y/anchor-is-valid': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
+    'react/require-default-props': 'off',
   },
 };
