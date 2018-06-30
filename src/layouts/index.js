@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import { injectGlobal } from 'styled-components';
 
 import Header from '../components/Header';
-import './index.css';
+import base from '../styles/base.css';
+
+/* eslint-disable-next-line */
+injectGlobal`
+  ${base}
+`;
 
 const TemplateWrapper = ({ children, data, location }) => (
   <div>
