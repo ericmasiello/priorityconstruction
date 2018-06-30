@@ -23,8 +23,9 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build": "gatsby build",
     "develop": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
     "lint": "eslint . '**/.*.js' --cache || true",
     "format": "prettier-eslint --write --ignore **/node_modules/** \"**/*.{js,jsx}\"",
     "test": "echo \"Error: no test specified\" && exit 0",
