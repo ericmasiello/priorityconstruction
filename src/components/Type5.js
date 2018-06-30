@@ -6,6 +6,6 @@ const result = typeComponentFactory(TYPE_SIZE.t5, {
   displayName: 'Type5',
 });
 
-export const RawType = result.Type;
+export const Type5 = result.Type;
 
 export default result.StyledType;
