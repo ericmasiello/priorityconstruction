@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+.c0 {
+  font-size: 10vw;
+  line-height: 1.6;
+}
+
+@media (max-width:10rem) {
+  .c0 {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width:10rem) {
+  .c0 {
+    font-size: 1rem;
+  }
+}
+
+<span
+  className="c0"
+/>
+`;
