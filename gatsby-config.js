@@ -1,7 +1,15 @@
 module.exports = {
   siteMetadata: {
     title: 'Priority Construction',
-    desc: 'A new website',
+    desc: 'Priority Construction Corp. is dedicated to complete different types of concrete projects throughout the Baltimore area by using highly skilled employees and paying attention to every detail of the project.',
+    keywords: [
+      'construction',
+      'Baltimore',
+      'Maryland',
+      'concrete',
+      'brick',
+      'flatwork',
+    ],
   },
   plugins: [
     'gatsby-plugin-react-helmet',

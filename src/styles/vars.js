@@ -1,6 +1,8 @@
 import tinyColor from 'tinycolor2';
 
+const unitToPx = unit => unit * 16;
 const highlight = '#c90044';
+export const scaler = 1.6;
 
 export const COLORS = {
   bg: '#fff',
@@ -13,6 +15,17 @@ export const COLORS = {
 };
 
 // type properties
+export const TYPE_SIZE = {
+  small: [unitToPx(0.75), scaler],
+  base: [unitToPx(1), scaler],
+  t5: [unitToPx(1.3), scaler],
+  t4: [unitToPx(1.5), scaler],
+  t3: [unitToPx(2), 1.3],
+  t2: [unitToPx(2.5), 1.2],
+  t1: [unitToPx(3), 1.1],
+  jumbo: [unitToPx(4), 1.1],
+};
+
 export const HEADER_WEIGHTS = {
   medium: 400,
   bold: 700,
