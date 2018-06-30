@@ -14,10 +14,10 @@ injectGlobal`
 const TemplateWrapper = ({ children, data, location }) => (
   <div>
     <Helmet
-      title="Gatsby Default Starter"
+      title={data.site.siteMetadata.title}
       meta={[
-        { name: 'description', content: 'Sample' },
-        { name: 'keywords', content: 'sample, something' },
+        { name: 'description', content: data.site.siteMetadata.desc },
+        { name: 'keywords', content: data.site.siteMetadata.keywords.join(', ') },
       ]}
     />
     <Header
@@ -45,6 +45,7 @@ TemplateWrapper.propTypes = {
       siteMetadata: PropTypes.shape({
         title: PropTypes.string,
         desc: PropTypes.string,
+        keywords: PropTypes.arrayOf(PropTypes.string),
       }),
     }),
     background: PropTypes.shape({
@@ -67,6 +68,7 @@ export const query = graphql`
       siteMetadata {
         title
         desc
+        keywords
       }
     }
 
