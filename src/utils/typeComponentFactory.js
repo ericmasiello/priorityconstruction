@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { type, scalableType } from '../styles/mixins';
 
-export default function makeTypeComponent(typeSize, defaultTag, displayName = `Type(${typeSize})`) {
+const typeComponentFactory = (typeSize, {
+  defaultTag = 'div',
+  displayName = `Type(${typeSize})`,
+} = {}) => {
   const Type = (props) => {
     const {
       tag: Tag,
@@ -40,4 +43,6 @@ export default function makeTypeComponent(typeSize, defaultTag, displayName = `T
     Type,
     StyledType,
   };
-}
+};
+
+export default typeComponentFactory;
