@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PostListing from '../components/Posts/PostListing';
+import Type1 from '../components/Type1';
 
 const IndexPage = ({ data }) => (
   <div>
-    <h2>Posts</h2>
+    <Type1>Posts</Type1>
     {data.allMarkdownRemark.edges.map(({ node }) => <PostListing key={node.id} post={node} />)}
   </div>
 );
