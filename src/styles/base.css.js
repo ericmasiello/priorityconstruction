@@ -1,6 +1,6 @@
 import { pxToRem } from './utils';
 import { baseFont, headerFont } from './mixins';
-import { COLORS, BODY_WEIGHTS, HEADER_WEIGHTS, FONT_URL } from './vars';
+import { COLORS, BODY_WEIGHTS, HEADER_WEIGHTS, FONT_URL, scaler } from './vars';
 
 export default `
 @import url('${FONT_URL}');
@@ -22,25 +22,19 @@ export default `
 
   body {
     margin: 0;
-    font-size: ${pxToRem(14)};
-    line-height: 1.35;
-    font-weight: ${BODY_WEIGHTS.light};
-
-    @media only screen and (min-width: 992px) {
-      font-size: ${pxToRem(15)};
-    }
-
-    @media only screen and (min-width: 1200px) {
-      font-size: ${pxToRem(16)};
-    }
+    font-size: ${pxToRem(16)};
+    line-height: ${scaler};
+    font-weight: ${BODY_WEIGHTS.medium};
   }
 
   input, textarea, select, button {
     font-size: inherit;
     font-family: inherit;
     font-weight: inherit;
+    color: inherit;
   }
 
+  label,
   input[type=button],
   input[type=submit],
   input[type=reset],
@@ -79,5 +73,10 @@ export default `
 
   blockquote {
     margin: 0;
+  }
+
+  hr {
+    border-width: 1px 0 0 0;
+    border-style: solid;
   }
 `;

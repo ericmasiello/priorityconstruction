@@ -16,6 +16,7 @@ module.exports = {
     'react/no-danger': 'off',
     'import/no-named-as-default': 'off',
     'jsx-a11y/anchor-is-valid': 'off',
+    'jsx-a11y/label-has-for': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
     'react/require-default-props': 'off',
   },
