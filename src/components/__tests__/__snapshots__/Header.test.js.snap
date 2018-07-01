@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+.c2 {
+  max-width: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+}
+
+.c1 {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+  position: relative;
+  z-index: 2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c0 {
+  background: #524763;
+  margin-bottom: 1.45rem;
+  overflow: hidden;
+  position: relative;
+  height: 20vh;
+}
+
+.c0 h1 img {
+  height: 80px;
+}
+
+<header
+  className="c0"
+>
+  <div
+    className="c1"
+  />
+  <div
+    className=" gatsby-image-outer-wrapper"
+    style={
+      Object {
+        "position": "initial",
+      }
+    }
+  >
+    <div
+      className="c2 gatsby-image-wrapper"
+      style={
+        Object {
+          "overflow": "hidden",
+          "position": "absolute",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "paddingBottom": "NaN%",
+            "width": "100%",
+          }
+        }
+      />
+      <img
+        alt=""
+        onLoad={[Function]}
+        src="/foo/bar.jpg"
+        style={
+          Object {
+            "height": "100%",
+            "left": 0,
+            "objectFit": "cover",
+            "objectPosition": "center",
+            "opacity": 1,
+            "position": "absolute",
+            "top": 0,
+            "transition": "opacity 0.5s",
+            "width": "100%",
+          }
+        }
+      />
+      <noscript
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<img src=\\"/foo/bar.jpg\\" alt=\\"\\" style=\\"position:absolute;top:0;left:0;transition:opacity 0.5s;transition-delay:0.5s;opacity:1;width:100%;height:100%;object-fit:cover;object-position:center\\"/>",
+          }
+        }
+      />
+    </div>
+  </div>
+</header>
+`;

@@ -1,8 +1,9 @@
 import React from 'react';
+import Type1 from '../components/Type1';
 
 const About = () => (
   <div>
-    <h1>About Us</h1>
+    <Type1>About Us</Type1>
     <p>
       Beard roof party cardigan locavore you probably haven&apos;t heard of them squid artisan
       edison bulb whatever normcore jianbing succulents. Bitters kickstarter before they sold out

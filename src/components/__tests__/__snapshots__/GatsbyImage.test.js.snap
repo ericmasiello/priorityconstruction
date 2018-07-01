@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <GatsbyImage> 1`] = `
+.c0 {
+  max-width: 100%;
+}
+
+<div
+  className=" gatsby-image-outer-wrapper"
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <div
+    className="c0 gatsby-image-wrapper"
+    style={
+      Object {
+        "overflow": "hidden",
+        "position": "relative",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "paddingBottom": "NaN%",
+          "width": "100%",
+        }
+      }
+    />
+    <img
+      alt=""
+      onLoad={[Function]}
+      src="/foo/bar.jpg"
+      style={
+        Object {
+          "height": "100%",
+          "left": 0,
+          "objectFit": "cover",
+          "objectPosition": "center",
+          "opacity": 1,
+          "position": "absolute",
+          "top": 0,
+          "transition": "opacity 0.5s",
+          "width": "100%",
+        }
+      }
+    />
+    <noscript
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<img src=\\"/foo/bar.jpg\\" alt=\\"\\" style=\\"position:absolute;top:0;left:0;transition:opacity 0.5s;transition-delay:0.5s;opacity:1;width:100%;height:100%;object-fit:cover;object-position:center\\"/>",
+        }
+      }
+    />
+  </div>
+</div>
+`;

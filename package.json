@@ -81,7 +81,7 @@
       "src"
     ],
     "moduleNameMapper": {
-      "\\.(scss|svg|png|jpg)$": "<rootDir>/src/styleMock.js"
+      "\\.(scss|svg|png|jpg)$": "<rootDir>/src/__tests__/styleMock.js"
     },
     "moduleFileExtensions": [
       "jsx",
@@ -92,6 +92,6 @@
       "text",
       "html"
     ],
-    "setupTestFrameworkScriptFile": "./src/setupTests.js"
+    "setupTestFrameworkScriptFile": "./src/__tests__/setupTests.js"
   }
 }
