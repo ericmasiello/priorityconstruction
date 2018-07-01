@@ -4,9 +4,10 @@ import Helmet from 'react-helmet';
 import { injectGlobal } from 'styled-components';
 
 import Header from '../components/Header';
+import PageContainer from '../components/PageContainer';
 import base from '../styles/base.css';
 
-/* eslint-disable-next-line */
+// eslint-disable-next-line no-unused-expressions
 injectGlobal`
   ${base}
 `;
@@ -25,16 +26,9 @@ const TemplateWrapper = ({ children, data, location }) => (
       data={data}
       location={location}
     />
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '0px 1.0875rem 1.45rem',
-        paddingTop: 0,
-      }}
-    >
+    <PageContainer>
       {children()}
-    </div>
+    </PageContainer>
   </div>
 );
 
