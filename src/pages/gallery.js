@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Img from 'gatsby-image';
+import Type2 from '../components/Type2';
+import List from '../components/List';
+import GatsbyImage from '../components/GatsbyImage';
 
 const GalleryPage = ({ data }) => (
   <div>
-    <h2>Gallery</h2>
-    <ul>
+    <Type2 tag="h1">Gallery</Type2>
+    <List>
       {data.gallery.edges.map(edge => (
-        <li key={edge.node.id}><Img sizes={edge.node.sizes} /></li>
+        <List.Item key={edge.node.id}><GatsbyImage sizes={edge.node.sizes} /></List.Item>
       ))}
-    </ul>
+    </List>
   </div>
 );
 
