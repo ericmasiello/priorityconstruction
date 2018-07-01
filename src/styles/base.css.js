@@ -72,4 +72,9 @@ export default `
   blockquote {
     margin: 0;
   }
+
+  hr {
+    border-width: 1px 0 0 0;
+    border-style: solid;
+  }
 `;
