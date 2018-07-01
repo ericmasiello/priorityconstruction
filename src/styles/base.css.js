@@ -24,15 +24,17 @@ export default `
     margin: 0;
     font-size: ${pxToRem(16)};
     line-height: ${scaler};
-    font-weight: ${BODY_WEIGHTS.light};
+    font-weight: ${BODY_WEIGHTS.medium};
   }
 
   input, textarea, select, button {
     font-size: inherit;
     font-family: inherit;
     font-weight: inherit;
+    color: inherit;
   }
 
+  label,
   input[type=button],
   input[type=submit],
   input[type=reset],
