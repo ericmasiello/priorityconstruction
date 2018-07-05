@@ -34,7 +34,8 @@
     "test": "jest",
     "test:watch": "npm run test -- --watch",
     "deploy": "gatsby build && gh-pages -d public -b master",
-    "storybook": "start-storybook -p 9001 -c storybook"
+    "storybook": "start-storybook -p 9001 -c storybook",
+    "storybook:dist": "build-storybook -c storybook -o styleguide"
   },
   "devDependencies": {
     "@storybook/addon-options": "3.2.12",

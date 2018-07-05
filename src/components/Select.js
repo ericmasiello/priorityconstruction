@@ -12,16 +12,25 @@ export const SelectElement = styled.select`
   border: none;
 `;
 
-export const Select = ({ tag: Tag, children, ...rest }) => (
-  <Tag {...rest}>
-    <SelectElement>
-      {children}
-    </SelectElement>
-  </Tag>
-);
+export const Select = (props) => {
+  const {
+    tag: Tag,
+    className,
+    children,
+    ...rest
+  } = props;
+  return (
+    <Tag className={className}>
+      <SelectElement {...rest}>
+        {children}
+      </SelectElement>
+    </Tag>
+  );
+};
 
 Select.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  className: PropTypes.string,
   children: PropTypes.node,
 };
 

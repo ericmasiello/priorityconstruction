@@ -104,5 +104,4 @@ export default styled(Header)`
       height: 80px;
     }
   }
-`
-
+`;
