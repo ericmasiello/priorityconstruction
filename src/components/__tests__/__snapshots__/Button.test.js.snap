@@ -9,6 +9,7 @@ exports[`should render 1`] = `
   padding: 0.5rem 1.5rem;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
+  min-height: 2.375rem;
 }
 
 .c0:hover,

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import tinyColor from 'tinycolor2';
 import { COLORS, BODY_WEIGHTS } from '../styles/vars';
+import { pxToRem } from '../styles/utils';
 
 export const Button = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
 
@@ -23,6 +24,7 @@ export default styled(Button)`
   text-transform: uppercase;
   padding: 0.5rem 1.5rem;
   transition: background-color 0.2s;
+  min-height: ${pxToRem(38)};
 
   &:hover, &:focus {
     background-color: ${tinyColor(COLORS.bg)
