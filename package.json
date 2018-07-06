@@ -38,8 +38,8 @@
     "storybook:dist": "build-storybook -c storybook -o styleguide"
   },
   "devDependencies": {
-    "@storybook/addon-options": "3.2.12",
-    "@storybook/react": "3.2.12",
+    "@storybook/addon-options": "3.3.15",
+    "@storybook/react": "3.3.15",
     "babel-eslint": "~8.2.3",
     "babel-jest": "~23.2.0",
     "babel-plugin-syntax-class-properties": "^6.13.0",
