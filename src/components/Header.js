@@ -44,7 +44,7 @@ export class Header extends Component {
 
   componentDidUpdate = (prevProps) => {
     const { isFullHeight } = this.props;
-    if (isFullHeight !== prevProps.isFullHeight) {
+    if (isFullHeight !== prevProps.isFullHeight && this.elm && this.elm.animate) {
       if (isFullHeight) {
         this.elm.animate([{ height: '20vh' }, { height: '70vh' }], {
           duration: 300,
