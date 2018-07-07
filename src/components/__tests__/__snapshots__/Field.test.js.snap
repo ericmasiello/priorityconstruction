@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+.c0 .sc-bdVaJa {
+  -webkit-flex: 0 1 100px;
+  -ms-flex: 0 1 100px;
+  flex: 0 1 100px;
+  max-width: 200px;
+}
+
+.c0 .sc-bwzfXH,
+.c0 .sc-htpNat,
+.c0 .sc-ifAKCX {
+  width: 100%;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`should render as stack 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.c0 .sc-bwzfXH,
+.c0 .sc-htpNat,
+.c0 .sc-ifAKCX {
+  width: 100%;
+}
+
+<div
+  className="c0"
+/>
+`;

@@ -36,29 +36,29 @@ const Contact = () => (
 
     <form name="contact" method="POST" data-netlify>
       <input type="hidden" name="form-name" value="contact" />
-      <Field>
-        <Label htmlFor="name">Name</Label>
-        <Input id="name" />
+      <Field nameAs="name">
+        <Label>Name</Label>
+        <Input />
       </Field>
-      <Field>
-        <Label htmlFor="company">Company</Label>
-        <Input id="company" />
+      <Field nameAs="company">
+        <Label>Company</Label>
+        <Input />
       </Field>
-      <Field>
-        <Label htmlFor="phone">Phone</Label>
-        <Input id="phone" type="phone" />
+      <Field nameAs="phone">
+        <Label>Phone</Label>
+        <Input />
       </Field>
-      <Field>
-        <Label htmlFor="fax">Fax</Label>
-        <Input id="fax" type="phone" />
+      <Field nameAs="fax">
+        <Label>Fax</Label>
+        <Input />
       </Field>
-      <Field>
-        <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" />
+      <Field nameAs="email">
+        <Label>Email</Label>
+        <Input />
       </Field>
-      <Field stack>
-        <Label htmlFor="comments">Additional comments</Label>
-        <Textarea id="comments" />
+      <Field stack nameAs="comments">
+        <Label>Additional comments</Label>
+        <Textarea />
       </Field>
       <Button type="submit">Submit</Button>
     </form>

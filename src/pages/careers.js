@@ -33,9 +33,9 @@ const Careers = () => (
       <input type="hidden" name="form-name" value="careers" />
       <fieldset>
         <Type3>Personal Information</Type3>
-        <Field>
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" />
+        <Field nameAs="name">
+          <Label>Name</Label>
+          <Input />
         </Field>
       </fieldset>
 
