@@ -30,6 +30,7 @@ const Careers = () => (
     </p>
 
     <form name="careers" method="POST" data-netlify>
+      <input type="hidden" name="form-name" value="careers" />
       <fieldset>
         <Type3>Personal Information</Type3>
         <Field>
