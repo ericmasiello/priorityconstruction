@@ -8,7 +8,7 @@ const stories = storiesOf('Select', module);
 
 stories.add('default', () => (<Select />));
 stories.add('with selection', () => (
-  <Select value="red">
+  <Select defaultValue="green">
     <option />
     <option value="red">Red</option>
     <option value="green">Green</option>

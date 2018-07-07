@@ -10,6 +10,7 @@ export const SelectElement = styled.select`
   appearance: none;
   background-color: transparent;
   border: none;
+  width: 100%;
 `;
 
 export const Select = (props) => {
