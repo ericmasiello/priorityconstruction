@@ -13,6 +13,7 @@ module.exports = {
     'import/core-modules': ['react', 'prop-types', 'react-dom'],
   },
   rules: {
+    'arrow-parens': 'off',
     'react/no-danger': 'off',
     'import/no-named-as-default': 'off',
     'jsx-a11y/anchor-is-valid': 'off',

@@ -65,6 +65,12 @@ const TemplateWrapper = ({ children, data, location }) => (
           <FlatList.Item>
             <Link to="/about">About</Link>
           </FlatList.Item>
+          <FlatList.Item>
+            <Link to="/careers">Careers</Link>
+          </FlatList.Item>
+          <FlatList.Item>
+            <Link to="/contact">Contact</Link>
+          </FlatList.Item>
         </FlatList>
       </MainNav>
     </Header>

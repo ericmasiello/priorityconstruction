@@ -46,5 +46,3 @@ module.exports = {
     'gatsby-plugin-netlify-cms',
   ],
 };
-
-// pathPrefix: "/levelupgatsby",
