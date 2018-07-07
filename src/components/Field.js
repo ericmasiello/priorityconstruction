@@ -6,16 +6,56 @@ import Input from './Input';
 import Textarea from './Textarea';
 import Select from './Select';
 
+const isLabel = (child) => child.type.displayName === Label.displayName;
+const isFormField = (child) => {
+  if (child.type.displayName === Input.displayName
+    || child.type.displayName === Textarea.displayName
+    || child.type.displayName === Select.displayName) {
+    return true;
+  }
+  return false;
+};
+
+const applyNameAs = (child, nameAs) => {
+  if (!nameAs) {
+    return child;
+  }
+
+  if (isLabel(child)) {
+    return React.cloneElement(child, Object.assign({
+      htmlFor: nameAs,
+    }, child.props));
+  }
+
+  if (isFormField(child)) {
+    return React.cloneElement(child, Object.assign({
+      id: nameAs,
+      name: nameAs,
+    }, child.props));
+  }
+  return child;
+}
+
 export const Field = (props) => {
-  const { tag: Tag, stack, ...rest } = props;
+  const {
+    tag: Tag,
+    nameAs,
+    children,
+    stack,
+    ...rest
+  } = props;
   return (
-    <Tag {...rest} />
+    <Tag {...rest}>
+      {React.Children.map(children, (child) => applyNameAs(child, nameAs))}
+    </Tag>
   );
 };
 
 Field.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   stack: PropTypes.bool,
+  children: PropTypes.node,
+  nameAs: PropTypes.string,
 };
 
 Field.defaultProps = {
