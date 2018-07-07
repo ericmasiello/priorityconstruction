@@ -63,13 +63,13 @@ const TemplateWrapper = ({ children, data, location }) => (
             <Link to="/">Home</Link>
           </FlatList.Item>
           <FlatList.Item>
-            <Link to="about">About</Link>
+            <Link to="/about">About</Link>
           </FlatList.Item>
           <FlatList.Item>
-            <Link to="careers">Careers</Link>
+            <Link to="/careers">Careers</Link>
           </FlatList.Item>
           <FlatList.Item>
-            <Link to="contact">Contact</Link>
+            <Link to="/contact">Contact</Link>
           </FlatList.Item>
         </FlatList>
       </MainNav>

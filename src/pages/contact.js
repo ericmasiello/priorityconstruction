@@ -14,7 +14,7 @@ const Contact = () => (
     <Type1>Contact Priority Construction</Type1>
     <p>
       Do you have a question on an ongoing project? Want us to do a specific job? {' '}
-      <Link to="careers">Looking for a place to work?</Link> Please don{'\''}t hesitate to contact us.
+      <Link to="/careers">Looking for a place to work?</Link> Please don{'\''}t hesitate to contact us.
     </p>
     <p>
       <a
