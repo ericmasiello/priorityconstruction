@@ -1,7 +1,8 @@
 import { pxToRem } from './utils';
+import { BODY_FONT_STACK } from './vars';
 
-export const baseFont = () => 'font-family: \'Source Sans Pro\', sans-serif;';
-export const headerFont = () => 'font-family: \'Lato\', sans-serif;';
+export const baseFont = () => `font-family: ${BODY_FONT_STACK}`;
+export const headerFont = () => `font-family: ${BODY_FONT_STACK}`;
 
 export const type = typeDef => (
   `

@@ -17,7 +17,7 @@ exports[`should render 1`] = `
   position: relative;
   display: inline-block;
   border: 1px solid rgb(193,193,193);
-  font-weight: 400;
+  font-weight: 500;
   background-color: #fff;
 }
 

@@ -1,6 +1,6 @@
 import { pxToRem } from './utils';
 import { baseFont, headerFont } from './mixins';
-import { COLORS, BODY_WEIGHTS, HEADER_WEIGHTS, FONT_URL, scaler } from './vars';
+import { COLORS, BODY_WEIGHTS, FONT_URL, scaler } from './vars';
 
 export default `
 @import url('${FONT_URL}');
@@ -24,7 +24,7 @@ export default `
     margin: 0;
     font-size: ${pxToRem(16)};
     line-height: ${scaler};
-    font-weight: ${BODY_WEIGHTS.medium};
+    font-weight: ${BODY_WEIGHTS.regular};
   }
 
   input, textarea, select, button {
@@ -44,7 +44,7 @@ export default `
 
   h1, h2, h3, h4, h5, h6 {
     ${headerFont()};
-    font-weight: ${HEADER_WEIGHTS.medium};
+    font-weight: ${BODY_WEIGHTS.medium};
     line-height: 1.1;
   }
 

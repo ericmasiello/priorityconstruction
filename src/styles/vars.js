@@ -28,14 +28,9 @@ export const TYPE_SIZE = {
   jumbo: [unitToPx(4), 1.1],
 };
 
-export const HEADER_WEIGHTS = {
-  medium: 400,
-  bold: 700,
-};
-
 export const BODY_WEIGHTS = {
-  light: 300,
-  medium: 400,
+  regular: 400,
+  medium: 500,
   bold: 600,
 };
 
@@ -45,4 +40,9 @@ const getNumericWeights = weights => (
     .join(',')
 );
 
-export const FONT_URL = `https://fonts.googleapis.com/css?family=Lato:${getNumericWeights(HEADER_WEIGHTS)}|Source+Sans+Pro:${getNumericWeights(BODY_WEIGHTS)}`;
+export const BODY_FONT_STACK = '\'Montserrat\', sans-serif';
+
+export const FONT_URL = [
+  'https://fonts.googleapis.com/css?family=',
+  `Montserrat:${getNumericWeights(BODY_WEIGHTS)}`,
+].join('');
