@@ -34,7 +34,7 @@ const Contact = () => (
 
     <OfficeMap />
 
-    <form data-netlify>
+    <form name="contact" data-netlify>
       <Field>
         <Label htmlFor="name">Name</Label>
         <Input id="name" />

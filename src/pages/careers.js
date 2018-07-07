@@ -29,7 +29,7 @@ const Careers = () => (
       to apply for a position with Priority Construction. Thank you!
     </p>
 
-    <form data-netlify>
+    <form name="careers" data-netlify>
       <fieldset>
         <Type3>Personal Information</Type3>
         <Field>
