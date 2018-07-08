@@ -1,44 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PostListing from '../components/Posts/PostListing';
+import { ImageSharpPropTypes, AllImageSharpPropTypes } from '../propTypes';
+import GatsbyImage from '../components/GatsbyImage';
+import List from '../components/List';
 
-const IndexPage = ({ data }) => (
+const HomePage = ({ data }) => (
   <div>
-    {data.allMarkdownRemark.edges.map(({ node }) => <PostListing key={node.id} post={node} />)}
+    Hello world
+    <GatsbyImage sizes={data.pool.sizes} />
+    <List>
+      {data.homageGallery.edges.map(edge => (
+        <GatsbyImage
+          key={edge.node.id}
+          sizes={edge.node.sizes}
+        />
+      ))}
+    </List>
   </div>
 );
 
-IndexPage.propTypes = {
+HomePage.displayName = 'HomePage';
+
+HomePage.propTypes = {
   data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.arrayOf(PropTypes.shape({})),
-    }),
+    pool: ImageSharpPropTypes,
+    homageGallery: AllImageSharpPropTypes,
   }).isRequired,
 };
 
-export default IndexPage;
+export default HomePage;
 
 export const query = graphql`
-  query SiteMeta {
-    site {
-      siteMetadata {
-        title
-        desc
+  query HomePage {
+    pool: imageSharp(id: {
+      regex: "/src/images/photos/poolside/"
+    }) {
+      id
+      sizes {
+        ...GatsbyImageSharpSizes
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+
+    homageGallery: allImageSharp(limit: 20, filter:{
+      id: {
+        regex: "/src/images/photos/homepage-gallery/"
+      }
+    }) {
       edges {
         node {
           id
-          frontmatter {
-            title
-            date(formatString: "MMMM DD YYYY")
+          sizes {
+            ...GatsbyImageSharpSizes
           }
-          fields {
-            slug
-          }
-          html
-          excerpt
         }
       }
     }
