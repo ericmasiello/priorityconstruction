@@ -7,19 +7,14 @@ exports[`should render 1`] = `
   top: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.3;
+  opacity: 1;
 }
 
 .c0 {
-  background: #524763;
   margin-bottom: 1.45rem;
   overflow: hidden;
   position: relative;
   height: 20vh;
-}
-
-.c0 h1 img {
-  height: 80px;
 }
 
 <div

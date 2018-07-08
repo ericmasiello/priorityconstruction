@@ -5,8 +5,10 @@ import 'jest-styled-components';
 import Masthead, { Masthead as Raw } from '../Masthead';
 
 const props = {
-  bgImageSizes: {
-    src: '/foo/bar.jpg',
+  bgImage: {
+    sizes: {
+      src: '/foo/bar.jpg',
+    },
   },
 };
 
