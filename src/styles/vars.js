@@ -10,11 +10,11 @@ export const COLORS = {
   base: baseColor,
   muted: '#787575',
   highlight: highlightColor,
-  link: tinyColor(highlightColor)
-    .setAlpha(0.6)
-    .toRgbString(),
+  link: '#18232C',
   border: tinyColor(baseColor).lighten(50).toRgbString(),
 };
+
+export const MAX_CONTENT_WIDTH = 1024;
 
 // type properties
 export const TYPE_SIZE = {
