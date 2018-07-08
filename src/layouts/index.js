@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import PageContainer from '../components/PageContainer';
 import FlatList from '../components/FlatList';
 import base from '../styles/base.css';
+import { ImageSharpPropTypes } from '../propTypes';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -90,12 +91,8 @@ TemplateWrapper.propTypes = {
         keywords: PropTypes.arrayOf(PropTypes.string),
       }),
     }),
-    background: PropTypes.shape({
-      sizes: PropTypes.shape({}),
-    }),
-    logo: PropTypes.shape({
-      sizes: PropTypes.shape({}),
-    }),
+    background: ImageSharpPropTypes,
+    logo: ImageSharpPropTypes,
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
@@ -114,7 +111,9 @@ export const query = graphql`
       }
     }
 
-    background: imageSharp(id: { regex: "/bg.jpeg/" }) {
+    background: imageSharp(id: {
+      regex: "/src/images/photos/poolside/"
+    }) {
       sizes(maxWidth: 1240) {
         ...GatsbyImageSharpSizes
       }
