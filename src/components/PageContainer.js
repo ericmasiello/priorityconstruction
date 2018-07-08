@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { pxToRem } from '../styles/utils';
+import { TagPropType } from '../propTypes';
 
 export const PageContainer = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
 
 PageContainer.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  tag: TagPropType,
 };
 
 PageContainer.defaultProps = {

@@ -16,3 +16,5 @@ export const AllImageSharpPropTypes = PropTypes.shape({
     node: ImageSharpPropTypes,
   })),
 });
+
+export const TagPropType = PropTypes.oneOfType([PropTypes.func, PropTypes.string]);
