@@ -18,3 +18,31 @@ export const AllImageSharpPropTypes = PropTypes.shape({
 });
 
 export const TagPropType = PropTypes.oneOfType([PropTypes.func, PropTypes.string]);
+
+export const Location = PropTypes.shape({
+  hash: PropTypes.string.isRequired,
+  key: PropTypes.string.isRequired,
+  pathname: PropTypes.string.isRequired,
+  search: PropTypes.string.isRequired,
+});
+
+export const History = PropTypes.shape({
+  action: PropTypes.string.isRequired,
+  go: PropTypes.func.isRequired,
+  goBack: PropTypes.func.isRequired,
+  goForward: PropTypes.func.isRequired,
+  length: PropTypes.number.isRequired,
+  listen: PropTypes.func.isRequired,
+  location: Location.isRequired,
+  push: PropTypes.func.isRequired,
+  replace: PropTypes.func.isRequired,
+});
+
+export const LayoutContext = PropTypes.shape({});
+
+export const Match = PropTypes.shape({
+  isExact: PropTypes.bool,
+  params: PropTypes.shape({}),
+  path: PropTypes.string,
+  url: PropTypes.string,
+});
