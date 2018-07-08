@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   siteMetadata: {
     title: 'Priority Construction',
@@ -10,6 +12,7 @@ module.exports = {
       'brick',
       'flatwork',
     ],
+    googleMapKey: process.env.GOOGLE_MAP_KEY,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
