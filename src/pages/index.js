@@ -6,7 +6,11 @@ import List from '../components/List';
 
 const HomePage = ({ data }) => (
   <div>
-    Hello world
+    <p>
+      Priority Construction Corp., is dedicated to complete different types
+      of concrete projects throughout the Baltimore area by using highly
+      skilled employees and paying attention to every detail of the project.
+    </p>
     <List>
       {data.homageGallery.edges.map(edge => (
         <GatsbyImage
