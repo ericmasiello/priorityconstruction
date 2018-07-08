@@ -34,7 +34,7 @@ const applyNameAs = (child, nameAs) => {
     }, child.props));
   }
   return child;
-}
+};
 
 export const Field = (props) => {
   const {
