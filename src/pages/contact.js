@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 import Type1 from '../components/Type1';
 import List from '../components/List';
@@ -9,7 +10,7 @@ import Input from '../components/Input';
 import Textarea from '../components/Textarea';
 import Button from '../components/Button';
 
-const Contact = () => (
+const Contact = ({ data }) => (
   <div>
     <Type1>Contact Priority Construction</Type1>
     <p>
@@ -32,7 +33,7 @@ const Contact = () => (
       </List.Item>
     </List>
 
-    <OfficeMap />
+    <OfficeMap mapKey={data.site.siteMetadata.googleMapKey} />
 
     <form name="contact" method="POST" data-netlify>
       <input type="hidden" name="form-name" value="contact" />
@@ -65,6 +66,26 @@ const Contact = () => (
   </div>
 );
 
+Contact.propTypes = {
+  data: PropTypes.shape({
+    site: PropTypes.shape({
+      siteMetadata: PropTypes.shape({
+        googleMapKey: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
+};
+
 Contact.displayName = 'Contact';
 
 export default Contact;
+
+export const query = graphql`
+  query ContactQuery {
+    site {
+      siteMetadata {
+        googleMapKey
+      }
+    }
+  }
+`;
