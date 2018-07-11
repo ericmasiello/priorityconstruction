@@ -41,4 +41,13 @@ export default styled(PhotoGrid)`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
+
+  ${List.Item} {
+    margin: 0;
+  }
+
+  ${List.Item} .gatsby-image-outer-wrapper,
+  ${GatsbyImage} {
+    height: 100%;
+  }
 `;
