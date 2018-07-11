@@ -2,24 +2,24 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Header from '../Header';
+import Masthead from '../Masthead';
 import Type1 from '../Type1';
 import Button from '../Button';
 import img from '../../images/bg.jpeg';
 
-const stories = storiesOf('Header', module);
+const stories = storiesOf('Masthead', module);
 const bg = {
   src: img,
 };
 
 stories.add('default', () => (
-  <Header bgImageSizes={bg} />
+  <Masthead bgImageSizes={bg} />
 ));
 
 stories.add('with content', () => (
-  <Header bgImageSizes={bg}>
+  <Masthead bgImageSizes={bg}>
     <Type1>This is a title</Type1>
-  </Header>
+  </Masthead>
 ));
 
 class FullHeightDemo extends React.Component {
@@ -27,9 +27,9 @@ class FullHeightDemo extends React.Component {
   handleToggle = () => this.setState({ isFullHeight: !this.state.isFullHeight })
   render() {
     return (
-      <Header bgImageSizes={bg} isFullHeight={this.state.isFullHeight}>
+      <Masthead bgImageSizes={bg} isFullHeight={this.state.isFullHeight}>
         <Button onClick={this.handleToggle}>Toggle</Button>
-      </Header>
+      </Masthead>
     );
   }
 }

@@ -2,16 +2,18 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow, mount } from 'enzyme';
 import 'jest-styled-components';
-import Header, { Header as Raw } from '../Header';
+import Masthead, { Masthead as Raw } from '../Masthead';
 
 const props = {
-  bgImageSizes: {
-    src: '/foo/bar.jpg',
+  bgImage: {
+    sizes: {
+      src: '/foo/bar.jpg',
+    },
   },
 };
 
 it('should render', () => {
-  const component = renderer.create(<Header {...props} />);
+  const component = renderer.create(<Masthead {...props} />);
 
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -35,10 +37,10 @@ it('should display additional classes', () => {
   expect(wrapper.hasClass('my-class')).toBe(true);
 });
 
-it('should render as a <header> by default', () => {
+it('should render as a <div> by default', () => {
   const wrapper = shallow(<Raw {...props} />);
 
-  expect(wrapper.type()).toBe('header');
+  expect(wrapper.type()).toBe('div');
 });
 
 it('should render with a custom tag', () => {

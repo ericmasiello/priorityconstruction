@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Type2 from '../components/Type2';
 import List from '../components/List';
 import GatsbyImage from '../components/GatsbyImage';
+import * as CustomPropTypes from '../propTypes';
 
 const GalleryPage = ({ data }) => (
   <div>
@@ -19,14 +20,7 @@ GalleryPage.displayName = 'GalleryPage';
 
 GalleryPage.propTypes = {
   data: PropTypes.shape({
-    gallery: PropTypes.shape({
-      edges: PropTypes.arrayOf(PropTypes.shape({
-        node: PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          sizes: PropTypes.shape({}),
-        }),
-      })),
-    }),
+    gallery: CustomPropTypes.AllImageSharp,
   }).isRequired,
 };
 
