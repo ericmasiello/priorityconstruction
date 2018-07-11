@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Type2 from '../components/Type2';
 import List from '../components/List';
 import GatsbyImage from '../components/GatsbyImage';
-import { AllImageSharpPropTypes } from '../propTypes';
+import * as CustomPropTypes from '../propTypes';
 
 const GalleryPage = ({ data }) => (
   <div>
@@ -20,7 +20,7 @@ GalleryPage.displayName = 'GalleryPage';
 
 GalleryPage.propTypes = {
   data: PropTypes.shape({
-    gallery: AllImageSharpPropTypes,
+    gallery: CustomPropTypes.AllImageSharp,
   }).isRequired,
 };
 

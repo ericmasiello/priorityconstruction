@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'gatsby-link';
-import { TagPropType, ImageSharpPropTypes } from '../propTypes';
+import * as CustomPropTypes from '../propTypes';
 
 const LogoLink = styled(Link)`
   display: inline-block;
@@ -19,8 +19,8 @@ const Logo = (props) => {
 };
 
 Logo.propTypes = {
-  tag: TagPropType,
-  image: ImageSharpPropTypes.isRequired,
+  tag: CustomPropTypes.Tag,
+  image: CustomPropTypes.ImageSharp.isRequired,
 };
 
 Logo.defaultProps = {

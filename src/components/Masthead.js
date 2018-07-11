@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import GatsbyImage from './GatsbyImage';
-import { ImageSharpPropTypes } from '../propTypes';
+import * as CustomPropTypes from '../propTypes';
 import { COLORS } from '../styles/vars';
 
 const BackgroundImage = GatsbyImage.extend`
@@ -21,7 +21,7 @@ export class Masthead extends Component {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     children: PropTypes.node,
     isFullHeight: PropTypes.bool,
-    bgImage: ImageSharpPropTypes.isRequired,
+    bgImage: CustomPropTypes.ImageSharp.isRequired,
     bgColor: PropTypes.string,
     opacity: PropTypes.number,
   };

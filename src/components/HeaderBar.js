@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { pxToRem } from '../styles/utils';
 import { COLORS, MAX_CONTENT_WIDTH } from '../styles/vars';
-import { TagPropType } from '../propTypes';
+import * as CustomPropTypes from '../propTypes';
 
 const HeaderBarContent = styled.div`
   margin: 0 auto;
@@ -27,7 +27,7 @@ const HeaderBar = (props) => {
 HeaderBar.displayName = 'HeaderBar';
 
 HeaderBar.propTypes = {
-  tag: TagPropType,
+  tag: CustomPropTypes.Tag,
   children: PropTypes.node,
 };
 

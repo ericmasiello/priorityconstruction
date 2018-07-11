@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { pxToRem } from '../styles/utils';
 import { MAX_CONTENT_WIDTH } from '../styles/vars';
-import { TagPropType } from '../propTypes';
+import * as CustomPropTypes from '../propTypes';
 
 export const PageContainer = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
 
 PageContainer.propTypes = {
-  tag: TagPropType,
+  tag: CustomPropTypes.Tag,
 };
 
 PageContainer.defaultProps = {

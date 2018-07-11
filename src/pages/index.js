@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AllImageSharpPropTypes } from '../propTypes';
+import * as CustomPropTypes from '../propTypes';
 import PhotoGrid from '../components/PhotoGrid';
 
 // TODO: move these to a utility file
@@ -50,7 +50,7 @@ HomePage.displayName = 'HomePage';
 
 HomePage.propTypes = {
   data: PropTypes.shape({
-    homageGallery: AllImageSharpPropTypes,
+    homageGallery: CustomPropTypes.AllImageSharp,
   }).isRequired,
 };
 

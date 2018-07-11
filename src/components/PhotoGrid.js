@@ -31,8 +31,8 @@ const PhotoGrid = (props) => {
 };
 
 PhotoGrid.propTypes = {
-  additionalImages: PropTypes.arrayOf(CustomPropTypes.ImageSharpPropTypes),
-  primaryImage: CustomPropTypes.ImageSharpPropTypes.isRequired,
+  additionalImages: PropTypes.arrayOf(CustomPropTypes.ImageSharp),
+  primaryImage: CustomPropTypes.ImageSharp.isRequired,
 };
 
 PhotoGrid.displayName = 'PhotoGrid';

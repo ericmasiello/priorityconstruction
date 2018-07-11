@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const ImageSharpPropTypes = PropTypes.shape({
+export const ImageSharp = PropTypes.shape({
   id: PropTypes.string,
   sizes: PropTypes.shape({
     aspectRatio: PropTypes.number,
@@ -11,13 +11,13 @@ export const ImageSharpPropTypes = PropTypes.shape({
   }),
 });
 
-export const AllImageSharpPropTypes = PropTypes.shape({
+export const AllImageSharp = PropTypes.shape({
   edges: PropTypes.arrayOf(PropTypes.shape({
-    node: ImageSharpPropTypes,
+    node: ImageSharp,
   })),
 });
 
-export const TagPropType = PropTypes.oneOfType([PropTypes.func, PropTypes.string]);
+export const Tag = PropTypes.oneOfType([PropTypes.func, PropTypes.string]);
 
 export const Location = PropTypes.shape({
   hash: PropTypes.string.isRequired,
