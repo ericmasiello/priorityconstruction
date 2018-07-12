@@ -1,7 +1,7 @@
 import tinyColor from 'tinycolor2';
 
 const unitToPx = unit => unit * 16;
-const highlightColor = '#c90044';
+const highlightColor = '#FBDB1E';
 const baseColor = '#424141';
 export const scaler = 1.5;
 
