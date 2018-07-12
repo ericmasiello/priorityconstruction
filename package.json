@@ -30,7 +30,7 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "lint": "eslint . '**/.*.js' --cache || true",
+    "lint": "eslint . '**/.*.js' --cache",
     "format": "prettier-eslint --write --ignore **/node_modules/** \"**/*.{js,jsx}\"",
     "test": "jest",
     "test:watch": "npm run test -- --watch",
