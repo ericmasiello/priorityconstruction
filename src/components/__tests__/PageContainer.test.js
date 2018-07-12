@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import 'jest-styled-components';
 import PageContainer, { PageContainer as Raw } from '../PageContainer';
 
@@ -12,7 +12,7 @@ it('should render', () => {
 });
 
 it('should render children', () => {
-  const wrapper = shallow(<Raw>Test</Raw>);
+  const wrapper = mount(<Raw>Test</Raw>);
 
   expect(wrapper.text()).toBe('Test');
 });

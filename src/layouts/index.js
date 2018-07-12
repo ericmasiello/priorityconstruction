@@ -2,15 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
-import Masthead from '../components/Masthead';
-import HeaderBar from '../components/HeaderBar';
 import PageContainer from '../components/PageContainer';
-import FlatList from '../components/FlatList';
-import Logo from '../components/Logo';
-import MainNavLink from '../components/MainNavLink';
 import base from '../styles/base.css';
-import { pxToRem } from '../styles/utils';
 import * as CustomPropTypes from '../propTypes';
+import ComposedFooter from '../composed/Footer';
+import ComposedMasthead from '../composed/Masthead';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -25,42 +21,40 @@ const Layout = (props) => {
     className,
   } = props;
 
+  const {
+    title,
+    desc,
+    keywords,
+    address,
+    phone,
+    fax,
+    email,
+  } = data.site.siteMetadata;
+
   return (
     <div className={className}>
       <Helmet
-        title={data.site.siteMetadata.title}
+        title={title}
         meta={[
-          { name: 'description', content: data.site.siteMetadata.desc },
-          { name: 'keywords', content: data.site.siteMetadata.keywords.join(', ') },
+          { name: 'description', content: desc },
+          { name: 'keywords', content: keywords.join(', ') },
         ]}
       />
-      <Masthead
-        bgImage={data.background}
+      <ComposedMasthead
+        background={data.background}
         isFullHeight={location.pathname === '/'}
-      >
-        <HeaderBar>
-          <Logo image={data.logo} />
-          <nav>
-            <FlatList>
-              <FlatList.Item>
-                <MainNavLink to="/services">Services</MainNavLink>
-              </FlatList.Item>
-              <FlatList.Item>
-                <MainNavLink to="/about">About</MainNavLink>
-              </FlatList.Item>
-              <FlatList.Item>
-                <MainNavLink to="/careers">Careers</MainNavLink>
-              </FlatList.Item>
-              <FlatList.Item>
-                <MainNavLink to="/contact">Contact</MainNavLink>
-              </FlatList.Item>
-            </FlatList>
-          </nav>
-        </HeaderBar>
-      </Masthead>
+        logo={data.logo}
+      />
       <PageContainer>
         {children()}
       </PageContainer>
+      <ComposedFooter
+        {...address}
+        logo={data.logo}
+        phone={phone}
+        fax={fax}
+        email={email}
+      />
     </div>
   );
 };
@@ -73,6 +67,15 @@ Layout.propTypes = {
         title: PropTypes.string,
         desc: PropTypes.string,
         keywords: PropTypes.arrayOf(PropTypes.string),
+        address: PropTypes.shape({
+          streetAddress: PropTypes.string.isRequired,
+          city: PropTypes.string.isRequired,
+          state: PropTypes.string.isRequired,
+          zip: PropTypes.number.isRequired,
+        }),
+        phone: PropTypes.string.isRequired,
+        fax: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
       }),
     }),
     background: CustomPropTypes.ImageSharp,
@@ -84,15 +87,7 @@ Layout.propTypes = {
 
 Layout.displayName = 'Layout';
 
-export default styled(Layout)`
-  ${FlatList.Item} {
-    margin-right: ${pxToRem(30)};
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-`;
+export default styled(Layout)``;
 
 export const query = graphql`
   query LayoutQuery {
@@ -100,7 +95,16 @@ export const query = graphql`
       siteMetadata {
         title
         desc
-        keywords
+        keywords,
+        address {
+          streetAddress
+          state
+          city
+          zip
+        }
+        phone
+        fax
+        email
       }
     }
 

@@ -79,4 +79,8 @@ export default `
     border-width: 1px 0 0 0;
     border-style: solid;
   }
+
+  address {
+    font-style: normal;
+  }
 `;
