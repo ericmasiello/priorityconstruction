@@ -14,23 +14,33 @@ injectGlobal`
   ${base}
 `;
 
+const setBackgroundImageFromPath = (data, pathname) => {
+  const path = pathname.replace('/', '');
+  switch (path) {
+    case 'about':
+      return data.backgroundAbout;
+    default:
+      return data.backgroundHome;
+  }
+};
+
 class Layout extends React.Component {
   /* eslint-disable react/no-unused-state */
   state = {
     logo: this.props.data.logo,
     title: this.props.data.site.siteMetadata.title,
     isFullHeight: this.props.location.pathname === '/',
-    background: this.props.data.background,
+    background: setBackgroundImageFromPath(this.props.data, this.props.location.pathname),
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
       this.setState({
         isFullHeight: nextProps.location.pathname === '/',
+        background: setBackgroundImageFromPath(nextProps.data, nextProps.location.pathname),
       });
     }
   }
-
 
   render() {
     const {
@@ -59,9 +69,7 @@ class Layout extends React.Component {
               { name: 'keywords', content: keywords.join(', ') },
             ]}
           />
-          <ComposedMasthead
-            background={data.background}
-          />
+          <ComposedMasthead />
           <PageContainer>
             {children()}
           </PageContainer>
@@ -97,7 +105,8 @@ Layout.propTypes = {
         email: PropTypes.string.isRequired,
       }),
     }),
-    background: CustomPropTypes.ImageSharp,
+    backgroundHome: CustomPropTypes.ImageSharp,
+    backgroundAbout: CustomPropTypes.ImageSharp,
     logo: CustomPropTypes.ImageSharp,
   }).isRequired,
   location: CustomPropTypes.Location.isRequired,
@@ -127,8 +136,16 @@ export const query = graphql`
       }
     }
 
-    background: imageSharp(id: {
-      regex: "/src/images/photos/poolside/"
+    backgroundHome: imageSharp(id: {
+      regex: "/src/images/photos/mastheads/poolside/"
+    }) {
+      sizes(maxWidth: 1240) {
+        ...GatsbyImageSharpSizes
+      }
+    }
+
+    backgroundAbout: imageSharp(id: {
+      regex: "/src/images/photos/mastheads/underpass/"
     }) {
       sizes(maxWidth: 1240) {
         ...GatsbyImageSharpSizes
