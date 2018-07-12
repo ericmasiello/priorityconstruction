@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import GatsbyImage from './GatsbyImage';
+import Type1 from '../components/Type1';
 import * as CustomPropTypes from '../propTypes';
 import { COLORS } from '../styles/vars';
+import { pxToRem } from '../styles/utils';
 
 const BackgroundImage = GatsbyImage.extend`
   left: 0;
@@ -71,7 +73,7 @@ export class Masthead extends Component {
 
     return (
       <Tag ref={this.setRef} {...rest}>
-        {children}
+        {children && (<Type1>{children}</Type1>)}
         <BackgroundImage
           style={{
             position: 'absolute',
@@ -90,4 +92,19 @@ export default styled(Masthead)`
   overflow: hidden;
   position: relative;
   height: ${({ isFullHeight }) => (isFullHeight ? '70vh' : '20vh')};
+  display: flex;
+  align-items: center;
+  max-height: ${pxToRem(700)};
+
+  ${Type1} {
+    position: relative;
+    z-index: 2;
+    color: ${COLORS.highlight};
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 0;
+  }
 `;
