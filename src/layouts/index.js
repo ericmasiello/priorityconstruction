@@ -7,57 +7,75 @@ import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
 import ComposedFooter from '../composed/Footer';
 import ComposedMasthead from '../composed/Masthead';
+import LayoutContext from '../layoutContext';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
   ${base}
 `;
 
-const Layout = (props) => {
-  const {
-    children,
-    data,
-    location,
-    className,
-  } = props;
+class Layout extends React.Component {
+  /* eslint-disable react/no-unused-state */
+  state = {
+    logo: this.props.data.logo,
+    title: this.props.data.site.siteMetadata.title,
+    isFullHeight: this.props.location.pathname === '/',
+  };
 
-  const {
-    title,
-    desc,
-    keywords,
-    address,
-    phone,
-    fax,
-    email,
-  } = data.site.siteMetadata;
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.setState({
+        isFullHeight: nextProps.location.pathname === '/',
+      });
+    }
+  }
 
-  return (
-    <div className={className}>
-      <Helmet
-        title={title}
-        meta={[
-          { name: 'description', content: desc },
-          { name: 'keywords', content: keywords.join(', ') },
-        ]}
-      />
-      <ComposedMasthead
-        background={data.background}
-        isFullHeight={location.pathname === '/'}
-        logo={data.logo}
-      />
-      <PageContainer>
-        {children()}
-      </PageContainer>
-      <ComposedFooter
-        {...address}
-        logo={data.logo}
-        phone={phone}
-        fax={fax}
-        email={email}
-      />
-    </div>
-  );
-};
+
+  render() {
+    const {
+      children,
+      data,
+      className,
+    } = this.props;
+
+    const {
+      title,
+      desc,
+      keywords,
+      address,
+      phone,
+      fax,
+      email,
+    } = data.site.siteMetadata;
+
+    return (
+      <LayoutContext.Provider value={this.state}>
+        <div className={className}>
+          <Helmet
+            title={title}
+            meta={[
+              { name: 'description', content: desc },
+              { name: 'keywords', content: keywords.join(', ') },
+            ]}
+          />
+          <ComposedMasthead
+            background={data.background}
+          />
+          <PageContainer>
+            {children()}
+          </PageContainer>
+          <ComposedFooter
+            {...address}
+            logo={data.logo}
+            phone={phone}
+            fax={fax}
+            email={email}
+          />
+        </div>
+      </LayoutContext.Provider>
+    );
+  }
+}
 
 Layout.propTypes = {
   children: PropTypes.func.isRequired,
