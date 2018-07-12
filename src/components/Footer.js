@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { pxToRem } from '../styles/utils';
-import { MAX_CONTENT_WIDTH } from '../styles/vars';
+import { PAGE_SPACING } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
 import Container from './Container';
 
@@ -44,8 +44,5 @@ Footer.defaultProps = {
 };
 
 export default styled(Footer)`
-  margin: 0 auto;
-  max-width: ${pxToRem(MAX_CONTENT_WIDTH)};
-  padding-top: 1.45rem;
-  padding-bottom: 1.45rem;
+  padding: 1.45rem ${pxToRem(PAGE_SPACING.horizontal)};
 `;
