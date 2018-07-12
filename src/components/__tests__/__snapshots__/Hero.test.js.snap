@@ -26,16 +26,9 @@ exports[`should render 1`] = `
   max-height: 43.75rem;
 }
 
-.c0 .sc-htpNat {
+.c0 .sc-bxivhb {
   position: relative;
   z-index: 2;
-  color: #FBDB1E;
-  background-color: rgba(0,0,0,0.5);
-  text-align: center;
-  width: 100%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  margin-bottom: 0;
 }
 
 <div

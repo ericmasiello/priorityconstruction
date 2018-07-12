@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import GatsbyImage from './GatsbyImage';
-import Type1 from './Type1';
+import HeroBanner from './HeroBanner';
 import * as CustomPropTypes from '../propTypes';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
@@ -73,7 +73,7 @@ export class Hero extends Component {
 
     return (
       <Tag ref={this.setRef} {...rest}>
-        {children && (<Type1>{children}</Type1>)}
+        {children}
         <BackgroundImage
           style={{
             position: 'absolute',
@@ -96,15 +96,8 @@ export default styled(Hero)`
   align-items: center;
   max-height: ${pxToRem(700)};
 
-  ${Type1} {
+  ${HeroBanner} {
     position: relative;
     z-index: 2;
-    color: ${COLORS.highlight};
-    background-color: rgba(0, 0, 0, 0.5);
-    text-align: center;
-    width: 100%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    margin-bottom: 0;
   }
 `;

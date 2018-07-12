@@ -11,6 +11,7 @@ import MainNavLink from '../components/MainNavLink';
 import FlatList from '../components/FlatList';
 import ComposedFooter from '../composed/Footer';
 import Hero from '../components/Hero';
+import HeroBanner from '../components/HeroBanner';
 import LayoutContext from '../layoutContext';
 import { pxToRem } from '../styles/utils';
 
@@ -120,7 +121,7 @@ class Layout extends React.Component {
             bgImage={this.state.background}
             isFullHeight={this.state.isFullHeight}
           >
-            {this.state.pageTitle}
+            {this.state.pageTitle && <HeroBanner>{this.state.pageTitle}</HeroBanner>}
           </Hero>
           <PageContainer>
             {children()}
