@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow, mount } from 'enzyme';
 import 'jest-styled-components';
-import Masthead, { Masthead as Raw } from '../Masthead';
+import Hero, { Hero as Raw } from '../Hero';
 
 const props = {
   bgImage: {
@@ -13,7 +13,7 @@ const props = {
 };
 
 it('should render', () => {
-  const component = renderer.create(<Masthead {...props} />);
+  const component = renderer.create(<Hero {...props} />);
 
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();

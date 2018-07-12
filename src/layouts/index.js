@@ -10,7 +10,7 @@ import Logo from '../components/Logo';
 import MainNavLink from '../components/MainNavLink';
 import FlatList from '../components/FlatList';
 import ComposedFooter from '../composed/Footer';
-import Masthead from '../components/Masthead';
+import Hero from '../components/Hero';
 import LayoutContext from '../layoutContext';
 import { pxToRem } from '../styles/utils';
 
@@ -116,12 +116,12 @@ class Layout extends React.Component {
               </FlatList>
             </nav>
           </HeaderBar>
-          <Masthead
+          <Hero
             bgImage={this.state.background}
             isFullHeight={this.state.isFullHeight}
           >
             {this.state.pageTitle}
-          </Masthead>
+          </Hero>
           <PageContainer>
             {children()}
           </PageContainer>
@@ -197,7 +197,7 @@ export const query = graphql`
     }
 
     backgroundHome: imageSharp(id: {
-      regex: "/src/images/photos/mastheads/poolside/"
+      regex: "/src/images/photos/heroes/poolside/"
     }) {
       sizes(maxWidth: 1240) {
         ...GatsbyImageSharpSizes
@@ -205,7 +205,7 @@ export const query = graphql`
     }
 
     backgroundAbout: imageSharp(id: {
-      regex: "/src/images/photos/mastheads/underpass/"
+      regex: "/src/images/photos/heroes/underpass/"
     }) {
       sizes(maxWidth: 1240) {
         ...GatsbyImageSharpSizes
