@@ -19,7 +19,7 @@ export const ComposedMasthead = (props) => {
       {(layout) => (
         <Masthead
           {...rest}
-          bgImage={background}
+          bgImage={background || layout.background}
           isFullHeight={layout.isFullHeight}
         >
           <HeaderBar>
@@ -50,7 +50,7 @@ export const ComposedMasthead = (props) => {
 ComposedMasthead.displayName = 'ComposedMasthead';
 
 ComposedMasthead.propTypes = {
-  background: CustomPropTypes.ImageSharp.isRequired,
+  background: CustomPropTypes.ImageSharp,
 };
 
 export default styled(ComposedMasthead)`

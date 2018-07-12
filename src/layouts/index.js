@@ -20,6 +20,7 @@ class Layout extends React.Component {
     logo: this.props.data.logo,
     title: this.props.data.site.siteMetadata.title,
     isFullHeight: this.props.location.pathname === '/',
+    background: this.props.data.background,
   };
 
   componentWillReceiveProps(nextProps) {

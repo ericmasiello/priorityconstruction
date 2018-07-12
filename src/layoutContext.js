@@ -4,6 +4,7 @@ const LayoutContext = React.createContext({
   logo: {},
   title: '',
   isFullHeight: false,
+  background: {},
 });
 
 export default LayoutContext;
