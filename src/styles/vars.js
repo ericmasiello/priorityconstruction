@@ -16,6 +16,10 @@ export const COLORS = {
 
 export const MAX_CONTENT_WIDTH = 1024;
 
+export const PAGE_SPACING = {
+  horizontal: 20,
+};
+
 // type properties
 export const TYPE_SIZE = {
   small: [unitToPx(0.8125), scaler],

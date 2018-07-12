@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { pxToRem } from '../styles/utils';
-import { COLORS, MAX_CONTENT_WIDTH } from '../styles/vars';
+import { COLORS, MAX_CONTENT_WIDTH, PAGE_SPACING } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
 
 const HeaderBarContent = styled.div`
@@ -37,7 +37,7 @@ HeaderBar.defaultProps = {
 
 export default styled(HeaderBar)`
   background-color: ${COLORS.bg};
-  padding: 1.45rem 1.0875rem;
+  padding: 1.45rem ${pxToRem(PAGE_SPACING.horizontal)};
   position: relative;
   z-index: 2;
 `;

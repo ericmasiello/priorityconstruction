@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { pxToRem } from '../styles/utils';
 import { MAX_CONTENT_WIDTH } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
+import Container from './Container';
 
 export const Footer = (props) => {
   const {
@@ -15,11 +16,14 @@ export const Footer = (props) => {
     phone,
     fax,
     email,
+    children,
     ...rest
   } = props;
 
   return (
-    <Tag {...rest} />
+    <Tag {...rest}>
+      <Container>{children}</Container>
+    </Tag>
   );
 };
 
@@ -32,6 +36,7 @@ Footer.propTypes = {
   phone: PropTypes.string,
   fax: PropTypes.string,
   email: PropTypes.string,
+  children: PropTypes.node,
 };
 
 Footer.defaultProps = {
@@ -41,5 +46,6 @@ Footer.defaultProps = {
 export default styled(Footer)`
   margin: 0 auto;
   max-width: ${pxToRem(MAX_CONTENT_WIDTH)};
-  padding: 1.45rem 1.0875rem;
+  padding-top: 1.45rem;
+  padding-bottom: 1.45rem;
 `;
