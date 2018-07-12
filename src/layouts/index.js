@@ -5,39 +5,67 @@ import styled, { injectGlobal } from 'styled-components';
 import PageContainer from '../components/PageContainer';
 import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
+import HeaderBar from '../components/HeaderBar';
+import Logo from '../components/Logo';
+import MainNavLink from '../components/MainNavLink';
+import FlatList from '../components/FlatList';
 import ComposedFooter from '../composed/Footer';
-import ComposedMasthead from '../composed/Masthead';
+import Masthead from '../components/Masthead';
 import LayoutContext from '../layoutContext';
+import { pxToRem } from '../styles/utils';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
   ${base}
 `;
 
-const setBackgroundImageFromPath = (data, pathname) => {
+const getConfigFromPathname = (configs, pathname) => {
   const path = pathname.replace('/', '');
-  switch (path) {
-    case 'about':
-      return data.backgroundAbout;
-    default:
-      return data.backgroundHome;
-  }
+  return Object.assign({}, configs.base, configs[path]);
 };
 
 class Layout extends React.Component {
+  /* eslint-disable react/sort-comp */
+  pageConfigs = {
+    base: {
+      background: this.props.data.backgroundHome,
+      isFullHeight: false,
+      pageTitle: null,
+    },
+    '': {
+      isFullHeight: true,
+    },
+    about: {
+      background: this.props.data.backgroundAbout,
+      isFullHeight: true,
+      pageTitle: 'About Us',
+    },
+    careers: {
+      isFullHeight: false,
+    },
+    contact: {
+      isFullHeight: false,
+    },
+  };
+
   /* eslint-disable react/no-unused-state */
   state = {
     logo: this.props.data.logo,
     title: this.props.data.site.siteMetadata.title,
-    isFullHeight: this.props.location.pathname === '/',
-    background: setBackgroundImageFromPath(this.props.data, this.props.location.pathname),
+    pageTitle: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).pageTitle,
+    isFullHeight: getConfigFromPathname(
+      this.pageConfigs,
+      this.props.location.pathname,
+    ).isFullHeight,
+    background: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).background,
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
+      const config = getConfigFromPathname(this.pageConfigs, nextProps.location.pathname);
+
       this.setState({
-        isFullHeight: nextProps.location.pathname === '/',
-        background: setBackgroundImageFromPath(nextProps.data, nextProps.location.pathname),
+        ...config,
       });
     }
   }
@@ -69,7 +97,31 @@ class Layout extends React.Component {
               { name: 'keywords', content: keywords.join(', ') },
             ]}
           />
-          <ComposedMasthead />
+          <HeaderBar>
+            <Logo image={this.state.logo} />
+            <nav>
+              <FlatList>
+                <FlatList.Item>
+                  <MainNavLink to="/services">Services</MainNavLink>
+                </FlatList.Item>
+                <FlatList.Item>
+                  <MainNavLink to="/about">About</MainNavLink>
+                </FlatList.Item>
+                <FlatList.Item>
+                  <MainNavLink to="/careers">Careers</MainNavLink>
+                </FlatList.Item>
+                <FlatList.Item>
+                  <MainNavLink to="/contact">Contact</MainNavLink>
+                </FlatList.Item>
+              </FlatList>
+            </nav>
+          </HeaderBar>
+          <Masthead
+            bgImage={this.state.background}
+            isFullHeight={this.state.isFullHeight}
+          >
+            {this.state.pageTitle}
+          </Masthead>
           <PageContainer>
             {children()}
           </PageContainer>
@@ -115,7 +167,15 @@ Layout.propTypes = {
 
 Layout.displayName = 'Layout';
 
-export default styled(Layout)``;
+export default styled(Layout)`
+  ${FlatList.Item} {
+    margin-right: ${pxToRem(30)};
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+`;
 
 export const query = graphql`
   query LayoutQuery {
