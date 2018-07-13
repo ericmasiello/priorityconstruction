@@ -33,9 +33,14 @@ class HeaderBar extends React.Component {
   }
 
   render() {
-    const { tag: Tag, children, ...rest } = this.props;
+    const {
+      tag: Tag,
+      innerRef,
+      children,
+      ...rest
+    } = this.props;
     return (
-      <Tag {...rest} data-stuck={this.state.stuck}>
+      <Tag {...rest} data-stuck={this.state.stuck} ref={innerRef}>
         <HeaderBarContent>
           {children}
         </HeaderBarContent>
@@ -49,6 +54,7 @@ HeaderBar.displayName = 'HeaderBar';
 HeaderBar.propTypes = {
   tag: CustomPropTypes.Tag,
   children: PropTypes.node,
+  innerRef: PropTypes.func,
 };
 
 HeaderBar.defaultProps = {

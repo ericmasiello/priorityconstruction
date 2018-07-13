@@ -59,6 +59,7 @@ class Layout extends React.Component {
       this.props.location.pathname,
     ).isFullHeight,
     background: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).background,
+    navRef: React.createRef(),
   };
 
   componentWillReceiveProps(nextProps) {
@@ -98,7 +99,7 @@ class Layout extends React.Component {
               { name: 'keywords', content: keywords.join(', ') },
             ]}
           />
-          <HeaderBar>
+          <HeaderBar innerRef={this.state.navRef}>
             <Logo image={this.state.logo} />
             <nav>
               <FlatList>

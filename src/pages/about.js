@@ -1,20 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import List from '../components/List';
 import ContentBlock from '../components/ContentBlock';
 import NavBlockList from '../components/NavBlockList';
 import { pxToRem } from '../styles/utils';
-import { COLORS, PAGE_SPACING } from '../styles/vars';
+import { COLORS, PAGE_SPACING, MAX_CONTENT_WIDTH } from '../styles/vars';
+import { withLayoutContext } from '../layoutContext';
 
 const StickyNavContainer = styled.div`
   position: fixed;
-  top: ${pxToRem(64)};
+  margin: auto;
   left: 0;
   z-index: 9;
   width: 100%;
   background-color: ${COLORS.highlight3};
   transition: transform 0.5s;
+  padding-left: ${pxToRem(PAGE_SPACING.horizontal)};
+  padding-right: ${pxToRem(PAGE_SPACING.horizontal)};
 
   ${({ show }) => (
     show
@@ -22,12 +26,16 @@ const StickyNavContainer = styled.div`
       : `transform: translateY(${pxToRem(-200)});`
   )}
 
+  ${({ offset }) => `top: ${pxToRem(offset)};`}
+
   ${NavBlockList} {
+    max-width: ${pxToRem(MAX_CONTENT_WIDTH)};
     justify-content: flex-end;
+    margin: auto;
   }
 
   ${NavBlockList.Item}:last-child a {
-    padding-right: ${pxToRem(PAGE_SPACING.horizontal)};
+    padding-right: 0;
   }
 `;
 
@@ -77,19 +85,36 @@ class About extends React.Component {
   state = { showStickyNav: false };
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll, false);
+    window.addEventListener('scroll', this.handleSetStickyState, false);
+    window.addEventListener('resize', this.handleSetStickyState, false);
+  }
+
+  componentDidUpdate() {
+    if (!this.pageNav) {
+      // eslint-disable-next-line react/no-find-dom-node
+      this.pageNav = ReactDOM.findDOMNode(this.props.navRef.current);
+    }
+
+    if (!this.stuckNavElm) {
+      // eslint-disable-next-line react/no-find-dom-node
+      this.stuckNavElm = ReactDOM.findDOMNode(this.stuckNavList.current);
+    }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll, false);
+    window.removeEventListener('scroll', this.handleSetStickyState, false);
+    window.removeEventListener('resize', this.handleSetStickyState, false);
   }
 
   leftNavList = React.createRef();
+  stuckNavList = React.createRef();
+  pageNav = null;
+  stuckNavElm = null;
 
   handleShowSticky = () => this.setState({ showStickyNav: true });
   handleHideSticky = () => this.setState({ showStickyNav: false });
 
-  handleScroll = () => {
+  handleSetStickyState = () => {
     if (!this.leftNavList.current) {
       return;
     }
@@ -101,16 +126,34 @@ class About extends React.Component {
     }
   };
 
+  handleScrollIntoView = (event) => {
+    event.preventDefault();
+    const url = new URL(event.target.href);
+    const elm = document.querySelector(url.hash);
+    elm.scrollIntoViewIfNeeded();
+
+    const pageNavHeight = this.pageNav ? this.pageNav.clientHeight : 0;
+    const stuckNavElmHeight = this.stuckNavElm ? this.stuckNavElm.clientHeight : 0;
+
+    document.documentElement.scrollTop = (
+      elm.offsetTop - pageNavHeight - stuckNavElmHeight
+    );
+  }
+
   render() {
     const { className } = this.props;
 
     return (
       <section className={className}>
-        <StickyNavContainer show={this.state.showStickyNav}>
+        <StickyNavContainer
+          ref={this.stuckNavList}
+          show={this.state.showStickyNav}
+          offset={this.pageNav ? this.pageNav.clientHeight : 0}
+        >
           <NavBlockList row>
             {navItems.map((item => (
               <NavBlockList.Item key={item.href}>
-                <a href={item.href}>{item.children}</a>
+                <a href={item.href} onClick={this.handleScrollIntoView}>{item.children}</a>
               </NavBlockList.Item>
             )))}
           </NavBlockList>
@@ -123,7 +166,7 @@ class About extends React.Component {
               <NavBlockList>
                 {navItems.map((item => (
                   <NavBlockList.Item key={item.href}>
-                    <a href={item.href}>{item.children}</a>
+                    <a href={item.href} onClick={this.handleScrollIntoView}>{item.children}</a>
                   </NavBlockList.Item>
                 )))}
               </NavBlockList>
@@ -202,6 +245,9 @@ About.displayName = 'About';
 
 About.propTypes = {
   className: PropTypes.string,
+  navRef: PropTypes.shape({
+    current: PropTypes.shape({}),
+  }),
 };
 
-export default styled(About)``;
+export default withLayoutContext(About);
