@@ -121,7 +121,6 @@ class About extends React.Component {
     event.preventDefault();
     const url = new URL(event.target.href);
     const elm = document.querySelector(url.hash);
-    elm.scrollIntoViewIfNeeded();
 
     const pageNavHeight = this.pageNav ? this.pageNav.clientHeight : 0;
     const stuckNavElmHeight = this.stuckNavElm ? this.stuckNavElm.clientHeight : 0;
