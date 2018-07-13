@@ -14,13 +14,12 @@ const Contact = ({ data }) => (
   <div>
     <Type1>Contact Priority Construction</Type1>
     <p>
-      Do you have a question on an ongoing project? Want us to do a specific job? {' '}
-      <Link to="/careers">Looking for a place to work?</Link> Please don{'\''}t hesitate to contact us.
+      Do you have a question on an ongoing project? Want us to do a specific job?{' '}
+      <Link to="/careers">Looking for a place to work?</Link> Please don{"'"}t hesitate to contact
+      us.
     </p>
     <p>
-      <a
-        href="https://www.google.com/maps/place/1315+W+Hamburg+St/@39.277222,-76.632891,17z/"
-      >
+      <a href="https://www.google.com/maps/place/1315+W+Hamburg+St/@39.277222,-76.632891,17z/">
         1315 West Hamburg Street, Baltimore, MD 21203
       </a>
     </p>

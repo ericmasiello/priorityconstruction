@@ -8,26 +8,17 @@ import * as CustomPropTypes from '../propTypes';
 import { pxToRem } from '../styles/utils';
 import { COLORS } from '../styles/vars';
 
-
-export const ComposedFooter = (props) => {
-  const {
-    logo,
-    streetAddress,
-    city,
-    state,
-    zip,
-    phone,
-    fax,
-    email,
-    ...rest
-  } = props;
+export const ComposedFooter = props => {
+  const { logo, streetAddress, city, state, zip, phone, fax, email, ...rest } = props;
   return (
     <Footer {...rest}>
       <Logo image={logo} />
       <address>
         <List>
           <List.Item>{streetAddress}</List.Item>
-          <List.Item>{city}, {state} {zip}</List.Item>
+          <List.Item>
+            {city}, {state} {zip}
+          </List.Item>
         </List>
         <List>
           <List.Item>phone: {phone}</List.Item>

@@ -34,7 +34,7 @@ export class Hero extends Component {
     opacity: 1,
   };
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = prevProps => {
     const { isFullHeight } = this.props;
     if (isFullHeight !== prevProps.isFullHeight && this.elm && this.elm.animate) {
       if (isFullHeight) {
@@ -55,21 +55,13 @@ export class Hero extends Component {
     }
   };
 
-  setRef = (elm) => {
+  setRef = elm => {
     // eslint-disable-next-line react/no-find-dom-node
     this.elm = ReactDOM.findDOMNode(elm);
   };
 
   render() {
-    const {
-      bgColor,
-      bgImage,
-      isFullHeight,
-      children,
-      opacity,
-      tag: Tag,
-      ...rest
-    } = this.props;
+    const { bgColor, bgImage, isFullHeight, children, opacity, tag: Tag, ...rest } = this.props;
 
     return (
       <Tag ref={this.setRef} {...rest}>

@@ -3,19 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { type, scalableType } from '../styles/mixins';
 
-const typeComponentFactory = (typeSize, {
-  defaultTag = 'div',
-  displayName = `Type(${typeSize})`,
-} = {}) => {
-  const Type = (props) => {
-    const {
-      tag: Tag,
-      scale,
-      ...rest
-    } = props;
-    return (
-      <Tag {...rest} />
-    );
+const typeComponentFactory = (
+  typeSize,
+  { defaultTag = 'div', displayName = `Type(${typeSize})` } = {},
+) => {
+  const Type = props => {
+    const { tag: Tag, scale, ...rest } = props;
+    return <Tag {...rest} />;
   };
 
   Type.defaultProps = {
@@ -33,10 +27,7 @@ const typeComponentFactory = (typeSize, {
 
   const StyledType = styled(Type)`
     ${props =>
-    ({ ...Type.defaultProps, ...props }.scale
-      ? scalableType(typeSize)
-      : type(typeSize)
-    )};
+      ({ ...Type.defaultProps, ...props }.scale ? scalableType(typeSize) : type(typeSize))};
   `;
 
   return {

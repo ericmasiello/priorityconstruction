@@ -20,19 +20,24 @@ injectGlobal`
   ${base}
 `;
 
-const links = [{
-  to: '/services',
-  children: 'Services',
-}, {
-  to: '/about',
-  children: 'About',
-}, {
-  to: '/careers',
-  children: 'Careers',
-}, {
-  to: '/contact',
-  children: 'Contact',
-}];
+const links = [
+  {
+    to: '/services',
+    children: 'Services',
+  },
+  {
+    to: '/about',
+    children: 'About',
+  },
+  {
+    to: '/careers',
+    children: 'Careers',
+  },
+  {
+    to: '/contact',
+    children: 'Contact',
+  },
+];
 
 const getConfigFromPathname = (configs, pathname) => {
   const path = pathname.replace('/', '');
@@ -68,10 +73,8 @@ class Layout extends React.Component {
     logo: this.props.data.logo,
     title: this.props.data.site.siteMetadata.title,
     pageTitle: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).pageTitle,
-    isFullHeight: getConfigFromPathname(
-      this.pageConfigs,
-      this.props.location.pathname,
-    ).isFullHeight,
+    isFullHeight: getConfigFromPathname(this.pageConfigs, this.props.location.pathname)
+      .isFullHeight,
     background: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).background,
     navRef: React.createRef(),
   };
@@ -87,21 +90,9 @@ class Layout extends React.Component {
   }
 
   render() {
-    const {
-      children,
-      data,
-      className,
-    } = this.props;
+    const { children, data, className } = this.props;
 
-    const {
-      title,
-      desc,
-      keywords,
-      address,
-      phone,
-      fax,
-      email,
-    } = data.site.siteMetadata;
+    const { title, desc, keywords, address, phone, fax, email } = data.site.siteMetadata;
 
     return (
       <LayoutContext.Provider value={this.state}>
@@ -119,31 +110,17 @@ class Layout extends React.Component {
               <FlatList>
                 {links.map(link => (
                   <FlatList.Item key={link.to}>
-                    <MainNavLink
-                      selected={this.props.location.pathname === link.to}
-                      {...link}
-                    />
+                    <MainNavLink selected={this.props.location.pathname === link.to} {...link} />
                   </FlatList.Item>
                 ))}
               </FlatList>
             </nav>
           </HeaderBar>
-          <Hero
-            bgImage={this.state.background}
-            isFullHeight={this.state.isFullHeight}
-          >
+          <Hero bgImage={this.state.background} isFullHeight={this.state.isFullHeight}>
             {this.state.pageTitle && <HeroBanner>{this.state.pageTitle}</HeroBanner>}
           </Hero>
-          <PageContainer>
-            {children()}
-          </PageContainer>
-          <ComposedFooter
-            {...address}
-            logo={data.logo}
-            phone={phone}
-            fax={fax}
-            email={email}
-          />
+          <PageContainer>{children()}</PageContainer>
+          <ComposedFooter {...address} logo={data.logo} phone={phone} fax={fax} email={email} />
         </div>
       </LayoutContext.Provider>
     );
@@ -195,7 +172,7 @@ export const query = graphql`
       siteMetadata {
         title
         desc
-        keywords,
+        keywords
         address {
           streetAddress
           state
@@ -208,17 +185,13 @@ export const query = graphql`
       }
     }
 
-    backgroundHome: imageSharp(id: {
-      regex: "/src/images/photos/heroes/poolside/"
-    }) {
+    backgroundHome: imageSharp(id: { regex: "/src/images/photos/heroes/poolside/" }) {
       sizes(maxWidth: 1240) {
         ...GatsbyImageSharpSizes
       }
     }
 
-    backgroundAbout: imageSharp(id: {
-      regex: "/src/images/photos/heroes/underpass/"
-    }) {
+    backgroundAbout: imageSharp(id: { regex: "/src/images/photos/heroes/underpass/" }) {
       sizes(maxWidth: 1240) {
         ...GatsbyImageSharpSizes
       }

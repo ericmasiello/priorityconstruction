@@ -13,18 +13,11 @@ export const SelectElement = styled.select`
   width: 100%;
 `;
 
-export const Select = (props) => {
-  const {
-    tag: Tag,
-    className,
-    children,
-    ...rest
-  } = props;
+export const Select = props => {
+  const { tag: Tag, className, children, ...rest } = props;
   return (
     <Tag className={className}>
-      <SelectElement {...rest}>
-        {children}
-      </SelectElement>
+      <SelectElement {...rest}>{children}</SelectElement>
     </Tag>
   );
 };
@@ -54,8 +47,8 @@ export default styled(Select)`
     top: 50%;
     right: 0.5rem;
     transform: translateY(-50%);
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-left: 3px solid transparent;
     border-right: 3px solid transparent;
     border-top: 4px solid ${COLORS.base};

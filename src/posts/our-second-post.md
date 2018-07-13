@@ -7,11 +7,11 @@ Bitters kickstarter before they sold out 8-bit, af blue bottle DIY paleo iceland
 
 <!-- end -->
 
-* This
-* Is
-* A
+- This
+- Is
+- A
 
 Beard roof party cardigan locavore you probably haven't heard of them squid artisan edison bulb whatever normcore
 
-* New
-* Post
+- New
+- Post

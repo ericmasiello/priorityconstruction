@@ -4,7 +4,7 @@ import * as CustomPropTypes from '../propTypes';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
-export const ContentBlock = (props) => {
+export const ContentBlock = props => {
   const { tag: Tag, ...rest } = props;
   return <Tag {...rest} />;
 };

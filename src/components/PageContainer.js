@@ -6,7 +6,7 @@ import { PAGE_SPACING } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
 import Container from './Container';
 
-export const PageContainer = (props) => {
+export const PageContainer = props => {
   const { tag: Tag, children, ...rest } = props;
   return (
     <Tag {...rest}>

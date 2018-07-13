@@ -30,20 +30,13 @@ class HeaderBar extends React.Component {
     } else if (window.pageYOffset === 0 && this.state.stuck === true) {
       this.setState({ stuck: false });
     }
-  }
+  };
 
   render() {
-    const {
-      tag: Tag,
-      innerRef,
-      children,
-      ...rest
-    } = this.props;
+    const { tag: Tag, innerRef, children, ...rest } = this.props;
     return (
       <Tag {...rest} data-stuck={this.state.stuck} ref={innerRef}>
-        <HeaderBarContent>
-          {children}
-        </HeaderBarContent>
+        <HeaderBarContent>{children}</HeaderBarContent>
       </Tag>
     );
   }
@@ -70,8 +63,8 @@ export default styled(HeaderBar)`
   transition: padding-top 0.2s, padding-bottom 0.2s;
   will-change: padding-top, padding-bottom;
 
-  &[data-stuck="true"] {
-    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  &[data-stuck='true'] {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     padding-top: ${pxToRem(10)};
     padding-bottom: ${pxToRem(10)};
   }

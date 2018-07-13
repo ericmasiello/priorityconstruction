@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import Type1 from './Type1';
 import { COLORS } from '../styles/vars';
 
-export const HeroBanner = (props) => (
-  <Type1 {...props} />
-);
+export const HeroBanner = props => <Type1 {...props} />;
 
 HeroBanner.displayName = 'HeroBanner';
 

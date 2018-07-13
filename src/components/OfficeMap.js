@@ -3,13 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { pxToRem } from '../styles/utils';
 
-export const OfficeMap = (props) => {
-  const {
-    title,
-    address,
-    mapKey,
-    ...rest
-  } = props;
+export const OfficeMap = props => {
+  const { title, address, mapKey, ...rest } = props;
 
   return (
     <iframe

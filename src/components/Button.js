@@ -26,9 +26,10 @@ export default styled(Button)`
   transition: background-color 0.2s;
   min-height: ${pxToRem(38)};
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: ${tinyColor(COLORS.bg)
-    .darken(4)
-    .toRgbString()};
+      .darken(4)
+      .toRgbString()};
   }
 `;

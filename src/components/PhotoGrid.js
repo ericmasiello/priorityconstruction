@@ -10,20 +10,16 @@ const PrimaryPhotoGrid = styled(List.Item)`
   grid-row: span 2;
 `;
 
-const PhotoGrid = (props) => {
+const PhotoGrid = props => {
   const { primaryImage, additionalImages, ...rest } = props;
   return (
     <List {...rest}>
       <PrimaryPhotoGrid>
-        <GatsbyImage
-          sizes={primaryImage.sizes}
-        />
+        <GatsbyImage sizes={primaryImage.sizes} />
       </PrimaryPhotoGrid>
-      {additionalImages.map((image) => (
+      {additionalImages.map(image => (
         <List.Item key={image.id}>
-          <GatsbyImage
-            sizes={image.sizes}
-          />
+          <GatsbyImage sizes={image.sizes} />
         </List.Item>
       ))}
     </List>
