@@ -13,22 +13,48 @@ const HeaderBarContent = styled.div`
   justify-content: space-between;
 `;
 
-const HeaderBar = (props) => {
-  const { tag: Tag, children, ...rest } = props;
-  return (
-    <Tag {...rest}>
-      <HeaderBarContent>
-        {children}
-      </HeaderBarContent>
-    </Tag>
-  );
-};
+class HeaderBar extends React.Component {
+  state = { stuck: false };
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll, false);
+  }
+
+  handleScroll = () => {
+    if (window.pageYOffset > 0 && this.state.stuck === false) {
+      this.setState({ stuck: true });
+    } else if (window.pageYOffset === 0 && this.state.stuck === true) {
+      this.setState({ stuck: false });
+    }
+  }
+
+  render() {
+    const {
+      tag: Tag,
+      innerRef,
+      children,
+      ...rest
+    } = this.props;
+    return (
+      <Tag {...rest} data-stuck={this.state.stuck} ref={innerRef}>
+        <HeaderBarContent>
+          {children}
+        </HeaderBarContent>
+      </Tag>
+    );
+  }
+}
 
 HeaderBar.displayName = 'HeaderBar';
 
 HeaderBar.propTypes = {
   tag: CustomPropTypes.Tag,
   children: PropTypes.node,
+  innerRef: PropTypes.func,
 };
 
 HeaderBar.defaultProps = {
@@ -37,7 +63,16 @@ HeaderBar.defaultProps = {
 
 export default styled(HeaderBar)`
   background-color: ${COLORS.bg};
-  padding: 1.45rem ${pxToRem(PAGE_SPACING.horizontal)};
-  position: relative;
-  z-index: 2;
+  padding: ${pxToRem(20)} ${pxToRem(PAGE_SPACING.horizontal)};
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: padding-top 0.2s, padding-bottom 0.2s;
+  will-change: padding-top, padding-bottom;
+
+  &[data-stuck="true"] {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    padding-top: ${pxToRem(10)};
+    padding-bottom: ${pxToRem(10)};
+  }
 `;

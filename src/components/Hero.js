@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import GatsbyImage from './GatsbyImage';
+import HeroBanner from './HeroBanner';
 import * as CustomPropTypes from '../propTypes';
 import { COLORS } from '../styles/vars';
+import { pxToRem } from '../styles/utils';
 
 const BackgroundImage = GatsbyImage.extend`
   left: 0;
@@ -14,8 +16,8 @@ const BackgroundImage = GatsbyImage.extend`
   opacity: ${props => props.opacity};
 `;
 
-export class Masthead extends Component {
-  static displayName = 'Masthead';
+export class Hero extends Component {
+  static displayName = 'Hero';
 
   static propTypes = {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -84,10 +86,18 @@ export class Masthead extends Component {
   }
 }
 
-export default styled(Masthead)`
+export default styled(Hero)`
   background-color: ${props => props.bgColor};
   margin-bottom: 1.45rem;
   overflow: hidden;
   position: relative;
   height: ${({ isFullHeight }) => (isFullHeight ? '70vh' : '20vh')};
+  display: flex;
+  align-items: center;
+  max-height: ${pxToRem(700)};
+
+  ${HeroBanner} {
+    position: relative;
+    z-index: 2;
+  }
 `;

@@ -15,6 +15,20 @@ exports[`should render 1`] = `
   overflow: hidden;
   position: relative;
   height: 20vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  max-height: 43.75rem;
+}
+
+.c0 .sc-bxivhb {
+  position: relative;
+  z-index: 2;
 }
 
 <div

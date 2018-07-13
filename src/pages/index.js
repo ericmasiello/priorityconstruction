@@ -31,18 +31,18 @@ const edgesToGallery = (edges, primaryMatch = '') => {
 };
 
 const HomePage = (props) => {
-  const { data } = props;
+  const { data, className } = props;
   const photoGridProps = edgesToGallery(data.homageGallery.edges, 'courtyard.jpg');
 
   return (
-    <div>
+    <section className={className}>
       <p>
         Priority Construction Corp., is dedicated to complete different types
         of concrete projects throughout the Baltimore area by using highly
         skilled employees and paying attention to every detail of the project.
       </p>
       <PhotoGrid {...photoGridProps} />
-    </div>
+    </section>
   );
 };
 
@@ -52,6 +52,7 @@ HomePage.propTypes = {
   data: PropTypes.shape({
     homageGallery: CustomPropTypes.AllImageSharp,
   }).isRequired,
+  className: PropTypes.string,
 };
 
 export default HomePage;
