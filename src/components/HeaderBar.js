@@ -67,7 +67,8 @@ export default styled(HeaderBar)`
   position: sticky;
   top: 0;
   z-index: 10;
-  transition: padding 0.2s;
+  transition: padding-top 0.2s, padding-bottom 0.2s;
+  will-change: padding-top, padding-bottom;
 
   &[data-stuck="true"] {
     box-shadow: 0 1px 4px rgba(0,0,0,0.25);
