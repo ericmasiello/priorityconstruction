@@ -20,6 +20,20 @@ injectGlobal`
   ${base}
 `;
 
+const links = [{
+  to: '/services',
+  children: 'Services',
+}, {
+  to: '/about',
+  children: 'About',
+}, {
+  to: '/careers',
+  children: 'Careers',
+}, {
+  to: '/contact',
+  children: 'Contact',
+}];
+
 const getConfigFromPathname = (configs, pathname) => {
   const path = pathname.replace('/', '');
   return Object.assign({}, configs.base, configs[path]);
@@ -103,18 +117,14 @@ class Layout extends React.Component {
             <Logo image={this.state.logo} />
             <nav>
               <FlatList>
-                <FlatList.Item>
-                  <MainNavLink to="/services">Services</MainNavLink>
-                </FlatList.Item>
-                <FlatList.Item>
-                  <MainNavLink to="/about">About</MainNavLink>
-                </FlatList.Item>
-                <FlatList.Item>
-                  <MainNavLink to="/careers">Careers</MainNavLink>
-                </FlatList.Item>
-                <FlatList.Item>
-                  <MainNavLink to="/contact">Contact</MainNavLink>
-                </FlatList.Item>
+                {links.map(link => (
+                  <FlatList.Item key={link.to}>
+                    <MainNavLink
+                      selected={this.props.location.pathname === link.to}
+                      {...link}
+                    />
+                  </FlatList.Item>
+                ))}
               </FlatList>
             </nav>
           </HeaderBar>
