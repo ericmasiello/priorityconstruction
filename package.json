@@ -22,7 +22,8 @@
     "tinycolor2": "~1.4.1"
   },
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "styled components"
   ],
   "license": "MIT",
   "main": "n/a",
@@ -49,6 +50,7 @@
     "enzyme-adapter-react-16": "~1.1.1",
     "eslint": "~4.19.1",
     "eslint-config-airbnb": "~16.1.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "~2.12.0",
     "eslint-plugin-jsx-a11y": "~6.0.3",
     "eslint-plugin-react": "~7.9.1",
@@ -56,9 +58,15 @@
     "imports-loader": "0.7.1",
     "jest": "~23.2.0",
     "jest-styled-components": "~5.0.1",
-    "prettier": "^1.12.0",
+    "prettier": "^1.13.7",
     "prettier-eslint-cli": "~4.7.1",
     "react-test-renderer": "~16.4.1"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "trailingComma": "all"
   },
   "babel": {
     "env": {
