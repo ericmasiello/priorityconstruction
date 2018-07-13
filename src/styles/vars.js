@@ -12,7 +12,9 @@ export const COLORS = {
   highlight2: '#4D1017',
   highlight3: '#002B6D',
   link: '#18232C',
-  border: tinyColor(baseColor).lighten(50).toRgbString(),
+  border: tinyColor(baseColor)
+    .lighten(50)
+    .toRgbString(),
 };
 
 export const MAX_CONTENT_WIDTH = 1024;
@@ -39,13 +41,12 @@ export const BODY_WEIGHTS = {
   bold: 600,
 };
 
-const getNumericWeights = weights => (
+const getNumericWeights = weights =>
   Object.keys(weights)
     .map(key => weights[key])
-    .join(',')
-);
+    .join(',');
 
-export const BODY_FONT_STACK = '\'Montserrat\', sans-serif';
+export const BODY_FONT_STACK = "'Montserrat', sans-serif";
 
 export const FONT_URL = [
   'https://fonts.googleapis.com/css?family=',

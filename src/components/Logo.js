@@ -9,7 +9,7 @@ const LogoLink = styled(Link)`
   width: 197px;
 `;
 
-const Logo = (props) => {
+const Logo = props => {
   const { tag: Tag, image, ...rest } = props;
   return (
     <LogoLink to="/">
@@ -28,7 +28,7 @@ Logo.defaultProps = {
 };
 
 export default styled(Logo)`
-  ${props => `background-image: url('${props.image.sizes.src}');`}
+  ${props => `background-image: url('${props.image.sizes.src}')`};
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;

@@ -28,17 +28,19 @@ export default styled(Blockquote)`
     font-size: 300%;
     line-height: 50%;
     font-weight: ${BODY_WEIGHTS.bold};
-    color: ${tinyColor(COLORS.base).lighten(60).toRgbString()}
+    color: ${tinyColor(COLORS.base)
+      .lighten(60)
+      .toRgbString()};
   }
 
   &::before {
-    content: "\\201C";
+    content: '\\201C';
     left: 0;
     top: ${pxToRem(10)};
   }
 
   &::after {
-    content: "\\201D";
+    content: '\\201D';
     right: 0;
     bottom: ${pxToRem(10)};
   }

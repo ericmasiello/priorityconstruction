@@ -10,7 +10,9 @@ const GalleryPage = ({ data }) => (
     <Type2 tag="h1">Gallery</Type2>
     <List>
       {data.gallery.edges.map(edge => (
-        <List.Item key={edge.node.id}><GatsbyImage sizes={edge.node.sizes} /></List.Item>
+        <List.Item key={edge.node.id}>
+          <GatsbyImage sizes={edge.node.sizes} />
+        </List.Item>
       ))}
     </List>
   </div>
@@ -28,11 +30,7 @@ export default GalleryPage;
 
 export const query = graphql`
   query GalleryMeta {
-    gallery: allImageSharp(limit: 20, filter:{
-      id: {
-        regex: "/src/images/"
-      }
-    }) {
+    gallery: allImageSharp(limit: 20, filter: { id: { regex: "/src/images/" } }) {
       edges {
         node {
           id

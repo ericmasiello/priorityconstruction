@@ -17,13 +17,13 @@ exports[`should render 1`] = `
 }
 
 .c0::before {
-  content: "\\201C";
+  content: '\\201C';
   left: 0;
   top: 0.625rem;
 }
 
 .c0::after {
-  content: "\\201D";
+  content: '\\201D';
   right: 0;
   bottom: 0.625rem;
 }

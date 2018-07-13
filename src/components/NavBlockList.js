@@ -5,7 +5,7 @@ import * as CustomPropTypes from '../propTypes';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
-export const NavBlockList = (props) => {
+export const NavBlockList = props => {
   const { tag: Tag, row, ...rest } = props;
   return <Tag {...rest} />;
 };
@@ -24,7 +24,7 @@ NavBlockList.propTypes = {
   row: PropTypes.bool,
 };
 
-export const NavBlockListItem = (props) => {
+export const NavBlockListItem = props => {
   const { tag: Tag, ...rest } = props;
   return <Tag {...rest} />;
 };
@@ -44,7 +44,7 @@ const StyledNavBlockListItem = styled(NavBlockListItem)`
   text-transform: uppercase;
   color: #fff;
   margin-bottom: ${pxToRem(3)};
-  
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -71,7 +71,7 @@ const StyledBlockList = styled(NavBlockList)`
       `;
     }
     return '';
-  }}
+  }};
 `;
 
 StyledBlockList.Item = StyledNavBlockListItem;

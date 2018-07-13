@@ -6,19 +6,8 @@ import { PAGE_SPACING } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
 import Container from './Container';
 
-export const Footer = (props) => {
-  const {
-    tag: Tag,
-    streetAddress,
-    city,
-    state,
-    zip,
-    phone,
-    fax,
-    email,
-    children,
-    ...rest
-  } = props;
+export const Footer = props => {
+  const { tag: Tag, streetAddress, city, state, zip, phone, fax, email, children, ...rest } = props;
 
   return (
     <Tag {...rest}>

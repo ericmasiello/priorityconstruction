@@ -12,21 +12,19 @@ const Careers = () => (
   <div>
     <Type1>Career Opportunities with Priority Construction</Type1>
     <p>
-      Interested in working with us in the construction field? We are
-      always looking for individuals who would like to develop their
-      skills and apply them to ongoing projects we currently have. We
-      are always in demand for dedicated foreman, laborers, skilled
-      workers, mechanics, CDL drivers, and operators. Working outside
-      in the construction field isn’t for you? We are also interested
-      in individuals who specialize in estimating, accounting, finance,
-      project management, and office management. We are not only a team
-      at Priority Construction, we are also a family.
+      Interested in working with us in the construction field? We are always looking for individuals
+      who would like to develop their skills and apply them to ongoing projects we currently have.
+      We are always in demand for dedicated foreman, laborers, skilled workers, mechanics, CDL
+      drivers, and operators. Working outside in the construction field isn’t for you? We are also
+      interested in individuals who specialize in estimating, accounting, finance, project
+      management, and office management. We are not only a team at Priority Construction, we are
+      also a family.
     </p>
     <Type2>Online Employment Application</Type2>
     <Base tag="h2">Solicitud de empleo en línea</Base>
     <p>
-      Please fill out the online application below as completely as possible
-      to apply for a position with Priority Construction. Thank you!
+      Please fill out the online application below as completely as possible to apply for a position
+      with Priority Construction. Thank you!
     </p>
 
     <form name="careers" method="POST" data-netlify>
