@@ -1,7 +1,6 @@
 import tinyColor from 'tinycolor2';
 
 const unitToPx = unit => unit * 16;
-const highlightColor = '#FBDB1E';
 const baseColor = '#424141';
 export const scaler = 1.5;
 
@@ -9,7 +8,9 @@ export const COLORS = {
   bg: '#fff',
   base: baseColor,
   muted: '#787575',
-  highlight: highlightColor,
+  highlight: '#FBDB1E',
+  highlight2: '#4D1017',
+  highlight3: '#002B6D',
   link: '#18232C',
   border: tinyColor(baseColor).lighten(50).toRgbString(),
 };
