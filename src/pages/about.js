@@ -8,6 +8,7 @@ import NavBlockList from '../components/NavBlockList';
 import { pxToRem } from '../styles/utils';
 import { COLORS, PAGE_SPACING, MAX_CONTENT_WIDTH } from '../styles/vars';
 import { withLayoutContext } from '../layoutContext';
+import { hasScrolledPastBottomOfElement } from '../utils/ui';
 
 const StickyNavContainer = styled.div`
   position: fixed;
@@ -71,16 +72,6 @@ const AboutContent = styled.div`
   }
 `;
 
-function isInViewport(element) {
-  const rect = element.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight + window.pageYOffset) &&
-    rect.right <= (window.innerWidth + window.pageXOffset)
-  );
-}
-
 class About extends React.Component {
   state = { showStickyNav: false };
 
@@ -119,10 +110,10 @@ class About extends React.Component {
       return;
     }
 
-    if (isInViewport(this.leftNavList.current)) {
-      window.requestAnimationFrame(this.handleHideSticky);
-    } else {
+    if (hasScrolledPastBottomOfElement(this.leftNavList.current)) {
       window.requestAnimationFrame(this.handleShowSticky);
+    } else {
+      window.requestAnimationFrame(this.handleHideSticky);
     }
   };
 
