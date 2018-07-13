@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '../../node_modules/styled-components';
 import * as CustomPropTypes from '../propTypes';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
 export const NavBlockList = (props) => {
-  const { tag: Tag, ...rest } = props;
+  const { tag: Tag, row, ...rest } = props;
   return <Tag {...rest} />;
 };
 
@@ -19,11 +20,9 @@ NavBlockList.defaultProps = {
 
 NavBlockList.displayName = 'NavBlockList';
 
-const StyledBlockList = styled(NavBlockList)`
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-`;
+NavBlockList.propTypes = {
+  row: PropTypes.bool,
+};
 
 export const NavBlockListItem = (props) => {
   const { tag: Tag, ...rest } = props;
@@ -44,9 +43,10 @@ const StyledNavBlockListItem = styled(NavBlockListItem)`
   background-color: ${COLORS.highlight3};
   text-transform: uppercase;
   color: #fff;
+  margin-bottom: ${pxToRem(3)};
   
-  &:not(:last-child) {
-    margin-bottom: ${pxToRem(3)};
+  &:last-child {
+    margin-bottom: 0;
   }
 
   a {
@@ -54,6 +54,24 @@ const StyledNavBlockListItem = styled(NavBlockListItem)`
     color: inherit;
     display: block;
   }
+`;
+
+const StyledBlockList = styled(NavBlockList)`
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  ${({ row }) => {
+    if (row) {
+      return `
+        display: flex;
+        
+        > * {
+          margin-bottom: 0;
+        }
+      `;
+    }
+    return '';
+  }}
 `;
 
 StyledBlockList.Item = StyledNavBlockListItem;
