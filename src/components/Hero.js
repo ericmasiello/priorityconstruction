@@ -101,7 +101,6 @@ export default styled(Hero)`
   position: relative;
   height: ${({ isFullHeight }) => (isFullHeight ? '70vh' : '20vh')};
   display: flex;
-  align-items: center;
   max-height: ${pxToRem(700)};
 
   ${HeroBanner} {
