@@ -1,5 +1,6 @@
 import Link from 'gatsby-link';
 import styled from 'styled-components';
+import { pxToRem } from '../styles/utils';
 import { COLORS } from '../styles/vars';
 
 const MainNavLink = styled(Link)`
@@ -13,8 +14,8 @@ const MainNavLink = styled(Link)`
     width: 100%;
     height: 0;
     left: 0px;
-    bottom: -3px;
-    background-color: ${COLORS.highlight3};
+    bottom: ${pxToRem(-5)};
+    background-color: ${COLORS.highlight};
     transition: all 0.3s ease;
   }
 

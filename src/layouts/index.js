@@ -6,6 +6,7 @@ import PageContainer from '../components/PageContainer';
 import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
 import HeaderBar from '../components/HeaderBar';
+import HeaderBarFlatListItem from '../components/HeaderBarFlatListItem';
 import Logo from '../components/Logo';
 import MainNavLink from '../components/MainNavLink';
 import FlatList from '../components/FlatList';
@@ -13,17 +14,11 @@ import ComposedFooter from '../composed/Footer';
 import Hero from '../components/Hero';
 import HeroBanner from '../components/HeroBanner';
 import TopBar from '../components/TopBar';
+import TopBarLink from '../components/TopBarLink';
 import Small from '../components/Small';
 import LayoutContext from '../layoutContext';
-import { pxToRem } from '../styles/utils';
 import MailIcon from '../components/MailIcon';
 import PhoneIcon from '../components/PhoneIcon';
-
-const TopBarListItem = FlatList.Item.extend`
-  display: flex;
-  align-items: center;
-  margin-left: ${pxToRem(20)};
-`;
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -116,14 +111,16 @@ class Layout extends React.Component {
           />
           <TopBar>
             <Small tag={FlatList}>
-              <TopBarListItem>
-                <PhoneIcon />
-                <a href={`tel:${phone}`}>{phone}</a>
-              </TopBarListItem>
-              <TopBarListItem>
-                <MailIcon />
-                <a href={`mailto:${email}`}>{email}</a>
-              </TopBarListItem>
+              <FlatList.Item>
+                <TopBarLink href={`tel:${phone}`}>
+                  <PhoneIcon /> {phone}
+                </TopBarLink>
+              </FlatList.Item>
+              <FlatList.Item>
+                <TopBarLink href={`mailto:${email}`}>
+                  <MailIcon /> {email}
+                </TopBarLink>
+              </FlatList.Item>
             </Small>
           </TopBar>
           <HeaderBar innerRef={this.state.navRef}>
@@ -131,9 +128,9 @@ class Layout extends React.Component {
             <nav>
               <FlatList>
                 {links.map(link => (
-                  <FlatList.Item key={link.to}>
+                  <HeaderBarFlatListItem key={link.to}>
                     <MainNavLink selected={this.props.location.pathname === link.to} {...link} />
-                  </FlatList.Item>
+                  </HeaderBarFlatListItem>
                 ))}
               </FlatList>
             </nav>
@@ -182,27 +179,7 @@ Layout.propTypes = {
 
 Layout.displayName = 'Layout';
 
-export default styled(Layout)`
-  ${FlatList.Item} {
-    margin-right: ${pxToRem(30)};
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
-  ${MailIcon}, ${PhoneIcon} {
-    margin-right: ${pxToRem(8)};
-  }
-
-  ${PhoneIcon} {
-    width: ${pxToRem(20)};
-  }
-
-  ${MailIcon} {
-    width: ${pxToRem(22)};
-  }
-`;
+export default styled(Layout)``;
 
 export const query = graphql`
   query LayoutQuery {
