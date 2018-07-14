@@ -31,7 +31,7 @@ TopBar.defaultProps = {
 export default styled(TopBar)`
   display: none;
   background-color: ${COLORS.highlight};
-  padding: ${pxToRem(8)} ${pxToRem(PAGE_SPACING.horizontal)};
+  padding: ${pxToRem(6)} ${pxToRem(PAGE_SPACING.horizontal)};
 
   @media (min-width: ${pxToRem(450)}) {
     display: block;
