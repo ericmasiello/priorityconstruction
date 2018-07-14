@@ -2,33 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as CustomPropTypes from '../propTypes';
 import PhotoGrid from '../components/PhotoGrid';
-
-// TODO: move these to a utility file
-const predicate = primaryMatch => include => edge => {
-  if (edge.node.id.includes(primaryMatch)) {
-    return include;
-  }
-  return !include;
-};
-
-const mapEdgeToNode = edge => edge.node;
-
-const edgesToGallery = (edges, primaryMatch = '') => {
-  const predicateMatch = predicate(primaryMatch);
-  const primary = edges.find(predicateMatch(true));
-
-  if (primary) {
-    return {
-      primaryImage: mapEdgeToNode(primary),
-      additionalImages: edges.filter(predicateMatch(false)).map(mapEdgeToNode),
-    };
-  }
-
-  return {
-    primaryImage: null,
-    additionalImages: edges.map(mapEdgeToNode),
-  };
-};
+import { edgesToGallery } from '../utils/gallery';
 
 const HomePage = props => {
   const { data, className } = props;
