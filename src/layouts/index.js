@@ -16,9 +16,14 @@ import TopBar from '../components/TopBar';
 import Small from '../components/Small';
 import LayoutContext from '../layoutContext';
 import { pxToRem } from '../styles/utils';
-import mail from '../images/mail.svg';
+import MailIcon from '../components/MailIcon';
+import PhoneIcon from '../components/PhoneIcon';
 
-console.log(mail);
+const TopBarListItem = FlatList.Item.extend`
+  display: flex;
+  align-items: center;
+  margin-left: ${pxToRem(20)};
+`;
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -111,12 +116,14 @@ class Layout extends React.Component {
           />
           <TopBar>
             <Small tag={FlatList}>
-              <FlatList.Item>
+              <TopBarListItem>
+                <PhoneIcon />
                 <a href={`tel:${phone}`}>{phone}</a>
-              </FlatList.Item>
-              <FlatList.Item>
+              </TopBarListItem>
+              <TopBarListItem>
+                <MailIcon />
                 <a href={`mailto:${email}`}>{email}</a>
-              </FlatList.Item>
+              </TopBarListItem>
             </Small>
           </TopBar>
           <HeaderBar innerRef={this.state.navRef}>
@@ -178,6 +185,18 @@ export default styled(Layout)`
     &:last-child {
       margin-right: 0;
     }
+  }
+
+  ${MailIcon}, ${PhoneIcon} {
+    margin-right: ${pxToRem(8)};
+  }
+
+  ${PhoneIcon} {
+    width: ${pxToRem(20)};
+  }
+
+  ${MailIcon} {
+    width: ${pxToRem(22)};
   }
 `;
 

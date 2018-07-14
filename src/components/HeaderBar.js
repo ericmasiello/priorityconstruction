@@ -58,7 +58,7 @@ export default styled(HeaderBar)`
   background-color: ${COLORS.bg};
   padding: ${pxToRem(20)} ${pxToRem(PAGE_SPACING.horizontal)};
   position: sticky;
-  top: 0;
+  top: -1px;
   z-index: 10;
   transition: padding-top 0.2s, padding-bottom 0.2s;
   will-change: padding-top, padding-bottom;
