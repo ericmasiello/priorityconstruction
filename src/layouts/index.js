@@ -12,8 +12,18 @@ import FlatList from '../components/FlatList';
 import ComposedFooter from '../composed/Footer';
 import Hero from '../components/Hero';
 import HeroBanner from '../components/HeroBanner';
+import TopBar from '../components/TopBar';
+import Small from '../components/Small';
 import LayoutContext from '../layoutContext';
 import { pxToRem } from '../styles/utils';
+import MailIcon from '../components/MailIcon';
+import PhoneIcon from '../components/PhoneIcon';
+
+const TopBarListItem = FlatList.Item.extend`
+  display: flex;
+  align-items: center;
+  margin-left: ${pxToRem(20)};
+`;
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -104,6 +114,18 @@ class Layout extends React.Component {
               { name: 'keywords', content: keywords.join(', ') },
             ]}
           />
+          <TopBar>
+            <Small tag={FlatList}>
+              <TopBarListItem>
+                <PhoneIcon />
+                <a href={`tel:${phone}`}>{phone}</a>
+              </TopBarListItem>
+              <TopBarListItem>
+                <MailIcon />
+                <a href={`mailto:${email}`}>{email}</a>
+              </TopBarListItem>
+            </Small>
+          </TopBar>
           <HeaderBar innerRef={this.state.navRef}>
             <Logo image={this.state.logo} />
             <nav>
@@ -116,7 +138,11 @@ class Layout extends React.Component {
               </FlatList>
             </nav>
           </HeaderBar>
-          <Hero bgImage={this.state.background} isFullHeight={this.state.isFullHeight}>
+          <Hero
+            selectedImage={this.state.background}
+            bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
+            isFullHeight={this.state.isFullHeight}
+          >
             {this.state.pageTitle && <HeroBanner>{this.state.pageTitle}</HeroBanner>}
           </Hero>
           <PageContainer>{children()}</PageContainer>
@@ -163,6 +189,18 @@ export default styled(Layout)`
     &:last-child {
       margin-right: 0;
     }
+  }
+
+  ${MailIcon}, ${PhoneIcon} {
+    margin-right: ${pxToRem(8)};
+  }
+
+  ${PhoneIcon} {
+    width: ${pxToRem(20)};
+  }
+
+  ${MailIcon} {
+    width: ${pxToRem(22)};
   }
 `;
 

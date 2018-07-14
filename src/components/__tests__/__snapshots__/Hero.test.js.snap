@@ -1,15 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render 1`] = `
-.c1 {
-  max-width: 100%;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-}
-
 .c0 {
   margin-bottom: 1.45rem;
   overflow: hidden;
@@ -33,58 +24,5 @@ exports[`should render 1`] = `
 
 <div
   className="c0"
->
-  <div
-    className=" gatsby-image-outer-wrapper"
-    style={
-      Object {
-        "position": "initial",
-      }
-    }
-  >
-    <div
-      className="c1 gatsby-image-wrapper"
-      style={
-        Object {
-          "overflow": "hidden",
-          "position": "absolute",
-        }
-      }
-    >
-      <div
-        style={
-          Object {
-            "paddingBottom": "NaN%",
-            "width": "100%",
-          }
-        }
-      />
-      <img
-        alt=""
-        onLoad={[Function]}
-        src="/foo/bar.jpg"
-        style={
-          Object {
-            "height": "100%",
-            "left": 0,
-            "objectFit": "cover",
-            "objectPosition": "center",
-            "opacity": 1,
-            "position": "absolute",
-            "top": 0,
-            "transition": "opacity 0.5s",
-            "width": "100%",
-          }
-        }
-      />
-      <noscript
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "<img src=\\"/foo/bar.jpg\\" alt=\\"\\" style=\\"position:absolute;top:0;left:0;transition:opacity 0.5s;transition-delay:0.5s;opacity:1;width:100%;height:100%;object-fit:cover;object-position:center\\"/>",
-          }
-        }
-      />
-    </div>
-  </div>
-</div>
+/>
 `;
