@@ -12,13 +12,14 @@ import MainNavLink from '../components/MainNavLink';
 import FlatList from '../components/FlatList';
 import ComposedFooter from '../composed/Footer';
 import Hero from '../components/Hero';
-import HeroBanner from '../components/HeroBanner';
 import TopBar from '../components/TopBar';
 import TopBarLink from '../components/TopBarLink';
 import Small from '../components/Small';
 import LayoutContext from '../layoutContext';
 import MailIcon from '../components/MailIcon';
 import PhoneIcon from '../components/PhoneIcon';
+import HeroHomePageContent from '../components/HeroHomePageContent';
+import HeroAboutPageContent from '../components/HeroAboutPageContent';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -55,15 +56,16 @@ class Layout extends React.Component {
     base: {
       background: this.props.data.backgroundHome,
       isFullHeight: false,
-      pageTitle: null,
+      heroChildren: null,
     },
     '': {
       isFullHeight: true,
+      heroChildren: <HeroHomePageContent />,
     },
     about: {
       background: this.props.data.backgroundAbout,
       isFullHeight: true,
-      pageTitle: 'About Us',
+      heroChildren: <HeroAboutPageContent />,
     },
     careers: {
       isFullHeight: false,
@@ -77,7 +79,8 @@ class Layout extends React.Component {
   state = {
     logo: this.props.data.logo,
     title: this.props.data.site.siteMetadata.title,
-    pageTitle: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).pageTitle,
+    heroChildren: getConfigFromPathname(this.pageConfigs, this.props.location.pathname)
+      .heroChildren,
     isFullHeight: getConfigFromPathname(this.pageConfigs, this.props.location.pathname)
       .isFullHeight,
     background: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).background,
@@ -96,7 +99,6 @@ class Layout extends React.Component {
 
   render() {
     const { children, data, className } = this.props;
-
     const { title, desc, keywords, address, phone, fax, email } = data.site.siteMetadata;
 
     return (
@@ -140,7 +142,7 @@ class Layout extends React.Component {
             bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
             isFullHeight={this.state.isFullHeight}
           >
-            {this.state.pageTitle && <HeroBanner>{this.state.pageTitle}</HeroBanner>}
+            {this.state.heroChildren}
           </Hero>
           <PageContainer>{children()}</PageContainer>
           <ComposedFooter {...address} logo={data.logo} phone={phone} fax={fax} email={email} />
