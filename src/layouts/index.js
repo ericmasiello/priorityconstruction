@@ -12,8 +12,13 @@ import FlatList from '../components/FlatList';
 import ComposedFooter from '../composed/Footer';
 import Hero from '../components/Hero';
 import HeroBanner from '../components/HeroBanner';
+import TopBar from '../components/TopBar';
+import Small from '../components/Small';
 import LayoutContext from '../layoutContext';
 import { pxToRem } from '../styles/utils';
+import mail from '../images/mail.svg';
+
+console.log(mail);
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -104,6 +109,16 @@ class Layout extends React.Component {
               { name: 'keywords', content: keywords.join(', ') },
             ]}
           />
+          <TopBar>
+            <Small tag={FlatList}>
+              <FlatList.Item>
+                <a href={`tel:${phone}`}>{phone}</a>
+              </FlatList.Item>
+              <FlatList.Item>
+                <a href={`mailto:${email}`}>{email}</a>
+              </FlatList.Item>
+            </Small>
+          </TopBar>
           <HeaderBar innerRef={this.state.navRef}>
             <Logo image={this.state.logo} />
             <nav>
