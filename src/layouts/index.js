@@ -138,7 +138,11 @@ class Layout extends React.Component {
               </FlatList>
             </nav>
           </HeaderBar>
-          <Hero bgImage={this.state.background} isFullHeight={this.state.isFullHeight}>
+          <Hero
+            selectedImage={this.state.background}
+            bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
+            isFullHeight={this.state.isFullHeight}
+          >
             {this.state.pageTitle && <HeroBanner>{this.state.pageTitle}</HeroBanner>}
           </Hero>
           <PageContainer>{children()}</PageContainer>

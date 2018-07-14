@@ -5,7 +5,7 @@ import 'jest-styled-components';
 import Hero, { Hero as Raw } from '../Hero';
 
 const props = {
-  bgImage: {
+  selectedImage: {
     sizes: {
       src: '/foo/bar.jpg',
     },

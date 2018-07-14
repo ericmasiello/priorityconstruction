@@ -23,15 +23,17 @@ export class Hero extends Component {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     children: PropTypes.node,
     isFullHeight: PropTypes.bool,
-    bgImage: CustomPropTypes.ImageSharp.isRequired,
+    selectedImage: CustomPropTypes.ImageSharp.isRequired,
     bgColor: PropTypes.string,
     opacity: PropTypes.number,
+    bgImages: PropTypes.arrayOf(CustomPropTypes.ImageSharp),
   };
 
   static defaultProps = {
     tag: 'div',
     bgColor: COLORS.bg,
     opacity: 1,
+    bgImages: [],
   };
 
   componentDidUpdate = prevProps => {
@@ -61,18 +63,32 @@ export class Hero extends Component {
   };
 
   render() {
-    const { bgColor, bgImage, isFullHeight, children, opacity, tag: Tag, ...rest } = this.props;
+    const {
+      bgColor,
+      selectedImage,
+      bgImages,
+      isFullHeight,
+      children,
+      opacity,
+      tag: Tag,
+      ...rest
+    } = this.props;
 
     return (
       <Tag ref={this.setRef} {...rest}>
         {children}
-        <BackgroundImage
-          style={{
-            position: 'absolute',
-          }}
-          sizes={bgImage.sizes}
-          opacity={opacity}
-        />
+        {bgImages.map(image => (
+          <BackgroundImage
+            key={image.id}
+            style={{
+              position: 'absolute',
+              transition: 'opacity 0.5s',
+              opacity: selectedImage.sizes.src === image.sizes.src ? '1' : '0',
+            }}
+            sizes={image.sizes}
+            opacity={opacity}
+          />
+        ))}
       </Tag>
     );
   }
