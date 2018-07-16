@@ -14,7 +14,9 @@ export const HeroHomePageContent = props => (
     <ContentWrapper tag="hgroup">
       <Type2 tag="h1">Bringing Concrete Ideas to Life</Type2>
       <Type4 tag="p">Quality workmanship & excellent customer service</Type4>
-      <Button>Get a quote</Button>
+      <Button color="light" large>
+        Get a quote
+      </Button>
     </ContentWrapper>
   </HeroContent>
 );
@@ -24,9 +26,9 @@ HeroHomePageContent.displayName = 'HeroHomePageContent';
 export default styled(HeroHomePageContent)`
   padding-left: ${pxToRem(PAGE_SPACING.horizontal)};
   padding-right: ${pxToRem(PAGE_SPACING.horizontal)};
-  padding-bottom: ${pxToRem(50)};
+  padding-bottom: 15vh;
   color: ${COLORS.highlight};
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100%;
   display: flex;
