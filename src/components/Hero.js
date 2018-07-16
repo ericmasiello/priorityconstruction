@@ -79,7 +79,7 @@ export class Hero extends Component {
         {children}
         {bgImages.map(image => (
           <BackgroundImage
-            key={image.id}
+            key={image.sizes.src}
             style={{
               position: 'absolute',
               transition: 'opacity 0.5s',
