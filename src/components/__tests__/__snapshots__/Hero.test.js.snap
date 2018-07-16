@@ -5,7 +5,6 @@ exports[`should render 1`] = `
   margin-bottom: 1.45rem;
   overflow: hidden;
   position: relative;
-  height: 20vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -16,6 +15,12 @@ exports[`should render 1`] = `
 .c0 .sc-bxivhb {
   position: relative;
   z-index: 2;
+}
+
+@media (min-height:28.125rem) {
+  .c0 {
+    height: 20vh;
+  }
 }
 
 <div
