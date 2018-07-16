@@ -5,10 +5,6 @@ import styled, { injectGlobal } from 'styled-components';
 import PageContainer from '../components/PageContainer';
 import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
-import HeaderBar from '../components/HeaderBar';
-import HeaderBarFlatListItem from '../components/HeaderBarFlatListItem';
-import Logo from '../components/Logo';
-import MainNavLink from '../components/MainNavLink';
 import FlatList from '../components/FlatList';
 import ComposedFooter from '../composed/Footer';
 import Hero from '../components/Hero';
@@ -20,30 +16,12 @@ import MailIcon from '../components/MailIcon';
 import PhoneIcon from '../components/PhoneIcon';
 import HeroHomePageContent from '../components/HeroHomePageContent';
 import HeroAboutPageContent from '../components/HeroAboutPageContent';
+import PageHeaderBar from '../components/PageHeaderBar';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
   ${base}
 `;
-
-const links = [
-  {
-    to: '/services',
-    children: 'Services',
-  },
-  {
-    to: '/about',
-    children: 'About',
-  },
-  {
-    to: '/careers',
-    children: 'Careers',
-  },
-  {
-    to: '/contact',
-    children: 'Contact',
-  },
-];
 
 const getConfigFromPathname = (configs, pathname) => {
   const path = pathname.replace('/', '');
@@ -125,18 +103,11 @@ class Layout extends React.Component {
               </FlatList.Item>
             </Small>
           </TopBar>
-          <HeaderBar innerRef={this.state.navRef}>
-            <Logo image={this.state.logo} />
-            <nav>
-              <FlatList>
-                {links.map(link => (
-                  <HeaderBarFlatListItem key={link.to}>
-                    <MainNavLink selected={this.props.location.pathname === link.to} {...link} />
-                  </HeaderBarFlatListItem>
-                ))}
-              </FlatList>
-            </nav>
-          </HeaderBar>
+          <PageHeaderBar
+            navRef={this.state.navRef}
+            logo={this.state.logo}
+            currentPathname={this.props.location.pathname}
+          />
           <Hero
             selectedImage={this.state.background}
             bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
