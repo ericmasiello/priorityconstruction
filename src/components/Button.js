@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 import tinyColor from 'tinycolor2';
 import { COLORS, BODY_WEIGHTS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
+import * as CustomPropTypes from '../propTypes';
 
-export const Button = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
+export const Button = ({ tag: Tag, color, large, ...rest }) => <Tag {...rest} />;
 
 Button.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  tag: CustomPropTypes.Tag,
+  color: PropTypes.oneOf(['light']),
+  large: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -19,10 +22,11 @@ Button.displayName = 'Button';
 
 export default styled(Button)`
   border: 1px solid ${COLORS.base};
-  font-weight: ${BODY_WEIGHTS.bold};
+  font-weight: ${BODY_WEIGHTS.medium};
   background-color: ${COLORS.bg};
   text-transform: uppercase;
-  padding: 0.5rem 1.5rem;
+  ${({ large }) =>
+    large ? `padding: ${pxToRem(12)} ${pxToRem(24)}` : `padding: ${pxToRem(8)} ${pxToRem(24)}`};
   transition: background-color 0.2s;
   min-height: ${pxToRem(38)};
 
@@ -32,4 +36,24 @@ export default styled(Button)`
       .darken(4)
       .toRgbString()};
   }
+
+  ${({ color }) => {
+    switch (color) {
+      case 'light':
+        return `
+          background-color: ${COLORS.highlight};
+          border-color: ${COLORS.highlight};
+          color: ${COLORS.base};
+
+          &:hover,
+          &:focus {
+            background-color: ${tinyColor(COLORS.highlight)
+              .lighten(7)
+              .toRgbString()};
+          }
+        `;
+      default:
+        return '';
+    }
+  }};
 `;
