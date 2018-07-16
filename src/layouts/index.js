@@ -17,6 +17,8 @@ import PhoneIcon from '../components/PhoneIcon';
 import HeroHomePageContent from '../components/HeroHomePageContent';
 import HeroAboutPageContent from '../components/HeroAboutPageContent';
 import PageHeaderBar from '../components/PageHeaderBar';
+import { MEDIA_QUERIES } from '../styles/vars';
+import { pxToRem } from '../styles/utils';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -89,6 +91,11 @@ class Layout extends React.Component {
               { name: 'keywords', content: keywords.join(', ') },
             ]}
           />
+          <PageHeaderBar
+            navRef={this.state.navRef}
+            logo={this.state.logo}
+            currentPathname={this.props.location.pathname}
+          />
           <TopBar>
             <Small tag={FlatList}>
               <FlatList.Item>
@@ -103,11 +110,6 @@ class Layout extends React.Component {
               </FlatList.Item>
             </Small>
           </TopBar>
-          <PageHeaderBar
-            navRef={this.state.navRef}
-            logo={this.state.logo}
-            currentPathname={this.props.location.pathname}
-          />
           <Hero
             selectedImage={this.state.background}
             bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
@@ -152,7 +154,20 @@ Layout.propTypes = {
 
 Layout.displayName = 'Layout';
 
-export default styled(Layout)``;
+export default styled(Layout)`
+  display: flex;
+  flex-direction: column;
+
+  ${PageHeaderBar}, ${Hero}, ${PageContainer}, ${ComposedFooter} {
+    order: 1;
+  }
+
+  @media(max-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
+    ${TopBar} {
+      order: 1;
+    }
+  }
+`;
 
 export const query = graphql`
   query LayoutQuery {

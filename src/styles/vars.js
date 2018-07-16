@@ -23,6 +23,10 @@ export const PAGE_SPACING = {
   horizontal: 20,
 };
 
+export const MEDIA_QUERIES = {
+  navTransition: 680,
+};
+
 // type properties
 export const TYPE_SIZE = {
   small: [unitToPx(0.8125), scaler],

@@ -7,7 +7,7 @@ import MenuIcon from './MenuIcon';
 import Logo from './Logo';
 import MainNavLink from './MainNavLink';
 import { pxToRem } from '../styles/utils';
-import { PAGE_SPACING, TYPE_SIZE, COLORS } from '../styles/vars';
+import { PAGE_SPACING, TYPE_SIZE, COLORS, MEDIA_QUERIES } from '../styles/vars';
 import HeaderBarFlatListItem from './HeaderBarFlatListItem';
 import * as CustomPropTypes from '../propTypes';
 
@@ -20,7 +20,7 @@ const InvisibleButton = styled.button`
 
 const HomeHeaderBarFlatListItem = HeaderBarFlatListItem.extend`
   display: none;
-  @media (max-width: ${pxToRem(680)}) {
+  @media (max-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
     display: block;
   }
 `;
@@ -102,9 +102,7 @@ export default styled(PageHeaderBar)`
     display: none;
   }
 
-  @media (max-width: ${pxToRem(680)}) {
-    position: static;
-
+  @media (max-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
     ${FlatList} {
       display: none;
       position: absolute;
