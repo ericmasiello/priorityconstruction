@@ -99,7 +99,9 @@ export default styled(Hero)`
   margin-bottom: 1.45rem;
   overflow: hidden;
   position: relative;
-  height: ${({ isFullHeight }) => (isFullHeight ? '70vh' : '20vh')};
+  @media (min-height: ${pxToRem(450)}) {
+    height: ${({ isFullHeight }) => (isFullHeight ? '70vh' : '20vh')};
+  }
   display: flex;
   max-height: ${pxToRem(700)};
 
