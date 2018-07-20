@@ -6,6 +6,7 @@ import PageContainer from '../components/PageContainer';
 import PhotoGrid from '../components/PhotoGrid';
 import Placeholder from '../components/Placeholder';
 import Type4 from '../components/Type4';
+import Base from '../components/Base';
 import Blockquote from '../components/Blockquote';
 import { edgesToGallery } from '../utils/gallery';
 import { COLORS } from '../styles/vars';
@@ -58,7 +59,16 @@ const BlockquoteContainer = PageContainer.extend`
   padding-top: 2rem;
   padding-bottom: 2rem;
 
-  ${Blockquote} > :last-child {
+  ${Blockquote} {
+    text-align: center;
+  }
+
+  ${Blockquote.Citation} > :last-child {
+    margin-bottom: 0;
+  }
+
+  ${Base} {
+    text-transform: uppercase;
     margin-bottom: 0;
   }
 `;
@@ -83,12 +93,16 @@ const HomePage = props => {
 
       <BlockquoteContainer>
         <Blockquote>
-          <p>
+          <Blockquote.Quote>
             General Paving and Contracting, Inc. regularly use Priority Construction Corp. on a
             range of construction projects. Priority&rsquo;s crews are punctual and highly skilled
             in a variety of concrete jobs. Over the years, they have proven to be easy to work with
             and have consistently performed excellent work.
-          </p>
+          </Blockquote.Quote>
+          <Blockquote.Citation>
+            <Base tag="h1">Robert L. Quinn, Jr.</Base>
+            <p>General Paving & Contracting, Inc., Halethorpe, Maryland</p>
+          </Blockquote.Citation>
         </Blockquote>
       </BlockquoteContainer>
     </React.Fragment>
