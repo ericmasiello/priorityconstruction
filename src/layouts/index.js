@@ -19,7 +19,7 @@ import PageHeaderBar from '../components/PageHeaderBar';
 import { MEDIA_QUERIES } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
-const LayoutChildren = styled.div``;
+const LayoutChildren = styled.main``;
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
