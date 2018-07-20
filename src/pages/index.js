@@ -6,6 +6,7 @@ import PageContainer from '../components/PageContainer';
 import PhotoGrid from '../components/PhotoGrid';
 import Placeholder from '../components/Placeholder';
 import Type4 from '../components/Type4';
+import Blockquote from '../components/Blockquote';
 import { edgesToGallery } from '../utils/gallery';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
@@ -27,40 +28,13 @@ const FPOGrid = styled.div`
   }
 `;
 
-const HomePage = props => {
-  const { data, className } = props;
-  const photoGridProps = edgesToGallery(data.homageGallery.edges, 'courtyard.jpg');
-
-  return (
-    <PageContainer tag="section" className={className}>
-      <FPOGrid>
-        <Placeholder>
-          <Type4>Our Team</Type4>
-        </Placeholder>
-        <Placeholder>
-          <Type4>Our Expertise</Type4>
-        </Placeholder>
-      </FPOGrid>
-      <PhotoGrid {...photoGridProps} />
-    </PageContainer>
-  );
-};
-
-HomePage.displayName = 'HomePage';
-
-HomePage.propTypes = {
-  data: PropTypes.shape({
-    homageGallery: CustomPropTypes.AllImageSharp,
-  }).isRequired,
-  className: PropTypes.string,
-};
-
-export default styled(HomePage)`
+const MainContentContainer = styled(PageContainer)`
   background-image: url(${blueprint});
   background-size: cover;
   background-position: center center;
   position: relative;
   padding-top: ${pxToRem(70)};
+  padding-bottom: ${pxToRem(70)};
 
   &::before {
     content: '';
@@ -77,6 +51,60 @@ export default styled(HomePage)`
     z-index: 1;
   }
 `;
+
+const BlockquoteContainer = styled(PageContainer)`
+  background-color: ${COLORS.highlight3};
+  color: #fff;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  ${Blockquote} > :last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const HomePage = props => {
+  const { data } = props;
+  const photoGridProps = edgesToGallery(data.homageGallery.edges, 'courtyard.jpg');
+
+  return (
+    <React.Fragment>
+      <MainContentContainer tag="section">
+        <FPOGrid>
+          <Placeholder>
+            <Type4>Our Team</Type4>
+          </Placeholder>
+          <Placeholder>
+            <Type4>Our Expertise</Type4>
+          </Placeholder>
+        </FPOGrid>
+        <PhotoGrid {...photoGridProps} />
+      </MainContentContainer>
+
+      <BlockquoteContainer>
+        <Blockquote>
+          <p>
+            General Paving and Contracting, Inc. regularly use Priority Construction Corp. on a
+            range of construction projects. Priority&squo;s crews are punctual and highly skilled in
+            a variety of concrete jobs. Over the years, they have proven to be easy to work with and
+            have consistently performed excellent work.
+          </p>
+        </Blockquote>
+      </BlockquoteContainer>
+    </React.Fragment>
+  );
+};
+
+HomePage.displayName = 'HomePage';
+
+HomePage.propTypes = {
+  data: PropTypes.shape({
+    homageGallery: CustomPropTypes.AllImageSharp,
+  }).isRequired,
+  className: PropTypes.string,
+};
+
+export default HomePage;
 
 export const query = graphql`
   query HomePage {
