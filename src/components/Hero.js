@@ -96,7 +96,6 @@ export class Hero extends Component {
 
 export default styled(Hero)`
   background-color: ${props => props.bgColor};
-  margin-bottom: 1.45rem;
   overflow: hidden;
   position: relative;
   @media (min-height: ${pxToRem(450)}) {

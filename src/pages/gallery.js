@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PageContainer from '../components/PageContainer';
 import Type2 from '../components/Type2';
 import List from '../components/List';
 import GatsbyImage from '../components/GatsbyImage';
 import * as CustomPropTypes from '../propTypes';
 
 const GalleryPage = ({ data }) => (
-  <div>
+  <PageContainer tag="section">
     <Type2 tag="h1">Gallery</Type2>
     <List>
       {data.gallery.edges.map(edge => (
@@ -15,7 +16,7 @@ const GalleryPage = ({ data }) => (
         </List.Item>
       ))}
     </List>
-  </div>
+  </PageContainer>
 );
 
 GalleryPage.displayName = 'GalleryPage';

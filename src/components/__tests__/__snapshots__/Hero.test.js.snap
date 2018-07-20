@@ -2,7 +2,6 @@
 
 exports[`should render 1`] = `
 .c0 {
-  margin-bottom: 1.45rem;
   overflow: hidden;
   position: relative;
   display: -webkit-box;

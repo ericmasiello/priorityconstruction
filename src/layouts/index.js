@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
-import PageContainer from '../components/PageContainer';
 import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
 import FlatList from '../components/FlatList';
@@ -19,6 +18,8 @@ import HeroAboutPageContent from '../components/HeroAboutPageContent';
 import PageHeaderBar from '../components/PageHeaderBar';
 import { MEDIA_QUERIES } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
+
+const LayoutChildren = styled.div``;
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -117,7 +118,7 @@ class Layout extends React.Component {
           >
             {this.state.heroChildren}
           </Hero>
-          <PageContainer>{children()}</PageContainer>
+          <LayoutChildren>{children()}</LayoutChildren>
           <ComposedFooter {...address} logo={data.logo} phone={phone} fax={fax} email={email} />
         </div>
       </LayoutContext.Provider>
@@ -158,7 +159,7 @@ export default styled(Layout)`
   display: flex;
   flex-direction: column;
 
-  ${PageHeaderBar}, ${Hero}, ${PageContainer}, ${ComposedFooter} {
+  ${PageHeaderBar}, ${Hero}, ${LayoutChildren}, ${ComposedFooter} {
     order: 1;
   }
 

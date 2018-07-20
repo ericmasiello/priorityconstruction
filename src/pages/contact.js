@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
+import PageContainer from '../components/PageContainer';
 import Type1 from '../components/Type1';
 import List from '../components/List';
 import OfficeMap from '../components/OfficeMap';
@@ -11,7 +12,7 @@ import Textarea from '../components/Textarea';
 import Button from '../components/Button';
 
 const Contact = ({ data }) => (
-  <div>
+  <PageContainer tag="section">
     <Type1>Contact Priority Construction</Type1>
     <p>
       Do you have a question on an ongoing project? Want us to do a specific job?{' '}
@@ -62,7 +63,7 @@ const Contact = ({ data }) => (
       </Field>
       <Button type="submit">Submit</Button>
     </form>
-  </div>
+  </PageContainer>
 );
 
 Contact.propTypes = {
