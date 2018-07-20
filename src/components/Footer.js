@@ -33,5 +33,5 @@ Footer.defaultProps = {
 };
 
 export default styled(Footer)`
-  padding: 1.45rem ${pxToRem(PAGE_SPACING.horizontal)};
+  padding: ${pxToRem(40)} ${pxToRem(PAGE_SPACING.horizontal)};
 `;
