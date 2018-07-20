@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import tinyColor from 'tinycolor2';
-import { pxToRem } from '../styles/utils';
-import { COLORS, BODY_WEIGHTS } from '../styles/vars';
 
 export const BlockquoteCitation = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
 
