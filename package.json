@@ -32,16 +32,12 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "lint": "eslint . '**/.*.js' --cache",
-    "format": "prettier-eslint --write --ignore **/node_modules/** \"**/*.{js,jsx}\"",
+    "format": "prettier-eslint --write \"**/*.{js,jsx,json,md}\"",
     "test": "jest",
     "test:watch": "npm run test -- --watch",
-    "deploy": "gatsby build && gh-pages -d public -b master",
-    "storybook": "start-storybook -p 9001 -c storybook",
-    "storybook:dist": "build-storybook -c storybook -o styleguide"
+    "deploy": "gatsby build && gh-pages -d public -b master"
   },
   "devDependencies": {
-    "@storybook/addon-options": "3.3.15",
-    "@storybook/react": "3.3.15",
     "babel-eslint": "~8.2.3",
     "babel-jest": "~23.2.0",
     "babel-plugin-syntax-class-properties": "^6.13.0",
@@ -66,14 +62,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-push": "npm run lint && npm run format"
     }
-  },
-  "lint-staged": {
-    "*.{js,jsx,json,md}": [
-      "prettier --write",
-      "git add"
-    ]
   },
   "prettier": {
     "printWidth": 100,

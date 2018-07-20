@@ -9,10 +9,10 @@ const LayoutContext = React.createContext({
   navRef: null,
 });
 
-export const withLayoutContext = (Component) => {
+export const withLayoutContext = Component => {
   const Wrapper = ({ innerRef, ...rest }) => (
     <LayoutContext.Consumer>
-      {((layoutContext) => <Component ref={innerRef} {...rest} {...layoutContext} />)}
+      {layoutContext => <Component ref={innerRef} {...rest} {...layoutContext} />}
     </LayoutContext.Consumer>
   );
 
