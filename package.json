@@ -32,7 +32,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "lint": "eslint . '**/.*.js' --cache",
-    "format": "prettier-eslint --write --ignore **/node_modules/** \"**/*.{js,jsx,json,md}\"",
+    "format": "prettier-eslint --write \"**/*.{js,jsx,json,md}\"",
     "test": "jest",
     "test:watch": "npm run test -- --watch",
     "deploy": "gatsby build && gh-pages -d public -b master"
