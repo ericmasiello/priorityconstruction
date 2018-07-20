@@ -12,9 +12,11 @@ export const ImageSharp = PropTypes.shape({
 });
 
 export const AllImageSharp = PropTypes.shape({
-  edges: PropTypes.arrayOf(PropTypes.shape({
-    node: ImageSharp,
-  })),
+  edges: PropTypes.arrayOf(
+    PropTypes.shape({
+      node: ImageSharp,
+    }),
+  ),
 });
 
 export const Tag = PropTypes.oneOfType([PropTypes.func, PropTypes.string]);

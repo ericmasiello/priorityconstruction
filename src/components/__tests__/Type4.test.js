@@ -40,4 +40,3 @@ it('should render with a custom tag', () => {
 
   expect(wrapper.type()).toBe('span');
 });
-

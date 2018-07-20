@@ -3,7 +3,8 @@ require('dotenv').config();
 module.exports = {
   siteMetadata: {
     title: 'Priority Construction',
-    desc: 'Priority Construction Corp. is dedicated to complete different types of concrete projects throughout the Baltimore area by using highly skilled employees and paying attention to every detail of the project.',
+    desc:
+      'Priority Construction Corp. is dedicated to complete different types of concrete projects throughout the Baltimore area by using highly skilled employees and paying attention to every detail of the project.',
     address: {
       streetAddress: '1315 West Hamburg Street',
       city: 'Baltimore',
@@ -13,14 +14,7 @@ module.exports = {
     phone: '410-244-6773',
     fax: '410-244-6778',
     email: 'info@priorityconst.com',
-    keywords: [
-      'construction',
-      'Baltimore',
-      'Maryland',
-      'concrete',
-      'brick',
-      'flatwork',
-    ],
+    keywords: ['construction', 'Baltimore', 'Maryland', 'concrete', 'brick', 'flatwork'],
     googleMapKey: process.env.GOOGLE_MAP_KEY,
   },
   plugins: [
