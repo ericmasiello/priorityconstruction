@@ -22,4 +22,17 @@ export default styled(Placeholder)`
   display: block;
   background-color: ${COLORS.placeholder};
   padding: 1rem;
+  position: relative;
+
+  &::after {
+    content: '[Placeholder]';
+    position: absolute;
+    opacity: 0.3;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    text-transform: uppercase;
+    transform: translateY(-50%);
+  }
 `;
