@@ -15,12 +15,17 @@ export const COLORS = {
   border: tinyColor(baseColor)
     .lighten(50)
     .toRgbString(),
+  placeholder: '#D8D8D8',
 };
 
-export const MAX_CONTENT_WIDTH = 1024;
+export const MAX_CONTENT_WIDTH = 1200;
 
 export const PAGE_SPACING = {
   horizontal: 20,
+};
+
+export const MEDIA_QUERIES = {
+  navTransition: 680,
 };
 
 // type properties

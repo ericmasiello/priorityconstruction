@@ -2,47 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
-import PageContainer from '../components/PageContainer';
 import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
-import HeaderBar from '../components/HeaderBar';
-import HeaderBarFlatListItem from '../components/HeaderBarFlatListItem';
-import Logo from '../components/Logo';
-import MainNavLink from '../components/MainNavLink';
 import FlatList from '../components/FlatList';
 import ComposedFooter from '../composed/Footer';
 import Hero from '../components/Hero';
-import HeroBanner from '../components/HeroBanner';
 import TopBar from '../components/TopBar';
 import TopBarLink from '../components/TopBarLink';
 import Small from '../components/Small';
 import LayoutContext from '../layoutContext';
 import MailIcon from '../components/MailIcon';
 import PhoneIcon from '../components/PhoneIcon';
+import HeroHomePageContent from '../components/HeroHomePageContent';
+import HeroAboutPageContent from '../components/HeroAboutPageContent';
+import PageHeaderBar from '../components/PageHeaderBar';
+import { MEDIA_QUERIES } from '../styles/vars';
+import { pxToRem } from '../styles/utils';
+
+const LayoutChildren = styled.main``;
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
   ${base}
 `;
-
-const links = [
-  {
-    to: '/services',
-    children: 'Services',
-  },
-  {
-    to: '/about',
-    children: 'About',
-  },
-  {
-    to: '/careers',
-    children: 'Careers',
-  },
-  {
-    to: '/contact',
-    children: 'Contact',
-  },
-];
 
 const getConfigFromPathname = (configs, pathname) => {
   const path = pathname.replace('/', '');
@@ -55,15 +37,16 @@ class Layout extends React.Component {
     base: {
       background: this.props.data.backgroundHome,
       isFullHeight: false,
-      pageTitle: null,
+      heroChildren: null,
     },
     '': {
       isFullHeight: true,
+      heroChildren: <HeroHomePageContent />,
     },
     about: {
       background: this.props.data.backgroundAbout,
       isFullHeight: true,
-      pageTitle: 'About Us',
+      heroChildren: <HeroAboutPageContent />,
     },
     careers: {
       isFullHeight: false,
@@ -77,7 +60,8 @@ class Layout extends React.Component {
   state = {
     logo: this.props.data.logo,
     title: this.props.data.site.siteMetadata.title,
-    pageTitle: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).pageTitle,
+    heroChildren: getConfigFromPathname(this.pageConfigs, this.props.location.pathname)
+      .heroChildren,
     isFullHeight: getConfigFromPathname(this.pageConfigs, this.props.location.pathname)
       .isFullHeight,
     background: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).background,
@@ -96,7 +80,6 @@ class Layout extends React.Component {
 
   render() {
     const { children, data, className } = this.props;
-
     const { title, desc, keywords, address, phone, fax, email } = data.site.siteMetadata;
 
     return (
@@ -108,6 +91,11 @@ class Layout extends React.Component {
               { name: 'description', content: desc },
               { name: 'keywords', content: keywords.join(', ') },
             ]}
+          />
+          <PageHeaderBar
+            navRef={this.state.navRef}
+            logo={this.state.logo}
+            currentPathname={this.props.location.pathname}
           />
           <TopBar>
             <Small tag={FlatList}>
@@ -123,26 +111,14 @@ class Layout extends React.Component {
               </FlatList.Item>
             </Small>
           </TopBar>
-          <HeaderBar innerRef={this.state.navRef}>
-            <Logo image={this.state.logo} />
-            <nav>
-              <FlatList>
-                {links.map(link => (
-                  <HeaderBarFlatListItem key={link.to}>
-                    <MainNavLink selected={this.props.location.pathname === link.to} {...link} />
-                  </HeaderBarFlatListItem>
-                ))}
-              </FlatList>
-            </nav>
-          </HeaderBar>
           <Hero
             selectedImage={this.state.background}
             bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
             isFullHeight={this.state.isFullHeight}
           >
-            {this.state.pageTitle && <HeroBanner>{this.state.pageTitle}</HeroBanner>}
+            {this.state.heroChildren}
           </Hero>
-          <PageContainer>{children()}</PageContainer>
+          <LayoutChildren>{children()}</LayoutChildren>
           <ComposedFooter {...address} logo={data.logo} phone={phone} fax={fax} email={email} />
         </div>
       </LayoutContext.Provider>
@@ -179,7 +155,20 @@ Layout.propTypes = {
 
 Layout.displayName = 'Layout';
 
-export default styled(Layout)``;
+export default styled(Layout)`
+  display: flex;
+  flex-direction: column;
+
+  ${PageHeaderBar}, ${Hero}, ${LayoutChildren}, ${ComposedFooter} {
+    order: 1;
+  }
+
+  @media(max-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
+    ${TopBar} {
+      order: 1;
+    }
+  }
+`;
 
 export const query = graphql`
   query LayoutQuery {

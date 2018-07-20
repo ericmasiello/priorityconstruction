@@ -79,7 +79,7 @@ export class Hero extends Component {
         {children}
         {bgImages.map(image => (
           <BackgroundImage
-            key={image.id}
+            key={image.sizes.src}
             style={{
               position: 'absolute',
               transition: 'opacity 0.5s',
@@ -96,12 +96,12 @@ export class Hero extends Component {
 
 export default styled(Hero)`
   background-color: ${props => props.bgColor};
-  margin-bottom: 1.45rem;
   overflow: hidden;
   position: relative;
-  height: ${({ isFullHeight }) => (isFullHeight ? '70vh' : '20vh')};
+  @media (min-height: ${pxToRem(450)}) {
+    height: ${({ isFullHeight }) => (isFullHeight ? '70vh' : '20vh')};
+  }
   display: flex;
-  align-items: center;
   max-height: ${pxToRem(700)};
 
   ${HeroBanner} {

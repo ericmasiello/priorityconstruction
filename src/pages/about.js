@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import List from '../components/List';
+import PageContainer from '../components/PageContainer';
 import ContentBlock from '../components/ContentBlock';
 import NavBlockList from '../components/NavBlockList';
 import { pxToRem } from '../styles/utils';
@@ -134,7 +135,7 @@ class About extends React.Component {
     const { className } = this.props;
 
     return (
-      <section className={className}>
+      <PageContainer tag="section" className={className}>
         <StickyNavContainer
           ref={this.stuckNavList}
           show={this.state.showStickyNav}
@@ -221,7 +222,7 @@ class About extends React.Component {
             </ContentBlock>
           </div>
         </AboutContent>
-      </section>
+      </PageContainer>
     );
   }
 }
@@ -235,4 +236,6 @@ About.propTypes = {
   }),
 };
 
-export default withLayoutContext(About);
+export default styled(withLayoutContext(About))`
+  padding-top: 2rem;
+`;

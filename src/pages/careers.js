@@ -1,4 +1,5 @@
 import React from 'react';
+import PageContainer from '../components/PageContainer';
 import Type1 from '../components/Type1';
 import Type2 from '../components/Type2';
 import Type3 from '../components/Type3';
@@ -9,7 +10,7 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 
 const Careers = () => (
-  <div>
+  <PageContainer tag="section">
     <Type1>Career Opportunities with Priority Construction</Type1>
     <p>
       Interested in working with us in the construction field? We are always looking for individuals
@@ -51,7 +52,7 @@ const Careers = () => (
 
       <Button type="submit">Submit</Button>
     </form>
-  </div>
+  </PageContainer>
 );
 
 Careers.displayName = 'Careers';

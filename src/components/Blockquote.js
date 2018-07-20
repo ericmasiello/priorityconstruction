@@ -1,9 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import tinyColor from 'tinycolor2';
-import { pxToRem } from '../styles/utils';
-import { COLORS, BODY_WEIGHTS } from '../styles/vars';
+
+export const BlockquoteCitation = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
+
+BlockquoteCitation.propTypes = {
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+};
+
+BlockquoteCitation.defaultProps = {
+  tag: 'footer',
+};
+
+BlockquoteCitation.displayName = 'Blockquote.Citation';
+
+const StyledBlockquoteCitation = styled(BlockquoteCitation)``;
+
+export const BlockquoteQuote = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
+
+BlockquoteQuote.propTypes = {
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+};
+
+BlockquoteQuote.defaultProps = {
+  tag: 'p',
+};
+
+BlockquoteQuote.displayName = 'Blockquote.Quote';
+
+const StyledBlockquoteQuote = styled(BlockquoteQuote)`
+  &::before {
+    content: '\\201C';
+  }
+
+  &::after {
+    content: '\\201D';
+  }
+`;
 
 export const Blockquote = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
 
@@ -17,31 +50,13 @@ Blockquote.defaultProps = {
 
 Blockquote.displayName = 'Blockquote';
 
-export default styled(Blockquote)`
+const StyledBlockquote = styled(Blockquote)`
   position: relative;
-  padding-left: 2em;
-  padding-right: 2em;
-
-  &::before,
-  &::after {
-    position: absolute;
-    font-size: 300%;
-    line-height: 50%;
-    font-weight: ${BODY_WEIGHTS.bold};
-    color: ${tinyColor(COLORS.base)
-      .lighten(60)
-      .toRgbString()};
-  }
-
-  &::before {
-    content: '\\201C';
-    left: 0;
-    top: ${pxToRem(10)};
-  }
-
-  &::after {
-    content: '\\201D';
-    right: 0;
-    bottom: ${pxToRem(10)};
-  }
+  padding-left: 2rem;
+  padding-right: 2rem;
 `;
+
+StyledBlockquote.Quote = StyledBlockquoteQuote;
+StyledBlockquote.Citation = StyledBlockquoteCitation;
+
+export default StyledBlockquote;

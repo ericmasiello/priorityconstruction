@@ -4,10 +4,15 @@ import styled from 'styled-components';
 import List from './List';
 import GatsbyImage from './GatsbyImage';
 import * as CustomPropTypes from '../propTypes';
+import { pxToRem } from '../styles/utils';
+
+const breakpoint = pxToRem(800);
 
 const PrimaryPhotoGrid = styled(List.Item)`
-  grid-column: span 2;
-  grid-row: span 2;
+  @media (min-width: ${breakpoint}) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
 `;
 
 const PhotoGrid = props => {
@@ -35,8 +40,12 @@ PhotoGrid.displayName = 'PhotoGrid';
 
 export default styled(PhotoGrid)`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
+
+  @media(min-width: ${breakpoint}) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, ${pxToRem(200)});
+  }
 
   ${List.Item} {
     margin: 0;
