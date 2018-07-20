@@ -14,13 +14,16 @@ import blueprint from '../images/blueprint.svg';
 const FPOGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(${pxToRem(400)}, 1fr));
-  grid-template-rows: repeat(2, ${pxToRem(225)});
   grid-gap: 1rem;
   margin-bottom: ${pxToRem(160)};
 
   ${Type4} {
     color: ${COLORS.highlight3};
     text-transform: uppercase;
+  }
+
+  ${Placeholder} {
+    min-height: ${pxToRem(225)};
   }
 `;
 
