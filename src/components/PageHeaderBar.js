@@ -45,8 +45,8 @@ const links = [
 ];
 
 class PageHeaderBar extends React.Component {
-  propTypes = {
-    navRef: PropTypes.func,
+  static propTypes = {
+    navRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     logo: CustomPropTypes.ImageSharp,
     currentPathname: PropTypes.string,
     className: PropTypes.string,
