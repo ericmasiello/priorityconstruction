@@ -28,7 +28,7 @@ const FPOGrid = styled.div`
   }
 `;
 
-const MainContentContainer = styled(PageContainer)`
+const MainContentContainer = PageContainer.extend`
   background-image: url(${blueprint});
   background-size: cover;
   background-position: center center;
@@ -52,7 +52,7 @@ const MainContentContainer = styled(PageContainer)`
   }
 `;
 
-const BlockquoteContainer = styled(PageContainer)`
+const BlockquoteContainer = PageContainer.extend`
   background-color: ${COLORS.highlight3};
   color: #fff;
   padding-top: 2rem;
@@ -85,9 +85,9 @@ const HomePage = props => {
         <Blockquote>
           <p>
             General Paving and Contracting, Inc. regularly use Priority Construction Corp. on a
-            range of construction projects. Priority&squo;s crews are punctual and highly skilled in
-            a variety of concrete jobs. Over the years, they have proven to be easy to work with and
-            have consistently performed excellent work.
+            range of construction projects. Priority&rsquo;s crews are punctual and highly skilled
+            in a variety of concrete jobs. Over the years, they have proven to be easy to work with
+            and have consistently performed excellent work.
           </p>
         </Blockquote>
       </BlockquoteContainer>
