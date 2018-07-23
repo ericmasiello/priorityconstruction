@@ -127,8 +127,10 @@ class About extends React.Component {
 
     const pageNavHeight = this.pageNav ? this.pageNav.clientHeight : 0;
     const stuckNavElmHeight = this.stuckNavElm ? this.stuckNavElm.clientHeight : 0;
+    const computedScrollTo = elm.offsetTop - pageNavHeight - stuckNavElmHeight;
 
-    document.documentElement.scrollTop = elm.offsetTop - pageNavHeight - stuckNavElmHeight;
+    document.body.scrollTop = computedScrollTo;
+    document.documentElement.scrollTop = computedScrollTo;
   };
 
   render() {
