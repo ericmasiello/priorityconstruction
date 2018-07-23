@@ -131,6 +131,10 @@ class About extends React.Component {
 
     document.body.scrollTop = computedScrollTo;
     document.documentElement.scrollTop = computedScrollTo;
+
+    if (elm) {
+      elm.focus();
+    }
   };
 
   render() {
@@ -170,7 +174,7 @@ class About extends React.Component {
           </div>
 
           <div>
-            <ContentBlock tag="section" id="history">
+            <ContentBlock tag="section" id="history" tabIndex={-1}>
               <p>
                 Priority Construction Corp. was established in 1996 by Pedro Ponce, a humble man
                 from humble beginnings. Pedro Ponce envisioned a family owned company that focused
@@ -201,7 +205,7 @@ class About extends React.Component {
                 and brick paving business.
               </p>
             </ContentBlock>
-            <ContentBlock tag="section" id="mission">
+            <ContentBlock tag="section" id="mission" tabIndex={-1}>
               <p>
                 At Priority Construction, we strive to exceed our client’s and competitor&rsquo;s
                 expectation by maintaining a high level of professionalism, integrity, workmanship,
@@ -213,7 +217,7 @@ class About extends React.Component {
                 pride in our accomplishments and build on them every day.
               </p>
             </ContentBlock>
-            <ContentBlock tag="section" id="certifications">
+            <ContentBlock tag="section" id="certifications" tabIndex={-1}>
               <List>
                 <List.Item>MBE - STATE # 02-490</List.Item>
                 <List.Item>MBE - BALTIMORE CITY # 01-003989</List.Item>
