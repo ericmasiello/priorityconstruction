@@ -15,6 +15,8 @@ import MailIcon from '../components/MailIcon';
 import PhoneIcon from '../components/PhoneIcon';
 import HeroHomePageContent from '../components/HeroHomePageContent';
 import HeroAboutPageContent from '../components/HeroAboutPageContent';
+import HeroCareersPageContent from '../components/HeroCareersPageContent';
+import HeroContactPageContent from '../components/HeroContactPageContent';
 import PageHeaderBar from '../components/PageHeaderBar';
 import { MEDIA_QUERIES } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
@@ -50,9 +52,11 @@ class Layout extends React.Component {
     },
     careers: {
       isFullHeight: false,
+      heroChildren: <HeroCareersPageContent />,
     },
     contact: {
       isFullHeight: false,
+      heroChildren: <HeroContactPageContent />,
     },
   };
 
@@ -186,6 +190,10 @@ export const query = graphql`
         phone
         fax
         email
+        urls {
+          facebook
+          linkedin
+        }
       }
     }
 

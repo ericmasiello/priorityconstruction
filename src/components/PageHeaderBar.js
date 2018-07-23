@@ -27,7 +27,7 @@ const HomeHeaderBarFlatListItem = HeaderBarFlatListItem.extend`
 
 const links = [
   {
-    to: '/services',
+    to: '/placeholder',
     children: 'Services',
   },
   {
@@ -35,12 +35,12 @@ const links = [
     children: 'About',
   },
   {
-    to: '/careers',
+    to: '/placeholder',
     children: 'Careers',
   },
   {
-    to: '/contact',
-    children: 'Contact',
+    to: '/placeholder',
+    children: 'Request Quote',
   },
 ];
 
@@ -79,7 +79,7 @@ class PageHeaderBar extends React.Component {
             </MainNavLink>
           </HomeHeaderBarFlatListItem>
           {links.map(link => (
-            <HeaderBarFlatListItem key={link.to}>
+            <HeaderBarFlatListItem key={link.children}>
               <MainNavLink
                 selected={currentPathname === link.to}
                 {...link}

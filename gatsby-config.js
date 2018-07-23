@@ -16,6 +16,10 @@ module.exports = {
     email: 'info@priorityconst.com',
     keywords: ['construction', 'Baltimore', 'Maryland', 'concrete', 'brick', 'flatwork'],
     googleMapKey: process.env.GOOGLE_MAP_KEY,
+    urls: {
+      facebook: 'https://www.facebook.com/prorityconstruction/',
+      linkedin: 'https://www.linkedin.com/company/priority-construction/',
+    },
   },
   plugins: [
     'gatsby-plugin-react-helmet',
