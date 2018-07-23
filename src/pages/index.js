@@ -15,7 +15,7 @@ import blueprint from '../images/blueprint.svg';
 
 const FPOGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(${pxToRem(400)}, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(${pxToRem(280)}, 1fr));
   grid-gap: 1rem;
   margin-bottom: ${pxToRem(160)};
 
