@@ -83,4 +83,10 @@ export default `
   address {
     font-style: normal;
   }
+
+  fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
 `;
