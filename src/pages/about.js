@@ -141,7 +141,7 @@ class About extends React.Component {
         <StickyNavContainer
           ref={this.stuckNavList}
           show={this.state.showStickyNav}
-          offset={this.pageNav ? this.pageNav.clientHeight : 0}
+          offset={this.pageNav ? this.pageNav.clientHeight - 1 : 0}
         >
           <NavBlockList row>
             {navItems.map(item => (
