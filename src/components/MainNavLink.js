@@ -27,8 +27,10 @@ const MainNavLink = styled(Link)`
     }
   `};
 
-  &:hover::after {
-    height: 25%;
+  @media (hover) {
+    &:hover::after {
+      height: 25%;
+    }
   }
 `;
 

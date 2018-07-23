@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 import List from '../components/List';
+import Small from '../components/Small';
 import PageContainer from '../components/PageContainer';
 import ContentBlock from '../components/ContentBlock';
 import NavBlockList from '../components/NavBlockList';
@@ -12,6 +14,7 @@ import { withLayoutContext } from '../layoutContext';
 import { hasScrolledPastBottomOfElement } from '../utils/ui';
 
 const StickyNavContainer = styled.div`
+  display: none;
   position: fixed;
   margin: auto;
   left: 0;
@@ -21,6 +24,10 @@ const StickyNavContainer = styled.div`
   transition: transform 0.5s;
   padding-left: ${pxToRem(PAGE_SPACING.horizontal)};
   padding-right: ${pxToRem(PAGE_SPACING.horizontal)};
+
+  @media (min-width: ${pxToRem(375)}) {
+    display: block;
+  }
 
   ${({ show }) => (show ? 'transform: translateY(0)' : `transform: translateY(${pxToRem(-200)})`)};
 
@@ -120,15 +127,18 @@ class About extends React.Component {
     }
   };
 
-  handleScrollIntoView = event => {
-    event.preventDefault();
+  handleClick = event => {
     const url = new URL(event.target.href);
     const elm = document.querySelector(url.hash);
+    if (elm) {
+      elm.focus();
+    }
+  };
 
+  handleCompueteOffset = () => {
     const pageNavHeight = this.pageNav ? this.pageNav.clientHeight : 0;
     const stuckNavElmHeight = this.stuckNavElm ? this.stuckNavElm.clientHeight : 0;
-
-    document.documentElement.scrollTop = elm.offsetTop - pageNavHeight - stuckNavElmHeight;
+    return pageNavHeight + stuckNavElmHeight;
   };
 
   render() {
@@ -139,14 +149,19 @@ class About extends React.Component {
         <StickyNavContainer
           ref={this.stuckNavList}
           show={this.state.showStickyNav}
-          offset={this.pageNav ? this.pageNav.clientHeight : 0}
+          offset={this.pageNav ? this.pageNav.clientHeight - 1 : 0}
         >
           <NavBlockList row>
             {navItems.map(item => (
               <NavBlockList.Item key={item.href}>
-                <a href={item.href} onClick={this.handleScrollIntoView}>
+                <Small
+                  tag={AnchorLink}
+                  href={item.href}
+                  offset={this.handleCompueteOffset}
+                  onClick={this.handleClick}
+                >
                   {item.children}
-                </a>
+                </Small>
               </NavBlockList.Item>
             ))}
           </NavBlockList>
@@ -158,9 +173,13 @@ class About extends React.Component {
               <NavBlockList>
                 {navItems.map(item => (
                   <NavBlockList.Item key={item.href}>
-                    <a href={item.href} onClick={this.handleScrollIntoView}>
+                    <AnchorLink
+                      href={item.href}
+                      offset={this.handleCompueteOffset}
+                      onClick={this.handleClick}
+                    >
                       {item.children}
-                    </a>
+                    </AnchorLink>
                   </NavBlockList.Item>
                 ))}
               </NavBlockList>
@@ -168,7 +187,7 @@ class About extends React.Component {
           </div>
 
           <div>
-            <ContentBlock tag="section" id="history">
+            <ContentBlock tag="section" id="history" tabIndex={-1}>
               <p>
                 Priority Construction Corp. was established in 1996 by Pedro Ponce, a humble man
                 from humble beginnings. Pedro Ponce envisioned a family owned company that focused
@@ -199,7 +218,7 @@ class About extends React.Component {
                 and brick paving business.
               </p>
             </ContentBlock>
-            <ContentBlock tag="section" id="mission">
+            <ContentBlock tag="section" id="mission" tabIndex={-1}>
               <p>
                 At Priority Construction, we strive to exceed our client’s and competitor&rsquo;s
                 expectation by maintaining a high level of professionalism, integrity, workmanship,
@@ -211,7 +230,7 @@ class About extends React.Component {
                 pride in our accomplishments and build on them every day.
               </p>
             </ContentBlock>
-            <ContentBlock tag="section" id="certifications">
+            <ContentBlock tag="section" id="certifications" tabIndex={-1}>
               <List>
                 <List.Item>MBE - STATE # 02-490</List.Item>
                 <List.Item>MBE - BALTIMORE CITY # 01-003989</List.Item>
