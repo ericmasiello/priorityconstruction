@@ -186,6 +186,10 @@ export const query = graphql`
         phone
         fax
         email
+        urls {
+          facebook
+          linkedin
+        }
       }
     }
 
