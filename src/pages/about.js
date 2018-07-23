@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 import List from '../components/List';
 import PageContainer from '../components/PageContainer';
 import ContentBlock from '../components/ContentBlock';
@@ -120,21 +121,18 @@ class About extends React.Component {
     }
   };
 
-  handleScrollIntoView = event => {
-    event.preventDefault();
+  handleClick = event => {
     const url = new URL(event.target.href);
     const elm = document.querySelector(url.hash);
-
-    const pageNavHeight = this.pageNav ? this.pageNav.clientHeight : 0;
-    const stuckNavElmHeight = this.stuckNavElm ? this.stuckNavElm.clientHeight : 0;
-    const computedScrollTo = elm.offsetTop - pageNavHeight - stuckNavElmHeight;
-
-    document.body.scrollTop = computedScrollTo;
-    document.documentElement.scrollTop = computedScrollTo;
-
     if (elm) {
       elm.focus();
     }
+  };
+
+  handleCompueteOffset = () => {
+    const pageNavHeight = this.pageNav ? this.pageNav.clientHeight : 0;
+    const stuckNavElmHeight = this.stuckNavElm ? this.stuckNavElm.clientHeight : 0;
+    return pageNavHeight + stuckNavElmHeight;
   };
 
   render() {
@@ -150,9 +148,13 @@ class About extends React.Component {
           <NavBlockList row>
             {navItems.map(item => (
               <NavBlockList.Item key={item.href}>
-                <a href={item.href} onClick={this.handleScrollIntoView}>
+                <AnchorLink
+                  href={item.href}
+                  offset={this.handleCompueteOffset}
+                  onClick={this.handleClick}
+                >
                   {item.children}
-                </a>
+                </AnchorLink>
               </NavBlockList.Item>
             ))}
           </NavBlockList>
@@ -164,9 +166,13 @@ class About extends React.Component {
               <NavBlockList>
                 {navItems.map(item => (
                   <NavBlockList.Item key={item.href}>
-                    <a href={item.href} onClick={this.handleScrollIntoView}>
+                    <AnchorLink
+                      href={item.href}
+                      offset={this.handleCompueteOffset}
+                      onClick={this.handleClick}
+                    >
                       {item.children}
-                    </a>
+                    </AnchorLink>
                   </NavBlockList.Item>
                 ))}
               </NavBlockList>
