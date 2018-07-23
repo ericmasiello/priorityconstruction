@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import List from '../components/List';
+import Small from '../components/Small';
 import PageContainer from '../components/PageContainer';
 import ContentBlock from '../components/ContentBlock';
 import NavBlockList from '../components/NavBlockList';
@@ -13,6 +14,7 @@ import { withLayoutContext } from '../layoutContext';
 import { hasScrolledPastBottomOfElement } from '../utils/ui';
 
 const StickyNavContainer = styled.div`
+  display: none;
   position: fixed;
   margin: auto;
   left: 0;
@@ -22,6 +24,10 @@ const StickyNavContainer = styled.div`
   transition: transform 0.5s;
   padding-left: ${pxToRem(PAGE_SPACING.horizontal)};
   padding-right: ${pxToRem(PAGE_SPACING.horizontal)};
+
+  @media (min-width: ${pxToRem(375)}) {
+    display: block;
+  }
 
   ${({ show }) => (show ? 'transform: translateY(0)' : `transform: translateY(${pxToRem(-200)})`)};
 
@@ -148,13 +154,14 @@ class About extends React.Component {
           <NavBlockList row>
             {navItems.map(item => (
               <NavBlockList.Item key={item.href}>
-                <AnchorLink
+                <Small
+                  tag={AnchorLink}
                   href={item.href}
                   offset={this.handleCompueteOffset}
                   onClick={this.handleClick}
                 >
                   {item.children}
-                </AnchorLink>
+                </Small>
               </NavBlockList.Item>
             ))}
           </NavBlockList>
