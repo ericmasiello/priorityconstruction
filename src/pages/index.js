@@ -6,7 +6,7 @@ import PageContainer from '../components/PageContainer';
 import PhotoGrid from '../components/PhotoGrid';
 import Placeholder from '../components/Placeholder';
 import Type4 from '../components/Type4';
-import Quotes from '../components/Quotes';
+import QuoteCarousel from '../components/QuoteCarousel';
 import { edgesToGallery } from '../utils/gallery';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
@@ -70,7 +70,7 @@ const HomePage = props => {
         </FPOGrid>
         <PhotoGrid {...photoGridProps} />
       </MainContentContainer>
-      <Quotes quotes={quotes} />
+      <QuoteCarousel quotes={quotes} />
     </React.Fragment>
   );
 };
