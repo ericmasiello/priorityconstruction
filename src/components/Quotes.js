@@ -9,9 +9,12 @@ import Base from './Base';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
+// TODO: make responsive friendly
+const HORIZONTAL_PADDING = 4;
+
 const ShiftButton = InvisibleButton.extend`
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   right: 1.5rem;
   top: 50%;
   transform: translateY(-50%);
@@ -26,6 +29,24 @@ const PreviousButton = ShiftButton.extend`
   left: 1.5rem;
   ${ChevronIcon} {
     transform: rotate(180deg);
+  }
+`;
+
+const QuoteContainer = styled.div`
+  display: flex;
+  transition: transform 0.7s;
+  position: relative;
+
+  ${props => `
+    width: calc((100vw * ${props.count}) - ${HORIZONTAL_PADDING * 2 * props.count}rem);
+    transform: translateX(${(100 / props.count) * -1 * props.index}%);
+  `};
+
+  ${Blockquote} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 `;
 
@@ -77,15 +98,17 @@ export class Quotes extends Component {
             <ChevronIcon />
           </PreviousButton>
         )}
-        <Blockquote>
-          <Blockquote.Quote>{quotes[this.state.selectedIndex].quote}</Blockquote.Quote>
-          <Blockquote.Citation>
-            <Base tag="h1">{quotes[this.state.selectedIndex].author}</Base>
-            {quotes[this.state.selectedIndex].title && (
-              <p>{quotes[this.state.selectedIndex].title}</p>
-            )}
-          </Blockquote.Citation>
-        </Blockquote>
+        <QuoteContainer count={quotes.length} index={this.state.selectedIndex}>
+          {quotes.map(quote => (
+            <Blockquote key={quote.quote}>
+              <Blockquote.Quote>{quote.quote}</Blockquote.Quote>
+              <Blockquote.Citation>
+                <Base tag="h1">{quote.author}</Base>
+                {quote.title && <p>{quote.title}</p>}
+              </Blockquote.Citation>
+            </Blockquote>
+          ))}
+        </QuoteContainer>
         {quotes.length > 1 && (
           <ShiftButton aria-label="Next quote" onClick={this.handleClickNext}>
             <ChevronIcon />
@@ -100,7 +123,7 @@ export default styled(Quotes)`
   position: relative;
   background-color: ${COLORS.highlight3};
   color: #fff;
-  padding: 2rem 4rem;
+  padding: 2rem ${HORIZONTAL_PADDING}rem;
 
   ${Blockquote} {
     text-align: center;
@@ -113,5 +136,24 @@ export default styled(Quotes)`
   ${Base} {
     text-transform: uppercase;
     margin-bottom: 0;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: ${HORIZONTAL_PADDING}rem;
+    background-color: ${COLORS.highlight3};
+    z-index: 2;
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
   }
 `;
