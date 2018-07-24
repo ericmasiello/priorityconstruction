@@ -11,6 +11,7 @@ import { edgesToGallery } from '../utils/gallery';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 import blueprint from '../images/blueprint.svg';
+import quotes from '../content/quotes.json';
 
 const FPOGrid = styled.div`
   display: grid;
@@ -69,7 +70,7 @@ const HomePage = props => {
         </FPOGrid>
         <PhotoGrid {...photoGridProps} />
       </MainContentContainer>
-      <Quotes />
+      <Quotes quotes={quotes} />
     </React.Fragment>
   );
 };
