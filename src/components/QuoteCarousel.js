@@ -9,10 +9,14 @@ import Base from './Base';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
-// TODO: make responsive friendly
 const HORIZONTAL_PADDING = 4;
+const BREAKPOINT = 550;
 
 const ShiftButton = InvisibleButton.extend`
+  display: none;
+  @media (min-width: ${pxToRem(BREAKPOINT)}) {
+    display: block;
+  }
   position: absolute;
   z-index: 3;
   right: 1.5rem;
@@ -33,20 +37,41 @@ const PreviousButton = ShiftButton.extend`
 `;
 
 const QuoteContainer = styled.div`
-  display: flex;
-  transition: transform 0.7s;
-  position: relative;
+  @media (min-width: ${pxToRem(BREAKPOINT)}) {
+    display: flex;
+    transition: transform 0.7s;
 
-  ${props => `
-    width: calc((100vw * ${props.count}) - ${HORIZONTAL_PADDING * 2 * props.count}rem);
-    transform: translateX(${(100 / props.count) * -1 * props.index}%);
-  `};
+    ${props => `
+      width: calc((100vw * ${props.count}) - ${HORIZONTAL_PADDING * 2 * props.count}rem);
+      transform: translateX(${(100 / props.count) * -1 * props.index}%);
+    `};
+  }
 
   ${Blockquote} {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
+
+    &:not(:last-child) {
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: ${pxToRem(BREAKPOINT)}) {
+      &:not(:last-child) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  ${Blockquote.Citation} > :last-child {
+    margin-bottom: 0;
+  }
+
+  ${Base} {
+    text-transform: uppercase;
+    margin-bottom: 0;
   }
 `;
 
@@ -123,37 +148,30 @@ export default styled(Quotes)`
   position: relative;
   background-color: ${COLORS.highlight3};
   color: #fff;
-  padding: 2rem ${HORIZONTAL_PADDING}rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 
-  ${Blockquote} {
-    text-align: center;
-  }
+  @media (min-width: ${pxToRem(BREAKPOINT)}) {
+    padding-left: ${HORIZONTAL_PADDING}rem;
+    padding-right: ${HORIZONTAL_PADDING}rem;
 
-  ${Blockquote.Citation} > :last-child {
-    margin-bottom: 0;
-  }
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: ${HORIZONTAL_PADDING}rem;
+      background-color: ${COLORS.highlight3};
+      z-index: 2;
+    }
 
-  ${Base} {
-    text-transform: uppercase;
-    margin-bottom: 0;
-  }
+    &::before {
+      left: 0;
+    }
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: ${HORIZONTAL_PADDING}rem;
-    background-color: ${COLORS.highlight3};
-    z-index: 2;
-  }
-
-  &::before {
-    left: 0;
-  }
-
-  &::after {
-    right: 0;
+    &::after {
+      right: 0;
+    }
   }
 `;
