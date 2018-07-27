@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import hoistNonReactStatics from 'hoist-non-react-statics';
 
 const LayoutContext = React.createContext({
   logo: {},
@@ -22,7 +23,8 @@ export const withLayoutContext = Component => {
 
   Wrapper.displayName = `withLayoutContext${Component.displayName || Component.name}`;
 
-  // TODO: hoist statics
+  hoistNonReactStatics(Wrapper, Component);
+
   return Wrapper;
 };
 
