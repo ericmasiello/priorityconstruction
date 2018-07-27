@@ -126,7 +126,7 @@ export class Quotes extends Component {
         <QuoteContainer count={quotes.length} index={this.state.selectedIndex}>
           {quotes.map(quote => (
             <Blockquote key={quote.quote}>
-              <Blockquote.Quote>{quote.quote}</Blockquote.Quote>
+              <Blockquote.Quote tag="div" dangerouslySetInnerHTML={{ __html: quote.quote }} />
               <Blockquote.Citation>
                 <Base tag="h1">{quote.author}</Base>
                 {quote.title && <p>{quote.title}</p>}

@@ -29,11 +29,11 @@ BlockquoteQuote.defaultProps = {
 BlockquoteQuote.displayName = 'Blockquote.Quote';
 
 const StyledBlockquoteQuote = styled(BlockquoteQuote)`
-  &::before {
+  > *:first-child::before {
     content: '\\201C';
   }
 
-  &::after {
+  > *:last-child::after {
     content: '\\201D';
   }
 `;

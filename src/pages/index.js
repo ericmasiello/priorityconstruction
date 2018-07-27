@@ -11,7 +11,7 @@ import { edgesToGallery } from '../utils/gallery';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 import blueprint from '../images/blueprint.svg';
-import quotes from '../content/quotes.json';
+import markdownRemarkToQuote from '../utils/quotes';
 
 const FPOGrid = styled.div`
   display: grid;
@@ -70,7 +70,7 @@ const HomePage = props => {
         </FPOGrid>
         <PhotoGrid {...photoGridProps} />
       </MainContentContainer>
-      <QuoteCarousel quotes={quotes} />
+      <QuoteCarousel quotes={data.quotes.edges.map(markdownRemarkToQuote)} />
     </React.Fragment>
   );
 };
@@ -80,6 +80,7 @@ HomePage.displayName = 'HomePage';
 HomePage.propTypes = {
   data: PropTypes.shape({
     homageGallery: CustomPropTypes.AllImageSharp,
+    quotes: CustomPropTypes.AllQuotes,
   }).isRequired,
   className: PropTypes.string,
 };
@@ -98,6 +99,23 @@ export const query = graphql`
           sizes {
             ...GatsbyImageSharpSizes
           }
+        }
+      }
+    }
+
+    quotes: allMarkdownRemark(
+      sort: { order: DESC, fields: [frontmatter___date, id] }
+      limit: 10
+      filter: { id: { regex: "/content/quotes/" } }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+            date
+            author
+          }
+          html
         }
       }
     }

@@ -19,6 +19,23 @@ export const AllImageSharp = PropTypes.shape({
   ),
 });
 
+export const Quote = PropTypes.shape({
+  frontmatter: PropTypes.shape({
+    author: PropTypes.string.isRequired,
+    date: PropTypes.string,
+    title: PropTypes.string,
+  }),
+  html: PropTypes.string.isRequired,
+});
+
+export const AllQuotes = PropTypes.shape({
+  edges: PropTypes.arrayOf(
+    PropTypes.shape({
+      node: Quote,
+    }),
+  ),
+});
+
 export const Tag = PropTypes.oneOfType([PropTypes.func, PropTypes.string]);
 
 export const Location = PropTypes.shape({
