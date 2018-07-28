@@ -167,9 +167,13 @@ export default styled(Layout)`
     order: 1;
   }
 
-  @media(max-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
+  ${TopBar} {
+    order: 1;
+  }
+
+  @media(min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
     ${TopBar} {
-      order: 1;
+      order: 0;
     }
   }
 `;
