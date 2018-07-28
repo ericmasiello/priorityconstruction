@@ -6,12 +6,12 @@ import PageContainer from '../components/PageContainer';
 import PhotoGrid from '../components/PhotoGrid';
 import Placeholder from '../components/Placeholder';
 import Type4 from '../components/Type4';
-import Base from '../components/Base';
-import Blockquote from '../components/Blockquote';
+import QuoteCarousel from '../components/QuoteCarousel';
 import { edgesToGallery } from '../utils/gallery';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 import blueprint from '../images/blueprint.svg';
+import markdownRemarkToQuote from '../utils/quotes';
 
 const FPOGrid = styled.div`
   display: grid;
@@ -53,26 +53,6 @@ const MainContentContainer = PageContainer.extend`
   }
 `;
 
-const BlockquoteContainer = PageContainer.extend`
-  background-color: ${COLORS.highlight3};
-  color: #fff;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-
-  ${Blockquote} {
-    text-align: center;
-  }
-
-  ${Blockquote.Citation} > :last-child {
-    margin-bottom: 0;
-  }
-
-  ${Base} {
-    text-transform: uppercase;
-    margin-bottom: 0;
-  }
-`;
-
 const HomePage = props => {
   const { data } = props;
   const photoGridProps = edgesToGallery(data.homageGallery.edges, 'courtyard.jpg');
@@ -90,21 +70,7 @@ const HomePage = props => {
         </FPOGrid>
         <PhotoGrid {...photoGridProps} />
       </MainContentContainer>
-
-      <BlockquoteContainer>
-        <Blockquote>
-          <Blockquote.Quote>
-            General Paving and Contracting, Inc. regularly use Priority Construction Corp. on a
-            range of construction projects. Priority&rsquo;s crews are punctual and highly skilled
-            in a variety of concrete jobs. Over the years, they have proven to be easy to work with
-            and have consistently performed excellent work.
-          </Blockquote.Quote>
-          <Blockquote.Citation>
-            <Base tag="h1">Robert L. Quinn, Jr.</Base>
-            <p>General Paving & Contracting, Inc., Halethorpe, Maryland</p>
-          </Blockquote.Citation>
-        </Blockquote>
-      </BlockquoteContainer>
+      <QuoteCarousel quotes={data.quotes.edges.map(markdownRemarkToQuote)} />
     </React.Fragment>
   );
 };
@@ -114,6 +80,7 @@ HomePage.displayName = 'HomePage';
 HomePage.propTypes = {
   data: PropTypes.shape({
     homageGallery: CustomPropTypes.AllImageSharp,
+    quotes: CustomPropTypes.AllQuotes,
   }).isRequired,
   className: PropTypes.string,
 };
@@ -132,6 +99,23 @@ export const query = graphql`
           sizes {
             ...GatsbyImageSharpSizes
           }
+        }
+      }
+    }
+
+    quotes: allMarkdownRemark(
+      sort: { order: DESC, fields: [frontmatter___date, id] }
+      limit: 10
+      filter: { id: { regex: "/content/quotes/" } }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+            date
+            author
+          }
+          html
         }
       }
     }
