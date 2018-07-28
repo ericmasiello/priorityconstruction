@@ -19,6 +19,10 @@ export const AllImageSharp = PropTypes.shape({
   ),
 });
 
+export const Markdown = PropTypes.shape({
+  html: PropTypes.string.isRequired,
+});
+
 export const Quote = PropTypes.shape({
   frontmatter: PropTypes.shape({
     author: PropTypes.string.isRequired,

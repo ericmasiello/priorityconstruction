@@ -22,4 +22,14 @@ ContentBlock.displayName = 'ContentBlock';
 export default styled(ContentBlock)`
   border-left: 1px solid ${COLORS.highlight2};
   padding-left: ${pxToRem(20)};
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
 `;

@@ -18,10 +18,38 @@ const InvisibleButton = styled.button`
   cursor: pointer;
 `;
 
-const HomeHeaderBarFlatListItem = HeaderBarFlatListItem.extend`
+const HeaderBarFlatList = FlatList.extend`
   display: none;
-  @media (max-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  height: 100vh;
+  z-index: 999;
+  flex-direction: column;
+  padding: ${pxToRem(PAGE_SPACING.horizontal)};
+  font-size: ${pxToRem(TYPE_SIZE.t4[0])};
+
+  &.show-menu {
     display: block;
+  }
+
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
+    display: flex;
+    position: static;
+    background: transparent;
+    height: auto;
+    flex-direction: row;
+    padding: 0;
+    font-size: 1rem;
+  }
+`;
+
+const HomeHeaderBarFlatListItem = HeaderBarFlatListItem.extend`
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
+    display: none;
   }
 `;
 
@@ -72,7 +100,7 @@ class PageHeaderBar extends React.Component {
     return (
       <HeaderBar tag="nav" innerRef={navRef} className={className}>
         <Logo image={logo} />
-        <FlatList className={showMenuClassName}>
+        <HeaderBarFlatList className={showMenuClassName}>
           <HomeHeaderBarFlatListItem>
             <MainNavLink selected={currentPathname === '/'} onClick={this.handleHideMenu} to="/">
               Home
@@ -87,7 +115,7 @@ class PageHeaderBar extends React.Component {
               />
             </HeaderBarFlatListItem>
           ))}
-        </FlatList>
+        </HeaderBarFlatList>
         <InvisibleButton onClick={this.handleShowMenu}>
           <MenuIcon />
         </InvisibleButton>
@@ -96,49 +124,20 @@ class PageHeaderBar extends React.Component {
   }
 }
 
-// TODO: refactor these styles for mobile-first!
 export default styled(PageHeaderBar)`
   ${InvisibleButton} {
-    display: none;
+    display: block;
   }
 
-  @media (max-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
-    ${FlatList} {
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: white;
-      height: 100vh;
-      z-index: 999;
-      flex-direction: column;
-      padding: ${pxToRem(PAGE_SPACING.horizontal)};
-      font-size: ${pxToRem(TYPE_SIZE.t4[0])};
-    }
+  ${MenuIcon} {
+    fill: ${COLORS.highlight3};
+    width: ${pxToRem(20)};
+    height: ${pxToRem(20)};
+  }
 
-    ${FlatList}.show-menu {
-      display: block;
-    }
-
-    ${HomeHeaderBarFlatListItem}, ${HeaderBarFlatListItem} {
-      margin-bottom: 1rem;
-    }
-
-    // prettier-ignore
-    ${HeaderBarFlatListItem}:not(:last-child) {
-      margin-right: 0;
-    }
-
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
     ${InvisibleButton} {
-      display: block;
-    }
-
-    ${MenuIcon} {
-      fill: ${COLORS.highlight3};
-      width: ${pxToRem(20)};
-      height: ${pxToRem(20)};
+      display: none;
     }
   }
 `;
