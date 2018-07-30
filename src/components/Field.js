@@ -51,8 +51,12 @@ const applyNameAs = (child, nameAs) => {
 };
 
 export const Field = props => {
-  const { tag: Tag, nameAs, children, stack, ...rest } = props;
-  return <Tag {...rest}>{React.Children.map(children, child => applyNameAs(child, nameAs))}</Tag>;
+  const { tag: Tag, nameAs, children, stack, fragment, ...rest } = props;
+  const renderedChildren = React.Children.map(children, child => applyNameAs(child, nameAs));
+  if (fragment) {
+    return <React.Fragment>{renderedChildren}</React.Fragment>;
+  }
+  return <Tag {...rest}>{renderedChildren}</Tag>;
 };
 
 Field.propTypes = {
@@ -60,6 +64,7 @@ Field.propTypes = {
   stack: PropTypes.bool,
   children: PropTypes.node,
   nameAs: PropTypes.string,
+  fragment: PropTypes.bool,
 };
 
 Field.defaultProps = {
