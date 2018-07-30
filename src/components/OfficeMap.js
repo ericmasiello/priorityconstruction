@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { pxToRem } from '../styles/utils';
 
 export const OfficeMap = props => {
-  const { title, address, mapKey, ...rest } = props;
+  const { title, address, width, height, mapKey, ...rest } = props;
 
   return (
     <iframe
@@ -19,6 +19,8 @@ OfficeMap.propTypes = {
   mapKey: PropTypes.string.isRequired,
   address: PropTypes.string,
   title: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
 };
 
 OfficeMap.defaultProps = {
@@ -28,6 +30,6 @@ OfficeMap.defaultProps = {
 
 export default styled(OfficeMap)`
   border: none;
-  width: ${pxToRem(450)};
-  height: ${pxToRem(350)};
+  ${({ width }) => `width: ${width || pxToRem(450)};`};
+  ${({ height }) => `height: ${height || pxToRem(350)};`};
 `;
