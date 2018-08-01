@@ -67,17 +67,23 @@ class Contact extends React.Component {
   }
 
   state = {
-    name: '',
-    company: '',
-    phone: '',
-    fax: '',
-    email: '',
-    comments: '',
+    fields: {
+      name: '',
+      company: '',
+      phone: '',
+      fax: '',
+      email: '',
+      comments: '',
+    },
+    submitted: false,
   };
 
   handleChange = key => event => {
     this.setState({
-      [key]: event.target.value,
+      fields: {
+        ...this.state.fields,
+        [key]: event.target.value,
+      },
     });
   };
 
@@ -85,9 +91,21 @@ class Contact extends React.Component {
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': FORM_NAME, ...this.state }),
+      body: encode({ 'form-name': FORM_NAME, ...this.state.fields }),
     })
-      .then(() => alert('Success!'))
+      .then(() =>
+        this.setState({
+          submitted: true,
+          fields: {
+            name: '',
+            company: '',
+            phone: '',
+            fax: '',
+            email: '',
+            comments: '',
+          },
+        }),
+      )
       .catch(error => alert(error));
 
     e.preventDefault();
@@ -108,16 +126,16 @@ class Contact extends React.Component {
             <input type="hidden" name="form-name" value={FORM_NAME} />
             <Field nameAs="name" fragment>
               <Label>Name</Label>
-              <Input value={this.state.name} onChange={this.handleChangeName} required />
+              <Input value={this.state.fields.name} onChange={this.handleChangeName} required />
             </Field>
             <Field nameAs="company" fragment>
               <Label>Company</Label>
-              <Input value={this.state.company} onChange={this.handleChangeCompany} />
+              <Input value={this.state.fields.company} onChange={this.handleChangeCompany} />
             </Field>
             <Field nameAs="phone" fragment>
               <Label>Phone</Label>
               <Input
-                value={this.state.phone}
+                value={this.state.fields.phone}
                 onChange={this.handleChangePhone}
                 type="tel"
                 placeholder="123-456-7890"
@@ -128,7 +146,7 @@ class Contact extends React.Component {
             <Field nameAs="fax" fragment>
               <Label>Fax</Label>
               <Input
-                value={this.state.fax}
+                value={this.state.fields.fax}
                 onChange={this.handleChangeFax}
                 type="tel"
                 placeholder="123-456-7890"
@@ -138,7 +156,7 @@ class Contact extends React.Component {
             <Field nameAs="email" fragment>
               <Label>Email</Label>
               <Input
-                value={this.state.email}
+                value={this.state.fields.email}
                 onChange={this.handleChangeEmail}
                 type="email"
                 required
@@ -146,9 +164,13 @@ class Contact extends React.Component {
             </Field>
             <Field stack nameAs="comments" fragment>
               <Label>Additional comments</Label>
-              <Textarea value={this.state.comments} onChange={this.handleChangeComments} required />
+              <Textarea
+                value={this.state.fields.comments}
+                onChange={this.handleChangeComments}
+                required
+              />
             </Field>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">{this.state.submitted ? 'Thanks!' : 'Submit'}</Button>
           </ContactForm>
           <div>
             <OfficeMap width="100%" mapKey={data.site.siteMetadata.googleMapKey} />
