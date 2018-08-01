@@ -134,28 +134,29 @@ class Contact extends React.Component {
   };
 
   handleSubmit = e => {
+    // optimistically render a success message
+    this.setState({ submissionState: 'success' }, () => {
+      this.thankYou.current.focus();
+    });
+
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': FORM_NAME, ...this.state.fields }),
     })
       .then(() =>
-        this.setState(
-          {
-            submissionState: 'success',
-            fields: {
-              name: '',
-              company: '',
-              phone: '',
-              fax: '',
-              email: '',
-              comments: '',
-            },
+        // once we know everything is submitted successfully,
+        // clear the fields
+        this.setState({
+          fields: {
+            name: '',
+            company: '',
+            phone: '',
+            fax: '',
+            email: '',
+            comments: '',
           },
-          () => {
-            this.thankYou.current.focus();
-          },
-        ),
+        }),
       )
       .catch(error => {
         // eslint-disable-next-line
