@@ -139,7 +139,7 @@ class Contact extends React.Component {
                 onChange={this.handleChangePhone}
                 type="tel"
                 placeholder="123-456-7890"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                pattern="[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}"
                 required
               />
             </Field>
@@ -150,7 +150,7 @@ class Contact extends React.Component {
                 onChange={this.handleChangeFax}
                 type="tel"
                 placeholder="123-456-7890"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                pattern="[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}"
               />
             </Field>
             <Field nameAs="email" fragment>
