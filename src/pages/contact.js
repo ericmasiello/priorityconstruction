@@ -35,6 +35,18 @@ const ThankYouMessage = styled.div`
   ${({ show }) => (show ? `height: 100%` : `height: 0`)};
 `;
 
+const ErrorMessage = styled.div`
+  background-color: ${COLORS.highlight2};
+  color: #fff;
+  padding: 1rem;
+  margin-top: 1rem;
+
+  @media (min-width: ${pxToRem(500)}) {
+    grid-column: span 2;
+    margin-top: 0;
+  }
+`;
+
 const PageLayout = styled.div`
   position: relative;
   margin-top: 3rem;
@@ -73,6 +85,14 @@ const ContactForm = styled.form`
       margin-top: 0;
     }
   }
+
+  ${Button} {
+    margin-top: 1rem;
+
+    @media (min-width: ${pxToRem(500)}) {
+      margin-top: 0;
+    }
+  }
 `;
 
 const FORM_NAME = 'contact';
@@ -82,6 +102,7 @@ class Contact extends React.Component {
     super(...args);
 
     this.thankYou = React.createRef();
+    this.error = React.createRef();
 
     this.handleChangeName = this.handleChange('name');
     this.handleChangeCompany = this.handleChange('company');
@@ -136,7 +157,19 @@ class Contact extends React.Component {
           },
         ),
       )
-      .catch(error => alert(error));
+      .catch(error => {
+        // eslint-disable-next-line
+        console.error(error);
+
+        this.setState(
+          {
+            submissionState: 'error',
+          },
+          () => {
+            this.error.current.focus();
+          },
+        );
+      });
 
     e.preventDefault();
   };
@@ -216,6 +249,15 @@ class Contact extends React.Component {
               />
             </Field>
             <Button type="submit">Submit</Button>
+            {this.state.submissionState === 'error' && (
+              <ErrorMessage tabIndex={-1} innerRef={this.error}>
+                Sorry.{' '}
+                <span role="img" aria-label="Sad face">
+                  😔
+                </span>{' '}
+                There was an problem submitting your message. Please try again.
+              </ErrorMessage>
+            )}
           </ContactForm>
           <div>
             <OfficeMap width="100%" mapKey={data.site.siteMetadata.googleMapKey} />
