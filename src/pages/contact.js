@@ -13,31 +13,42 @@ import Small from '../components/Small';
 import { encode } from '../utils/form';
 import { pxToRem } from '../styles/utils';
 
-const Grid = styled.div`
+const PageLayout = styled.div`
   margin-top: 3rem;
   display: grid;
   grid-gap: 1rem;
 
-  ${Button} {
-    grid-column: span 2;
-  }
-
   @media (min-width: ${pxToRem(960)}) {
     grid-template-columns: 1fr ${pxToRem(450)};
-
-    ${Button} {
-      grid-column: span 1;
-    }
   }
 `;
 
 const ContactForm = styled.form`
   display: grid;
-  grid-template-columns: ${pxToRem(150)} 1fr;
-  grid-gap: 1rem;
+
+  @media (min-width: ${pxToRem(500)}) {
+    grid-template-columns: ${pxToRem(150)} 1fr;
+    grid-gap: 1rem;
+
+    ${Button} {
+      grid-column: span 2;
+    }
+  }
 
   ${Textarea} {
     min-height: ${pxToRem(250)};
+  }
+
+  ${Label} {
+    padding-top: ${pxToRem(6)};
+
+    &:not(:first-of-type) {
+      margin-top: 1rem;
+    }
+
+    @media (min-width: ${pxToRem(500)}) {
+      margin-top: 0;
+    }
   }
 `;
 
@@ -92,7 +103,7 @@ class Contact extends React.Component {
           <Link to="/careers">Looking for a place to work?</Link> Please don{"'"}t hesitate to
           contact us.
         </p>
-        <Grid>
+        <PageLayout>
           <ContactForm onSubmit={this.handleSubmit} name={FORM_NAME} method="POST" data-netlify>
             <input type="hidden" name="form-name" value={FORM_NAME} />
             <Field nameAs="name" fragment>
@@ -147,7 +158,7 @@ class Contact extends React.Component {
               </a>
             </p>
           </div>
-        </Grid>
+        </PageLayout>
       </PageContainer>
     );
   }
