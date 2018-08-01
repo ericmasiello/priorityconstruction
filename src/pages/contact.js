@@ -10,10 +10,33 @@ import Input from '../components/Input';
 import Textarea from '../components/Textarea';
 import Button from '../components/Button';
 import Small from '../components/Small';
+import Type2 from '../components/Type2';
+import Type4 from '../components/Type4';
+import InvisibleButton from '../components/InvisibleButton';
 import { encode } from '../utils/form';
 import { pxToRem } from '../styles/utils';
+import { COLORS } from '../styles/vars';
+
+const ThankYouMessage = styled.div`
+  background-color: ${COLORS.highlight3};
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: height 0.5s;
+  overflow: hidden;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  ${({ show }) => (show ? `height: 100%` : `height: 0`)};
+`;
 
 const PageLayout = styled.div`
+  position: relative;
   margin-top: 3rem;
   display: grid;
   grid-gap: 1rem;
@@ -58,6 +81,8 @@ class Contact extends React.Component {
   constructor(...args) {
     super(...args);
 
+    this.thankYou = React.createRef();
+
     this.handleChangeName = this.handleChange('name');
     this.handleChangeCompany = this.handleChange('company');
     this.handleChangePhone = this.handleChange('phone');
@@ -75,7 +100,7 @@ class Contact extends React.Component {
       email: '',
       comments: '',
     },
-    submitted: false,
+    submissionState: null,
   };
 
   handleChange = key => event => {
@@ -94,22 +119,29 @@ class Contact extends React.Component {
       body: encode({ 'form-name': FORM_NAME, ...this.state.fields }),
     })
       .then(() =>
-        this.setState({
-          submitted: true,
-          fields: {
-            name: '',
-            company: '',
-            phone: '',
-            fax: '',
-            email: '',
-            comments: '',
+        this.setState(
+          {
+            submissionState: 'success',
+            fields: {
+              name: '',
+              company: '',
+              phone: '',
+              fax: '',
+              email: '',
+              comments: '',
+            },
           },
-        }),
+          () => {
+            this.thankYou.current.focus();
+          },
+        ),
       )
       .catch(error => alert(error));
 
     e.preventDefault();
   };
+
+  handleResetFormSubmission = () => this.setState({ submissionState: null });
 
   render() {
     const { data, className } = this.props;
@@ -122,6 +154,19 @@ class Contact extends React.Component {
           contact us.
         </p>
         <PageLayout>
+          <ThankYouMessage
+            aria-hidden={this.state.submissionState !== 'success'}
+            show={this.state.submissionState === 'success'}
+            tabIndex={-1}
+            innerRef={this.thankYou}
+          >
+            <div>
+              <Type2 tag="p">Thanks! We&rsquo;ll be in touch.</Type2>
+              <Type4 tag={InvisibleButton} onClick={this.handleResetFormSubmission}>
+                All done.
+              </Type4>
+            </div>
+          </ThankYouMessage>
           <ContactForm onSubmit={this.handleSubmit} name={FORM_NAME} method="POST" data-netlify>
             <input type="hidden" name="form-name" value={FORM_NAME} />
             <Field nameAs="name" fragment>
@@ -170,7 +215,7 @@ class Contact extends React.Component {
                 required
               />
             </Field>
-            <Button type="submit">{this.state.submitted ? 'Thanks!' : 'Submit'}</Button>
+            <Button type="submit">Submit</Button>
           </ContactForm>
           <div>
             <OfficeMap width="100%" mapKey={data.site.siteMetadata.googleMapKey} />
