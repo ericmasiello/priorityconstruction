@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Link from 'gatsby-link';
 import Footer from '../components/Footer';
 import List from '../components/List';
 import Logo from '../components/Logo';
@@ -8,7 +9,7 @@ import FacebookIcon from '../components/FacebookIcon';
 import LinkedInIcon from '../components/LinkedInIcon';
 import * as CustomPropTypes from '../propTypes';
 import { pxToRem } from '../styles/utils';
-import { COLORS } from '../styles/vars';
+import { COLORS, TYPE_SIZE } from '../styles/vars';
 
 const Container = styled.div`
   @media (min-width: ${pxToRem(650)}) {
@@ -71,27 +72,41 @@ export const ComposedFooter = props => {
         <div>
           <Logo image={logo} />
           <Address>
+            <a href="https://www.google.com/maps/place/1315+W+Hamburg+St,+Baltimore,+MD+21230/">
+              <List>
+                <List.Item>
+                  {streetAddress} {city}, {state} {zip}
+                </List.Item>
+              </List>
+            </a>
             <List>
-              <List.Item>{streetAddress}</List.Item>
               <List.Item>
-                {city}, {state} {zip}
+                <a href={`tel:${phone}`}>phone: {phone}</a>
+              </List.Item>
+              <List.Item>
+                <a href={`tel:${fax}`}>fax {fax}</a>
               </List.Item>
             </List>
             <List>
-              <List.Item>phone: {phone}</List.Item>
-              <List.Item>fax {fax}</List.Item>
+              <List.Item>
+                <a href={`mailto:${email}`}>{email}</a>
+              </List.Item>
+              <List.Item>
+                <Link to="/contact">Contact Us</Link>
+              </List.Item>
             </List>
-            <a href={`mailto:${email}`}>{email}</a>
           </Address>
         </div>
-        <SocialMedia>
-          <a href="https://www.facebook.com/prorityconstruction/" title="Facebook page">
-            <FacebookIcon />
-          </a>
-          <a href="https://www.linkedin.com/company/priority-construction/" title="LinkedIn Page">
-            <LinkedInIcon />
-          </a>
-        </SocialMedia>
+        <div>
+          <SocialMedia>
+            <a href="https://www.facebook.com/prorityconstruction/" title="Facebook page">
+              <FacebookIcon />
+            </a>
+            <a href="https://www.linkedin.com/company/priority-construction/" title="LinkedIn Page">
+              <LinkedInIcon />
+            </a>
+          </SocialMedia>
+        </div>
       </Container>
     </Footer>
   );
@@ -110,4 +125,7 @@ ComposedFooter.propTypes = {
   email: PropTypes.string.isRequired,
 };
 
-export default styled(ComposedFooter)``;
+export default styled(ComposedFooter)`
+  font-size: ${pxToRem(TYPE_SIZE.small[0])};
+  line-height: ${TYPE_SIZE.small[1]};
+`;
