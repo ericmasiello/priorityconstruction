@@ -13,7 +13,7 @@ const MainNavLink = styled(Link)`
     z-index: -1;
     width: 100%;
     height: 0;
-    left: 0px;
+    left: 0;
     bottom: ${pxToRem(-5)};
     background-color: ${COLORS.highlight};
     transition: all 0.3s ease;
