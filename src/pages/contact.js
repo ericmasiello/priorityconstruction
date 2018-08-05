@@ -13,32 +13,12 @@ import Small from '../components/Small';
 import Type2 from '../components/Type2';
 import Type4 from '../components/Type4';
 import InvisibleButton from '../components/InvisibleButton';
+import ErrorMessage from '../components/ErrorMessage';
+import FormSuccessMessage from '../components/FormSuccessMessage';
 import { encode } from '../utils/form';
 import { pxToRem } from '../styles/utils';
-import { COLORS } from '../styles/vars';
 
-const ThankYouMessage = styled.div`
-  background-color: ${COLORS.highlight3};
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  transition: height 0.5s;
-  overflow: hidden;
-  padding-left: 3vw;
-  padding-right: 3vw;
-  ${({ show }) => (show ? `height: 100%` : `height: 0`)};
-`;
-
-const ErrorMessage = styled.div`
-  background-color: ${COLORS.highlight2};
-  color: #fff;
-  padding: 1rem;
+const FormErrorMessage = ErrorMessage.extend`
   margin-top: 1rem;
 
   @media (min-width: ${pxToRem(500)}) {
@@ -188,7 +168,7 @@ class Contact extends React.Component {
           contact us.
         </p>
         <PageLayout>
-          <ThankYouMessage
+          <FormSuccessMessage
             aria-hidden={this.state.submissionState !== 'success'}
             show={this.state.submissionState === 'success'}
             tabIndex={-1}
@@ -200,7 +180,7 @@ class Contact extends React.Component {
                 All done.
               </Type4>
             </div>
-          </ThankYouMessage>
+          </FormSuccessMessage>
           <ContactForm onSubmit={this.handleSubmit} name={FORM_NAME} method="POST" data-netlify>
             <input type="hidden" name="form-name" value={FORM_NAME} />
             <Field nameAs="name" fragment>
@@ -251,13 +231,13 @@ class Contact extends React.Component {
             </Field>
             <Button type="submit">Submit</Button>
             {this.state.submissionState === 'error' && (
-              <ErrorMessage tabIndex={-1} innerRef={this.error}>
+              <FormErrorMessage tabIndex={-1} innerRef={this.error}>
                 Sorry.{' '}
                 <span role="img" aria-label="Sad face">
                   😔
                 </span>{' '}
                 There was an problem submitting your message. Please try again.
-              </ErrorMessage>
+              </FormErrorMessage>
             )}
           </ContactForm>
           <div>
