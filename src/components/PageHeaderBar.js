@@ -67,7 +67,7 @@ const links = [
     children: 'Careers',
   },
   {
-    to: '/placeholder',
+    to: '/quote',
     children: 'Request Quote',
   },
 ];
