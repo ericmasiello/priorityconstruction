@@ -16,6 +16,7 @@ const FormSuccessMessage = styled.div`
   overflow: hidden;
   padding-left: 3vw;
   padding-right: 3vw;
+  z-index: 3;
   ${({ show }) => (show ? `height: 100%` : `height: 0`)};
 `;
 
