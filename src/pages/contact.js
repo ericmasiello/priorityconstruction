@@ -15,7 +15,7 @@ import Type4 from '../components/Type4';
 import InvisibleButton from '../components/InvisibleButton';
 import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
-import { encode } from '../utils/form';
+import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import { pxToRem } from '../styles/utils';
 
 const FormErrorMessage = ErrorMessage.extend`
@@ -44,6 +44,7 @@ const ContactForm = styled.form`
   @media (min-width: ${pxToRem(500)}) {
     grid-template-columns: ${pxToRem(150)} 1fr;
     grid-gap: 1rem;
+    align-items: start;
 
     ${Button} {
       grid-column: span 2;
@@ -62,7 +63,9 @@ const ContactForm = styled.form`
     }
 
     @media (min-width: ${pxToRem(500)}) {
-      margin-top: 0;
+      &:not(:first-of-type) {
+        margin-top: 0;
+      }
     }
   }
 
@@ -75,87 +78,31 @@ const ContactForm = styled.form`
   }
 `;
 
-const FORM_NAME = 'contact';
-
 class Contact extends React.Component {
-  constructor(...args) {
-    super(...args);
-
-    this.thankYou = React.createRef();
-    this.error = React.createRef();
-
-    this.handleChangeName = this.handleChange('name');
-    this.handleChangeCompany = this.handleChange('company');
-    this.handleChangePhone = this.handleChange('phone');
-    this.handleChangeFax = this.handleChange('fax');
-    this.handleChangeEmail = this.handleChange('email');
-    this.handleChangeComments = this.handleChange('comments');
-  }
-
-  state = {
-    fields: {
-      name: '',
-      company: '',
-      phone: '',
-      fax: '',
-      email: '',
-      comments: '',
-    },
-    submissionState: null,
-  };
-
-  handleChange = key => event => {
-    this.setState({
-      fields: {
-        ...this.state.fields,
-        [key]: event.target.value,
-      },
-    });
-  };
-
-  handleSubmit = e => {
-    // optimistically render a success message
-    this.setState({ submissionState: 'success' }, () => {
-      this.thankYou.current.focus();
-    });
-
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': FORM_NAME, ...this.state.fields }),
-    })
-      .then(() =>
-        // once we know everything is submitted successfully,
-        // clear the fields
-        this.setState({
-          fields: {
-            name: '',
-            company: '',
-            phone: '',
-            fax: '',
-            email: '',
-            comments: '',
-          },
+  static displayName = 'Contact';
+  static propTypes = {
+    data: PropTypes.shape({
+      site: PropTypes.shape({
+        siteMetadata: PropTypes.shape({
+          googleMapKey: PropTypes.string,
         }),
-      )
-      .catch(error => {
-        // eslint-disable-next-line
-        console.error(error);
-
-        this.setState(
-          {
-            submissionState: 'error',
-          },
-          () => {
-            this.error.current.focus();
-          },
-        );
-      });
-
-    e.preventDefault();
+      }),
+    }).isRequired,
+    className: PropTypes.string,
   };
 
-  handleResetFormSubmission = () => this.setState({ submissionState: null });
+  thankYouMessage = React.createRef();
+  errorMessage = React.createRef();
+
+  fields = ['name', 'company', 'phone', 'fax', 'email', 'comments'];
+
+  handleSetThankYouFocus = () => {
+    this.thankYouMessage.current.focus();
+  };
+
+  handleSetErrorFocus = () => {
+    this.errorMessage.current.focus();
+  };
 
   render() {
     const { data, className } = this.props;
@@ -168,78 +115,78 @@ class Contact extends React.Component {
           contact us.
         </p>
         <PageLayout>
-          <FormSuccessMessage
-            aria-hidden={this.state.submissionState !== 'success'}
-            show={this.state.submissionState === 'success'}
-            tabIndex={-1}
-            innerRef={this.thankYou}
+          <NetlifyFormComposer
+            name="contact"
+            fields={this.fields}
+            onSubmitError={this.handleSetErrorFocus}
+            onSubmitSuccess={this.handleSetThankYouFocus}
           >
-            <div>
-              <Type2 tag="p">Thanks! We&rsquo;ll be in touch.</Type2>
-              <Type4 tag={InvisibleButton} onClick={this.handleResetFormSubmission}>
-                All done.
-              </Type4>
-            </div>
-          </FormSuccessMessage>
-          <ContactForm onSubmit={this.handleSubmit} name={FORM_NAME} method="POST" data-netlify>
-            <input type="hidden" name="form-name" value={FORM_NAME} />
-            <Field nameAs="name" fragment>
-              <Label>Name</Label>
-              <Input value={this.state.fields.name} onChange={this.handleChangeName} required />
-            </Field>
-            <Field nameAs="company" fragment>
-              <Label>Company</Label>
-              <Input value={this.state.fields.company} onChange={this.handleChangeCompany} />
-            </Field>
-            <Field nameAs="phone" fragment>
-              <Label>Phone</Label>
-              <Input
-                value={this.state.fields.phone}
-                onChange={this.handleChangePhone}
-                type="tel"
-                placeholder="123-456-7890"
-                pattern="[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}"
-                required
-              />
-            </Field>
-            <Field nameAs="fax" fragment>
-              <Label>Fax</Label>
-              <Input
-                value={this.state.fields.fax}
-                onChange={this.handleChangeFax}
-                type="tel"
-                placeholder="123-456-7890"
-                pattern="[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}"
-              />
-            </Field>
-            <Field nameAs="email" fragment>
-              <Label>Email</Label>
-              <Input
-                value={this.state.fields.email}
-                onChange={this.handleChangeEmail}
-                type="email"
-                required
-              />
-            </Field>
-            <Field stack nameAs="comments" fragment>
-              <Label>Additional comments</Label>
-              <Textarea
-                value={this.state.fields.comments}
-                onChange={this.handleChangeComments}
-                required
-              />
-            </Field>
-            <Button type="submit">Submit</Button>
-            {this.state.submissionState === 'error' && (
-              <FormErrorMessage tabIndex={-1} innerRef={this.error}>
-                Sorry.{' '}
-                <span role="img" aria-label="Sad face">
-                  😔
-                </span>{' '}
-                There was an problem submitting your message. Please try again.
-              </FormErrorMessage>
+            {state => (
+              <React.Fragment>
+                <FormSuccessMessage
+                  aria-hidden={state.submissionState !== 'success'}
+                  show={state.submissionState === 'success'}
+                  tabIndex={-1}
+                  innerRef={this.thankYouMessage}
+                >
+                  <div>
+                    <Type2 tag="p">Thanks! We&rsquo;ll be in touch.</Type2>
+                    <Type4 tag={InvisibleButton} onClick={state.handleResetFormSubmission}>
+                      All done.
+                    </Type4>
+                  </div>
+                </FormSuccessMessage>
+                <ContactForm {...state.form}>
+                  <input type="hidden" name="form-name" value={state.form.name} />
+                  <Field nameAs="name" fragment>
+                    <Label>Name</Label>
+                    <Input {...state.fields.name} required />
+                  </Field>
+                  <Field nameAs="company" fragment>
+                    <Label>Company</Label>
+                    <Input {...state.fields.company} />
+                  </Field>
+                  <Field nameAs="phone" fragment>
+                    <Label>Phone</Label>
+                    <Input
+                      {...state.fields.phone}
+                      type="tel"
+                      placeholder="123-456-7890"
+                      pattern="[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}"
+                      required
+                    />
+                  </Field>
+                  <Field nameAs="fax" fragment>
+                    <Label>Fax</Label>
+                    <Input
+                      {...state.fields.fax}
+                      type="tel"
+                      placeholder="123-456-7890"
+                      pattern="[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}"
+                    />
+                  </Field>
+                  <Field nameAs="email" fragment>
+                    <Label>Email</Label>
+                    <Input {...state.fields.email} type="email" required />
+                  </Field>
+                  <Field stack nameAs="comments" fragment>
+                    <Label>Additional comments</Label>
+                    <Textarea {...state.fields.comments} required />
+                  </Field>
+                  <Button type="submit">Submit</Button>
+                  {state.submissionState === 'error' && (
+                    <FormErrorMessage tabIndex={-1} innerRef={this.errorMessage}>
+                      Sorry.{' '}
+                      <span role="img" aria-label="Sad face">
+                        😔
+                      </span>{' '}
+                      There was an problem submitting your message. Please try again.
+                    </FormErrorMessage>
+                  )}
+                </ContactForm>
+              </React.Fragment>
             )}
-          </ContactForm>
+          </NetlifyFormComposer>
           <div>
             <OfficeMap width="100%" mapKey={data.site.siteMetadata.googleMapKey} />
             <p>
@@ -253,19 +200,6 @@ class Contact extends React.Component {
     );
   }
 }
-
-Contact.propTypes = {
-  data: PropTypes.shape({
-    site: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        googleMapKey: PropTypes.string,
-      }),
-    }),
-  }).isRequired,
-  className: PropTypes.string,
-};
-
-Contact.displayName = 'Contact';
 
 export default styled(Contact)`
   padding-top: 2rem;
