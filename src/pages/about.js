@@ -158,7 +158,7 @@ class About extends React.Component {
                   tag={AnchorLink}
                   href={item.href}
                   offset={this.handleCompueteOffset}
-                  onClick={this.handleClick}
+                  onMouseUp={this.handleClick}
                 >
                   {item.children}
                 </Small>
@@ -176,7 +176,7 @@ class About extends React.Component {
                     <AnchorLink
                       href={item.href}
                       offset={this.handleCompueteOffset}
-                      onClick={this.handleClick}
+                      onMouseUp={this.handleClick}
                     >
                       {item.children}
                     </AnchorLink>
