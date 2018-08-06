@@ -94,6 +94,9 @@ export const ComposedFooter = props => {
               <List.Item>
                 <Link to="/contact">Contact Us</Link>
               </List.Item>
+              <List.Item>
+                <Link to="/careers">Career Opportunities</Link>
+              </List.Item>
             </List>
           </Address>
         </div>

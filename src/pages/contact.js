@@ -109,6 +109,7 @@ class Contact extends React.Component {
 
     return (
       <PageContainer tag="section" className={className}>
+        {/* TODO: move this text to markdown */}
         <p>
           Do you have a question on an ongoing project? Want us to do a specific job?{' '}
           <Link to="/careers">Looking for a place to work?</Link> Please don{"'"}t hesitate to
