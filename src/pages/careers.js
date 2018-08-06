@@ -13,7 +13,7 @@ import InvisibleButton from '../components/InvisibleButton';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
-import { TabContainer, Tab, TabContext } from '../components/TabContainer';
+import Tabs from '../components/Tabs';
 import { pxToRem } from '../styles/utils';
 
 const FormErrorMessage = ErrorMessage.extend`
@@ -148,7 +148,7 @@ class Careers extends React.Component {
   render() {
     const { className } = this.props;
     return (
-      <TabContainer tabs={this.tabs}>
+      <Tabs tabs={this.tabs}>
         <PageContainer tag="section" className={className}>
           {/* TODO: move this text to markdown */}
           <p>
@@ -184,7 +184,7 @@ class Careers extends React.Component {
                   </FormSuccessMessage>
                   <ContactForm {...state.form}>
                     <input type="hidden" name="form-name" value={state.form.name} />
-                    <Tab name="personalInformation">
+                    <Tabs.Content name="personalInformation">
                       <Field nameAs="name" fragment>
                         <Label>Name</Label>
                         <Input required {...state.fields.name} />
@@ -243,10 +243,10 @@ class Careers extends React.Component {
                         <Label>Position you are applying for</Label>
                         <Input {...state.fields.position} required />
                       </Field>
-                    </Tab>
-                    <Tab name="additionalQualifications">{/* TODO: */}</Tab>
-                    <Tab name="previousEmployment">{/* TODO: */}</Tab>
-                    <Tab name="disclaimerAndSignature">
+                    </Tabs.Content>
+                    <Tabs.Content name="additionalQualifications">{/* TODO: */}</Tabs.Content>
+                    <Tabs.Content name="previousEmployment">{/* TODO: */}</Tabs.Content>
+                    <Tabs.Content name="disclaimerAndSignature">
                       <AdditionalRequirements>
                         {/* TODO: move this text to markdown */}
                         <p>Please Call To Provide:</p>
@@ -255,9 +255,9 @@ class Careers extends React.Component {
                           <li>Your Driver&rsquo;s License Number / State / EXP</li>
                         </ol>
                       </AdditionalRequirements>
-                    </Tab>
+                    </Tabs.Content>
 
-                    <TabContext.Consumer>
+                    <Tabs.Consumer>
                       {tabState => (
                         <ButtonContainer>
                           {/* NOTE: keep the "key" property else React will act strangely when swapping the next and submit buttons */}
@@ -275,7 +275,7 @@ class Careers extends React.Component {
                           )}
                         </ButtonContainer>
                       )}
-                    </TabContext.Consumer>
+                    </Tabs.Consumer>
 
                     {state.submissionState === 'error' && (
                       <FormErrorMessage tabIndex={-1} innerRef={this.errorMessage}>
@@ -292,7 +292,7 @@ class Careers extends React.Component {
             </NetlifyFormComposer>
           </PageLayout>
         </PageContainer>
-      </TabContainer>
+      </Tabs>
     );
   }
 }

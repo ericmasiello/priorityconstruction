@@ -1,16 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const TabContext = React.createContext();
+const TabContext = React.createContext();
+
+export const Content = props => (
+  <TabContext.Consumer>
+    {({ activeTab }) => (activeTab === props.name ? props.children : null)}
+  </TabContext.Consumer>
+);
+
+Content.displayName = 'Tabs.Content';
+Content.propTypes = {
+  name: PropTypes.string.isRequired,
+  children: PropTypes.node,
+};
 
 /* eslint-disable react/no-unused-state, react/sort-comp */
-export class TabContainer extends React.Component {
-  static displayName = 'TabContainer';
+export default class Tabs extends React.Component {
+  static displayName = 'Tabs';
   static propTypes = {
     children: PropTypes.node,
     tabs: PropTypes.arrayOf(PropTypes.string).isRequired,
     activeTab: PropTypes.string,
   };
+
+  static Consumer = TabContext.Consumer;
+  static Content = Content;
 
   handleSetTab = tab => this.setState({ activeTab: tab });
   handleNextTab = () => {
@@ -48,15 +63,3 @@ export class TabContainer extends React.Component {
     return <TabContext.Provider value={this.state}>{this.props.children}</TabContext.Provider>;
   }
 }
-
-export const Tab = props => (
-  <TabContext.Consumer>
-    {({ activeTab }) => (activeTab === props.name ? props.children : null)}
-  </TabContext.Consumer>
-);
-
-Tab.displayName = 'Tab';
-Tab.propTypes = {
-  name: PropTypes.string.isRequired,
-  children: PropTypes.node,
-};
