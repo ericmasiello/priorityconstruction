@@ -20,35 +20,21 @@ import { pxToRem } from '../styles/utils';
 const TabTitle = Type5.extend`
   margin-bottom: 0;
   text-transform: uppercase;
-  @media (min-width: ${pxToRem(500)}) {
-    grid-column: span 2;
-  }
 `;
 
 const FormErrorMessage = ErrorMessage.extend`
   margin-top: 1rem;
-
-  @media (min-width: ${pxToRem(500)}) {
-    grid-column: span 2;
-    margin-top: 0;
-  }
 `;
 
-const AdditionalRequirements = styled.div`
-  @media (min-width: ${pxToRem(500)}) {
-    grid-column: span 2;
-  }
-`;
+const AdditionalRequirements = styled.div``;
 
 const PageLayout = styled.div`
   position: relative;
 `;
 
 const ButtonContainer = styled.div`
+  margin-top: 1rem;
   display: flex;
-  @media (min-width: ${pxToRem(500)}) {
-    grid-column: span 2;
-  }
 
   ${Button} {
     flex: 1;
@@ -68,36 +54,12 @@ const ButtonContainer = styled.div`
 const ContactForm = styled.form`
   display: grid;
 
-  @media (min-width: ${pxToRem(500)}) {
-    grid-template-columns: ${pxToRem(150)} 1fr;
-    grid-gap: 1rem;
-    align-items: start;
-  }
-
   ${Textarea} {
     min-height: ${pxToRem(250)};
   }
 
   ${Label} {
-    padding-top: ${pxToRem(6)};
-
-    &:not(:first-of-type) {
-      margin-top: 1rem;
-    }
-
-    @media (min-width: ${pxToRem(500)}) {
-      &:not(:first-of-type) {
-        margin-top: 0;
-      }
-    }
-  }
-
-  ${Button} {
     margin-top: 1rem;
-
-    @media (min-width: ${pxToRem(500)}) {
-      margin-top: 0;
-    }
   }
 `;
 
