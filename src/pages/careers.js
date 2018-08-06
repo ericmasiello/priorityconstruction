@@ -9,12 +9,21 @@ import Textarea from '../components/Textarea';
 import Button from '../components/Button';
 import Type2 from '../components/Type2';
 import Type4 from '../components/Type4';
+import Type5 from '../components/Type5';
 import InvisibleButton from '../components/InvisibleButton';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
 import Tabs from '../components/Tabs';
 import { pxToRem } from '../styles/utils';
+
+const TabTitle = Type5.extend`
+  margin-bottom: 0;
+  text-transform: uppercase;
+  @media (min-width: ${pxToRem(500)}) {
+    grid-column: span 2;
+  }
+`;
 
 const FormErrorMessage = ErrorMessage.extend`
   margin-top: 1rem;
@@ -185,6 +194,7 @@ class Careers extends React.Component {
                   <ContactForm {...state.form}>
                     <input type="hidden" name="form-name" value={state.form.name} />
                     <Tabs.Content name="personalInformation">
+                      <TabTitle>Personal Information</TabTitle>
                       <Field nameAs="name" fragment>
                         <Label>Name</Label>
                         <Input required {...state.fields.name} />
@@ -243,10 +253,57 @@ class Careers extends React.Component {
                         <Label>Position you are applying for</Label>
                         <Input {...state.fields.position} required />
                       </Field>
+                      <Label>Are you available to work on weekends?</Label>
+                      <fieldset>
+                        <label>
+                          <Input {...state.fields.canWorkWeekends} type="radio" value="yes" /> Yes
+                        </label>
+                        <label>
+                          <Input {...state.fields.canWorkWeekends} type="radio" value="no" /> No
+                        </label>
+                      </fieldset>
+                      <Label>Are you capable of physical labor?</Label>
+                      <fieldset>
+                        <label>
+                          <Input
+                            {...state.fields.capableOfPhysicalLabor}
+                            type="radio"
+                            value="yes"
+                          />{' '}
+                          Yes
+                        </label>
+                        <label>
+                          <Input {...state.fields.capableOfPhysicalLabor} type="radio" value="no" />{' '}
+                          No
+                        </label>
+                      </fieldset>
+                      <Label>Have you ever been convicted of a felony?</Label>
+                      <fieldset>
+                        <label>
+                          <Input {...state.fields.convictedOfFelony} type="radio" value="yes" /> Yes
+                        </label>
+                        <label>
+                          <Input {...state.fields.convictedOfFelony} type="radio" value="no" /> No
+                        </label>
+                      </fieldset>
+                      {state.fields.convictedOfFelony.value === 'yes' && (
+                        <Field nameAs="felonyExplanation" fragment>
+                          <Label>Please explain:</Label>
+                          <Textarea {...state.fields.felonyExplanation} required />
+                        </Field>
+                      )}
                     </Tabs.Content>
-                    <Tabs.Content name="additionalQualifications">{/* TODO: */}</Tabs.Content>
-                    <Tabs.Content name="previousEmployment">{/* TODO: */}</Tabs.Content>
+                    <Tabs.Content name="previousEmployment">
+                      {/* TODO: */}
+                      <TabTitle>Previous Employment Experience</TabTitle>
+                    </Tabs.Content>
+                    <Tabs.Content name="additionalQualifications">
+                      {/* TODO: */}
+                      <TabTitle>Additional Qualifications</TabTitle>
+                    </Tabs.Content>
+
                     <Tabs.Content name="disclaimerAndSignature">
+                      <TabTitle>Disclaimer and Signature</TabTitle>
                       <AdditionalRequirements>
                         {/* TODO: move this text to markdown */}
                         <p>Please Call To Provide:</p>
