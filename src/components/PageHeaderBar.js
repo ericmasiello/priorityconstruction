@@ -64,7 +64,7 @@ const links = [
   },
   {
     to: '/placeholder',
-    children: 'Careers',
+    children: 'Project Gallery',
   },
   {
     to: '/quote',
