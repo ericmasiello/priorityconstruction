@@ -55,7 +55,6 @@ export default `
 
   a {
     background-color: transparent;
-    text-decoration: none;
     color: ${COLORS.link};
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
