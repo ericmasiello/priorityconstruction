@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { encode, fieldsToKeyValues } from '../utils/form';
+import { encode, fieldsToKeyValues, fieldsToFieldState } from '../utils/form';
 
 export default class NetlifyFormComposer extends React.Component {
   static propTypes = {
     children: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     // eslint-disable-next-line react/no-unused-prop-types
-    fields: PropTypes.arrayOf(PropTypes.string),
+    fields: PropTypes.oneOf([PropTypes.arrayOf(PropTypes.string), PropTypes.shape({})]),
     onSubmitSuccess: PropTypes.func,
     onSubmitError: PropTypes.func,
   };
@@ -37,27 +37,24 @@ export default class NetlifyFormComposer extends React.Component {
         'data-netlify': true,
         name,
       },
-      fields: fields.reduce((acc, field) => {
-        acc[field] = {
-          name: field,
-          onChange: this.handleChange,
-          value: '',
-        };
-        return acc;
-      }, {}),
+      fields: fieldsToFieldState(fields, this.handleChange),
       submissionState: null,
       handleResetFormSubmission: this.handleResetFormSubmission,
     };
   };
 
   handleChange = event => {
+    const value =
+      event.target.type === 'checkbox' && event.target.checked === false
+        ? undefined
+        : event.target.value;
+
     this.setState({
       fields: {
         ...this.state.fields,
         [event.target.name]: {
-          value: event.target.value,
-          onChange: this.state.fields[event.target.name].onChange,
-          name: event.target.name,
+          ...this.state.fields[event.target.name],
+          value,
         },
       },
     });

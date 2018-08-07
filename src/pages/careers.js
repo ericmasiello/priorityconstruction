@@ -63,42 +63,96 @@ const ContactForm = styled.form`
   }
 `;
 
+const fields = {
+  name: {
+    required: true,
+  },
+  address: {
+    required: true,
+  },
+  homePhone: {
+    type: 'tel',
+    placeholder: '123-456-7890',
+    pattern: '[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}',
+    required: true,
+  },
+  cellPhone: {
+    type: 'tel',
+    placeholder: '123-456-7890',
+    pattern: '[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}',
+  },
+  email: {},
+  dob: {
+    required: true,
+  },
+  beginWorkDate: {
+    placeholder: 'MM/DD/YYYY',
+    maxLength: '10',
+    required: true,
+  },
+  desiredSalary: {},
+  position: {
+    required: true,
+  },
+  canWorkWeekends: {
+    type: 'radio',
+    required: true,
+  },
+  capableOfPhysicalLabor: {
+    type: 'radio',
+    required: true,
+  },
+  convictedOfFelony: {
+    type: 'radio',
+    required: true,
+  },
+  felonyExplanation: {
+    required: true,
+  },
+  previouslyWorkedForPriority: {
+    type: 'radio',
+  },
+  previousWorkforPriorityDetails: {},
+  previousEmployerCompany: {},
+  previousEmployerPhone: {
+    type: 'tel',
+    placeholder: '123-456-7890',
+    pattern: '[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}',
+  },
+  previousEmployerCity: {},
+  previousEmployerState: {},
+  previousEmployerJobTitle: {},
+  previousEmployerResponsibilities: {},
+  previousEmployerStartDate: {
+    placeholder: 'MM/DD/YYYY',
+    maxLength: '10',
+  },
+  previousEmployerEndDate: {
+    placeholder: 'MM/DD/YYYY',
+    maxLength: '10',
+  },
+  previousEmployerReasonForLeaving: {},
+  additionalQualifications: {},
+  signature: {
+    placeholder: 'Enter your name',
+    required: true,
+  },
+  date: {
+    placeholder: 'MM/DD/YYYY',
+    maxLength: '10',
+    required: true,
+  },
+  certification: {
+    type: 'checkbox',
+    required: true,
+  },
+};
+
 class Careers extends React.Component {
   static displayName = 'Careers';
   static propTypes = {
     className: PropTypes.string,
   };
-
-  fields = [
-    'name',
-    'address',
-    'homePhone',
-    'cellPhone',
-    'email',
-    'dob',
-    'beginWorkDate',
-    'desiredSalary',
-    'position',
-    'canWorkWeekends',
-    'capableOfPhysicalLabor',
-    'convictedOfFelony',
-    'felonyExplanation',
-    'previouslyWorkedForPriority',
-    'previousWorkforPriorityDetails',
-    'previousEmployerCompany',
-    'previousEmployerPhone',
-    'previousEmployerCity',
-    'previousEmployerState',
-    'previousEmployerJobTitle',
-    'previousEmployerResponsibilities',
-    'previousEmployerStartDate',
-    'previousEmployerEndDate',
-    'previousEmployerReasonForLeaving',
-    'additionalQualifications',
-    'signature',
-    'date',
-    'certification',
-  ];
 
   tabs = [
     'personalInformation',
@@ -118,6 +172,12 @@ class Careers extends React.Component {
     this.errorMessage.current.focus();
   };
 
+  handleNext = (fields, activeTab, setNextTab) => () => {
+    // TODO: validate fields based on active tab
+    console.log(activeTab);
+    setNextTab();
+  };
+
   render() {
     const { className } = this.props;
     return (
@@ -126,7 +186,7 @@ class Careers extends React.Component {
           <PageLayout>
             <NetlifyFormComposer
               name="careers"
-              fields={this.fields}
+              fields={fields}
               onSubmitError={this.handleSetErrorFocus}
               onSubmitSuccess={this.handleSetThankYouFocus}
             >
@@ -163,53 +223,31 @@ class Careers extends React.Component {
                       <TabTitle>Personal Information</TabTitle>
                       <Field nameAs="name" fragment>
                         <Label>Name</Label>
-                        <Input required {...state.fields.name} />
+                        <Input {...state.fields.name} />
                       </Field>
                       <Field nameAs="address" fragment>
                         <Label>Address</Label>
-                        <Input required {...state.fields.address} />
+                        <Input {...state.fields.address} />
                       </Field>
                       <Field nameAs="homePhone" fragment>
                         <Label>Home phone</Label>
-                        <Input
-                          type="tel"
-                          placeholder="123-456-7890"
-                          pattern="[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}"
-                          required
-                          {...state.fields.homePhone}
-                        />
+                        <Input {...state.fields.homePhone} />
                       </Field>
                       <Field nameAs="cellPhone" fragment>
                         <Label>Cell phone</Label>
-                        <Input
-                          type="tel"
-                          placeholder="123-456-7890"
-                          pattern="[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}"
-                          required
-                          {...state.fields.cellPhone}
-                        />
+                        <Input {...state.fields.cellPhone} />
                       </Field>
                       <Field nameAs="email" fragment>
                         <Label>Email</Label>
-                        <Input {...state.fields.email} type="email" required />
+                        <Input {...state.fields.email} type="email" />
                       </Field>
                       <Field nameAs="dob" fragment>
                         <Label>Date of birth</Label>
-                        <Input
-                          {...state.fields.dob}
-                          placeholder="MM/DD/YYYY"
-                          maxLength="10"
-                          required
-                        />
+                        <Input {...state.fields.dob} placeholder="MM/DD/YYYY" maxLength="10" />
                       </Field>
                       <Field nameAs="beginWorkDate" fragment>
                         <Label>Date available to begin working</Label>
-                        <Input
-                          {...state.fields.beginWorkDate}
-                          placeholder="MM/DD/YYYY"
-                          maxLength="10"
-                          required
-                        />
+                        <Input {...state.fields.beginWorkDate} />
                       </Field>
                       <Field nameAs="desiredSalary" fragment>
                         <Label>Desired salary</Label>
@@ -217,7 +255,7 @@ class Careers extends React.Component {
                       </Field>
                       <Field nameAs="position" fragment>
                         <Label>Position you are applying for</Label>
-                        <Input {...state.fields.position} required />
+                        <Input {...state.fields.position} />
                       </Field>
                       <Label>Are you available to work on weekends?</Label>
                       <fieldset>
@@ -225,7 +263,6 @@ class Careers extends React.Component {
                           <Input
                             {...state.fields.canWorkWeekends}
                             checked={state.fields.canWorkWeekends.value === 'yes'}
-                            type="radio"
                             value="yes"
                           />{' '}
                           Yes
@@ -234,7 +271,6 @@ class Careers extends React.Component {
                           <Input
                             {...state.fields.canWorkWeekends}
                             checked={state.fields.canWorkWeekends.value === 'no'}
-                            type="radio"
                             value="no"
                           />{' '}
                           No
@@ -246,7 +282,6 @@ class Careers extends React.Component {
                           <Input
                             {...state.fields.capableOfPhysicalLabor}
                             checked={state.fields.capableOfPhysicalLabor.value === 'yes'}
-                            type="radio"
                             value="yes"
                           />{' '}
                           Yes
@@ -255,7 +290,6 @@ class Careers extends React.Component {
                           <Input
                             {...state.fields.capableOfPhysicalLabor}
                             checked={state.fields.capableOfPhysicalLabor.value === 'no'}
-                            type="radio"
                             value="no"
                           />{' '}
                           No
@@ -267,7 +301,6 @@ class Careers extends React.Component {
                           <Input
                             {...state.fields.convictedOfFelony}
                             checked={state.fields.convictedOfFelony.value === 'yes'}
-                            type="radio"
                             value="yes"
                           />{' '}
                           Yes
@@ -276,7 +309,6 @@ class Careers extends React.Component {
                           <Input
                             {...state.fields.convictedOfFelony}
                             checked={state.fields.convictedOfFelony.value === 'no'}
-                            type="radio"
                             value="no"
                           />{' '}
                           No
@@ -285,7 +317,7 @@ class Careers extends React.Component {
                       {state.fields.convictedOfFelony.value === 'yes' && (
                         <Field nameAs="felonyExplanation" fragment>
                           <Label>Please explain:</Label>
-                          <Textarea {...state.fields.felonyExplanation} required />
+                          <Textarea {...state.fields.felonyExplanation} />
                         </Field>
                       )}
                       <Label>Have you previously worked for Priority Construction?</Label>
@@ -294,7 +326,6 @@ class Careers extends React.Component {
                           <Input
                             {...state.fields.previouslyWorkedForPriority}
                             checked={state.fields.previouslyWorkedForPriority.value === 'yes'}
-                            type="radio"
                             value="yes"
                           />{' '}
                           Yes
@@ -303,7 +334,6 @@ class Careers extends React.Component {
                           <Input
                             {...state.fields.previouslyWorkedForPriority}
                             checked={state.fields.previouslyWorkedForPriority.value === 'no'}
-                            type="radio"
                             value="no"
                           />{' '}
                           No
@@ -314,7 +344,7 @@ class Careers extends React.Component {
                           <Label>
                             When did you work for Priority Construction and who was your supervisor?
                           </Label>
-                          <Textarea {...state.fields.previousWorkforPriorityDetails} required />
+                          <Textarea {...state.fields.previousWorkforPriorityDetails} />
                         </Field>
                       )}
                     </Tabs.Content>
@@ -327,12 +357,7 @@ class Careers extends React.Component {
                       </Field>
                       <Field nameAs="previousEmployerPhone" fragment>
                         <Label>Phone</Label>
-                        <Input
-                          {...state.fields.previousEmployerPhone}
-                          type="tel"
-                          placeholder="123-456-7890"
-                          pattern="[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}"
-                        />
+                        <Input {...state.fields.previousEmployerPhone} />
                       </Field>
                       <Field nameAs="previousEmployerCity" fragment>
                         <Label>City</Label>
@@ -359,21 +384,11 @@ class Careers extends React.Component {
                       </Field>
                       <Field nameAs="previousEmployerStartDate" fragment>
                         <Label>Start date</Label>
-                        <Input
-                          {...state.fields.previousEmployerStartDate}
-                          placeholder="MM/DD/YYYY"
-                          maxLength="10"
-                          required
-                        />
+                        <Input {...state.fields.previousEmployerStartDate} />
                       </Field>
                       <Field nameAs="previousEmployerEndDate" fragment>
                         <Label>End date</Label>
-                        <Input
-                          {...state.fields.previousEmployerEndDate}
-                          placeholder="MM/DD/YYYY"
-                          maxLength="10"
-                          required
-                        />
+                        <Input {...state.fields.previousEmployerEndDate} />
                       </Field>
                       <Field nameAs="previousEmployerReasonForLeaving" fragment>
                         <Label>Reason for leaving</Label>
@@ -394,16 +409,11 @@ class Careers extends React.Component {
                       {/* TODO: move this text to markdown */}
                       <Field nameAs="signature" fragment>
                         <Label>Signature</Label>
-                        <Input {...state.fields.signature} placeholder="Enter your name" required />
+                        <Input {...state.fields.signature} />
                       </Field>
                       <Field nameAs="date" fragment>
                         <Label>Date</Label>
-                        <Input
-                          {...state.fields.date}
-                          placeholder="MM/DD/YYYY"
-                          maxLength="10"
-                          required
-                        />
+                        <Input {...state.fields.date} />
                       </Field>
                       <div>
                         <p>Please Call To Provide:</p>
@@ -419,13 +429,10 @@ class Careers extends React.Component {
                           false or misleading information in my application or interview may result
                           in my release.
                         </Label>
-                        {/* TODO: fix bug: spreading props for checkbox and radio buttons don't work well */}
                         <Input
                           {...state.fields.certification}
                           checked={state.fields.certification.value === 'yes'}
-                          type="checkbox"
                           value="yes"
-                          required
                         />
                       </Field>
                     </Tabs.Content>
@@ -442,7 +449,15 @@ class Careers extends React.Component {
                               Submit
                             </Button>
                           ) : (
-                            <Button key="next" type="button" onClick={tabState.setNextTab}>
+                            <Button
+                              key="next"
+                              type="button"
+                              onClick={this.handleNext(
+                                state.fields,
+                                tabState.activeTab,
+                                tabState.setNextTab,
+                              )}
+                            >
                               Next
                             </Button>
                           )}
