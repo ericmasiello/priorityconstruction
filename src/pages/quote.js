@@ -15,6 +15,7 @@ import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
 import { pxToRem } from '../styles/utils';
+import * as CustomPropTypes from '../propTypes';
 
 const FormErrorMessage = ErrorMessage.extend`
   margin-top: 1rem;
@@ -82,6 +83,9 @@ class Quote extends React.Component {
   static displayName = 'Quote';
   static propTypes = {
     className: PropTypes.string,
+    data: PropTypes.shape({
+      intro: CustomPropTypes.Markdown,
+    }).isRequired,
   };
 
   fields = ['name', 'company', 'phone', 'fax', 'email', 'comments', 'howDidYouHear', 'projectType'];
@@ -98,14 +102,11 @@ class Quote extends React.Component {
   };
 
   render() {
-    const { className } = this.props;
+    const { className, data } = this.props;
+
     return (
       <PageContainer tag="section" className={className}>
-        {/* TODO: move this text to markdown */}
-        <p>
-          Do you have a bid you want us to look at? In need of our services? Please fill out the
-          form with all of your information and we will get back to you as soon as possible.
-        </p>
+        <div dangerouslySetInnerHTML={{ __html: data.intro.html }} />
         <PageLayout>
           <NetlifyFormComposer
             name="quote"
@@ -201,4 +202,12 @@ class Quote extends React.Component {
 
 export default styled(Quote)`
   padding-top: 2rem;
+`;
+
+export const query = graphql`
+  query QuoteQuery {
+    intro: markdownRemark(id: { regex: "/content/quote/" }) {
+      html
+    }
+  }
 `;
