@@ -23,7 +23,7 @@ export const Markdown = PropTypes.shape({
   html: PropTypes.string.isRequired,
 });
 
-export const Quote = PropTypes.shape({
+export const Testimonial = PropTypes.shape({
   frontmatter: PropTypes.shape({
     author: PropTypes.string.isRequired,
     date: PropTypes.string,
@@ -32,10 +32,10 @@ export const Quote = PropTypes.shape({
   html: PropTypes.string.isRequired,
 });
 
-export const AllQuotes = PropTypes.shape({
+export const AllTestimonials = PropTypes.shape({
   edges: PropTypes.arrayOf(
     PropTypes.shape({
-      node: Quote,
+      node: Testimonial,
     }),
   ),
 });
