@@ -25,7 +25,7 @@ export const PAGE_SPACING = {
 };
 
 export const MEDIA_QUERIES = {
-  navTransition: 720,
+  navTransition: 800,
 };
 
 // type properties
