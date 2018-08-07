@@ -62,6 +62,10 @@ const ContactForm = styled.form`
   ${Label} {
     margin-top: 1rem;
   }
+
+  .error {
+    border-color: red;
+  }
 `;
 
 const fields = {
@@ -166,6 +170,10 @@ class Careers extends React.Component {
     }),
   };
 
+  state = {
+    fields,
+  };
+
   thankYouMessage = React.createRef();
   errorMessage = React.createRef();
 
@@ -177,10 +185,23 @@ class Careers extends React.Component {
     this.errorMessage.current.focus();
   };
 
-  handleNext = (fieldObjects, selected, goToNextView) => () => {
+  handleValiation = (fieldObjects, selectedView, goToNextView) => () => {
+    const updateFields = Object.assign({}, fieldObjects);
     // TODO: validate fields based on active tab
-    console.log(selected);
-    goToNextView();
+    // and if the field is required or not
+    // if its required and not filled out, set a className property
+    // with a string of error
+    console.log(selectedView);
+
+    // NOTE: naive approach
+    if (updateFields.name.required && updateFields.name.value === '') {
+      updateFields.name.className = 'error';
+    } else {
+      updateFields.name.className = '';
+      goToNextView();
+    }
+
+    this.setState({ fields: updateFields });
   };
 
   render() {
@@ -191,7 +212,7 @@ class Careers extends React.Component {
           <PageLayout>
             <NetlifyFormComposer
               name="careers"
-              fields={fields}
+              fields={this.state.fields}
               onSubmitError={this.handleSetErrorFocus}
               onSubmitSuccess={this.handleSetThankYouFocus}
             >
@@ -445,7 +466,7 @@ class Careers extends React.Component {
                             <Button
                               key="next"
                               type="button"
-                              onClick={this.handleNext(
+                              onClick={this.handleValiation(
                                 state.fields,
                                 togglerState.selected,
                                 togglerState.goToNextView,
