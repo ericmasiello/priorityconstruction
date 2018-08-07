@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Link from 'gatsby-link';
 import PageContainer from '../components/PageContainer';
 import OfficeMap from '../components/OfficeMap';
 import Field from '../components/Field';
@@ -17,6 +16,7 @@ import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import { pxToRem } from '../styles/utils';
+import * as CustomPropTypes from '../propTypes';
 
 const FormErrorMessage = ErrorMessage.extend`
   margin-top: 1rem;
@@ -87,6 +87,7 @@ class Contact extends React.Component {
           googleMapKey: PropTypes.string,
         }),
       }),
+      intro: CustomPropTypes.Markdown,
     }).isRequired,
     className: PropTypes.string,
   };
@@ -109,12 +110,7 @@ class Contact extends React.Component {
 
     return (
       <PageContainer tag="section" className={className}>
-        {/* TODO: move this text to markdown */}
-        <p>
-          Do you have a question on an ongoing project? Want us to do a specific job?{' '}
-          <Link to="/careers">Looking for a place to work?</Link> Please don{"'"}t hesitate to
-          contact us.
-        </p>
+        <div dangerouslySetInnerHTML={{ __html: data.intro.html }} />
         <PageLayout>
           <NetlifyFormComposer
             name="contact"
@@ -212,6 +208,10 @@ export const query = graphql`
       siteMetadata {
         googleMapKey
       }
+    }
+
+    intro: markdownRemark(id: { regex: "/content/contact/" }) {
+      html
     }
   }
 `;
