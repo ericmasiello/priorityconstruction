@@ -15,7 +15,7 @@ import InvisibleButton from '../components/InvisibleButton';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
-import Tabs from '../components/Tabs';
+import Toggler from '../components/ViewToggler';
 import { pxToRem } from '../styles/utils';
 import states from '../content/usStates.json';
 import * as CustomPropTypes from '../propTypes';
@@ -149,6 +149,13 @@ const fields = {
   },
 };
 
+const views = [
+  'personalInformation',
+  'previousEmployment',
+  'additionalQualifications',
+  'disclaimerAndSignature',
+];
+
 class Careers extends React.Component {
   static displayName = 'Careers';
   static propTypes = {
@@ -158,13 +165,6 @@ class Careers extends React.Component {
       additionalInfo: CustomPropTypes.Markdown,
     }),
   };
-
-  tabs = [
-    'personalInformation',
-    'previousEmployment',
-    'additionalQualifications',
-    'disclaimerAndSignature',
-  ];
 
   thankYouMessage = React.createRef();
   errorMessage = React.createRef();
@@ -177,16 +177,16 @@ class Careers extends React.Component {
     this.errorMessage.current.focus();
   };
 
-  handleNext = (fieldObjects, activeTab, setNextTab) => () => {
+  handleNext = (fieldObjects, selected, goToNextView) => () => {
     // TODO: validate fields based on active tab
-    console.log(activeTab);
-    setNextTab();
+    console.log(selected);
+    goToNextView();
   };
 
   render() {
     const { className, data } = this.props;
     return (
-      <Tabs tabs={this.tabs}>
+      <Toggler views={views} initialSelection={views[0]}>
         <PageContainer tag="section" className={className}>
           <PageLayout>
             <NetlifyFormComposer
@@ -213,7 +213,7 @@ class Careers extends React.Component {
                   <ContactForm {...state.form}>
                     <input type="hidden" name="form-name" value={state.form.name} />
 
-                    <Tabs.Content name="personalInformation">
+                    <Toggler.View view="personalInformation">
                       <div dangerouslySetInnerHTML={{ __html: data.intro.html }} />
                       <TabTitle>Personal Information</TabTitle>
                       <Field nameAs="name" fragment>
@@ -342,9 +342,9 @@ class Careers extends React.Component {
                           <Textarea {...state.fields.previousWorkforPriorityDetails} />
                         </Field>
                       )}
-                    </Tabs.Content>
+                    </Toggler.View>
 
-                    <Tabs.Content name="previousEmployment">
+                    <Toggler.View view="previousEmployment">
                       <TabTitle>Previous Employment Experience</TabTitle>
                       <Field nameAs="previousEmployerCompany" fragment>
                         <Label>Company</Label>
@@ -389,17 +389,17 @@ class Careers extends React.Component {
                         <Label>Reason for leaving</Label>
                         <Textarea {...state.fields.previousEmployerReasonForLeaving} />
                       </Field>
-                    </Tabs.Content>
+                    </Toggler.View>
 
-                    <Tabs.Content name="additionalQualifications">
+                    <Toggler.View view="additionalQualifications">
                       <TabTitle>Additional Qualifications</TabTitle>
                       <Field nameAs="additionalQualifications" fragment>
                         <Label>Additional qualifications</Label>
                         <Textarea {...state.fields.additionalQualifications} />
                       </Field>
-                    </Tabs.Content>
+                    </Toggler.View>
 
-                    <Tabs.Content name="disclaimerAndSignature">
+                    <Toggler.View view="disclaimerAndSignature">
                       <TabTitle>Disclaimer and Signature</TabTitle>
                       <Field nameAs="signature" fragment>
                         <Label>Signature</Label>
@@ -423,16 +423,20 @@ class Careers extends React.Component {
                           value="yes"
                         />
                       </Field>
-                    </Tabs.Content>
+                    </Toggler.View>
 
-                    <Tabs.Consumer>
-                      {tabState => (
+                    <Toggler.Consumer>
+                      {togglerState => (
                         <ButtonContainer>
                           {/* NOTE: keep the "key" property else React will act strangely when swapping the next and submit buttons */}
-                          <Button key="previous" type="button" onClick={tabState.setPreviousTab}>
+                          <Button
+                            key="previous"
+                            type="button"
+                            onClick={togglerState.goToPreviousView}
+                          >
                             Previous
                           </Button>
-                          {tabState.activeTab === this.tabs[this.tabs.length - 1] ? (
+                          {togglerState.selected === views[views.length - 1] ? (
                             <Button key="submit" type="submit">
                               Submit
                             </Button>
@@ -442,8 +446,8 @@ class Careers extends React.Component {
                               type="button"
                               onClick={this.handleNext(
                                 state.fields,
-                                tabState.activeTab,
-                                tabState.setNextTab,
+                                togglerState.selected,
+                                togglerState.goToNextView,
                               )}
                             >
                               Next
@@ -451,7 +455,7 @@ class Careers extends React.Component {
                           )}
                         </ButtonContainer>
                       )}
-                    </Tabs.Consumer>
+                    </Toggler.Consumer>
 
                     {state.submissionState === 'error' && (
                       <FormErrorMessage tabIndex={-1} innerRef={this.errorMessage}>
@@ -468,7 +472,7 @@ class Careers extends React.Component {
             </NetlifyFormComposer>
           </PageLayout>
         </PageContainer>
-      </Tabs>
+      </Toggler>
     );
   }
 }
