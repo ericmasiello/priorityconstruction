@@ -18,6 +18,7 @@ import FormSuccessMessage from '../components/FormSuccessMessage';
 import Tabs from '../components/Tabs';
 import { pxToRem } from '../styles/utils';
 import states from '../content/usStates.json';
+import * as CustomPropTypes from '../propTypes';
 
 const TabTitle = Type5.extend`
   margin-bottom: 0;
@@ -152,6 +153,10 @@ class Careers extends React.Component {
   static displayName = 'Careers';
   static propTypes = {
     className: PropTypes.string,
+    data: PropTypes.shape({
+      intro: CustomPropTypes.Markdown,
+      additionalInfo: CustomPropTypes.Markdown,
+    }),
   };
 
   tabs = [
@@ -172,14 +177,14 @@ class Careers extends React.Component {
     this.errorMessage.current.focus();
   };
 
-  handleNext = (fields, activeTab, setNextTab) => () => {
+  handleNext = (fieldObjects, activeTab, setNextTab) => () => {
     // TODO: validate fields based on active tab
     console.log(activeTab);
     setNextTab();
   };
 
   render() {
-    const { className } = this.props;
+    const { className, data } = this.props;
     return (
       <Tabs tabs={this.tabs}>
         <PageContainer tag="section" className={className}>
@@ -209,17 +214,7 @@ class Careers extends React.Component {
                     <input type="hidden" name="form-name" value={state.form.name} />
 
                     <Tabs.Content name="personalInformation">
-                      {/* TODO: move this text to markdown */}
-                      <p>
-                        Interested in working with us in the construction field? We are always
-                        looking for individuals who would like to develop their skills and apply
-                        them to ongoing projects we currently have. We are always in demand for
-                        dedicated foreman, laborers, skilled workers, mechanics, CDL drivers, and
-                        operators. Working outside in the construction field isn’t for you? We are
-                        also interested in individuals who specialize in estimating, accounting,
-                        finance, project management, and office management. We are not only a team
-                        at Priority Construction, we are also a family.
-                      </p>
+                      <div dangerouslySetInnerHTML={{ __html: data.intro.html }} />
                       <TabTitle>Personal Information</TabTitle>
                       <Field nameAs="name" fragment>
                         <Label>Name</Label>
@@ -406,7 +401,6 @@ class Careers extends React.Component {
 
                     <Tabs.Content name="disclaimerAndSignature">
                       <TabTitle>Disclaimer and Signature</TabTitle>
-                      {/* TODO: move this text to markdown */}
                       <Field nameAs="signature" fragment>
                         <Label>Signature</Label>
                         <Input {...state.fields.signature} />
@@ -415,13 +409,7 @@ class Careers extends React.Component {
                         <Label>Date</Label>
                         <Input {...state.fields.date} />
                       </Field>
-                      <div>
-                        <p>Please Call To Provide:</p>
-                        <ol>
-                          <li>Your Social Security Number</li>
-                          <li>Your Driver&rsquo;s License Number / State / EXP</li>
-                        </ol>
-                      </div>
+                      <div dangerouslySetInnerHTML={{ __html: data.additionalInfo.html }} />
                       <Field nameAs="certification" fragment>
                         <Label>
                           I certify that my answers are true and complete to the best of my
@@ -487,4 +475,16 @@ class Careers extends React.Component {
 
 export default styled(Careers)`
   padding-top: 2rem;
+`;
+
+export const query = graphql`
+  query CareersPage {
+    intro: markdownRemark(id: { regex: "/content/careers/" }) {
+      html
+    }
+
+    additionalInfo: markdownRemark(id: { regex: "/content/careersAdditionalInfo/" }) {
+      html
+    }
+  }
 `;
