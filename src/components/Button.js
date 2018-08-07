@@ -56,4 +56,15 @@ export default styled(Button)`
         return '';
     }
   }};
+
+  &:disabled {
+    pointer-events: none;
+    border-color: ${tinyColor(COLORS.muted)
+      .lighten(30)
+      .toRgbString()};
+    color: ${COLORS.muted};
+    background-color: ${tinyColor(COLORS.muted)
+      .lighten(40)
+      .toRgbString()};
+  }
 `;

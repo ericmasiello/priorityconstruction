@@ -433,6 +433,7 @@ class Careers extends React.Component {
                             key="previous"
                             type="button"
                             onClick={togglerState.goToPreviousView}
+                            disabled={togglerState.selected === views[0]}
                           >
                             Previous
                           </Button>
