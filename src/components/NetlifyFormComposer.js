@@ -7,7 +7,7 @@ export default class NetlifyFormComposer extends React.Component {
     children: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     // eslint-disable-next-line react/no-unused-prop-types
-    fields: PropTypes.oneOf([PropTypes.arrayOf(PropTypes.string), PropTypes.shape({})]),
+    fields: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.shape({})]),
     onSubmitSuccess: PropTypes.func,
     onSubmitError: PropTypes.func,
   };
