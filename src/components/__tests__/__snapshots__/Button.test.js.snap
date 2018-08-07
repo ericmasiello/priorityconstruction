@@ -17,6 +17,13 @@ exports[`should render 1`] = `
   background-color: rgb(245,245,245);
 }
 
+.c0:disabled {
+  pointer-events: none;
+  border-color: rgb(196,194,194);
+  color: #787575;
+  background-color: rgb(221,220,220);
+}
+
 <button
   className="c0"
 />

@@ -2,19 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import PageContainer from '../components/PageContainer';
-import OfficeMap from '../components/OfficeMap';
 import Field from '../components/Field';
 import Label from '../components/Label';
 import Input from '../components/Input';
 import Textarea from '../components/Textarea';
 import Button from '../components/Button';
-import Small from '../components/Small';
+import Select from '../components/Select';
 import Type2 from '../components/Type2';
 import Type4 from '../components/Type4';
 import InvisibleButton from '../components/InvisibleButton';
+import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
-import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import { pxToRem } from '../styles/utils';
 import * as CustomPropTypes from '../propTypes';
 
@@ -29,13 +28,6 @@ const FormErrorMessage = ErrorMessage.extend`
 
 const PageLayout = styled.div`
   position: relative;
-  margin-top: 3rem;
-  display: grid;
-  grid-gap: 1rem;
-
-  @media (min-width: ${pxToRem(960)}) {
-    grid-template-columns: 1fr ${pxToRem(450)};
-  }
 `;
 
 const ContactForm = styled.form`
@@ -78,24 +70,28 @@ const ContactForm = styled.form`
   }
 `;
 
-class Contact extends React.Component {
-  static displayName = 'Contact';
+const projecTypes = [
+  'Brick Paving',
+  'Flatwork Concrete',
+  'Pervious Concrete',
+  'Stamped & Colored Concrete',
+  'Structural Concrete',
+  'Other',
+];
+
+class Quote extends React.Component {
+  static displayName = 'Quote';
   static propTypes = {
+    className: PropTypes.string,
     data: PropTypes.shape({
-      site: PropTypes.shape({
-        siteMetadata: PropTypes.shape({
-          googleMapKey: PropTypes.string,
-        }),
-      }),
       intro: CustomPropTypes.Markdown,
     }).isRequired,
-    className: PropTypes.string,
   };
+
+  fields = ['name', 'company', 'phone', 'fax', 'email', 'comments', 'howDidYouHear', 'projectType'];
 
   thankYouMessage = React.createRef();
   errorMessage = React.createRef();
-
-  fields = ['name', 'company', 'phone', 'fax', 'email', 'comments'];
 
   handleSetThankYouFocus = () => {
     this.thankYouMessage.current.focus();
@@ -106,14 +102,14 @@ class Contact extends React.Component {
   };
 
   render() {
-    const { data, className } = this.props;
+    const { className, data } = this.props;
 
     return (
       <PageContainer tag="section" className={className}>
         <div dangerouslySetInnerHTML={{ __html: data.intro.html }} />
         <PageLayout>
           <NetlifyFormComposer
-            name="contact"
+            name="quote"
             fields={this.fields}
             onSubmitError={this.handleSetErrorFocus}
             onSubmitSuccess={this.handleSetThankYouFocus}
@@ -137,7 +133,7 @@ class Contact extends React.Component {
                   <input type="hidden" name="form-name" value={state.form.name} />
                   <Field nameAs="name" fragment>
                     <Label>Name</Label>
-                    <Input {...state.fields.name} required />
+                    <Input required {...state.fields.name} />
                   </Field>
                   <Field nameAs="company" fragment>
                     <Label>Company</Label>
@@ -166,9 +162,23 @@ class Contact extends React.Component {
                     <Label>Email</Label>
                     <Input {...state.fields.email} type="email" required />
                   </Field>
+                  <Field nameAs="projectType" fragment>
+                    <Label>Project type</Label>
+                    <Select {...state.fields.projectType}>
+                      {projecTypes.map(type => (
+                        <option key={type} value={type}>
+                          {type}
+                        </option>
+                      ))}
+                    </Select>
+                  </Field>
                   <Field stack nameAs="comments" fragment>
-                    <Label>Additional comments</Label>
+                    <Label>Project description and comments</Label>
                     <Textarea {...state.fields.comments} required />
+                  </Field>
+                  <Field nameAs="howDidYouHear" fragment>
+                    <Label>How did you hear about us?</Label>
+                    <Input {...state.fields.howDidYouHear} />
                   </Field>
                   <Button type="submit">Submit</Button>
                   {state.submissionState === 'error' && (
@@ -184,33 +194,19 @@ class Contact extends React.Component {
               </React.Fragment>
             )}
           </NetlifyFormComposer>
-          <div>
-            <OfficeMap width="100%" mapKey={data.site.siteMetadata.googleMapKey} />
-            <p>
-              <a href="https://www.google.com/maps/place/1315+W+Hamburg+St/@39.277222,-76.632891,17z/">
-                <Small>1315 West Hamburg Street, Baltimore, MD 21203</Small>
-              </a>
-            </p>
-          </div>
         </PageLayout>
       </PageContainer>
     );
   }
 }
 
-export default styled(Contact)`
+export default styled(Quote)`
   padding-top: 2rem;
 `;
 
 export const query = graphql`
-  query ContactQuery {
-    site {
-      siteMetadata {
-        googleMapKey
-      }
-    }
-
-    intro: markdownRemark(id: { regex: "/content/contact/" }) {
+  query QuoteQuery {
+    intro: markdownRemark(id: { regex: "/content/quote/" }) {
       html
     }
   }

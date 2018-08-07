@@ -64,10 +64,10 @@ const links = [
   },
   {
     to: '/placeholder',
-    children: 'Careers',
+    children: 'Project Gallery',
   },
   {
-    to: '/placeholder',
+    to: '/quote',
     children: 'Request Quote',
   },
 ];

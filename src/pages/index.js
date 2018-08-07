@@ -6,12 +6,12 @@ import PageContainer from '../components/PageContainer';
 import PhotoGrid from '../components/PhotoGrid';
 import Placeholder from '../components/Placeholder';
 import Type4 from '../components/Type4';
-import QuoteCarousel from '../components/QuoteCarousel';
+import TestimonialCarousel from '../components/TestimonialCarousel';
 import { edgesToGallery } from '../utils/gallery';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 import blueprint from '../images/blueprint.svg';
-import markdownRemarkToQuote from '../utils/quotes';
+import markdownRemarkToTestimonial from '../utils/testimonials';
 
 const FPOGrid = styled.div`
   display: grid;
@@ -70,7 +70,9 @@ const HomePage = props => {
         </FPOGrid>
         <PhotoGrid {...photoGridProps} />
       </MainContentContainer>
-      <QuoteCarousel quotes={data.quotes.edges.map(markdownRemarkToQuote)} />
+      <TestimonialCarousel
+        testimonials={data.testimonials.edges.map(markdownRemarkToTestimonial)}
+      />
     </React.Fragment>
   );
 };
@@ -80,7 +82,7 @@ HomePage.displayName = 'HomePage';
 HomePage.propTypes = {
   data: PropTypes.shape({
     homageGallery: CustomPropTypes.AllImageSharp,
-    quotes: CustomPropTypes.AllQuotes,
+    testimonials: CustomPropTypes.AllTestimonials,
   }).isRequired,
   className: PropTypes.string,
 };
@@ -103,10 +105,10 @@ export const query = graphql`
       }
     }
 
-    quotes: allMarkdownRemark(
+    testimonials: allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date, id] }
       limit: 10
-      filter: { id: { regex: "/content/quotes/" } }
+      filter: { id: { regex: "/content/testimonials/" } }
     ) {
       edges {
         node {

@@ -36,7 +36,7 @@ const PreviousButton = ShiftButton.extend`
   }
 `;
 
-const QuoteContainer = styled.div`
+const TestimonialContainer = styled.div`
   @media (min-width: ${pxToRem(BREAKPOINT)}) {
     display: flex;
     transition: transform 0.7s;
@@ -75,10 +75,10 @@ const QuoteContainer = styled.div`
   }
 `;
 
-export class Quotes extends Component {
+export class TestimonialCarousel extends Component {
   static propTypes = {
     className: PropTypes.string,
-    quotes: PropTypes.arrayOf(
+    testimonials: PropTypes.arrayOf(
       PropTypes.shape({
         quote: PropTypes.string.isRequired,
         author: PropTypes.string.isRequired,
@@ -88,7 +88,7 @@ export class Quotes extends Component {
   };
 
   static defaultProps = {
-    quotes: [],
+    testimonials: [],
   };
 
   state = {
@@ -97,7 +97,9 @@ export class Quotes extends Component {
 
   handleClickPrevious = () => {
     const nextIndex =
-      this.state.selectedIndex === 0 ? this.props.quotes.length - 1 : this.state.selectedIndex - 1;
+      this.state.selectedIndex === 0
+        ? this.props.testimonials.length - 1
+        : this.state.selectedIndex - 1;
     this.setState({
       selectedIndex: nextIndex,
     });
@@ -105,37 +107,39 @@ export class Quotes extends Component {
 
   handleClickNext = () => {
     const nextIndex =
-      this.state.selectedIndex === this.props.quotes.length - 1 ? 0 : this.state.selectedIndex + 1;
+      this.state.selectedIndex === this.props.testimonials.length - 1
+        ? 0
+        : this.state.selectedIndex + 1;
     this.setState({
       selectedIndex: nextIndex,
     });
   };
 
   render() {
-    const { className, quotes, ...rest } = this.props;
-    if (quotes.length < 1) {
+    const { className, testimonials, ...rest } = this.props;
+    if (testimonials.length < 1) {
       return null;
     }
     return (
       <PageContainer className={className} {...rest}>
-        {quotes.length > 1 && (
-          <PreviousButton aria-label="Previous quote" onClick={this.handleClickPrevious}>
+        {testimonials.length > 1 && (
+          <PreviousButton aria-label="Previous testimonial" onClick={this.handleClickPrevious}>
             <ChevronIcon />
           </PreviousButton>
         )}
-        <QuoteContainer count={quotes.length} index={this.state.selectedIndex}>
-          {quotes.map(quote => (
-            <Blockquote key={quote.quote}>
-              <Blockquote.Quote tag="div" dangerouslySetInnerHTML={{ __html: quote.quote }} />
+        <TestimonialContainer count={testimonials.length} index={this.state.selectedIndex}>
+          {testimonials.map(testimonial => (
+            <Blockquote key={testimonial.quote}>
+              <Blockquote.Quote tag="div" dangerouslySetInnerHTML={{ __html: testimonial.quote }} />
               <Blockquote.Citation>
-                <Base tag="h1">{quote.author}</Base>
-                {quote.title && <p>{quote.title}</p>}
+                <Base tag="h1">{testimonial.author}</Base>
+                {testimonial.title && <p>{testimonial.title}</p>}
               </Blockquote.Citation>
             </Blockquote>
           ))}
-        </QuoteContainer>
-        {quotes.length > 1 && (
-          <ShiftButton aria-label="Next quote" onClick={this.handleClickNext}>
+        </TestimonialContainer>
+        {testimonials.length > 1 && (
+          <ShiftButton aria-label="Next testimonial" onClick={this.handleClickNext}>
             <ChevronIcon />
           </ShiftButton>
         )}
@@ -144,7 +148,7 @@ export class Quotes extends Component {
   }
 }
 
-export default styled(Quotes)`
+export default styled(TestimonialCarousel)`
   position: relative;
   background-color: ${COLORS.highlight3};
   color: #fff;
