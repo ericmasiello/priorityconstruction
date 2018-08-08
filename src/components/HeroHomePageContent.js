@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
+import Link from 'gatsby-link';
 import Type2 from './Type2';
 import Type4 from './Type4';
 import Button from './Button';
@@ -14,7 +15,7 @@ export const HeroHomePageContent = props => (
     <ContentWrapper tag="hgroup">
       <Type2 tag="h1">Bringing Concrete Ideas to Life</Type2>
       <Type4 tag="p">Quality workmanship & excellent customer service</Type4>
-      <Button color="light" large>
+      <Button color="light" large tag={Link} to="/quote">
         Get a quote
       </Button>
     </ContentWrapper>
