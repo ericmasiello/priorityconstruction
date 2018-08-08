@@ -48,6 +48,10 @@ const MobileNav = FlatList.extend`
     box-shadow: 1px 1px 1rem rgba(0, 0, 0, 0);
   }
 
+  @media (min-width: ${pxToRem(600)}) {
+    font-size: ${pxToRem(TYPE_SIZE.t4[0])};
+  }
+
   @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
     display: none;
   }
