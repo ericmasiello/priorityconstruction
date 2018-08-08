@@ -18,8 +18,15 @@ const InvisibleButton = styled.button`
   cursor: pointer;
 `;
 
-const HeaderBarFlatList = FlatList.extend`
-  transform: translateX(-100%);
+const DesktopNav = FlatList.extend`
+  display: none;
+
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
+    display: flex;
+  }
+`;
+
+const MobileNav = FlatList.extend`
   position: absolute;
   top: 0;
   left: 0;
@@ -32,24 +39,14 @@ const HeaderBarFlatList = FlatList.extend`
   padding: ${pxToRem(PAGE_SPACING.horizontal)};
   font-size: ${pxToRem(TYPE_SIZE.t5[0])};
   transition: transform 0.4s, box-shadow 0.4s;
+  transform: translateX(0);
+  box-shadow: 1px 1px 1rem rgba(0, 0, 0, 0.5);
 
-  &.show-menu {
-    transform: translateX(0);
-    box-shadow: 1px 1px 1rem rgba(0, 0, 0, 0.5);
+  &[aria-hidden='true'] {
+    transform: translateX(-100%);
+    box-shadow: 1px 1px 1rem rgba(0, 0, 0, 0);
   }
 
-  @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
-    display: flex;
-    position: static;
-    background: transparent;
-    height: auto;
-    flex-direction: row;
-    padding: 0;
-    font-size: 1rem;
-  }
-`;
-
-const HomeHeaderBarFlatListItem = HeaderBarFlatListItem.extend`
   @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
     display: none;
   }
@@ -84,7 +81,11 @@ class PageHeaderBar extends React.Component {
 
   state = { showMenu: false };
 
+  mobileNav = React.createRef();
+
   handleShowMenu = () => {
+    // put focus into the mobile nav
+    this.mobileNav.current.focus();
     this.setState({
       showMenu: true,
     });
@@ -98,16 +99,16 @@ class PageHeaderBar extends React.Component {
 
   render() {
     const { className, navRef, logo, currentPathname } = this.props;
-    const showMenuClassName = this.state.showMenu ? 'show-menu' : '';
     return (
       <HeaderBar tag="nav" innerRef={navRef} className={className}>
         <Logo image={logo} />
-        <HeaderBarFlatList className={showMenuClassName}>
-          <HomeHeaderBarFlatListItem>
+        <MobileNav aria-hidden={!this.state.showMenu}>
+          <div ref={this.mobileNav} tabIndex={-1} />
+          <HeaderBarFlatListItem>
             <MainNavLink selected={currentPathname === '/'} onClick={this.handleHideMenu} to="/">
               Home
             </MainNavLink>
-          </HomeHeaderBarFlatListItem>
+          </HeaderBarFlatListItem>
           {links.map(link => (
             <HeaderBarFlatListItem key={link.children}>
               <MainNavLink
@@ -117,10 +118,21 @@ class PageHeaderBar extends React.Component {
               />
             </HeaderBarFlatListItem>
           ))}
-        </HeaderBarFlatList>
+        </MobileNav>
         <InvisibleButton onClick={this.state.showMenu ? this.handleHideMenu : this.handleShowMenu}>
           <MenuIcon />
         </InvisibleButton>
+        <DesktopNav>
+          {links.map(link => (
+            <HeaderBarFlatListItem key={link.children}>
+              <MainNavLink
+                selected={currentPathname === link.to}
+                {...link}
+                onClick={this.handleHideMenu}
+              />
+            </HeaderBarFlatListItem>
+          ))}
+        </DesktopNav>
       </HeaderBar>
     );
   }
