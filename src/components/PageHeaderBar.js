@@ -123,6 +123,24 @@ class PageHeaderBar extends React.Component {
               />
             </HeaderBarFlatListItem>
           ))}
+          <HeaderBarFlatListItem>
+            <MainNavLink
+              selected={currentPathname === '/careers'}
+              onClick={this.handleHideMenu}
+              to="/careers"
+            >
+              Career Opportunities
+            </MainNavLink>
+          </HeaderBarFlatListItem>
+          <HeaderBarFlatListItem>
+            <MainNavLink
+              selected={currentPathname === '/contact'}
+              onClick={this.handleHideMenu}
+              to="/contact"
+            >
+              Contact Us
+            </MainNavLink>
+          </HeaderBarFlatListItem>
         </MobileNav>
         <InvisibleButton onClick={this.state.showMenu ? this.handleHideMenu : this.handleShowMenu}>
           {this.state.showMenu ? <CloseIcon /> : <MenuIcon />}
