@@ -19,21 +19,23 @@ const InvisibleButton = styled.button`
 `;
 
 const HeaderBarFlatList = FlatList.extend`
-  display: none;
+  transform: translateX(-100%);
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  right: ${pxToRem(60)};
   bottom: 0;
   background: white;
   height: 100vh;
   z-index: 999;
   flex-direction: column;
   padding: ${pxToRem(PAGE_SPACING.horizontal)};
-  font-size: ${pxToRem(TYPE_SIZE.t4[0])};
+  font-size: ${pxToRem(TYPE_SIZE.t5[0])};
+  transition: transform 0.4s, box-shadow 0.4s;
 
   &.show-menu {
-    display: block;
+    transform: translateX(0);
+    box-shadow: 1px 1px 1rem rgba(0, 0, 0, 0.5);
   }
 
   @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
@@ -116,7 +118,7 @@ class PageHeaderBar extends React.Component {
             </HeaderBarFlatListItem>
           ))}
         </HeaderBarFlatList>
-        <InvisibleButton onClick={this.handleShowMenu}>
+        <InvisibleButton onClick={this.state.showMenu ? this.handleHideMenu : this.handleShowMenu}>
           <MenuIcon />
         </InvisibleButton>
       </HeaderBar>
