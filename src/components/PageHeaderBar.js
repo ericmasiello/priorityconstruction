@@ -108,8 +108,8 @@ class PageHeaderBar extends React.Component {
       <HeaderBar tag="nav" innerRef={navRef} className={className}>
         <Logo image={logo} />
         <MobileNav aria-hidden={!this.state.showMenu}>
-          <div ref={this.mobileNav} tabIndex={-1} />
           <HeaderBarFlatListItem>
+            <div ref={this.mobileNav} tabIndex={-1} />
             <MainNavLink selected={currentPathname === '/'} onClick={this.handleHideMenu} to="/">
               Home
             </MainNavLink>
