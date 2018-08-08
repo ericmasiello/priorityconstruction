@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import HeaderBar from './HeaderBar';
 import FlatList from './FlatList';
 import MenuIcon from './MenuIcon';
+import CloseIcon from './CloseIcon';
 import Logo from './Logo';
 import MainNavLink from './MainNavLink';
 import { pxToRem } from '../styles/utils';
@@ -120,7 +121,7 @@ class PageHeaderBar extends React.Component {
           ))}
         </MobileNav>
         <InvisibleButton onClick={this.state.showMenu ? this.handleHideMenu : this.handleShowMenu}>
-          <MenuIcon />
+          {this.state.showMenu ? <CloseIcon /> : <MenuIcon />}
         </InvisibleButton>
         <DesktopNav>
           {links.map(link => (
@@ -143,10 +144,14 @@ export default styled(PageHeaderBar)`
     display: block;
   }
 
-  ${MenuIcon} {
+  ${MenuIcon}, ${CloseIcon} {
     fill: ${COLORS.highlight3};
     width: ${pxToRem(20)};
     height: ${pxToRem(20)};
+  }
+
+  ${CloseIcon} {
+    stroke: ${COLORS.highlight3};
   }
 
   @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
