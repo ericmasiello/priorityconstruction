@@ -67,7 +67,7 @@ const links = [
     children: 'About',
   },
   {
-    to: '/placeholder',
+    to: '/gallery',
     children: 'Project Gallery',
   },
   {
