@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Link from 'gatsby-link';
+import tinyColor from 'tinycolor2';
 import PageContainer from '../components/PageContainer';
 import List from '../components/List';
 import GatsbyImage from '../components/GatsbyImage';
 import * as CustomPropTypes from '../propTypes';
 import { composeGalleryLandingMedia } from '../utils/gallery';
+import { BODY_WEIGHTS } from '../styles/vars';
 
 const LandingGallery = List.extend`
   display: grid;
@@ -15,6 +19,61 @@ const LandingGallery = List.extend`
 LandingGallery.Item = List.Item.extend`
   &:not(:last-child) {
     margin-bottom: 0;
+  }
+`;
+
+const GalleryItem = styled(Link)`
+  position: relative;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+
+  &:not(:last-child) {
+    margin-bottom: 0;
+  }
+
+  .gatsby-image-outer-wrapper {
+    height: 100%;
+    width: 100%;
+  }
+`;
+
+const GalleryItemContent = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  p,
+  h4 {
+    margin-bottom: 0;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+
+    background-color: ${tinyColor('#fff')
+      .setAlpha(0.6)
+      .toRgbString()};
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+    font-weight: ${BODY_WEIGHTS.medium};
+  }
+
+  h4 {
+    text-transform: uppercase;
+  }
+`;
+
+const GalleryImage = GatsbyImage.extend`
+  height: 100%;
+  z-index: 1;
+  transition: transform 3s;
+
+  &:hover {
+    transform: scale(1.15);
   }
 `;
 
@@ -36,10 +95,14 @@ const GalleryPage = ({ data }) => {
       <LandingGallery>
         {landingGallery.map(media => (
           <LandingGallery.Item key={media.imageId}>
-            <GatsbyImage sizes={media.sizes} />
-            <p>{media.name}</p>
-            <p>{media.location}</p>
-            <div dangerouslySetInnerHTML={{ __html: media.description }} />
+            <GalleryItem to="#">
+              <GalleryImage sizes={media.sizes} />
+              <GalleryItemContent>
+                <h4>{media.name}</h4>
+                <p>{media.location}</p>
+                <div dangerouslySetInnerHTML={{ __html: media.description }} />
+              </GalleryItemContent>
+            </GalleryItem>
           </LandingGallery.Item>
         ))}
       </LandingGallery>

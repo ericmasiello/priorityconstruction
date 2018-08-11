@@ -24,7 +24,8 @@ export const edgesToGallery = (edges, primaryMatch = '') => {
   };
 };
 
-export const composeGalleryLandingMedia = (images, contentMeta) => images.reduce((acc, image) => {
+export const composeGalleryLandingMedia = (images, contentMeta) =>
+  images.reduce((acc, image) => {
     // check to see if each image exists in the contentMeta...
     const matchContent = contentMeta.find(
       meta => !!image.node.id.match(meta.node.frontmatter.coverPhoto),
