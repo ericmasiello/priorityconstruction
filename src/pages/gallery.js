@@ -22,22 +22,6 @@ LandingGallery.Item = List.Item.extend`
   }
 `;
 
-const GalleryItem = styled(Link)`
-  position: relative;
-  display: flex;
-  height: 100%;
-  overflow: hidden;
-
-  &:not(:last-child) {
-    margin-bottom: 0;
-  }
-
-  .gatsby-image-outer-wrapper {
-    height: 100%;
-    width: 100%;
-  }
-`;
-
 const GalleryItemContent = styled.div`
   position: absolute;
   bottom: 0;
@@ -48,6 +32,8 @@ const GalleryItemContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  transition: transform 0.3s ease-in;
+  transform: translateY(100%);
 
   p,
   h4 {
@@ -67,6 +53,29 @@ const GalleryItemContent = styled.div`
   }
 `;
 
+const GalleryItem = styled(Link)`
+  position: relative;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+
+  &:not(:last-child) {
+    margin-bottom: 0;
+  }
+
+  .gatsby-image-outer-wrapper {
+    height: 100%;
+    width: 100%;
+  }
+
+  &:hover,
+  &:focus {
+    ${GalleryItemContent} {
+      transform: translateY(0);
+    }
+  }
+`;
+
 const GalleryImage = GatsbyImage.extend`
   height: 100%;
   z-index: 1;
@@ -77,14 +86,14 @@ const GalleryImage = GatsbyImage.extend`
   }
 `;
 
-const GalleryPage = ({ data }) => {
+const GalleryPage = ({ className, data }) => {
   if (!data.gallery || !data.galleryMeta) {
     return null;
   }
 
   const landingGallery = composeGalleryLandingMedia(data.gallery.edges, data.galleryMeta.edges);
   return (
-    <PageContainer tag="section">
+    <PageContainer tag="section" className={className}>
       {/* TODO: move to markdown */}
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum lacus quis magna
@@ -95,7 +104,7 @@ const GalleryPage = ({ data }) => {
       <LandingGallery>
         {landingGallery.map(media => (
           <LandingGallery.Item key={media.imageId}>
-            <GalleryItem to="#">
+            <GalleryItem to="/">
               <GalleryImage sizes={media.sizes} />
               <GalleryItemContent>
                 <h4>{media.name}</h4>
@@ -117,9 +126,12 @@ GalleryPage.propTypes = {
     gallery: CustomPropTypes.AllImageSharp,
     galleryMeta: CustomPropTypes.AllGalleryMeta,
   }).isRequired,
+  className: PropTypes.string,
 };
 
-export default GalleryPage;
+export default styled(GalleryPage)`
+  padding-top: 1rem;
+`;
 
 export const query = graphql`
   query GalleryMeta {
