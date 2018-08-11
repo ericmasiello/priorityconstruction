@@ -23,3 +23,23 @@ export const edgesToGallery = (edges, primaryMatch = '') => {
     additionalImages: edges.map(mapEdgeToNode),
   };
 };
+
+export const composeGalleryLandingMedia = (images, contentMeta) => images.reduce((acc, image) => {
+    // check to see if each image exists in the contentMeta...
+    const matchContent = contentMeta.find(
+      meta => !!image.node.id.match(meta.node.frontmatter.coverPhoto),
+    );
+    if (!matchContent) {
+      return acc;
+    }
+    const media = Object.assign({
+      location: matchContent.node.frontmatter.location,
+      name: matchContent.node.frontmatter.name,
+      description: matchContent.node.html,
+      imageId: image.node.id,
+      sizes: image.node.sizes,
+    });
+
+    acc.push(media);
+    return acc;
+  }, []);

@@ -23,6 +23,23 @@ export const Markdown = PropTypes.shape({
   html: PropTypes.string.isRequired,
 });
 
+export const GalleryMeta = PropTypes.shape({
+  frontmatter: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.string,
+    coverPhoto: PropTypes.string.isRequired,
+  }),
+  html: PropTypes.string.isRequired,
+});
+
+export const AllGalleryMeta = PropTypes.shape({
+  edges: PropTypes.arrayOf(
+    PropTypes.shape({
+      node: GalleryMeta,
+    }),
+  ),
+});
+
 export const Testimonial = PropTypes.shape({
   frontmatter: PropTypes.shape({
     author: PropTypes.string.isRequired,
