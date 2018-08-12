@@ -1,7 +1,7 @@
 ---
 name: "Georgetown"
 location: "Washington, DC"
-coverPhoto: "photos/gallery/georgetown/index.jpg"
+coverPhoto: "georgetown/index.jpg"
 ---
 
 Georgetown lorem ipsum
