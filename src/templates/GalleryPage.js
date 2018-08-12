@@ -6,32 +6,146 @@ import Gallery from '../components/Gallery';
 import Type1 from '../components/Type1';
 import Type5 from '../components/Type5';
 import GalleryItem from '../components/GalleryItem';
+import GatsbyImage from '../components/GatsbyImage';
+import FlatList from '../components/FlatList';
+import CloseIcon from '../components/CloseIcon';
+import InvisibleButton from '../components/InvisibleButton';
 import * as CustomPropTypes from '../propTypes';
 import { pxToRem } from '../styles/utils';
 
-const GalleryPage = ({ className, data }) => {
-  if (!data.images) {
-    return null;
+const GalleryOverlay = styled.article`
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.95);
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .gatsby-image-outer-wrapper {
+    flex: 1;
   }
-  return (
-    <PageContainer tag="section" className={className}>
-      <hgroup>
-        <Type1>{data.meta.frontmatter.name}</Type1>
-        <Type5>{data.meta.frontmatter.location}</Type5>
-      </hgroup>
-      <Gallery>
-        {data.images.edges.map(edge => (
-          <Gallery.Item key={edge.node.id}>
-            {/* TODO: make this component accept tag so you can make it a link or not */}
-            <GalleryItem>
-              <GalleryItem.Image sizes={edge.node.sizes} />
-            </GalleryItem>
-          </Gallery.Item>
-        ))}
-      </Gallery>
-    </PageContainer>
-  );
-};
+`;
+
+const GalleryOverlayPrimaryImage = GatsbyImage.extend`
+  height: 100%;
+`;
+
+const GalleryOverviewList = FlatList.extend`
+  display: grid;
+  grid-template-columns: repeat(10, minmax(150px, 1fr));
+  grid-gap: 0.5rem;
+  overflow: scroll;
+  padding: 0.5rem;
+
+  .gatsby-image-outer-wrapper {
+    height: 100%;
+  }
+`;
+
+GalleryOverviewList.Item = FlatList.Item.extend`
+  &:not(:last-child) {
+    margin-right: 0;
+  }
+`;
+
+const GalleryOverviewTileImage = GatsbyImage.extend`
+  height: 100%;
+`;
+
+const GalleryOverviewCloseButton = InvisibleButton.extend`
+  position: absolute;
+  z-index: 3;
+  top: 1rem;
+  right: 1rem;
+  width: ${pxToRem(30)};
+  height: ${pxToRem(30)};
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  ${CloseIcon} {
+    stroke: #fff;
+  }
+`;
+
+class GalleryPage extends React.Component {
+  state = { selectedIndex: null };
+
+  handleSelectImageByIndex = selectedIndex => () => {
+    this.setState({ selectedIndex });
+  };
+
+  handleResetSelection = () => this.setState({ selectedIndex: null });
+
+  selectedImage = () => {
+    if (this.state.selectedIndex === null) {
+      return {
+        sizes: {},
+      };
+    }
+
+    const edge = this.props.data.images.edges[this.state.selectedIndex];
+    return edge.node;
+  };
+
+  render() {
+    const { className, data } = this.props;
+
+    if (!data.images) {
+      return null;
+    }
+    return (
+      <PageContainer tag="section" className={className}>
+        {this.state.selectedIndex === null && (
+          <React.Fragment>
+            <hgroup>
+              <Type1>{data.meta.frontmatter.name}</Type1>
+              <Type5>{data.meta.frontmatter.location}</Type5>
+            </hgroup>
+            <Gallery>
+              {data.images.edges.map((edge, i) => (
+                <Gallery.Item key={edge.node.id}>
+                  <GalleryItem onClick={this.handleSelectImageByIndex(i)}>
+                    <GalleryItem.Image sizes={edge.node.sizes} />
+                  </GalleryItem>
+                </Gallery.Item>
+              ))}
+            </Gallery>
+          </React.Fragment>
+        )}
+        {this.state.selectedIndex !== null && (
+          <GalleryOverlay>
+            <GalleryOverviewCloseButton onClick={this.handleResetSelection}>
+              <CloseIcon />
+            </GalleryOverviewCloseButton>
+            <GalleryOverlayPrimaryImage sizes={this.selectedImage().sizes} />
+            <GalleryOverviewList>
+              {data.images.edges.map((edge, i) => (
+                <GalleryOverviewList.Item
+                  key={edge.node.id}
+                  onClick={this.handleSelectImageByIndex(i)}
+                >
+                  <GalleryOverviewTileImage sizes={edge.node.sizes} />
+                </GalleryOverviewList.Item>
+              ))}
+            </GalleryOverviewList>
+          </GalleryOverlay>
+        )}
+      </PageContainer>
+    );
+  }
+}
+
+/*
+<GalleryOverviewList>
+              {data.images.edges.map((edge, i) => (
+                <GalleryOverviewList.Item key={edge.node.id}>
+                  <GatsbyImage sizes={edge.node.sizes} />
+                </GalleryOverviewList.Item>
+              ))}
+            </GalleryOverviewList>
+*/
 
 GalleryPage.propTypes = {
   data: PropTypes.shape({

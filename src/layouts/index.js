@@ -162,6 +162,7 @@ Layout.displayName = 'Layout';
 export default styled(Layout)`
   display: flex;
   flex-direction: column;
+  position: relative;
 
   ${PageHeaderBar}, ${Hero}, ${LayoutChildren}, ${ComposedFooter} {
     order: 1;
