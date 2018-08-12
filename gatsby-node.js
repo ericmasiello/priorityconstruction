@@ -43,6 +43,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         gallery: allMarkdownRemark(filter: { id: { regex: "/gallery/" } }) {
           edges {
             node {
+              frontmatter {
+                imageDir
+              }
               fields {
                 slug
               }
@@ -58,6 +61,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           context: {
             // Data passed to context is available in page queries as GraphQL variables.
             slug: node.fields.slug,
+            imageDir: node.frontmatter.imageDir,
           },
         });
       });
