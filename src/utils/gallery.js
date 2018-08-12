@@ -34,6 +34,8 @@ export const composeGalleryLandingMedia = (images, contentMeta) =>
       return acc;
     }
     const media = Object.assign({
+      id: matchContent.node.id,
+      href: matchContent.node.fields.slug,
       location: matchContent.node.frontmatter.location,
       name: matchContent.node.frontmatter.name,
       description: matchContent.node.html,

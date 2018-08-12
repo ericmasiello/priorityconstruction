@@ -7,12 +7,27 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
     const slug = createFilePath({
       node,
       getNode,
-      basePath: 'posts',
+      basePath: 'pages',
     });
+
+    /*
+    * Creates a unique slug for each MarkdownRemark node
+    * and attaches it as a queryable property from GraphQL
+    * 
+    * node {
+    *   frontmatter {
+    *     name
+    *   }
+    *   html
+    *   fields {
+    *     slug
+    *   }
+    * }
+    */
     createNodeField({
       node,
       name: 'slug',
-      value: `/posts${slug}`,
+      value: slug,
     });
   }
 };
@@ -22,7 +37,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   return new Promise(resolve => {
     graphql(`
       {
-        allMarkdownRemark {
+        gallery: allMarkdownRemark(filter: { id: { regex: "/gallery/" } }) {
           edges {
             node {
               fields {
@@ -33,11 +48,12 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
       }
     `).then(result => {
-      result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      result.data.gallery.edges.forEach(({ node }) => {
         createPage({
           path: node.fields.slug,
-          component: path.resolve('./src/posts/PostPage.js'),
+          component: path.resolve(`./src/templates/GalleryPage.js`),
           context: {
+            // Data passed to context is available in page queries as GraphQL variables.
             slug: node.fields.slug,
           },
         });

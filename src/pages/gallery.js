@@ -103,8 +103,8 @@ const GalleryPage = ({ className, data }) => {
       </p>
       <LandingGallery>
         {landingGallery.map(media => (
-          <LandingGallery.Item key={media.imageId}>
-            <GalleryItem to="/">
+          <LandingGallery.Item key={media.id}>
+            <GalleryItem to={media.href}>
               <GalleryImage sizes={media.sizes} />
               <GalleryItemContent>
                 <h4>{media.name}</h4>
@@ -142,12 +142,16 @@ export const query = graphql`
     ) {
       edges {
         node {
+          id
           frontmatter {
             name
             location
             coverPhoto
           }
           html
+          fields {
+            slug
+          }
         }
       }
     }
