@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Link from 'gatsby-link';
 import PageContainer from '../components/PageContainer';
 import Gallery from '../components/Gallery';
 import GalleryItem from '../components/GalleryItem';
@@ -18,7 +19,7 @@ const GalleryPage = ({ className, data }) => {
       <Gallery>
         {landingGallery.map(media => (
           <Gallery.Item key={media.id}>
-            <GalleryItem to={media.href}>
+            <GalleryItem tag={Link} to={media.href}>
               <GalleryItem.Image sizes={media.sizes} />
               <GalleryItem.Content>
                 <h4>{media.name}</h4>

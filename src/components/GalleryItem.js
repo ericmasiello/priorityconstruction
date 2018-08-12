@@ -1,8 +1,9 @@
+import React from 'react';
 import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
-import Link from 'gatsby-link';
 import GatsbyImage from '../components/GatsbyImage';
 import { BODY_WEIGHTS } from '../styles/vars';
+import * as CustomPropTypes from '../propTypes';
 
 const Content = styled.div`
   position: absolute;
@@ -35,7 +36,19 @@ const Content = styled.div`
   }
 `;
 
-const GalleryItem = styled(Link)`
+const GalleryItem = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
+
+GalleryItem.displayName = 'GalleryItem';
+
+GalleryItem.propTypes = {
+  tag: CustomPropTypes.Tag,
+};
+
+GalleryItem.defaultProps = {
+  tag: 'div',
+};
+
+const StyledGalleryItem = styled(GalleryItem)`
   position: relative;
   display: flex;
   height: 100%;
@@ -68,7 +81,7 @@ const Image = GatsbyImage.extend`
   }
 `;
 
-GalleryItem.Image = Image;
-GalleryItem.Content = Content;
+StyledGalleryItem.Image = Image;
+StyledGalleryItem.Content = Content;
 
-export default GalleryItem;
+export default StyledGalleryItem;
