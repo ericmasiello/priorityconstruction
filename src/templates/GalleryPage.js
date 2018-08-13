@@ -13,6 +13,8 @@ import InvisibleButton from '../components/InvisibleButton';
 import * as CustomPropTypes from '../propTypes';
 import { pxToRem } from '../styles/utils';
 
+const GalleryOverlayTileImageHeight = pxToRem(120);
+
 const GalleryOverlay = styled.article`
   position: absolute;
   background-color: rgba(0, 0, 0, 0.95);
@@ -20,12 +22,12 @@ const GalleryOverlay = styled.article`
   left: 0;
   right: 0;
   z-index: 999;
-  display: flex;
-  flex-direction: column;
   height: 100vh;
+  display: grid;
+  grid-template-rows: calc(100vh - ${GalleryOverlayTileImageHeight}) ${GalleryOverlayTileImageHeight};
 
   .gatsby-image-outer-wrapper {
-    flex: 1;
+    height: 100%;
   }
 `;
 
@@ -37,11 +39,20 @@ const GalleryOverviewList = FlatList.extend`
   display: grid;
   grid-template-columns: repeat(10, minmax(150px, 1fr));
   grid-gap: 0.5rem;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   padding: 0.5rem;
 
   .gatsby-image-outer-wrapper {
     height: 100%;
+  }
+
+  ${GatsbyImage} {
+    height: 100%;
+
+    div {
+      padding-bottom: 0 !important;
+    }
   }
 `;
 
@@ -49,10 +60,6 @@ GalleryOverviewList.Item = FlatList.Item.extend`
   &:not(:last-child) {
     margin-right: 0;
   }
-`;
-
-const GalleryOverviewTileImage = GatsbyImage.extend`
-  height: 100%;
 `;
 
 const GalleryOverviewCloseButton = InvisibleButton.extend`
@@ -64,13 +71,14 @@ const GalleryOverviewCloseButton = InvisibleButton.extend`
   height: ${pxToRem(30)};
   background-color: rgba(0, 0, 0, 0.1);
   padding: 0.5rem;
+
   ${CloseIcon} {
     stroke: #fff;
   }
 `;
 
 class GalleryPage extends React.Component {
-  state = { selectedIndex: null };
+  state = { selectedIndex: 0 };
 
   handleSelectImageByIndex = selectedIndex => () => {
     this.setState({ selectedIndex });
@@ -126,7 +134,7 @@ class GalleryPage extends React.Component {
                   key={edge.node.id}
                   onClick={this.handleSelectImageByIndex(i)}
                 >
-                  <GalleryOverviewTileImage sizes={edge.node.sizes} />
+                  <GatsbyImage sizes={edge.node.sizes} />
                 </GalleryOverviewList.Item>
               ))}
             </GalleryOverviewList>
