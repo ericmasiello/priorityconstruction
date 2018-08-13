@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import PageContainer from '../components/PageContainer';
@@ -80,11 +81,21 @@ const GalleryOverviewCloseButton = InvisibleButton.extend`
 class GalleryPage extends React.Component {
   state = { selectedIndex: 0 };
 
-  handleSelectImageByIndex = selectedIndex => () => {
-    this.setState({ selectedIndex });
+  getPortalNode = () => {
+    let elm = document.getElementById('overlay');
+    if (!elm) {
+      elm = document.createElement('div');
+      elm.id = 'overlay';
+      document.body.appendChild(elm);
+    }
+    return elm;
   };
 
   handleResetSelection = () => this.setState({ selectedIndex: null });
+
+  handleSelectImageByIndex = selectedIndex => () => {
+    this.setState({ selectedIndex });
+  };
 
   selectedImage = () => {
     if (this.state.selectedIndex === null) {
@@ -122,24 +133,26 @@ class GalleryPage extends React.Component {
             </Gallery>
           </React.Fragment>
         )}
-        {this.state.selectedIndex !== null && (
-          <GalleryOverlay>
-            <GalleryOverviewCloseButton onClick={this.handleResetSelection}>
-              <CloseIcon />
-            </GalleryOverviewCloseButton>
-            <GalleryOverlayPrimaryImage sizes={this.selectedImage().sizes} />
-            <GalleryOverviewList>
-              {data.images.edges.map((edge, i) => (
-                <GalleryOverviewList.Item
-                  key={edge.node.id}
-                  onClick={this.handleSelectImageByIndex(i)}
-                >
-                  <GatsbyImage sizes={edge.node.sizes} />
-                </GalleryOverviewList.Item>
-              ))}
-            </GalleryOverviewList>
-          </GalleryOverlay>
-        )}
+        {this.state.selectedIndex !== null &&
+          ReactDOM.createPortal(
+            <GalleryOverlay>
+              <GalleryOverviewCloseButton onClick={this.handleResetSelection}>
+                <CloseIcon />
+              </GalleryOverviewCloseButton>
+              <GalleryOverlayPrimaryImage sizes={this.selectedImage().sizes} />
+              <GalleryOverviewList>
+                {data.images.edges.map((edge, i) => (
+                  <GalleryOverviewList.Item
+                    key={edge.node.id}
+                    onClick={this.handleSelectImageByIndex(i)}
+                  >
+                    <GatsbyImage sizes={edge.node.sizes} />
+                  </GalleryOverviewList.Item>
+                ))}
+              </GalleryOverviewList>
+            </GalleryOverlay>,
+            this.getPortalNode(),
+          )}
       </PageContainer>
     );
   }
