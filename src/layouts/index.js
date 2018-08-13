@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
@@ -60,6 +61,23 @@ class Layout extends React.Component {
     },
   };
 
+  getPortalNode = () => {
+    let elm = document.getElementById('overlay');
+    if (!elm) {
+      elm = document.createElement('div');
+      elm.id = 'overlay';
+      document.body.appendChild(elm);
+    }
+    return elm;
+  };
+
+  displayPortal = (Component, props) => {
+    /* eslint-disable react/no-unused-state */
+    this.setState({ showPortal: true, portalElm: <Component {...props} /> });
+  };
+
+  hidePortal = () => this.setState({ showPortal: false, portalElm: null });
+
   /* eslint-disable react/no-unused-state */
   state = {
     logo: this.props.data.logo,
@@ -70,6 +88,10 @@ class Layout extends React.Component {
       .isFullHeight,
     background: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).background,
     navRef: React.createRef(),
+    showPortal: false,
+    portalElm: null,
+    displayPortal: this.displayPortal,
+    hidePortal: this.hidePortal,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -88,43 +110,46 @@ class Layout extends React.Component {
 
     return (
       <LayoutContext.Provider value={this.state}>
-        <div className={className}>
-          <Helmet
-            title={title}
-            meta={[
-              { name: 'description', content: desc },
-              { name: 'keywords', content: keywords.join(', ') },
-            ]}
-          />
-          <PageHeaderBar
-            navRef={this.state.navRef}
-            logo={this.state.logo}
-            currentPathname={this.props.location.pathname}
-          />
-          <TopBar>
-            <Small tag={FlatList}>
-              <FlatList.Item>
-                <TopBarLink href={`tel:${phone}`}>
-                  <PhoneIcon /> {phone}
-                </TopBarLink>
-              </FlatList.Item>
-              <FlatList.Item>
-                <TopBarLink href={`mailto:${email}`}>
-                  <MailIcon /> {email}
-                </TopBarLink>
-              </FlatList.Item>
-            </Small>
-          </TopBar>
-          <Hero
-            selectedImage={this.state.background}
-            bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
-            isFullHeight={this.state.isFullHeight}
-          >
-            {this.state.heroChildren}
-          </Hero>
-          <LayoutChildren>{children()}</LayoutChildren>
-          <ComposedFooter {...address} logo={data.logo} phone={phone} fax={fax} email={email} />
-        </div>
+        {this.state.showPortal === false && (
+          <div className={className}>
+            <Helmet
+              title={title}
+              meta={[
+                { name: 'description', content: desc },
+                { name: 'keywords', content: keywords.join(', ') },
+              ]}
+            />
+            <PageHeaderBar
+              navRef={this.state.navRef}
+              logo={this.state.logo}
+              currentPathname={this.props.location.pathname}
+            />
+            <TopBar>
+              <Small tag={FlatList}>
+                <FlatList.Item>
+                  <TopBarLink href={`tel:${phone}`}>
+                    <PhoneIcon /> {phone}
+                  </TopBarLink>
+                </FlatList.Item>
+                <FlatList.Item>
+                  <TopBarLink href={`mailto:${email}`}>
+                    <MailIcon /> {email}
+                  </TopBarLink>
+                </FlatList.Item>
+              </Small>
+            </TopBar>
+            <Hero
+              selectedImage={this.state.background}
+              bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
+              isFullHeight={this.state.isFullHeight}
+            >
+              {this.state.heroChildren}
+            </Hero>
+            <LayoutChildren>{children()}</LayoutChildren>
+            <ComposedFooter {...address} logo={data.logo} phone={phone} fax={fax} email={email} />
+          </div>
+        )}
+        {this.state.showPortal && ReactDOM.createPortal(this.state.portalElm, this.getPortalNode())}
       </LayoutContext.Provider>
     );
   }
