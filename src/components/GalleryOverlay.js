@@ -52,6 +52,11 @@ const GalleryOverviewCloseButton = InvisibleButton.extend`
   }
 `;
 
+const GalleryTileButton = InvisibleButton.extend`
+  height: 100%;
+  width: 100%;
+`;
+
 // TODO: add a white border around the selected image
 export class GalleryOverlay extends React.Component {
   static displayName = 'GalleryOverlay';
@@ -117,8 +122,10 @@ export class GalleryOverlay extends React.Component {
         <GalleryOverlayPrimaryImage sizes={this.selectedImage().sizes} />
         <GalleryOverviewList>
           {images.edges.map((edge, i) => (
-            <GalleryOverviewList.Item key={edge.node.id} onClick={this.handleSelectImageByIndex(i)}>
-              <GatsbyImage sizes={edge.node.sizes} />
+            <GalleryOverviewList.Item key={edge.node.id}>
+              <GalleryTileButton onClick={this.handleSelectImageByIndex(i)}>
+                <GatsbyImage sizes={edge.node.sizes} />
+              </GalleryTileButton>
             </GalleryOverviewList.Item>
           ))}
         </GalleryOverviewList>
