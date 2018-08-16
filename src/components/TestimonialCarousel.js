@@ -154,6 +154,7 @@ export default styled(TestimonialCarousel)`
   color: #fff;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  overflow: hidden;
 
   @media (min-width: ${pxToRem(BREAKPOINT)}) {
     padding-left: ${HORIZONTAL_PADDING}rem;
