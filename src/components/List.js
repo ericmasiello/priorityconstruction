@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import * as CustomPropTypes from '../propTypes';
 
 export const List = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
 
 List.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  tag: CustomPropTypes.Tag,
 };
 
 List.defaultProps = {
@@ -17,7 +17,7 @@ List.displayName = 'List';
 export const ListItem = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
 
 ListItem.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  tag: CustomPropTypes.Tag,
 };
 
 ListItem.defaultProps = {

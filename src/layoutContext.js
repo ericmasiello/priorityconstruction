@@ -8,20 +8,30 @@ const LayoutContext = React.createContext({
   isFullHeight: false,
   background: {},
   navRef: null,
+  toggleElement: null,
+  displayLayoutElement: () => {},
+  hideLayoutElement: () => {},
+  scrollX: null,
+  scrollY: null,
 });
 
 export const withLayoutContext = Component => {
-  const Wrapper = ({ innerRef, ...rest }) => (
-    <LayoutContext.Consumer>
-      {layoutContext => <Component ref={innerRef} {...rest} {...layoutContext} />}
-    </LayoutContext.Consumer>
-  );
+  class Wrapper extends React.Component {
+    static displayName = `withLayoutContext${Component.displayName || Component.name}`;
 
-  Wrapper.propTypes = {
-    innerRef: PropTypes.func,
-  };
+    static propTypes = {
+      innerRef: PropTypes.func,
+    };
 
-  Wrapper.displayName = `withLayoutContext${Component.displayName || Component.name}`;
+    render() {
+      const { innerRef, ...rest } = this.props;
+      return (
+        <LayoutContext.Consumer>
+          {layoutContext => <Component ref={innerRef} {...rest} {...layoutContext} />}
+        </LayoutContext.Consumer>
+      );
+    }
+  }
 
   hoistNonReactStatics(Wrapper, Component);
 

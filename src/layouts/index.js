@@ -60,6 +60,19 @@ class Layout extends React.Component {
     },
   };
 
+  displayLayoutElement = (Component, props) => {
+    this.setState({
+      toggleElement: <Component {...props} />,
+      scrollX: window.pageXOffset,
+      scrollY: window.pageYOffset,
+    });
+  };
+
+  hideLayoutElement = () =>
+    this.setState({ toggleElement: null }, () =>
+      window.scrollTo(this.state.scrollX, this.state.scrollY),
+    );
+
   /* eslint-disable react/no-unused-state */
   state = {
     logo: this.props.data.logo,
@@ -70,6 +83,9 @@ class Layout extends React.Component {
       .isFullHeight,
     background: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).background,
     navRef: React.createRef(),
+    toggleElement: null,
+    displayLayoutElement: this.displayLayoutElement,
+    hideLayoutElement: this.hideLayoutElement,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -88,43 +104,46 @@ class Layout extends React.Component {
 
     return (
       <LayoutContext.Provider value={this.state}>
-        <div className={className}>
-          <Helmet
-            title={title}
-            meta={[
-              { name: 'description', content: desc },
-              { name: 'keywords', content: keywords.join(', ') },
-            ]}
-          />
-          <PageHeaderBar
-            navRef={this.state.navRef}
-            logo={this.state.logo}
-            currentPathname={this.props.location.pathname}
-          />
-          <TopBar>
-            <Small tag={FlatList}>
-              <FlatList.Item>
-                <TopBarLink href={`tel:${phone}`}>
-                  <PhoneIcon /> {phone}
-                </TopBarLink>
-              </FlatList.Item>
-              <FlatList.Item>
-                <TopBarLink href={`mailto:${email}`}>
-                  <MailIcon /> {email}
-                </TopBarLink>
-              </FlatList.Item>
-            </Small>
-          </TopBar>
-          <Hero
-            selectedImage={this.state.background}
-            bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
-            isFullHeight={this.state.isFullHeight}
-          >
-            {this.state.heroChildren}
-          </Hero>
-          <LayoutChildren>{children()}</LayoutChildren>
-          <ComposedFooter {...address} logo={data.logo} phone={phone} fax={fax} email={email} />
-        </div>
+        {this.state.toggleElement === null && (
+          <div className={className}>
+            <Helmet
+              title={title}
+              meta={[
+                { name: 'description', content: desc },
+                { name: 'keywords', content: keywords.join(', ') },
+              ]}
+            />
+            <PageHeaderBar
+              navRef={this.state.navRef}
+              logo={this.state.logo}
+              currentPathname={this.props.location.pathname}
+            />
+            <TopBar>
+              <Small tag={FlatList}>
+                <FlatList.Item>
+                  <TopBarLink href={`tel:${phone}`}>
+                    <PhoneIcon /> {phone}
+                  </TopBarLink>
+                </FlatList.Item>
+                <FlatList.Item>
+                  <TopBarLink href={`mailto:${email}`}>
+                    <MailIcon /> {email}
+                  </TopBarLink>
+                </FlatList.Item>
+              </Small>
+            </TopBar>
+            <Hero
+              selectedImage={this.state.background}
+              bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
+              isFullHeight={this.state.isFullHeight}
+            >
+              {this.state.heroChildren}
+            </Hero>
+            <LayoutChildren>{children()}</LayoutChildren>
+            <ComposedFooter {...address} logo={data.logo} phone={phone} fax={fax} email={email} />
+          </div>
+        )}
+        {this.state.toggleElement}
       </LayoutContext.Provider>
     );
   }
@@ -162,6 +181,7 @@ Layout.displayName = 'Layout';
 export default styled(Layout)`
   display: flex;
   flex-direction: column;
+  position: relative;
 
   ${PageHeaderBar}, ${Hero}, ${LayoutChildren}, ${ComposedFooter} {
     order: 1;

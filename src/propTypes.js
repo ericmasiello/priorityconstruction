@@ -11,16 +11,34 @@ export const ImageSharp = PropTypes.shape({
   }),
 });
 
+export const Edge = PropTypes.shape({
+  node: ImageSharp,
+});
+
 export const AllImageSharp = PropTypes.shape({
-  edges: PropTypes.arrayOf(
-    PropTypes.shape({
-      node: ImageSharp,
-    }),
-  ),
+  edges: PropTypes.arrayOf(Edge),
 });
 
 export const Markdown = PropTypes.shape({
   html: PropTypes.string.isRequired,
+});
+
+export const GalleryMeta = PropTypes.shape({
+  frontmatter: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.string,
+    coverPhoto: PropTypes.string,
+    imageDir: PropTypes.string,
+  }),
+  html: PropTypes.string.isRequired,
+});
+
+export const AllGalleryMeta = PropTypes.shape({
+  edges: PropTypes.arrayOf(
+    PropTypes.shape({
+      node: GalleryMeta,
+    }),
+  ),
 });
 
 export const Testimonial = PropTypes.shape({
