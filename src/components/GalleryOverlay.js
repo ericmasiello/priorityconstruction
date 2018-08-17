@@ -66,6 +66,7 @@ export class GalleryOverlay extends React.Component {
     selectedIndex: PropTypes.number,
     onResetSelection: PropTypes.func,
     onSelectImage: PropTypes.func,
+    onClose: PropTypes.func,
   };
 
   static defaultProps = {
@@ -74,10 +75,18 @@ export class GalleryOverlay extends React.Component {
 
   state = { selectedIndex: this.props.selectedIndex || 0 };
 
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleClose, false);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedIndex !== this.state.selectedIndex) {
       this.setState({ selectedIndex: nextProps.selectedIndex });
     }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleClose, false);
   }
 
   handleSelectImageByIndex = selectedIndex => () => {
@@ -103,6 +112,12 @@ export class GalleryOverlay extends React.Component {
 
     const edge = this.props.images.edges[this.state.selectedIndex];
     return edge.node;
+  };
+
+  handleClose = event => {
+    if (event.keyCode === 27 && this.props.onClose) {
+      this.props.onClose();
+    }
   };
 
   render() {

@@ -19,14 +19,15 @@ class GalleryPage extends React.Component {
       images: CustomPropTypes.AllImageSharp,
     }).isRequired,
     className: PropTypes.string,
-    displayPortal: PropTypes.func.isRequired,
-    hidePortal: PropTypes.func.isRequired,
+    displayLayoutElement: PropTypes.func.isRequired,
+    hideLayoutElement: PropTypes.func.isRequired,
   };
 
   handleSelectImageByIndex = selectedIndex => () => {
-    this.props.displayPortal(GalleryOverlay, {
+    this.props.displayLayoutElement(GalleryOverlay, {
       selectedIndex,
-      onResetSelection: this.props.hidePortal,
+      onClose: this.props.hideLayoutElement,
+      onResetSelection: this.props.hideLayoutElement,
       images: this.props.data.images,
     });
   };

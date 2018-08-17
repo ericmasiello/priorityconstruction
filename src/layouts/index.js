@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
@@ -61,22 +60,18 @@ class Layout extends React.Component {
     },
   };
 
-  getPortalNode = () => {
-    let elm = document.getElementById('overlay');
-    if (!elm) {
-      elm = document.createElement('div');
-      elm.id = 'overlay';
-      document.body.appendChild(elm);
-    }
-    return elm;
+  displayLayoutElement = (Component, props) => {
+    this.setState({
+      toggleElement: <Component {...props} />,
+      scrollX: window.pageXOffset,
+      scrollY: window.pageYOffset,
+    });
   };
 
-  displayPortal = (Component, props) => {
-    /* eslint-disable react/no-unused-state */
-    this.setState({ showPortal: true, portalElm: <Component {...props} /> });
-  };
-
-  hidePortal = () => this.setState({ showPortal: false, portalElm: null });
+  hideLayoutElement = () =>
+    this.setState({ toggleElement: null }, () =>
+      window.scrollTo(this.state.scrollX, this.state.scrollY),
+    );
 
   /* eslint-disable react/no-unused-state */
   state = {
@@ -88,10 +83,9 @@ class Layout extends React.Component {
       .isFullHeight,
     background: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).background,
     navRef: React.createRef(),
-    showPortal: false,
-    portalElm: null,
-    displayPortal: this.displayPortal,
-    hidePortal: this.hidePortal,
+    toggleElement: null,
+    displayLayoutElement: this.displayLayoutElement,
+    hideLayoutElement: this.hideLayoutElement,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -110,7 +104,7 @@ class Layout extends React.Component {
 
     return (
       <LayoutContext.Provider value={this.state}>
-        {this.state.showPortal === false && (
+        {this.state.toggleElement === null && (
           <div className={className}>
             <Helmet
               title={title}
@@ -149,7 +143,7 @@ class Layout extends React.Component {
             <ComposedFooter {...address} logo={data.logo} phone={phone} fax={fax} email={email} />
           </div>
         )}
-        {this.state.showPortal && ReactDOM.createPortal(this.state.portalElm, this.getPortalNode())}
+        {this.state.toggleElement}
       </LayoutContext.Provider>
     );
   }

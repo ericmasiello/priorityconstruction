@@ -8,10 +8,11 @@ const LayoutContext = React.createContext({
   isFullHeight: false,
   background: {},
   navRef: null,
-  showPortal: false,
-  portalElm: null,
-  displayPortal: () => {},
-  hidePortal: () => {},
+  toggleElement: null,
+  displayLayoutElement: () => {},
+  hideLayoutElement: () => {},
+  scrollX: null,
+  scrollY: null,
 });
 
 export const withLayoutContext = Component => {
