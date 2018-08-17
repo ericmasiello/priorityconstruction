@@ -44,7 +44,7 @@ const GalleryOverviewCloseButton = InvisibleButton.extend`
   right: 1rem;
   width: ${pxToRem(30)};
   height: ${pxToRem(30)};
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   padding: 0.5rem;
 
   ${CloseIcon} {
@@ -55,9 +55,25 @@ const GalleryOverviewCloseButton = InvisibleButton.extend`
 const GalleryTileButton = InvisibleButton.extend`
   height: 100%;
   width: 100%;
+  position: relative;
+
+  &[aria-pressed='true'] {
+    &::before {
+      content: '';
+      position: absolute;
+      left: -0.25rem;
+      right: -0.25rem;
+      top: -0.25rem;
+      bottom: -0.25rem;
+      border: 0.25rem solid #fff;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
 `;
 
-// TODO: add a white border around the selected image
 export class GalleryOverlay extends React.Component {
   static displayName = 'GalleryOverlay';
   static propTypes = {
@@ -138,7 +154,10 @@ export class GalleryOverlay extends React.Component {
         <GalleryOverviewList>
           {images.edges.map((edge, i) => (
             <GalleryOverviewList.Item key={edge.node.id}>
-              <GalleryTileButton onClick={this.handleSelectImageByIndex(i)}>
+              <GalleryTileButton
+                onClick={this.handleSelectImageByIndex(i)}
+                aria-pressed={i === this.state.selectedIndex}
+              >
                 <GatsbyImage sizes={edge.node.sizes} />
               </GalleryTileButton>
             </GalleryOverviewList.Item>
