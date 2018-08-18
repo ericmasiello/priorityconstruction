@@ -1,11 +1,10 @@
-import styled from 'styled-components';
-import List, { ListItem } from './List';
+import List from './List';
 
-const FlatList = styled(List)`
+const FlatList = List.extend`
   display: flex;
 `;
 
-FlatList.Item = styled(ListItem)`
+FlatList.Item = List.Item.extend`
   &:not(:last-child) {
     margin-right: 0.5rem;
   }
