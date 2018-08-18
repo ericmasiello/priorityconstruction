@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ChevronIcon from './ChevronIcon';
-import PageContainer from './PageContainer';
 import Blockquote from './Blockquote';
 import InvisibleButton from './InvisibleButton';
 import Base from './Base';
-import { COLORS } from '../styles/vars';
+import { COLORS, PAGE_SPACING, MAX_CONTENT_WIDTH } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
-const HORIZONTAL_PADDING = 4;
 const BREAKPOINT = 550;
 
 const ShiftButton = InvisibleButton.extend`
@@ -36,18 +34,38 @@ const PreviousButton = ShiftButton.extend`
   }
 `;
 
-const TestimonialContainer = styled.div`
+const TestimonialContainer = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   @media (min-width: ${pxToRem(BREAKPOINT)}) {
     display: flex;
     transition: transform 0.7s;
 
     ${props => `
-      width: calc((100vw * ${props.count}) - ${HORIZONTAL_PADDING * 2 * props.count}rem);
+      width: calc(100vw * ${props.count});
       transform: translateX(${(100 / props.count) * -1 * props.index}%);
     `};
   }
+`;
+
+const TestimonialContainerItem = styled.li`
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  padding-left: ${pxToRem(PAGE_SPACING.horizontal)};
+  padding-right: ${pxToRem(PAGE_SPACING.horizontal)};
+
+  @media (min-width: ${pxToRem(BREAKPOINT)}) {
+    padding-left: ${pxToRem(60)};
+    padding-right: ${pxToRem(60)};
+  }
 
   ${Blockquote} {
+    max-width: ${pxToRem(MAX_CONTENT_WIDTH)};
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -121,7 +139,7 @@ export class TestimonialCarousel extends Component {
       return null;
     }
     return (
-      <PageContainer className={className} {...rest}>
+      <section className={className} {...rest}>
         {testimonials.length > 1 && (
           <PreviousButton aria-label="Previous testimonial" onClick={this.handleClickPrevious}>
             <ChevronIcon />
@@ -129,13 +147,18 @@ export class TestimonialCarousel extends Component {
         )}
         <TestimonialContainer count={testimonials.length} index={this.state.selectedIndex}>
           {testimonials.map(testimonial => (
-            <Blockquote key={testimonial.quote}>
-              <Blockquote.Quote tag="div" dangerouslySetInnerHTML={{ __html: testimonial.quote }} />
-              <Blockquote.Citation>
-                <Base tag="h1">{testimonial.author}</Base>
-                {testimonial.title && <p>{testimonial.title}</p>}
-              </Blockquote.Citation>
-            </Blockquote>
+            <TestimonialContainerItem key={testimonial.quote}>
+              <Blockquote>
+                <Blockquote.Quote
+                  tag="div"
+                  dangerouslySetInnerHTML={{ __html: testimonial.quote }}
+                />
+                <Blockquote.Citation>
+                  <Base tag="h1">{testimonial.author}</Base>
+                  {testimonial.title && <p>{testimonial.title}</p>}
+                </Blockquote.Citation>
+              </Blockquote>
+            </TestimonialContainerItem>
           ))}
         </TestimonialContainer>
         {testimonials.length > 1 && (
@@ -143,7 +166,7 @@ export class TestimonialCarousel extends Component {
             <ChevronIcon />
           </ShiftButton>
         )}
-      </PageContainer>
+      </section>
     );
   }
 }
@@ -155,28 +178,4 @@ export default styled(TestimonialCarousel)`
   padding-top: 2rem;
   padding-bottom: 2rem;
   overflow: hidden;
-
-  @media (min-width: ${pxToRem(BREAKPOINT)}) {
-    padding-left: ${HORIZONTAL_PADDING}rem;
-    padding-right: ${HORIZONTAL_PADDING}rem;
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: ${HORIZONTAL_PADDING}rem;
-      background-color: ${COLORS.highlight3};
-      z-index: 2;
-    }
-
-    &::before {
-      left: 0;
-    }
-
-    &::after {
-      right: 0;
-    }
-  }
 `;
