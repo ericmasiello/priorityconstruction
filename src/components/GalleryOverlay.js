@@ -39,6 +39,7 @@ const GalleryOverviewList = FlatList.extend`
 GalleryOverviewList.Item = FlatList.Item.extend`
   &:not(:last-child) {
     margin-right: 0;
+    margin-bottom: 0;
   }
 `;
 const GalleryOverviewCloseButton = InvisibleButton.extend`
