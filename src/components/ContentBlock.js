@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '../../node_modules/styled-components';
+import styled from 'styled-components';
 import * as CustomPropTypes from '../propTypes';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';

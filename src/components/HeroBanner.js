@@ -1,13 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
 import Type1 from './Type1';
 import { COLORS } from '../styles/vars';
 
-export const HeroBanner = props => <Type1 {...props} />;
-
-HeroBanner.displayName = 'HeroBanner';
-
-export default styled(HeroBanner)`
+export default Type1.extend`
   position: relative;
   z-index: 2;
   color: ${COLORS.highlight};
