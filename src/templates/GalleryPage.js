@@ -47,7 +47,7 @@ class GalleryPage extends React.Component {
         <Gallery>
           {data.images.edges.map((edge, i) => (
             <Gallery.Item key={edge.node.id}>
-              <GalleryItem onClick={this.handleSelectImageByIndex(i)}>
+              <GalleryItem role="button" onClick={this.handleSelectImageByIndex(i)}>
                 <GalleryItem.Image sizes={edge.node.sizes} />
               </GalleryItem>
             </Gallery.Item>
@@ -67,6 +67,10 @@ export default styled(withLayoutContext(GalleryPage))`
 
   ${Gallery} {
     grid-template-columns: 1fr;
+  }
+
+  ${GalleryItem} {
+    cursor: pointer;
   }
 
   @media (min-width: 700px) {
