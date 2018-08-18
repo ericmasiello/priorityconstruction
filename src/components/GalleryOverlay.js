@@ -21,7 +21,11 @@ const GalleryOverviewList = FlatList.extend`
   padding: 0.5rem;
 
   .gatsby-image-outer-wrapper {
-    height: 100%;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
   }
 
   ${GatsbyImage} {
