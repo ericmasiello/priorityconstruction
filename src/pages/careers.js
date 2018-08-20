@@ -17,7 +17,6 @@ import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
 import Toggler from '../components/ViewToggler';
 import { pxToRem } from '../styles/utils';
-import { COLORS } from '../styles/vars';
 import states from '../content/usStates.json';
 import * as CustomPropTypes from '../propTypes';
 
@@ -60,16 +59,17 @@ const ContactForm = styled.form`
     min-height: ${pxToRem(250)};
   }
 
-  ${Label} {
+  ${Label}, fieldset {
     margin-top: 1rem;
   }
+`;
 
-  .error {
-    border-color: ${COLORS.error};
-  }
+const FieldGroups = styled.div`
+  display: flex;
+  align-items: center;
 
-  ${Label}.error {
-    color: ${COLORS.error};
+  ${Input} {
+    margin-right: 1rem;
   }
 `;
 
@@ -229,14 +229,14 @@ class Careers extends React.Component {
         if (fieldObjects[key].required && fieldObjects[key].value === '') {
           acc.fields[key] = {
             ...fieldObjects[key],
-            className: 'error',
+            error: true,
             message: 'Field is required',
           };
           acc.hasErrors = true;
         } else {
           acc.fields[key] = {
             ...fieldObjects[key],
-            className: '',
+            error: false,
             message: '',
           };
         }
@@ -324,88 +324,92 @@ class Careers extends React.Component {
                         <Label>Position you are applying for</Label>
                         <Input {...state.fields.position} />
                       </Field>
-                      <Label>Are you available to work on weekends?</Label>
                       <fieldset>
-                        <label>
+                        <legend>Are you available to work on weekends?</legend>
+                        <FieldGroups>
                           <Input
                             {...state.fields.canWorkWeekends}
                             checked={state.fields.canWorkWeekends.value === 'yes'}
                             value="yes"
-                          />{' '}
-                          Yes
-                        </label>
-                        <label>
+                          >
+                            Yes
+                          </Input>
                           <Input
                             {...state.fields.canWorkWeekends}
                             checked={state.fields.canWorkWeekends.value === 'no'}
                             value="no"
-                          />{' '}
-                          No
-                        </label>
+                          >
+                            No
+                          </Input>
+                        </FieldGroups>
                       </fieldset>
-                      <Label>Are you capable of physical labor?</Label>
                       <fieldset>
-                        <label>
+                        <legend>Are you capable of physical labor?</legend>
+                        <FieldGroups>
                           <Input
                             {...state.fields.capableOfPhysicalLabor}
                             checked={state.fields.capableOfPhysicalLabor.value === 'yes'}
                             value="yes"
-                          />{' '}
-                          Yes
-                        </label>
-                        <label>
+                          >
+                            Yes
+                          </Input>
                           <Input
                             {...state.fields.capableOfPhysicalLabor}
                             checked={state.fields.capableOfPhysicalLabor.value === 'no'}
                             value="no"
-                          />{' '}
-                          No
-                        </label>
+                          >
+                            No
+                          </Input>
+                        </FieldGroups>
                       </fieldset>
-                      <Label>Have you ever been convicted of a felony?</Label>
+
                       <fieldset>
-                        <label>
+                        <legend>Have you ever been convicted of a felony?</legend>
+                        <FieldGroups>
                           <Input
                             {...state.fields.convictedOfFelony}
                             checked={state.fields.convictedOfFelony.value === 'yes'}
                             value="yes"
-                          />{' '}
-                          Yes
-                        </label>
-                        <label>
+                          >
+                            Yes
+                          </Input>
                           <Input
                             {...state.fields.convictedOfFelony}
                             checked={state.fields.convictedOfFelony.value === 'no'}
                             value="no"
-                          />{' '}
-                          No
-                        </label>
+                          >
+                            No
+                          </Input>
+                        </FieldGroups>
                       </fieldset>
+
                       {state.fields.convictedOfFelony.value === 'yes' && (
                         <Field nameAs="felonyExplanation" fragment>
                           <Label>Please explain:</Label>
                           <Textarea {...state.fields.felonyExplanation} />
                         </Field>
                       )}
-                      <Label>Have you previously worked for Priority Construction?</Label>
+
                       <fieldset>
-                        <label>
+                        <legend>Have you previously worked for Priority Construction?</legend>
+                        <FieldGroups>
                           <Input
                             {...state.fields.previouslyWorkedForPriority}
                             checked={state.fields.previouslyWorkedForPriority.value === 'yes'}
                             value="yes"
-                          />{' '}
-                          Yes
-                        </label>
-                        <label>
+                          >
+                            Yes
+                          </Input>
                           <Input
                             {...state.fields.previouslyWorkedForPriority}
                             checked={state.fields.previouslyWorkedForPriority.value === 'no'}
                             value="no"
-                          />{' '}
-                          No
-                        </label>
+                          >
+                            No
+                          </Input>
+                        </FieldGroups>
                       </fieldset>
+
                       {state.fields.previouslyWorkedForPriority.value === 'yes' && (
                         <Field nameAs="previousWorkforPriorityDetails" fragment>
                           <Label>
