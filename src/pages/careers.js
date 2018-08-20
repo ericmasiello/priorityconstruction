@@ -17,6 +17,7 @@ import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
 import Toggler from '../components/ViewToggler';
 import { pxToRem } from '../styles/utils';
+import { COLORS } from '../styles/vars';
 import states from '../content/usStates.json';
 import * as CustomPropTypes from '../propTypes';
 
@@ -64,7 +65,11 @@ const ContactForm = styled.form`
   }
 
   .error {
-    border-color: red;
+    border-color: ${COLORS.error};
+  }
+
+  ${Label}.error {
+    color: ${COLORS.error};
   }
 `;
 
