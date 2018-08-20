@@ -230,12 +230,14 @@ class Careers extends React.Component {
           acc.fields[key] = {
             ...fieldObjects[key],
             className: 'error',
+            message: 'Field is required',
           };
           acc.hasErrors = true;
         } else {
           acc.fields[key] = {
             ...fieldObjects[key],
             className: '',
+            message: '',
           };
         }
         return acc;
