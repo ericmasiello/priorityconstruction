@@ -160,6 +160,39 @@ const views = [
   'disclaimerAndSignature',
 ];
 
+const viewFields = {
+  personalInformation: [
+    'name',
+    'address',
+    'homePhone',
+    'cellPhone',
+    'email',
+    'dob',
+    'beginWorkDate',
+    'desiredSalary',
+    'position',
+    'canWorkWeekends',
+    'capableOfPhysicalLabor',
+    'convictedOfFelony',
+    'felonyExplanation',
+    'previouslyWorkedForPriority',
+  ],
+  previousEmployment: [
+    'previousWorkforPriorityDetails',
+    'previousEmployerCompany',
+    'previousEmployerPhone',
+    'previousEmployerCity',
+    'previousEmployerState',
+    'previousEmployerJobTitle',
+    'previousEmployerResponsibilities',
+    'previousEmployerStartDate',
+    'previousEmployerEndDate',
+    'previousEmployerReasonForLeaving',
+  ],
+  additionalQualifications: ['additionalQualifications'],
+  disclaimerAndSignature: ['signature', 'date', 'certification'],
+};
+
 class Careers extends React.Component {
   static displayName = 'Careers';
   static propTypes = {
@@ -186,22 +219,33 @@ class Careers extends React.Component {
   };
 
   handleValiation = (fieldObjects, selectedView, goToNextView) => () => {
-    const updateFields = Object.assign({}, fieldObjects);
-    // TODO: validate fields based on active tab
-    // and if the field is required or not
-    // if its required and not filled out, set a className property
-    // with a string of error
-    console.log(selectedView);
+    const validationResult = viewFields[selectedView].reduce(
+      (acc, key) => {
+        if (fieldObjects[key].required && fieldObjects[key].value === '') {
+          acc.fields[key] = {
+            ...fieldObjects[key],
+            className: 'error',
+          };
+          acc.hasErrors = true;
+        } else {
+          acc.fields[key] = {
+            ...fieldObjects[key],
+            className: '',
+          };
+        }
+        return acc;
+      },
+      {
+        hasErrors: false,
+        fields: {},
+      },
+    );
 
-    // NOTE: naive approach
-    if (updateFields.name.required && updateFields.name.value === '') {
-      updateFields.name.className = 'error';
-    } else {
-      updateFields.name.className = '';
+    this.setState({ fields: Object.assign({}, this.state.fields, validationResult.fields) });
+
+    if (validationResult.hasErrors === false) {
       goToNextView();
     }
-
-    this.setState({ fields: updateFields });
   };
 
   render() {
