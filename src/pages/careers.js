@@ -19,6 +19,8 @@ import Toggler from '../components/ViewToggler';
 import { pxToRem } from '../styles/utils';
 import states from '../content/usStates.json';
 import * as CustomPropTypes from '../propTypes';
+import { fields, views, viewFields } from '../config/careers';
+import { validateFields } from '../utils/form';
 
 const TabTitle = Type5.extend`
   margin-bottom: 0;
@@ -73,131 +75,6 @@ const FieldGroups = styled.div`
   }
 `;
 
-const fields = {
-  name: {
-    required: true,
-  },
-  address: {
-    required: true,
-  },
-  homePhone: {
-    type: 'tel',
-    placeholder: '123-456-7890',
-    pattern: '[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}',
-    required: true,
-  },
-  cellPhone: {
-    type: 'tel',
-    placeholder: '123-456-7890',
-    pattern: '[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}',
-  },
-  email: {},
-  dob: {
-    required: true,
-  },
-  beginWorkDate: {
-    placeholder: 'MM/DD/YYYY',
-    maxLength: '10',
-    required: true,
-  },
-  desiredSalary: {},
-  position: {
-    required: true,
-  },
-  canWorkWeekends: {
-    type: 'radio',
-    required: true,
-  },
-  capableOfPhysicalLabor: {
-    type: 'radio',
-    required: true,
-  },
-  convictedOfFelony: {
-    type: 'radio',
-    required: true,
-  },
-  felonyExplanation: {
-    required: true,
-  },
-  previouslyWorkedForPriority: {
-    type: 'radio',
-  },
-  previousWorkforPriorityDetails: {},
-  previousEmployerCompany: {},
-  previousEmployerPhone: {
-    type: 'tel',
-    placeholder: '123-456-7890',
-    pattern: '[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}',
-  },
-  previousEmployerCity: {},
-  previousEmployerState: {},
-  previousEmployerJobTitle: {},
-  previousEmployerResponsibilities: {},
-  previousEmployerStartDate: {
-    placeholder: 'MM/DD/YYYY',
-    maxLength: '10',
-  },
-  previousEmployerEndDate: {
-    placeholder: 'MM/DD/YYYY',
-    maxLength: '10',
-  },
-  previousEmployerReasonForLeaving: {},
-  additionalQualifications: {},
-  signature: {
-    placeholder: 'Enter your name',
-    required: true,
-  },
-  date: {
-    placeholder: 'MM/DD/YYYY',
-    maxLength: '10',
-    required: true,
-  },
-  certification: {
-    type: 'checkbox',
-    required: true,
-  },
-};
-
-const views = [
-  'personalInformation',
-  'previousEmployment',
-  'additionalQualifications',
-  'disclaimerAndSignature',
-];
-
-const viewFields = {
-  personalInformation: [
-    'name',
-    'address',
-    'homePhone',
-    'cellPhone',
-    'email',
-    'dob',
-    'beginWorkDate',
-    'desiredSalary',
-    'position',
-    'canWorkWeekends',
-    'capableOfPhysicalLabor',
-    'convictedOfFelony',
-    'felonyExplanation',
-    'previouslyWorkedForPriority',
-  ],
-  previousEmployment: [
-    'previousWorkforPriorityDetails',
-    'previousEmployerCompany',
-    'previousEmployerPhone',
-    'previousEmployerCity',
-    'previousEmployerState',
-    'previousEmployerJobTitle',
-    'previousEmployerResponsibilities',
-    'previousEmployerStartDate',
-    'previousEmployerEndDate',
-    'previousEmployerReasonForLeaving',
-  ],
-  additionalQualifications: ['additionalQualifications'],
-  disclaimerAndSignature: ['signature', 'date', 'certification'],
-};
-
 class Careers extends React.Component {
   static displayName = 'Careers';
   static propTypes = {
@@ -210,6 +87,7 @@ class Careers extends React.Component {
 
   state = {
     fields,
+    hasErrors: false,
   };
 
   thankYouMessage = React.createRef();
@@ -224,31 +102,12 @@ class Careers extends React.Component {
   };
 
   handleValiation = (fieldObjects, selectedView, goToNextView) => () => {
-    const validationResult = viewFields[selectedView].reduce(
-      (acc, key) => {
-        if (fieldObjects[key].required && fieldObjects[key].value === '') {
-          acc.fields[key] = {
-            ...fieldObjects[key],
-            error: true,
-            message: 'Field is required',
-          };
-          acc.hasErrors = true;
-        } else {
-          acc.fields[key] = {
-            ...fieldObjects[key],
-            error: false,
-            message: '',
-          };
-        }
-        return acc;
-      },
-      {
-        hasErrors: false,
-        fields: {},
-      },
-    );
+    const validationResult = validateFields(viewFields[selectedView], fieldObjects);
 
-    this.setState({ fields: Object.assign({}, this.state.fields, validationResult.fields) });
+    this.setState({
+      fields: Object.assign({}, this.state.fields, validationResult.fields),
+      hasErrors: validationResult.hasErrors,
+    });
 
     if (validationResult.hasErrors === false) {
       goToNextView();
@@ -541,6 +400,12 @@ class Careers extends React.Component {
                           😔
                         </span>{' '}
                         There was an problem submitting your message. Please try again.
+                      </FormErrorMessage>
+                    )}
+
+                    {this.state.hasErrors && (
+                      <FormErrorMessage tabIndex={-1} innerRef={this.errorMessage}>
+                        Please correct any missing or invalid information above.
                       </FormErrorMessage>
                     )}
                   </ContactForm>
