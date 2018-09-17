@@ -81,6 +81,7 @@ const projecTypes = [
 
 class Quote extends React.Component {
   static displayName = 'Quote';
+
   static propTypes = {
     className: PropTypes.string,
     data: PropTypes.shape({
@@ -91,6 +92,7 @@ class Quote extends React.Component {
   fields = ['name', 'company', 'phone', 'fax', 'email', 'comments', 'howDidYouHear', 'projectType'];
 
   thankYouMessage = React.createRef();
+
   errorMessage = React.createRef();
 
   handleSetThankYouFocus = () => {
@@ -183,10 +185,12 @@ class Quote extends React.Component {
                   <Button type="submit">Submit</Button>
                   {state.submissionState === 'error' && (
                     <FormErrorMessage tabIndex={-1} innerRef={this.errorMessage}>
-                      Sorry.{' '}
+                      Sorry.
+                      {' '}
                       <span role="img" aria-label="Sad face">
                         😔
-                      </span>{' '}
+                      </span>
+                      {' '}
                       There was an problem submitting your message. Please try again.
                     </FormErrorMessage>
                   )}

@@ -85,6 +85,14 @@ const AboutContent = styled.div`
 class About extends React.Component {
   state = { showStickyNav: false };
 
+  leftNavList = React.createRef();
+
+  stuckNavList = React.createRef();
+
+  pageNav = null;
+
+  stuckNavElm = null;
+
   componentDidMount() {
     window.addEventListener('scroll', this.handleSetStickyState, false);
     window.addEventListener('resize', this.handleSetStickyState, false);
@@ -107,12 +115,8 @@ class About extends React.Component {
     window.removeEventListener('resize', this.handleSetStickyState, false);
   }
 
-  leftNavList = React.createRef();
-  stuckNavList = React.createRef();
-  pageNav = null;
-  stuckNavElm = null;
-
   handleShowSticky = () => this.setState({ showStickyNav: true });
+
   handleHideSticky = () => this.setState({ showStickyNav: false });
 
   handleSetStickyState = () => {

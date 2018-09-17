@@ -80,6 +80,7 @@ const ContactForm = styled.form`
 
 class Contact extends React.Component {
   static displayName = 'Contact';
+
   static propTypes = {
     data: PropTypes.shape({
       site: PropTypes.shape({
@@ -93,6 +94,7 @@ class Contact extends React.Component {
   };
 
   thankYouMessage = React.createRef();
+
   errorMessage = React.createRef();
 
   fields = ['name', 'company', 'phone', 'fax', 'email', 'comments'];
@@ -173,10 +175,12 @@ class Contact extends React.Component {
                   <Button type="submit">Submit</Button>
                   {state.submissionState === 'error' && (
                     <FormErrorMessage tabIndex={-1} innerRef={this.errorMessage}>
-                      Sorry.{' '}
+                      Sorry.
+                      {' '}
                       <span role="img" aria-label="Sad face">
                         😔
-                      </span>{' '}
+                      </span>
+                      {' '}
                       There was an problem submitting your message. Please try again.
                     </FormErrorMessage>
                   )}

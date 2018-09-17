@@ -77,6 +77,7 @@ const FieldGroups = styled.div`
 
 class Careers extends React.Component {
   static displayName = 'Careers';
+
   static propTypes = {
     className: PropTypes.string,
     data: PropTypes.shape({
@@ -91,6 +92,7 @@ class Careers extends React.Component {
   };
 
   thankYouMessage = React.createRef();
+
   errorMessage = React.createRef();
 
   handleSetThankYouFocus = () => {
@@ -104,10 +106,10 @@ class Careers extends React.Component {
   handleValiation = (fieldObjects, selectedView, goToNextView) => () => {
     const validationResult = validateFields(viewFields[selectedView], fieldObjects);
 
-    this.setState({
-      fields: Object.assign({}, this.state.fields, validationResult.fields),
+    this.setState(prevState => ({
+      fields: Object.assign({}, prevState.fields, validationResult.fields),
       hasErrors: validationResult.hasErrors,
-    });
+    }));
 
     if (validationResult.hasErrors === false) {
       goToNextView();
@@ -395,10 +397,12 @@ class Careers extends React.Component {
 
                     {state.submissionState === 'error' && (
                       <FormErrorMessage tabIndex={-1} innerRef={this.errorMessage}>
-                        Sorry.{' '}
+                        Sorry.
+                        {' '}
                         <span role="img" aria-label="Sad face">
                           😔
-                        </span>{' '}
+                        </span>
+                        {' '}
                         There was an problem submitting your message. Please try again.
                       </FormErrorMessage>
                     )}

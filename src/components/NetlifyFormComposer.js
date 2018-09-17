@@ -44,19 +44,20 @@ export default class NetlifyFormComposer extends React.Component {
   };
 
   handleChange = event => {
-    const value =
-      event.target.type === 'checkbox' && event.target.checked === false
-        ? undefined
-        : event.target.value;
-
-    this.setState({
-      fields: {
-        ...this.state.fields,
-        [event.target.name]: {
-          ...this.state.fields[event.target.name],
-          value,
+    this.setState(prevState => {
+      const value =
+        event.target.type === 'checkbox' && event.target.checked === false
+          ? undefined
+          : event.target.value;
+      return {
+        fields: {
+          ...prevState.fields,
+          [event.target.name]: {
+            ...prevState.fields[event.target.name],
+            value,
+          },
         },
-      },
+      };
     });
   };
 
@@ -70,17 +71,19 @@ export default class NetlifyFormComposer extends React.Component {
       body: encode({ 'form-name': this.props.name, ...fieldsToKeyValues(this.state.fields) }),
     })
       .then(() => {
-        // once we know everything is submitted successfully,
-        // clear the fields
-        const fields = Object.keys(this.state.fields).reduce((acc, key) => {
-          acc[key] = {
-            ...this.state.fields[key],
-            value: '',
-          };
-          return acc;
-        }, {});
+        this.setState(prevState => {
+          // once we know everything is submitted successfully,
+          // clear the fields
+          const fields = Object.keys(prevState.fields).reduce((acc, key) => {
+            acc[key] = {
+              ...prevState.fields[key],
+              value: '',
+            };
+            return acc;
+          }, {});
 
-        this.setState({ fields });
+          return { fields };
+        });
       })
       .catch(error => {
         // eslint-disable-next-line

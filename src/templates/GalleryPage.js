@@ -13,6 +13,7 @@ import GalleryOverlay from '../components/GalleryOverlay';
 
 class GalleryPage extends React.Component {
   static displayName = 'GalleryPage';
+
   static propTypes = {
     data: PropTypes.shape({
       meta: CustomPropTypes.GalleryMeta,

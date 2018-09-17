@@ -19,6 +19,7 @@ const LabelText = styled.span`
   margin-left: 0.5rem;
 `;
 
+/* eslint-disable jsx-a11y/label-has-associated-control */
 export const Radio = ({ children, error, className, ...rest }) => (
   <label className={className}>
     <input {...rest} />

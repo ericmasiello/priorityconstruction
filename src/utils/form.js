@@ -19,7 +19,8 @@ export const fieldsToFieldState = (fields, onChange) => {
       };
       return acc;
     }, {});
-  } else if (typeof fields === 'object') {
+  }
+  if (typeof fields === 'object') {
     return Object.keys(fields).reduce((acc, key) => {
       acc[key] = Object.assign(
         {

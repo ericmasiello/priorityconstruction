@@ -122,12 +122,16 @@ class Layout extends React.Component {
               <Small tag={FlatList}>
                 <FlatList.Item>
                   <TopBarLink href={`tel:${phone}`}>
-                    <PhoneIcon /> {phone}
+                    <PhoneIcon /> 
+                    {' '}
+                    {phone}
                   </TopBarLink>
                 </FlatList.Item>
                 <FlatList.Item>
                   <TopBarLink href={`mailto:${email}`}>
-                    <MailIcon /> {email}
+                    <MailIcon /> 
+                    {' '}
+                    {email}
                   </TopBarLink>
                 </FlatList.Item>
               </Small>

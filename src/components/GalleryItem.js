@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
-import GatsbyImage from '../components/GatsbyImage';
+import GatsbyImage from './GatsbyImage';
 import { BODY_WEIGHTS } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
 

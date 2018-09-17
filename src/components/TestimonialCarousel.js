@@ -114,22 +114,26 @@ export class TestimonialCarousel extends Component {
   };
 
   handleClickPrevious = () => {
-    const nextIndex =
-      this.state.selectedIndex === 0
-        ? this.props.testimonials.length - 1
-        : this.state.selectedIndex - 1;
-    this.setState({
-      selectedIndex: nextIndex,
+    this.setState(prevState => {
+      const nextIndex =
+        prevState.selectedIndex === 0
+          ? this.props.testimonials.length - 1
+          : prevState.selectedIndex - 1;
+
+      return { selectedIndex: nextIndex };
     });
   };
 
   handleClickNext = () => {
-    const nextIndex =
-      this.state.selectedIndex === this.props.testimonials.length - 1
-        ? 0
-        : this.state.selectedIndex + 1;
-    this.setState({
-      selectedIndex: nextIndex,
+    this.setState(prevState => {
+      const nextIndex =
+        prevState.selectedIndex === this.props.testimonials.length - 1
+          ? 0
+          : prevState.selectedIndex + 1;
+
+      return {
+        selectedIndex: nextIndex,
+      };
     });
   };
 
