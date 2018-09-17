@@ -40,8 +40,8 @@
     "deploy": "gatsby build && gh-pages -d public -b master"
   },
   "devDependencies": {
-    "babel-eslint": "~8.2.6",
-    "babel-jest": "~23.2.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.6.0",
     "babel-plugin-syntax-class-properties": "^6.13.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "enzyme": "~3.3.0",
