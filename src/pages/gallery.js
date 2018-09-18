@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import Link from 'gatsby-link';
 import PageContainer from '../components/PageContainer';
 import Gallery from '../components/Gallery';
+import GalleryItemWrapper from '../components/GalleryItemWrapper';
+import GalleryCopy from '../components/GalleryCopy';
+import GalleryImage from '../components/GalleryImage';
 import GalleryItem from '../components/GalleryItem';
 import * as CustomPropTypes from '../propTypes';
 import { composeGalleryLandingMedia } from '../utils/gallery';
@@ -18,16 +21,16 @@ const GalleryPage = ({ className, data }) => {
     <PageContainer tag="section" className={className}>
       <Gallery>
         {landingGallery.map(media => (
-          <Gallery.Item key={media.id}>
+          <GalleryItemWrapper key={media.id}>
             <GalleryItem tag={Link} to={media.href}>
-              <GalleryItem.Image sizes={media.sizes} />
-              <GalleryItem.Content>
+              <GalleryImage sizes={media.sizes} />
+              <GalleryCopy>
                 <h4>{media.name}</h4>
                 <p>{media.location}</p>
                 <div dangerouslySetInnerHTML={{ __html: media.description }} />
-              </GalleryItem.Content>
+              </GalleryCopy>
             </GalleryItem>
-          </Gallery.Item>
+          </GalleryItemWrapper>
         ))}
       </Gallery>
     </PageContainer>
