@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Link from 'gatsby-link';
 import Footer from '../components/Footer';
 import List from '../components/List';
+import ListItem from '../components/ListItem';
 import Logo from '../components/Logo';
 import FacebookIcon from '../components/FacebookIcon';
 import LinkedInIcon from '../components/LinkedInIcon';
@@ -31,22 +32,19 @@ const Address = styled.address`
     margin-bottom: ${pxToRem(4)};
   }
 
-  ${List.Item} {
+  ${ListItem} {
     margin-bottom: 0;
-  }
-
-  ${List.Item} {
     border-left: 1px solid ${COLORS.base};
     padding-left: ${pxToRem(8)};
     padding-right: ${pxToRem(8)};
   }
 
-  ${List.Item}:first-child {
+  ${ListItem}:first-child {
     padding-left: 0;
     border-left: none;
   }
 
-  ${List.Item}:last-child {
+  ${ListItem}:last-child {
     padding-right: 0;
   }
 `;
@@ -74,7 +72,7 @@ export const ComposedFooter = props => {
           <Address>
             <a href="https://www.google.com/maps/place/1315+W+Hamburg+St,+Baltimore,+MD+21230/">
               <List>
-                <List.Item>
+                <ListItem>
                   {streetAddress} 
                   {' '}
                   {city}
@@ -83,33 +81,33 @@ export const ComposedFooter = props => {
                   {state} 
                   {' '}
                   {zip}
-                </List.Item>
+                </ListItem>
               </List>
             </a>
             <List>
-              <List.Item>
+              <ListItem>
                 <a href={`tel:${phone}`}>
                   phone:
                   {phone}
                 </a>
-              </List.Item>
-              <List.Item>
+              </ListItem>
+              <ListItem>
                 <a href={`tel:${fax}`}>
                   fax
                   {fax}
                 </a>
-              </List.Item>
+              </ListItem>
             </List>
             <List>
-              <List.Item>
+              <ListItem>
                 <a href={`mailto:${email}`}>{email}</a>
-              </List.Item>
-              <List.Item>
+              </ListItem>
+              <ListItem>
                 <Link to="/contact">Contact Us</Link>
-              </List.Item>
-              <List.Item>
+              </ListItem>
+              <ListItem>
                 <Link to="/careers">Career Opportunities</Link>
-              </List.Item>
+              </ListItem>
             </List>
           </Address>
         </div>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import List from './List';
+import ListItem from './ListItem';
 
-const FlatListItem = styled(List.Item)`
+const FlatListItem = styled(ListItem)`
   &:not(:last-child) {
     margin-right: 0.5rem;
   }

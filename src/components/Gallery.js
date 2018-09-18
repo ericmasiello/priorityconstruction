@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import List from './List';
+import ListItem from './ListItem';
 import { pxToRem } from '../styles/utils';
 
 const Gallery = styled(List)`
@@ -8,7 +9,7 @@ const Gallery = styled(List)`
   grid-gap: 0.5rem;
 `;
 
-Gallery.Item = styled(List.Item)`
+Gallery.Item = styled(ListItem)`
   &:not(:last-child) {
     margin-bottom: 0;
   }
