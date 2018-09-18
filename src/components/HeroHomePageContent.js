@@ -28,7 +28,7 @@ export default styled(HeroHomePageContent)`
   padding-left: ${pxToRem(PAGE_SPACING.horizontal)};
   padding-right: ${pxToRem(PAGE_SPACING.horizontal)};
   padding-bottom: 15vh;
-  color: ${COLORS.highlight};
+  color: #fff;
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100%;
