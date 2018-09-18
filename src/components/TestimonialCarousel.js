@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ChevronIcon from './ChevronIcon';
 import Blockquote from './Blockquote';
+import Quote from './Quote';
+import Citation from './Citation';
 import InvisibleButton from './InvisibleButton';
 import Base from './Base';
 import { COLORS, PAGE_SPACING, MAX_CONTENT_WIDTH } from '../styles/vars';
@@ -83,7 +85,7 @@ const TestimonialContainerItem = styled.li`
     }
   }
 
-  ${Blockquote.Citation} > :last-child {
+  ${Citation} > :last-child {
     margin-bottom: 0;
   }
 
@@ -153,14 +155,11 @@ export class TestimonialCarousel extends Component {
           {testimonials.map(testimonial => (
             <TestimonialContainerItem key={testimonial.quote}>
               <Blockquote>
-                <Blockquote.Quote
-                  tag="div"
-                  dangerouslySetInnerHTML={{ __html: testimonial.quote }}
-                />
-                <Blockquote.Citation>
+                <Quote tag="div" dangerouslySetInnerHTML={{ __html: testimonial.quote }} />
+                <Citation>
                   <Base tag="h1">{testimonial.author}</Base>
                   {testimonial.title && <p>{testimonial.title}</p>}
-                </Blockquote.Citation>
+                </Citation>
               </Blockquote>
             </TestimonialContainerItem>
           ))}
