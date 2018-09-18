@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import GatsbyImage from './GatsbyImage';
 import FlatList from './FlatList';
+import FlatListItem from './FlatListItem';
 import InvisibleButton from './InvisibleButton';
 import CloseIcon from './CloseIcon';
 import { pxToRem } from '../styles/utils';
@@ -36,7 +37,7 @@ const GalleryOverviewList = styled(FlatList)`
     }
   }
 `;
-GalleryOverviewList.Item = styled(FlatList.Item)`
+GalleryOverviewList.Item = styled(FlatListItem)`
   &:not(:last-child) {
     margin-right: 0;
     margin-bottom: 0;

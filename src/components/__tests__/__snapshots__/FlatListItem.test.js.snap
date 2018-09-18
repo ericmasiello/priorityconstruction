@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <FlatListItem> 1`] = `
+.c1:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.c0:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+<li
+  className="c0 c1"
+/>
+`;

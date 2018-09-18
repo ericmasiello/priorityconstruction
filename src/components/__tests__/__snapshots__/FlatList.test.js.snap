@@ -1,19 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render <FlatList.Item> 1`] = `
-.c1:not(:last-child) {
-  margin-bottom: 0.5rem;
-}
-
-.c0:not(:last-child) {
-  margin-right: 0.5rem;
-}
-
-<li
-  className="c0 c1"
-/>
-`;
-
 exports[`should render <FlatList> 1`] = `
 .c1 {
   list-style-type: none;
