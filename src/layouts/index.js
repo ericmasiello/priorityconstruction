@@ -200,6 +200,10 @@ export default styled(Layout)`
       order: 0;
     }
   }
+
+  ${FlatList.Item} {
+    margin-bottom: 0;
+  }
 `;
 
 export const query = graphql`
