@@ -37,7 +37,7 @@ const GalleryOverviewList = styled(FlatList)`
     }
   }
 `;
-GalleryOverviewList.Item = styled(FlatListItem)`
+const GalleryOverviewListItem = styled(FlatListItem)`
   &:not(:last-child) {
     margin-right: 0;
     margin-bottom: 0;
@@ -160,14 +160,14 @@ export class GalleryOverlay extends React.Component {
         <GalleryOverlayPrimaryImage sizes={this.selectedImage().sizes} />
         <GalleryOverviewList>
           {images.edges.map((edge, i) => (
-            <GalleryOverviewList.Item key={edge.node.id}>
+            <GalleryOverviewListItem key={edge.node.id}>
               <GalleryTileButton
                 onClick={this.handleSelectImageByIndex(i)}
                 aria-pressed={i === this.state.selectedIndex}
               >
                 <GatsbyImage sizes={edge.node.sizes} />
               </GalleryTileButton>
-            </GalleryOverviewList.Item>
+            </GalleryOverviewListItem>
           ))}
         </GalleryOverviewList>
       </Tag>
