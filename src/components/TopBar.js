@@ -6,7 +6,7 @@ import { COLORS, PAGE_SPACING } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 import * as CustomPropTypes from '../propTypes';
 
-const TopBarContent = ContentWrapper.extend`
+const TopBarContent = styled(ContentWrapper)`
   display: flex;
   justify-content: flex-end;
 `;

@@ -5,6 +5,7 @@ import styled, { injectGlobal } from 'styled-components';
 import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
 import FlatList from '../components/FlatList';
+import FlatListItem from '../components/FlatListItem';
 import ComposedFooter from '../composed/Footer';
 import Hero from '../components/Hero';
 import TopBar from '../components/TopBar';
@@ -120,20 +121,20 @@ class Layout extends React.Component {
             />
             <TopBar>
               <Small tag={FlatList}>
-                <FlatList.Item>
+                <FlatListItem>
                   <TopBarLink href={`tel:${phone}`}>
                     <PhoneIcon /> 
                     {' '}
                     {phone}
                   </TopBarLink>
-                </FlatList.Item>
-                <FlatList.Item>
+                </FlatListItem>
+                <FlatListItem>
                   <TopBarLink href={`mailto:${email}`}>
                     <MailIcon /> 
                     {' '}
                     {email}
                   </TopBarLink>
-                </FlatList.Item>
+                </FlatListItem>
               </Small>
             </TopBar>
             <Hero
@@ -201,7 +202,7 @@ export default styled(Layout)`
     }
   }
 
-  ${FlatList.Item} {
+  ${FlatListItem} {
     margin-bottom: 0;
   }
 `;

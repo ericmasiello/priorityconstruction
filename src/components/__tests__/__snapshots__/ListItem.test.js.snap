@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <ListItem> 1`] = `
+.c0:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+<li
+  className="c0"
+/>
+`;

@@ -18,7 +18,7 @@ import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import { pxToRem } from '../styles/utils';
 import * as CustomPropTypes from '../propTypes';
 
-const FormErrorMessage = ErrorMessage.extend`
+const FormErrorMessage = styled(ErrorMessage)`
   margin-top: 1rem;
 
   @media (min-width: ${pxToRem(500)}) {

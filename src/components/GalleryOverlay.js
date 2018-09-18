@@ -3,16 +3,17 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import GatsbyImage from './GatsbyImage';
 import FlatList from './FlatList';
+import FlatListItem from './FlatListItem';
 import InvisibleButton from './InvisibleButton';
 import CloseIcon from './CloseIcon';
 import { pxToRem } from '../styles/utils';
 import * as CustomPropTypes from '../propTypes';
 
 const GalleryOverlayTileImageHeight = pxToRem(120);
-const GalleryOverlayPrimaryImage = GatsbyImage.extend`
+const GalleryOverlayPrimaryImage = styled(GatsbyImage)`
   height: 100%;
 `;
-const GalleryOverviewList = FlatList.extend`
+const GalleryOverviewList = styled(FlatList)`
   display: grid;
   grid-template-columns: repeat(10, minmax(150px, 1fr));
   grid-gap: 0.5rem;
@@ -36,13 +37,13 @@ const GalleryOverviewList = FlatList.extend`
     }
   }
 `;
-GalleryOverviewList.Item = FlatList.Item.extend`
+const GalleryOverviewListItem = styled(FlatListItem)`
   &:not(:last-child) {
     margin-right: 0;
     margin-bottom: 0;
   }
 `;
-const GalleryOverviewCloseButton = InvisibleButton.extend`
+const GalleryOverviewCloseButton = styled(InvisibleButton)`
   position: absolute;
   z-index: 3;
   top: 1rem;
@@ -57,7 +58,7 @@ const GalleryOverviewCloseButton = InvisibleButton.extend`
   }
 `;
 
-const GalleryTileButton = InvisibleButton.extend`
+const GalleryTileButton = styled(InvisibleButton)`
   height: 100%;
   width: 100%;
   position: relative;
@@ -159,14 +160,14 @@ export class GalleryOverlay extends React.Component {
         <GalleryOverlayPrimaryImage sizes={this.selectedImage().sizes} />
         <GalleryOverviewList>
           {images.edges.map((edge, i) => (
-            <GalleryOverviewList.Item key={edge.node.id}>
+            <GalleryOverviewListItem key={edge.node.id}>
               <GalleryTileButton
                 onClick={this.handleSelectImageByIndex(i)}
                 aria-pressed={i === this.state.selectedIndex}
               >
                 <GatsbyImage sizes={edge.node.sizes} />
               </GalleryTileButton>
-            </GalleryOverviewList.Item>
+            </GalleryOverviewListItem>
           ))}
         </GalleryOverviewList>
       </Tag>

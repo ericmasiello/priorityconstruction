@@ -7,6 +7,7 @@ import Small from '../components/Small';
 import PageContainer from '../components/PageContainer';
 import ContentBlock from '../components/ContentBlock';
 import NavBlockList from '../components/NavBlockList';
+import NavBlockListItem from '../components/NavBlockListItem';
 import { pxToRem } from '../styles/utils';
 import { COLORS, PAGE_SPACING, MAX_CONTENT_WIDTH } from '../styles/vars';
 import { withLayoutContext } from '../layoutContext';
@@ -39,7 +40,7 @@ const StickyNavContainer = styled.div`
     margin: auto;
   }
 
-  ${NavBlockList.Item}:last-child a {
+  ${NavBlockListItem}:last-child a {
     padding-right: 0;
   }
 `;
@@ -157,7 +158,7 @@ class About extends React.Component {
         >
           <NavBlockList row>
             {navItems.map(item => (
-              <NavBlockList.Item key={item.href}>
+              <NavBlockListItem key={item.href}>
                 <Small
                   tag={AnchorLink}
                   href={item.href}
@@ -166,7 +167,7 @@ class About extends React.Component {
                 >
                   {item.children}
                 </Small>
-              </NavBlockList.Item>
+              </NavBlockListItem>
             ))}
           </NavBlockList>
         </StickyNavContainer>
@@ -176,7 +177,7 @@ class About extends React.Component {
             <div ref={this.leftNavList}>
               <NavBlockList>
                 {navItems.map(item => (
-                  <NavBlockList.Item key={item.href}>
+                  <NavBlockListItem key={item.href}>
                     <AnchorLink
                       href={item.href}
                       offset={this.handleCompueteOffset}
@@ -184,7 +185,7 @@ class About extends React.Component {
                     >
                       {item.children}
                     </AnchorLink>
-                  </NavBlockList.Item>
+                  </NavBlockListItem>
                 ))}
               </NavBlockList>
             </div>

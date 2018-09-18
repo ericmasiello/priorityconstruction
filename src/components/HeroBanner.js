@@ -1,7 +1,8 @@
+import styled from 'styled-components';
 import Type1 from './Type1';
 import { COLORS } from '../styles/vars';
 
-export default Type1.extend`
+export default styled(Type1)`
   position: relative;
   z-index: 2;
   color: ${COLORS.highlight};

@@ -1,8 +1,9 @@
-import FlatList from './FlatList';
+import styled from 'styled-components';
+import FlatListItem from './FlatListItem';
 import { pxToRem } from '../styles/utils';
 import { MEDIA_QUERIES } from '../styles/vars';
 
-const HeaderBarFlatListItem = FlatList.Item.extend`
+const HeaderBarFlatListItem = styled(FlatListItem)`
   margin-bottom: 1rem;
 
   @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
