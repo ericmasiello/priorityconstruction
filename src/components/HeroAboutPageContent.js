@@ -7,7 +7,7 @@ import { pxToRem } from '../styles/utils';
 
 export const HeroAboutPageContent = props => (
   <HeroContent {...props}>
-    <HeroBanner>About Us</HeroBanner>
+    <HeroBanner tag="h1">About Us</HeroBanner>
   </HeroContent>
 );
 
