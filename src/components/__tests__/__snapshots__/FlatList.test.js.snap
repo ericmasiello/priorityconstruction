@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render <FlatList.Item> 1`] = `
-.c0:not(:last-child) {
+.c1:not(:last-child) {
   margin-bottom: 0.5rem;
 }
 
@@ -10,15 +10,18 @@ exports[`should render <FlatList.Item> 1`] = `
 }
 
 <li
-  className="c0"
+  className="c0 c1"
 />
 `;
 
 exports[`should render <FlatList> 1`] = `
-.c0 {
+.c1 {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -26,6 +29,6 @@ exports[`should render <FlatList> 1`] = `
 }
 
 <ul
-  className="c0"
+  className="c0 c1"
 />
 `;

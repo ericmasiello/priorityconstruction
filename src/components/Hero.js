@@ -8,7 +8,7 @@ import * as CustomPropTypes from '../propTypes';
 import { COLORS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
-const BackgroundImage = GatsbyImage.extend`
+const BackgroundImage = styled(GatsbyImage)`
   left: 0;
   top: 0;
   width: 100%;

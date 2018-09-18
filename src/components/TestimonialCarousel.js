@@ -10,7 +10,7 @@ import { pxToRem } from '../styles/utils';
 
 const BREAKPOINT = 550;
 
-const ShiftButton = InvisibleButton.extend`
+const ShiftButton = styled(InvisibleButton)`
   display: none;
   @media (min-width: ${pxToRem(BREAKPOINT)}) {
     display: block;
@@ -26,7 +26,7 @@ const ShiftButton = InvisibleButton.extend`
   }
 `;
 
-const PreviousButton = ShiftButton.extend`
+const PreviousButton = styled(ShiftButton)`
   right: auto;
   left: 1.5rem;
   ${ChevronIcon} {

@@ -12,6 +12,7 @@ import { PAGE_SPACING, TYPE_SIZE, COLORS, MEDIA_QUERIES } from '../styles/vars';
 import HeaderBarFlatListItem from './HeaderBarFlatListItem';
 import * as CustomPropTypes from '../propTypes';
 
+// FIXME: use the actual invisible button?
 const InvisibleButton = styled.button`
   background-color: transparent;
   border: none;
@@ -19,7 +20,7 @@ const InvisibleButton = styled.button`
   cursor: pointer;
 `;
 
-const DesktopNav = FlatList.extend`
+const DesktopNav = styled(FlatList)`
   display: none;
 
   @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
@@ -27,7 +28,7 @@ const DesktopNav = FlatList.extend`
   }
 `;
 
-const MobileNav = FlatList.extend`
+const MobileNav = styled(FlatList)`
   position: absolute;
   top: 0;
   left: 0;

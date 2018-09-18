@@ -9,10 +9,10 @@ import { pxToRem } from '../styles/utils';
 import * as CustomPropTypes from '../propTypes';
 
 const GalleryOverlayTileImageHeight = pxToRem(120);
-const GalleryOverlayPrimaryImage = GatsbyImage.extend`
+const GalleryOverlayPrimaryImage = styled(GatsbyImage)`
   height: 100%;
 `;
-const GalleryOverviewList = FlatList.extend`
+const GalleryOverviewList = styled(FlatList)`
   display: grid;
   grid-template-columns: repeat(10, minmax(150px, 1fr));
   grid-gap: 0.5rem;
@@ -36,13 +36,13 @@ const GalleryOverviewList = FlatList.extend`
     }
   }
 `;
-GalleryOverviewList.Item = FlatList.Item.extend`
+GalleryOverviewList.Item = styled(FlatList.Item)`
   &:not(:last-child) {
     margin-right: 0;
     margin-bottom: 0;
   }
 `;
-const GalleryOverviewCloseButton = InvisibleButton.extend`
+const GalleryOverviewCloseButton = styled(InvisibleButton)`
   position: absolute;
   z-index: 3;
   top: 1rem;
@@ -57,7 +57,7 @@ const GalleryOverviewCloseButton = InvisibleButton.extend`
   }
 `;
 
-const GalleryTileButton = InvisibleButton.extend`
+const GalleryTileButton = styled(InvisibleButton)`
   height: 100%;
   width: 100%;
   position: relative;

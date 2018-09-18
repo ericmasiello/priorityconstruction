@@ -22,12 +22,12 @@ import * as CustomPropTypes from '../propTypes';
 import { fields, views, viewFields } from '../config/careers';
 import { validateFields } from '../utils/form';
 
-const TabTitle = Type5.extend`
+const TabTitle = styled(Type5)`
   margin-bottom: 0;
   text-transform: uppercase;
 `;
 
-const FormErrorMessage = ErrorMessage.extend`
+const FormErrorMessage = styled(ErrorMessage)`
   margin-top: 1rem;
 `;
 

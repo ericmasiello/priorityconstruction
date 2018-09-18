@@ -71,7 +71,7 @@ const StyledGalleryItem = styled(GalleryItem)`
   }
 `;
 
-const Image = GatsbyImage.extend`
+const Image = styled(GatsbyImage)`
   height: 100%;
   z-index: 1;
   transition: transform 3s;

@@ -29,7 +29,7 @@ const FPOGrid = styled.div`
   }
 `;
 
-const MainContentContainer = PageContainer.extend`
+const MainContentContainer = styled(PageContainer)`
   background-image: url(${blueprint});
   background-size: cover;
   background-position: center center;
