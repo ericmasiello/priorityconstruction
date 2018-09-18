@@ -19,6 +19,8 @@ import Toggler from '../components/ViewToggler';
 import { pxToRem } from '../styles/utils';
 import states from '../content/usStates.json';
 import * as CustomPropTypes from '../propTypes';
+import { fields, views, viewFields } from '../config/careers';
+import { validateFields } from '../utils/form';
 
 const TabTitle = Type5.extend`
   margin-bottom: 0;
@@ -59,109 +61,23 @@ const ContactForm = styled.form`
     min-height: ${pxToRem(250)};
   }
 
-  ${Label} {
+  ${Label}, fieldset {
     margin-top: 1rem;
-  }
-
-  .error {
-    border-color: red;
   }
 `;
 
-const fields = {
-  name: {
-    required: true,
-  },
-  address: {
-    required: true,
-  },
-  homePhone: {
-    type: 'tel',
-    placeholder: '123-456-7890',
-    pattern: '[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}',
-    required: true,
-  },
-  cellPhone: {
-    type: 'tel',
-    placeholder: '123-456-7890',
-    pattern: '[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}',
-  },
-  email: {},
-  dob: {
-    required: true,
-  },
-  beginWorkDate: {
-    placeholder: 'MM/DD/YYYY',
-    maxLength: '10',
-    required: true,
-  },
-  desiredSalary: {},
-  position: {
-    required: true,
-  },
-  canWorkWeekends: {
-    type: 'radio',
-    required: true,
-  },
-  capableOfPhysicalLabor: {
-    type: 'radio',
-    required: true,
-  },
-  convictedOfFelony: {
-    type: 'radio',
-    required: true,
-  },
-  felonyExplanation: {
-    required: true,
-  },
-  previouslyWorkedForPriority: {
-    type: 'radio',
-  },
-  previousWorkforPriorityDetails: {},
-  previousEmployerCompany: {},
-  previousEmployerPhone: {
-    type: 'tel',
-    placeholder: '123-456-7890',
-    pattern: '[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}',
-  },
-  previousEmployerCity: {},
-  previousEmployerState: {},
-  previousEmployerJobTitle: {},
-  previousEmployerResponsibilities: {},
-  previousEmployerStartDate: {
-    placeholder: 'MM/DD/YYYY',
-    maxLength: '10',
-  },
-  previousEmployerEndDate: {
-    placeholder: 'MM/DD/YYYY',
-    maxLength: '10',
-  },
-  previousEmployerReasonForLeaving: {},
-  additionalQualifications: {},
-  signature: {
-    placeholder: 'Enter your name',
-    required: true,
-  },
-  date: {
-    placeholder: 'MM/DD/YYYY',
-    maxLength: '10',
-    required: true,
-  },
-  certification: {
-    type: 'checkbox',
-    required: true,
-  },
-};
+const FieldGroups = styled.div`
+  display: flex;
+  align-items: center;
 
-const views = [
-  'personalInformation',
-  'previousEmployment',
-  'additionalQualifications',
-  'disclaimerAndSignature',
-];
+  ${Input} {
+    margin-right: 1rem;
+  }
+`;
 
 class Careers extends React.Component {
   static displayName = 'Careers';
+
   static propTypes = {
     className: PropTypes.string,
     data: PropTypes.shape({
@@ -172,9 +88,11 @@ class Careers extends React.Component {
 
   state = {
     fields,
+    hasErrors: false,
   };
 
   thankYouMessage = React.createRef();
+
   errorMessage = React.createRef();
 
   handleSetThankYouFocus = () => {
@@ -186,22 +104,16 @@ class Careers extends React.Component {
   };
 
   handleValiation = (fieldObjects, selectedView, goToNextView) => () => {
-    const updateFields = Object.assign({}, fieldObjects);
-    // TODO: validate fields based on active tab
-    // and if the field is required or not
-    // if its required and not filled out, set a className property
-    // with a string of error
-    console.log(selectedView);
+    const validationResult = validateFields(viewFields[selectedView], fieldObjects);
 
-    // NOTE: naive approach
-    if (updateFields.name.required && updateFields.name.value === '') {
-      updateFields.name.className = 'error';
-    } else {
-      updateFields.name.className = '';
+    this.setState(prevState => ({
+      fields: Object.assign({}, prevState.fields, validationResult.fields),
+      hasErrors: validationResult.hasErrors,
+    }));
+
+    if (validationResult.hasErrors === false) {
       goToNextView();
     }
-
-    this.setState({ fields: updateFields });
   };
 
   render() {
@@ -273,88 +185,92 @@ class Careers extends React.Component {
                         <Label>Position you are applying for</Label>
                         <Input {...state.fields.position} />
                       </Field>
-                      <Label>Are you available to work on weekends?</Label>
                       <fieldset>
-                        <label>
+                        <legend>Are you available to work on weekends?</legend>
+                        <FieldGroups>
                           <Input
                             {...state.fields.canWorkWeekends}
                             checked={state.fields.canWorkWeekends.value === 'yes'}
                             value="yes"
-                          />{' '}
-                          Yes
-                        </label>
-                        <label>
+                          >
+                            Yes
+                          </Input>
                           <Input
                             {...state.fields.canWorkWeekends}
                             checked={state.fields.canWorkWeekends.value === 'no'}
                             value="no"
-                          />{' '}
-                          No
-                        </label>
+                          >
+                            No
+                          </Input>
+                        </FieldGroups>
                       </fieldset>
-                      <Label>Are you capable of physical labor?</Label>
                       <fieldset>
-                        <label>
+                        <legend>Are you capable of physical labor?</legend>
+                        <FieldGroups>
                           <Input
                             {...state.fields.capableOfPhysicalLabor}
                             checked={state.fields.capableOfPhysicalLabor.value === 'yes'}
                             value="yes"
-                          />{' '}
-                          Yes
-                        </label>
-                        <label>
+                          >
+                            Yes
+                          </Input>
                           <Input
                             {...state.fields.capableOfPhysicalLabor}
                             checked={state.fields.capableOfPhysicalLabor.value === 'no'}
                             value="no"
-                          />{' '}
-                          No
-                        </label>
+                          >
+                            No
+                          </Input>
+                        </FieldGroups>
                       </fieldset>
-                      <Label>Have you ever been convicted of a felony?</Label>
+
                       <fieldset>
-                        <label>
+                        <legend>Have you ever been convicted of a felony?</legend>
+                        <FieldGroups>
                           <Input
                             {...state.fields.convictedOfFelony}
                             checked={state.fields.convictedOfFelony.value === 'yes'}
                             value="yes"
-                          />{' '}
-                          Yes
-                        </label>
-                        <label>
+                          >
+                            Yes
+                          </Input>
                           <Input
                             {...state.fields.convictedOfFelony}
                             checked={state.fields.convictedOfFelony.value === 'no'}
                             value="no"
-                          />{' '}
-                          No
-                        </label>
+                          >
+                            No
+                          </Input>
+                        </FieldGroups>
                       </fieldset>
+
                       {state.fields.convictedOfFelony.value === 'yes' && (
                         <Field nameAs="felonyExplanation" fragment>
                           <Label>Please explain:</Label>
                           <Textarea {...state.fields.felonyExplanation} />
                         </Field>
                       )}
-                      <Label>Have you previously worked for Priority Construction?</Label>
+
                       <fieldset>
-                        <label>
+                        <legend>Have you previously worked for Priority Construction?</legend>
+                        <FieldGroups>
                           <Input
                             {...state.fields.previouslyWorkedForPriority}
                             checked={state.fields.previouslyWorkedForPriority.value === 'yes'}
                             value="yes"
-                          />{' '}
-                          Yes
-                        </label>
-                        <label>
+                          >
+                            Yes
+                          </Input>
                           <Input
                             {...state.fields.previouslyWorkedForPriority}
                             checked={state.fields.previouslyWorkedForPriority.value === 'no'}
                             value="no"
-                          />{' '}
-                          No
-                        </label>
+                          >
+                            No
+                          </Input>
+                        </FieldGroups>
                       </fieldset>
+
                       {state.fields.previouslyWorkedForPriority.value === 'yes' && (
                         <Field nameAs="previousWorkforPriorityDetails" fragment>
                           <Label>
@@ -481,11 +397,19 @@ class Careers extends React.Component {
 
                     {state.submissionState === 'error' && (
                       <FormErrorMessage tabIndex={-1} innerRef={this.errorMessage}>
-                        Sorry.{' '}
+                        Sorry.
+                        {' '}
                         <span role="img" aria-label="Sad face">
                           😔
-                        </span>{' '}
+                        </span>
+                        {' '}
                         There was an problem submitting your message. Please try again.
+                      </FormErrorMessage>
+                    )}
+
+                    {this.state.hasErrors && (
+                      <FormErrorMessage tabIndex={-1} innerRef={this.errorMessage}>
+                        Please correct any missing or invalid information above.
                       </FormErrorMessage>
                     )}
                   </ContactForm>

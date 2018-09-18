@@ -13,16 +13,16 @@ exports[`should render 1`] = `
   margin-bottom: 1rem;
 }
 
-.c0 .sc-bdVaJa {
+.c0 .c1 {
   -webkit-flex: 0 1 100px;
   -ms-flex: 0 1 100px;
   flex: 0 1 100px;
   max-width: 200px;
 }
 
-.c0 .sc-bwzfXH,
-.c0 .sc-htpNat,
-.c0 .sc-ifAKCX {
+.c0 .c2,
+.c0 .sc-bZQynM,
+.c0 .sc-htoDjs {
   width: 100%;
 }
 
@@ -47,9 +47,9 @@ exports[`should render as stack 1`] = `
   margin-bottom: 1rem;
 }
 
-.c0 .sc-bwzfXH,
-.c0 .sc-htpNat,
-.c0 .sc-ifAKCX {
+.c0 .c1,
+.c0 .sc-bZQynM,
+.c0 .sc-htoDjs {
   width: 100%;
 }
 

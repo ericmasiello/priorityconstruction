@@ -122,12 +122,16 @@ class Layout extends React.Component {
               <Small tag={FlatList}>
                 <FlatList.Item>
                   <TopBarLink href={`tel:${phone}`}>
-                    <PhoneIcon /> {phone}
+                    <PhoneIcon /> 
+                    {' '}
+                    {phone}
                   </TopBarLink>
                 </FlatList.Item>
                 <FlatList.Item>
                   <TopBarLink href={`mailto:${email}`}>
-                    <MailIcon /> {email}
+                    <MailIcon /> 
+                    {' '}
+                    {email}
                   </TopBarLink>
                 </FlatList.Item>
               </Small>
@@ -195,6 +199,10 @@ export default styled(Layout)`
     ${TopBar} {
       order: 0;
     }
+  }
+
+  ${FlatList.Item} {
+    margin-bottom: 0;
   }
 `;
 

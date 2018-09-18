@@ -16,6 +16,7 @@ export const COLORS = {
     .lighten(50)
     .toRgbString(),
   placeholder: '#D8D8D8',
+  error: '#cc0000',
 };
 
 export const MAX_CONTENT_WIDTH = 1200;

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import GatsbyImage from '../components/GatsbyImage';
-import FlatList from '../components/FlatList';
-import InvisibleButton from '../components/InvisibleButton';
-import CloseIcon from '../components/CloseIcon';
+import GatsbyImage from './GatsbyImage';
+import FlatList from './FlatList';
+import InvisibleButton from './InvisibleButton';
+import CloseIcon from './CloseIcon';
 import { pxToRem } from '../styles/utils';
 import * as CustomPropTypes from '../propTypes';
 
@@ -81,6 +81,7 @@ const GalleryTileButton = InvisibleButton.extend`
 
 export class GalleryOverlay extends React.Component {
   static displayName = 'GalleryOverlay';
+
   static propTypes = {
     tag: CustomPropTypes.Tag,
     images: CustomPropTypes.AllImageSharp.isRequired,

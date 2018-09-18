@@ -18,6 +18,7 @@ View.propTypes = {
 /* eslint-disable react/no-unused-state, react/sort-comp */
 export default class Toggler extends React.Component {
   static displayName = 'Toggler';
+
   static propTypes = {
     children: PropTypes.node,
     views: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -25,29 +26,34 @@ export default class Toggler extends React.Component {
   };
 
   static Consumer = TogglerContext.Consumer;
+
   static View = View;
 
   handleSelection = tab => this.setState({ selected: tab });
-  handleNextView = () => {
-    const currentIndex = this.state.views.findIndex(tab => tab === this.state.selected);
-    const nextTab =
-      currentIndex >= this.state.views.length - 1
-        ? this.state.views[0]
-        : this.state.views[currentIndex + 1];
 
-    this.setState({
-      selected: nextTab,
+  handleNextView = () => {
+    this.setState(prevState => {
+      const currentIndex = prevState.views.findIndex(tab => tab === prevState.selected);
+      const nextTab =
+        currentIndex >= prevState.views.length - 1
+          ? prevState.views[0]
+          : prevState.views[currentIndex + 1];
+      return {
+        selected: nextTab,
+      };
     });
   };
-  handlePreviousView = () => {
-    const currentIndex = this.state.views.findIndex(tab => tab === this.state.selected);
-    const nextTab =
-      currentIndex === 0
-        ? this.state.views[this.state.views.length - 1]
-        : this.state.views[currentIndex - 1];
 
-    this.setState({
-      selected: nextTab,
+  handlePreviousView = () => {
+    this.setState(prevState => {
+      const currentIndex = prevState.views.findIndex(tab => tab === prevState.selected);
+      const nextTab =
+        currentIndex === 0
+          ? prevState.views[prevState.views.length - 1]
+          : prevState.views[currentIndex - 1];
+      return {
+        selected: nextTab,
+      };
     });
   };
 

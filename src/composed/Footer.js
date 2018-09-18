@@ -75,16 +75,29 @@ export const ComposedFooter = props => {
             <a href="https://www.google.com/maps/place/1315+W+Hamburg+St,+Baltimore,+MD+21230/">
               <List>
                 <List.Item>
-                  {streetAddress} {city}, {state} {zip}
+                  {streetAddress} 
+                  {' '}
+                  {city}
+, 
+                  {' '}
+                  {state} 
+                  {' '}
+                  {zip}
                 </List.Item>
               </List>
             </a>
             <List>
               <List.Item>
-                <a href={`tel:${phone}`}>phone: {phone}</a>
+                <a href={`tel:${phone}`}>
+                  phone:
+                  {phone}
+                </a>
               </List.Item>
               <List.Item>
-                <a href={`tel:${fax}`}>fax {fax}</a>
+                <a href={`tel:${fax}`}>
+                  fax
+                  {fax}
+                </a>
               </List.Item>
             </List>
             <List>
