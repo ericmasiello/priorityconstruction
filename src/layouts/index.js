@@ -101,7 +101,7 @@ class Layout extends React.Component {
 
   render() {
     const { children, data, className } = this.props;
-    const { title, desc, keywords, address, phone, fax, email } = data.site.siteMetadata;
+    const { title, desc, keywords, address, phone, email } = data.site.siteMetadata;
 
     return (
       <LayoutContext.Provider value={this.state}>
@@ -145,7 +145,7 @@ class Layout extends React.Component {
               {this.state.heroChildren}
             </Hero>
             <LayoutChildren>{children()}</LayoutChildren>
-            <ComposedFooter {...address} logo={data.logo} phone={phone} fax={fax} email={email} />
+            <ComposedFooter {...address} phone={phone} />
           </div>
         )}
         {this.state.toggleElement}
@@ -169,7 +169,6 @@ Layout.propTypes = {
           zip: PropTypes.number.isRequired,
         }),
         phone: PropTypes.string.isRequired,
-        fax: PropTypes.string.isRequired,
         email: PropTypes.string.isRequired,
       }),
     }),
@@ -221,12 +220,7 @@ export const query = graphql`
           zip
         }
         phone
-        fax
         email
-        urls {
-          facebook
-          linkedin
-        }
       }
     }
 
