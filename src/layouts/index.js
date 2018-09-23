@@ -106,19 +106,21 @@ class Layout extends React.Component {
                 { name: 'keywords', content: keywords.join(', ') },
               ]}
             />
-            <PageHeaderBar
-              navRef={this.state.navRef}
-              logo={this.state.logo}
-              currentPathname={this.props.location.pathname}
-            />
-            <Hero
-              selectedImage={this.state.background}
-              bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
-              isFullHeight={this.state.isFullHeight}
-            >
-              {this.state.heroChildren}
-            </Hero>
-            <LayoutChildren>{children()}</LayoutChildren>
+            <div>
+              <PageHeaderBar
+                navRef={this.state.navRef}
+                logo={this.state.logo}
+                currentPathname={this.props.location.pathname}
+              />
+              <Hero
+                selectedImage={this.state.background}
+                bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
+                isFullHeight={this.state.isFullHeight}
+              >
+                {this.state.heroChildren}
+              </Hero>
+              <LayoutChildren>{children()}</LayoutChildren>
+            </div>
             <ComposedFooter {...address} phone={phone} />
           </div>
         )}
@@ -158,6 +160,8 @@ Layout.displayName = 'Layout';
 export default styled(Layout)`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
   position: relative;
 
   ${PageHeaderBar}, ${Hero}, ${LayoutChildren}, ${ComposedFooter} {
