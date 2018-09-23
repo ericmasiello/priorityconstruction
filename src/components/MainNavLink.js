@@ -23,13 +23,13 @@ const MainNavLink = styled(Link)`
     selected &&
     `
     &::after {
-      height: 25%;
+      height: 3px;
     }
   `};
 
   @media (hover) {
     &:hover::after {
-      height: 25%;
+      height: 3px;
     }
   }
 `;
