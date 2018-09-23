@@ -94,36 +94,37 @@ class Layout extends React.Component {
   render() {
     const { children, data, className } = this.props;
     const { title, desc, keywords, address, phone } = data.site.siteMetadata;
+    const styles = {
+      display: this.state.toggleElement ? 'none' : undefined,
+    };
 
     return (
       <LayoutContext.Provider value={this.state}>
-        {this.state.toggleElement === null && (
-          <div className={className}>
-            <Helmet
-              title={title}
-              meta={[
-                { name: 'description', content: desc },
-                { name: 'keywords', content: keywords.join(', ') },
-              ]}
+        <Helmet
+          title={title}
+          meta={[
+            { name: 'description', content: desc },
+            { name: 'keywords', content: keywords.join(', ') },
+          ]}
+        />
+        <div className={className} style={styles}>
+          <div>
+            <PageHeaderBar
+              navRef={this.state.navRef}
+              logo={this.state.logo}
+              currentPathname={this.props.location.pathname}
             />
-            <div>
-              <PageHeaderBar
-                navRef={this.state.navRef}
-                logo={this.state.logo}
-                currentPathname={this.props.location.pathname}
-              />
-              <Hero
-                selectedImage={this.state.background}
-                bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
-                isFullHeight={this.state.isFullHeight}
-              >
-                {this.state.heroChildren}
-              </Hero>
-              <LayoutChildren>{children()}</LayoutChildren>
-            </div>
-            <ComposedFooter {...address} phone={phone} />
+            <Hero
+              selectedImage={this.state.background}
+              bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
+              isFullHeight={this.state.isFullHeight}
+            >
+              {this.state.heroChildren}
+            </Hero>
+            <LayoutChildren>{children()}</LayoutChildren>
           </div>
-        )}
+          <ComposedFooter {...address} phone={phone} />
+        </div>
         {this.state.toggleElement}
       </LayoutContext.Provider>
     );
