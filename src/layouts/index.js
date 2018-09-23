@@ -4,23 +4,15 @@ import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
 import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
-import FlatList from '../components/FlatList';
 import FlatListItem from '../components/FlatListItem';
 import ComposedFooter from '../composed/Footer';
 import Hero from '../components/Hero';
-import TopBar from '../components/TopBar';
-import TopBarLink from '../components/TopBarLink';
-import Small from '../components/Small';
 import LayoutContext from '../layoutContext';
-import MailIcon from '../components/MailIcon';
-import PhoneIcon from '../components/PhoneIcon';
 import HeroHomePageContent from '../components/HeroHomePageContent';
 import HeroAboutPageContent from '../components/HeroAboutPageContent';
 import HeroCareersPageContent from '../components/HeroCareersPageContent';
 import HeroContactPageContent from '../components/HeroContactPageContent';
 import PageHeaderBar from '../components/PageHeaderBar';
-import { MEDIA_QUERIES } from '../styles/vars';
-import { pxToRem } from '../styles/utils';
 
 const LayoutChildren = styled.main``;
 
@@ -101,7 +93,7 @@ class Layout extends React.Component {
 
   render() {
     const { children, data, className } = this.props;
-    const { title, desc, keywords, address, phone, email } = data.site.siteMetadata;
+    const { title, desc, keywords, address, phone } = data.site.siteMetadata;
 
     return (
       <LayoutContext.Provider value={this.state}>
@@ -119,24 +111,6 @@ class Layout extends React.Component {
               logo={this.state.logo}
               currentPathname={this.props.location.pathname}
             />
-            <TopBar>
-              <Small tag={FlatList}>
-                <FlatListItem>
-                  <TopBarLink href={`tel:${phone}`}>
-                    <PhoneIcon /> 
-                    {' '}
-                    {phone}
-                  </TopBarLink>
-                </FlatListItem>
-                <FlatListItem>
-                  <TopBarLink href={`mailto:${email}`}>
-                    <MailIcon /> 
-                    {' '}
-                    {email}
-                  </TopBarLink>
-                </FlatListItem>
-              </Small>
-            </TopBar>
             <Hero
               selectedImage={this.state.background}
               bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
@@ -169,7 +143,6 @@ Layout.propTypes = {
           zip: PropTypes.number.isRequired,
         }),
         phone: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
       }),
     }),
     backgroundHome: CustomPropTypes.ImageSharp,
@@ -191,16 +164,6 @@ export default styled(Layout)`
     order: 1;
   }
 
-  ${TopBar} {
-    order: 1;
-  }
-
-  @media(min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
-    ${TopBar} {
-      order: 0;
-    }
-  }
-
   ${FlatListItem} {
     margin-bottom: 0;
   }
@@ -220,7 +183,6 @@ export const query = graphql`
           zip
         }
         phone
-        email
       }
     }
 
