@@ -14,12 +14,10 @@ const GalleryOverlayPrimaryImage = styled(GatsbyImage)`
   height: 100%;
 `;
 const GalleryOverviewList = styled(FlatList)`
-  display: grid;
-  grid-template-columns: repeat(10, minmax(150px, 1fr));
-  grid-gap: 0.5rem;
+  height: ${GalleryOverlayTileImageHeight};
+  display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
-  padding: 0.5rem;
 
   .gatsby-image-outer-wrapper {
     position: absolute !important;
@@ -38,6 +36,7 @@ const GalleryOverviewList = styled(FlatList)`
   }
 `;
 const GalleryOverviewListItem = styled(FlatListItem)`
+  min-width: 150px;
   &:not(:last-child) {
     margin-right: 0;
     margin-bottom: 0;
@@ -62,17 +61,10 @@ const GalleryTileButton = styled(InvisibleButton)`
   height: 100%;
   width: 100%;
   position: relative;
+  border: 0.25rem solid transparent;
 
   &[aria-pressed='true'] {
-    &::before {
-      content: '';
-      position: absolute;
-      left: -0.25rem;
-      right: -0.25rem;
-      top: -0.25rem;
-      bottom: -0.25rem;
-      border: 0.25rem solid #fff;
-    }
+    border-color: #fff;
 
     &:focus {
       outline: none;
@@ -183,10 +175,10 @@ export default styled(GalleryOverlay)`
   right: 0;
   z-index: 999;
   height: 100vh;
-  display: grid;
-  grid-template-rows: calc(100vh - ${GalleryOverlayTileImageHeight}) ${GalleryOverlayTileImageHeight};
+  display: flex;
+  flex-direction: column;
 
-  .gatsby-image-outer-wrapper {
-    height: 100%;
+  > .gatsby-image-outer-wrapper {
+    height: calc(100vh - ${GalleryOverlayTileImageHeight});
   }
 `;
