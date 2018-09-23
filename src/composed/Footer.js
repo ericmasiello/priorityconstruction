@@ -5,10 +5,6 @@ import Link from 'gatsby-link';
 import Footer from '../components/Footer';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
-import Logo from '../components/Logo';
-import FacebookIcon from '../components/FacebookIcon';
-import LinkedInIcon from '../components/LinkedInIcon';
-import * as CustomPropTypes from '../propTypes';
 import { pxToRem } from '../styles/utils';
 import { COLORS, TYPE_SIZE } from '../styles/vars';
 
@@ -16,10 +12,6 @@ const Container = styled.div`
   @media (min-width: ${pxToRem(650)}) {
     display: flex;
     justify-content: space-between;
-  }
-
-  ${Logo} {
-    margin-bottom: ${pxToRem(8)};
   }
 `;
 
@@ -49,26 +41,12 @@ const Address = styled.address`
   }
 `;
 
-const SocialMedia = styled.aside`
-  display: flex;
-
-  > * {
-    margin-right: 0.5rem;
-  }
-
-  ${FacebookIcon}, ${LinkedInIcon} {
-    width: ${pxToRem(40)};
-    height: ${pxToRem(40)};
-  }
-`;
-
 export const ComposedFooter = props => {
-  const { logo, streetAddress, city, state, zip, phone, fax, email, ...rest } = props;
+  const { streetAddress, city, state, zip, phone, ...rest } = props;
   return (
     <Footer {...rest}>
       <Container>
         <div>
-          <Logo image={logo} />
           <Address>
             <a href="https://www.google.com/maps/place/1315+W+Hamburg+St,+Baltimore,+MD+21230/">
               <List>
@@ -76,8 +54,7 @@ export const ComposedFooter = props => {
                   {streetAddress} 
                   {' '}
                   {city}
-, 
-                  {' '}
+                  {', '}
                   {state} 
                   {' '}
                   {zip}
@@ -87,21 +64,12 @@ export const ComposedFooter = props => {
             <List>
               <ListItem>
                 <a href={`tel:${phone}`}>
-                  phone:
+                  {'phone: '}
                   {phone}
-                </a>
-              </ListItem>
-              <ListItem>
-                <a href={`tel:${fax}`}>
-                  fax
-                  {fax}
                 </a>
               </ListItem>
             </List>
             <List>
-              <ListItem>
-                <a href={`mailto:${email}`}>{email}</a>
-              </ListItem>
               <ListItem>
                 <Link to="/contact">Contact Us</Link>
               </ListItem>
@@ -111,16 +79,6 @@ export const ComposedFooter = props => {
             </List>
           </Address>
         </div>
-        <div>
-          <SocialMedia>
-            <a href="https://www.facebook.com/prorityconstruction/" title="Facebook page">
-              <FacebookIcon />
-            </a>
-            <a href="https://www.linkedin.com/company/priority-construction/" title="LinkedIn Page">
-              <LinkedInIcon />
-            </a>
-          </SocialMedia>
-        </div>
       </Container>
     </Footer>
   );
@@ -129,14 +87,11 @@ export const ComposedFooter = props => {
 ComposedFooter.displayName = 'ComposedFooter';
 
 ComposedFooter.propTypes = {
-  logo: CustomPropTypes.ImageSharp.isRequired,
   streetAddress: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
   zip: PropTypes.number.isRequired,
   phone: PropTypes.string.isRequired,
-  fax: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
 };
 
 export default styled(ComposedFooter)`
