@@ -26,6 +26,10 @@ class GalleryPage extends React.Component {
     hideLayoutElement: PropTypes.func.isRequired,
   };
 
+  componentWillUnmount() {
+    this.props.hideLayoutElement();
+  }
+
   handleSelectImageByIndex = selectedIndex => () => {
     this.props.displayLayoutElement(GalleryOverlay, {
       selectedIndex,

@@ -176,7 +176,7 @@ export class GalleryOverlay extends React.Component {
 }
 
 export default styled(GalleryOverlay)`
-  position: absolute;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.95);
   top: 0;
   left: 0;
