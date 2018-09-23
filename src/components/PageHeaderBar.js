@@ -9,7 +9,7 @@ import Logo from './Logo';
 import MainNavLink from './MainNavLink';
 import { pxToRem } from '../styles/utils';
 import { PAGE_SPACING, TYPE_SIZE, COLORS, MEDIA_QUERIES } from '../styles/vars';
-import HeaderBarFlatListItem from './HeaderBarFlatListItem';
+import FlatListItem from './FlatListItem';
 import * as CustomPropTypes from '../propTypes';
 
 // FIXME: use the actual invisible button?
@@ -26,16 +26,23 @@ const DesktopNav = styled(FlatList)`
   @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
     display: flex;
   }
+
+  ${FlatListItem} {
+    margin-bottom: 0;
+
+    &:not(:last-child) {
+      margin-right: ${pxToRem(30)};
+    }
+  }
 `;
 
 const MobileNav = styled(FlatList)`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: ${pxToRem(60)};
   bottom: 0;
   background: white;
-  height: 100vh;
   z-index: 999;
   flex-direction: column;
   padding: ${pxToRem(PAGE_SPACING.horizontal)};
@@ -55,6 +62,14 @@ const MobileNav = styled(FlatList)`
 
   @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {
     display: none;
+  }
+
+  ${FlatListItem} {
+    margin-right: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
   }
 `;
 
@@ -109,22 +124,22 @@ class PageHeaderBar extends React.Component {
       <HeaderBar tag="nav" innerRef={navRef} className={className}>
         <Logo image={logo} />
         <MobileNav aria-hidden={!this.state.showMenu}>
-          <HeaderBarFlatListItem>
+          <FlatListItem>
             <div ref={this.mobileNav} tabIndex={-1} />
             <MainNavLink selected={currentPathname === '/'} onClick={this.handleHideMenu} to="/">
               Home
             </MainNavLink>
-          </HeaderBarFlatListItem>
+          </FlatListItem>
           {links.map(link => (
-            <HeaderBarFlatListItem key={link.children}>
+            <FlatListItem key={link.children}>
               <MainNavLink
                 selected={currentPathname === link.to}
                 {...link}
                 onClick={this.handleHideMenu}
               />
-            </HeaderBarFlatListItem>
+            </FlatListItem>
           ))}
-          <HeaderBarFlatListItem>
+          <FlatListItem>
             <MainNavLink
               selected={currentPathname === '/careers'}
               onClick={this.handleHideMenu}
@@ -132,8 +147,8 @@ class PageHeaderBar extends React.Component {
             >
               Career Opportunities
             </MainNavLink>
-          </HeaderBarFlatListItem>
-          <HeaderBarFlatListItem>
+          </FlatListItem>
+          <FlatListItem>
             <MainNavLink
               selected={currentPathname === '/contact'}
               onClick={this.handleHideMenu}
@@ -141,20 +156,20 @@ class PageHeaderBar extends React.Component {
             >
               Contact Us
             </MainNavLink>
-          </HeaderBarFlatListItem>
+          </FlatListItem>
         </MobileNav>
         <InvisibleButton onClick={this.state.showMenu ? this.handleHideMenu : this.handleShowMenu}>
           {this.state.showMenu ? <CloseIcon /> : <MenuIcon />}
         </InvisibleButton>
         <DesktopNav>
           {links.map(link => (
-            <HeaderBarFlatListItem key={link.children}>
+            <FlatListItem key={link.children}>
               <MainNavLink
                 selected={currentPathname === link.to}
                 {...link}
                 onClick={this.handleHideMenu}
               />
-            </HeaderBarFlatListItem>
+            </FlatListItem>
           ))}
         </DesktopNav>
       </HeaderBar>
