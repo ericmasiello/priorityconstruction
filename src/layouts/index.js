@@ -4,7 +4,6 @@ import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
 import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
-import FlatListItem from '../components/FlatListItem';
 import ComposedFooter from '../composed/Footer';
 import Hero from '../components/Hero';
 import LayoutContext from '../layoutContext';
@@ -164,14 +163,6 @@ export default styled(Layout)`
   justify-content: space-between;
   min-height: 100vh;
   position: relative;
-
-  ${PageHeaderBar}, ${Hero}, ${LayoutChildren}, ${ComposedFooter} {
-    order: 1;
-  }
-
-  ${FlatListItem} {
-    margin-bottom: 0;
-  }
 `;
 
 export const query = graphql`
