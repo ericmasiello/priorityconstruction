@@ -14,6 +14,11 @@ const GalleryOverlayPrimaryImage = styled(GatsbyImage)`
   height: 100%;
 `;
 const GalleryOverviewList = styled(FlatList)`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000;
   height: ${GalleryOverlayTileImageHeight};
   display: flex;
   overflow-x: scroll;
