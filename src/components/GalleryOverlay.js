@@ -173,12 +173,12 @@ export default styled(GalleryOverlay)`
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
   z-index: 999;
-  height: 100vh;
   display: flex;
   flex-direction: column;
 
   > .gatsby-image-outer-wrapper {
-    height: calc(100vh - ${GalleryOverlayTileImageHeight});
+    flex: 1;
   }
 `;
