@@ -67,7 +67,6 @@ class Layout extends React.Component {
 
   /* eslint-disable react/no-unused-state */
   state = {
-    logo: this.props.data.logo,
     title: this.props.data.site.siteMetadata.title,
     heroChildren: getConfigFromPathname(this.pageConfigs, this.props.location.pathname)
       .heroChildren,
@@ -110,7 +109,6 @@ class Layout extends React.Component {
           <div>
             <PageHeaderBar
               navRef={this.state.navRef}
-              logo={this.state.logo}
               currentPathname={this.props.location.pathname}
             />
             <Hero
@@ -149,7 +147,6 @@ Layout.propTypes = {
     }),
     backgroundHome: CustomPropTypes.ImageSharp,
     backgroundAbout: CustomPropTypes.ImageSharp,
-    logo: CustomPropTypes.ImageSharp,
   }).isRequired,
   location: CustomPropTypes.Location.isRequired,
   className: PropTypes.string,
@@ -190,12 +187,6 @@ export const query = graphql`
 
     backgroundAbout: imageSharp(id: { regex: "/src/images/photos/heroes/underpass/" }) {
       sizes(maxWidth: 1240) {
-        ...GatsbyImageSharpSizes
-      }
-    }
-
-    logo: imageSharp(id: { regex: "/priorityconstructionlogo.jpg/" }) {
-      sizes(maxWidth: 800) {
         ...GatsbyImageSharpSizes
       }
     }

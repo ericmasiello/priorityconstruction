@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'gatsby-link';
 import PropTypes from 'prop-types';
 import HeaderBar from './HeaderBar';
 import FlatList from './FlatList';
@@ -7,17 +8,24 @@ import MenuIcon from './MenuIcon';
 import CloseIcon from './CloseIcon';
 import Logo from './Logo';
 import MainNavLink from './MainNavLink';
+import InvisibleButton from './InvisibleButton';
 import { pxToRem } from '../styles/utils';
 import { PAGE_SPACING, TYPE_SIZE, COLORS, MEDIA_QUERIES } from '../styles/vars';
 import FlatListItem from './FlatListItem';
-import * as CustomPropTypes from '../propTypes';
 
-// FIXME: use the actual invisible button?
-const InvisibleButton = styled.button`
-  background-color: transparent;
-  border: none;
-  padding: 0.25rem;
-  cursor: pointer;
+const LogoLink = styled(Link)`
+  display: inline-block;
+  height: 45px;
+  width: 197px;
+  position: relative;
+`;
+
+const SiteTitle = styled.h1`
+  text-indent: -9999px;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
 `;
 
 const DesktopNav = styled(FlatList)`
@@ -95,7 +103,6 @@ const links = [
 class PageHeaderBar extends React.Component {
   static propTypes = {
     navRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    logo: CustomPropTypes.ImageSharp,
     currentPathname: PropTypes.string,
     className: PropTypes.string,
   };
@@ -119,10 +126,13 @@ class PageHeaderBar extends React.Component {
   };
 
   render() {
-    const { className, navRef, logo, currentPathname } = this.props;
+    const { className, navRef, currentPathname } = this.props;
     return (
       <HeaderBar tag="nav" innerRef={navRef} className={className}>
-        <Logo image={logo} />
+        <LogoLink to="/">
+          <SiteTitle>Priority Construction</SiteTitle>
+          <Logo />
+        </LogoLink>
         <MobileNav aria-hidden={!this.state.showMenu}>
           <FlatListItem>
             <div ref={this.mobileNav} tabIndex={-1} />
