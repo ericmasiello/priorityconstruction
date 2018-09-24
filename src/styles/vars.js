@@ -10,7 +10,9 @@ export const COLORS = {
   muted: '#787575',
   highlight: '#FBDB1E',
   highlight2: '#4D1017',
-  highlight3: '#002B6D',
+  highlight3: tinyColor('#385072')
+    .darken(5)
+    .toRgbString(),
   link: '#18232C',
   border: tinyColor(baseColor)
     .lighten(50)
