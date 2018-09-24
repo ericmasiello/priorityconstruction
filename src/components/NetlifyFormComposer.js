@@ -44,16 +44,14 @@ export default class NetlifyFormComposer extends React.Component {
   };
 
   handleChange = event => {
+    const elm = event.target;
     this.setState(prevState => {
-      const value =
-        event.target.type === 'checkbox' && event.target.checked === false
-          ? undefined
-          : event.target.value;
+      const value = elm.type === 'checkbox' && elm.checked === false ? undefined : elm.value;
       return {
         fields: {
           ...prevState.fields,
-          [event.target.name]: {
-            ...prevState.fields[event.target.name],
+          [elm.name]: {
+            ...prevState.fields[elm.name],
             value,
           },
         },
@@ -62,10 +60,11 @@ export default class NetlifyFormComposer extends React.Component {
   };
 
   handleSubmit = e => {
+    e.preventDefault();
     // optimistically render a success message
     this.setState({ submissionState: 'success' }, this.props.onSubmitSuccess);
 
-    fetch('/', {
+    return fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': this.props.name, ...fieldsToKeyValues(this.state.fields) }),
@@ -96,8 +95,6 @@ export default class NetlifyFormComposer extends React.Component {
           this.props.onSubmitError,
         );
       });
-
-    e.preventDefault();
   };
 
   handleResetFormSubmission = () => this.setState({ submissionState: null });
