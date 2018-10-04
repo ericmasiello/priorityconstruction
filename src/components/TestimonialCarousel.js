@@ -7,7 +7,7 @@ import Quote from './Quote';
 import Citation from './Citation';
 import InvisibleButton from './InvisibleButton';
 import Base from './Base';
-import { COLORS, PAGE_SPACING, MAX_CONTENT_WIDTH } from '../styles/vars';
+import { COLORS, GUTTER_SIZE, MAX_CONTENT_WIDTH } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
 const BREAKPOINT = 550;
@@ -55,8 +55,8 @@ const TestimonialContainerItem = styled.li`
   display: flex;
   align-items: center;
   width: 100vw;
-  padding-left: ${pxToRem(PAGE_SPACING.horizontal)};
-  padding-right: ${pxToRem(PAGE_SPACING.horizontal)};
+  padding-left: ${pxToRem(GUTTER_SIZE)};
+  padding-right: ${pxToRem(GUTTER_SIZE)};
 
   @media (min-width: ${pxToRem(BREAKPOINT)}) {
     padding-left: ${pxToRem(60)};

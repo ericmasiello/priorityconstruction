@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { pxToRem } from '../styles/utils';
-import { PAGE_SPACING } from '../styles/vars';
+import { GUTTER_SIZE } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
 import Container from './Container';
 
@@ -27,5 +27,5 @@ PageContainer.defaultProps = {
 PageContainer.displayName = 'PageContainer';
 
 export default styled(PageContainer)`
-  padding: 0 ${pxToRem(PAGE_SPACING.horizontal)} 1rem;
+  padding: 0 ${pxToRem(GUTTER_SIZE)} 1rem;
 `;

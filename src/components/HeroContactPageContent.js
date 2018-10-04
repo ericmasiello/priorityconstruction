@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import HeroBanner from './HeroBanner';
 import HeroContent from './HeroContent';
-import { PAGE_SPACING } from '../styles/vars';
+import { GUTTER_SIZE } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
 export const HeroContactPageContent = props => (
@@ -17,7 +17,7 @@ export default styled(HeroContactPageContent)`
   align-self: center;
   width: 100%;
   ${HeroBanner} {
-    padding-left: ${pxToRem(PAGE_SPACING.horizontal)};
-    padding-right: ${pxToRem(PAGE_SPACING.horizontal)};
+    padding-left: ${pxToRem(GUTTER_SIZE)};
+    padding-right: ${pxToRem(GUTTER_SIZE)};
   }
 `;
