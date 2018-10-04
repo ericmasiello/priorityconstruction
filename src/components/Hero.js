@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import GatsbyImage from './GatsbyImage';
 import HeroBanner from './HeroBanner';
 import * as CustomPropTypes from '../propTypes';
-import { COLORS, MAX_CONTENT_WIDTH, GUTTER_SIZE, MEDIA_QUERIES } from '../styles/vars';
+import { COLORS, MAX_CONTENT_WIDTH_PLUS, MEDIA_QUERIES } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
 const BackgroundImage = styled(GatsbyImage)`
@@ -94,7 +94,7 @@ export default styled(Hero)`
   background-color: ${props => props.bgColor};
   overflow: visible;
   position: relative;
-  max-width: ${pxToRem(MAX_CONTENT_WIDTH)};
+  max-width: ${pxToRem(MAX_CONTENT_WIDTH_PLUS)};
   margin-left: auto;
   margin-right: auto;
   @media (min-height: ${pxToRem(450)}) {
@@ -108,11 +108,6 @@ export default styled(Hero)`
     height: 100%;
     left: 0;
     top: 0;
-
-    @media (min-width: ${pxToRem(MEDIA_QUERIES.fullBleed)}) {
-      width: calc(100% + ${pxToRem(GUTTER_SIZE * 2)});
-      left: ${pxToRem(GUTTER_SIZE * -1)};
-    }
   }
 
   ${HeroBanner} {

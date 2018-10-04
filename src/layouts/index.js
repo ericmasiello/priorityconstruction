@@ -46,7 +46,7 @@ class Layout extends React.Component {
       isFullHeight: false,
       heroChildren: <HeroCareersPageContent />,
     },
-    contact: { 
+    contact: {
       isFullHeight: false,
       heroChildren: <HeroContactPageContent />,
     },
