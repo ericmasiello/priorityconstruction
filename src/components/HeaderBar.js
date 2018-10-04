@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { pxToRem } from '../styles/utils';
-import { COLORS, MAX_CONTENT_WIDTH, GUTTER_SIZE } from '../styles/vars';
+import { COLORS, MAX_CONTENT_WIDTH, GUTTER_SIZE, MEDIA_QUERIES } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
 
 const HeaderBarContent = styled.div`
@@ -56,10 +56,14 @@ HeaderBar.defaultProps = {
 
 export default styled(HeaderBar)`
   background-color: ${COLORS.bg};
-  padding: ${pxToRem(20)} ${pxToRem(GUTTER_SIZE)};
+  padding: 1.25rem ${pxToRem(GUTTER_SIZE)};
   position: sticky;
   top: -1px;
   z-index: 10;
+
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.max)}) {
+    padding-top: 2rem;
+  }
 
   &[data-stuck='true'] {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);

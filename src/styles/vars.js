@@ -33,6 +33,7 @@ export const MEDIA_QUERIES = {
   navTransition: 800,
   heroL: 700,
   heroXL: 950,
+  max: MAX_CONTENT_WIDTH_PLUS,
 };
 
 // type properties
