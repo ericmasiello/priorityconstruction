@@ -2,7 +2,7 @@ import tinyColor from 'tinycolor2';
 
 const unitToPx = unit => unit * 16;
 const baseColor = '#424141';
-export const scaler = 1.5;
+export const scaler = 1.333;
 
 export const COLORS = {
   bg: '#fff',
@@ -33,14 +33,14 @@ export const MEDIA_QUERIES = {
 
 // type properties
 export const TYPE_SIZE = {
-  small: [unitToPx(0.8125), scaler],
-  base: [unitToPx(1), scaler],
-  t5: [unitToPx(1.3), scaler],
-  t4: [unitToPx(1.5), scaler],
-  t3: [unitToPx(2), 1.3],
-  t2: [unitToPx(2.5), 1.2],
-  t1: [unitToPx(3), 1.1],
-  jumbo: [unitToPx(4), 1.1],
+  small: [unitToPx(0.8125), 1.5],
+  base: [unitToPx(1), 1.5],
+  t5: [unitToPx(scaler), 1.5],
+  t4: [unitToPx(scaler ** 2), 1.3],
+  t3: [unitToPx(scaler ** 3), 1.2],
+  t2: [unitToPx(scaler ** 4), 1.2],
+  t1: [unitToPx(scaler ** 5), 1.1],
+  jumbo: [unitToPx(scaler ** 6), 1.1],
 };
 
 export const BODY_WEIGHTS = {
