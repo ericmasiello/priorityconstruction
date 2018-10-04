@@ -29,11 +29,6 @@ const HGroup = styled(ContentWrapper)`
   @media (min-width: ${pxToRem(MEDIA_QUERIES.heroXL)}) {
     width: 50%;
   }
-
-  @media (min-width: ${pxToRem(MEDIA_QUERIES.fullBleed)}) {
-    width: calc(50% + ${pxToRem(GUTTER_SIZE)});
-    margin-right: ${pxToRem(GUTTER_SIZE * -1)};
-  }
 `;
 
 export const HeroHomePageContent = props => (
