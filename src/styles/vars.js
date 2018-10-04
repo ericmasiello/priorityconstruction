@@ -7,6 +7,7 @@ export const scaler = 1.333;
 export const COLORS = {
   bg: '#fff',
   base: baseColor,
+  brand: ['#1D293B'],
   muted: '#787575',
   highlight: '#FBDB1E',
   highlight2: '#4D1017',
@@ -22,13 +23,16 @@ export const COLORS = {
 };
 
 export const MAX_CONTENT_WIDTH = 1200;
-
-export const PAGE_SPACING = {
-  horizontal: 20,
-};
+export const GUTTER_SIZE = 20;
+export const TOTAL_GRID_UNITS = 12;
+export const GRID_SIZE =
+  (MAX_CONTENT_WIDTH - (TOTAL_GRID_UNITS - 1) * GUTTER_SIZE) / TOTAL_GRID_UNITS;
 
 export const MEDIA_QUERIES = {
   navTransition: 800,
+  heroL: 700,
+  heroXL: 900,
+  fullBleed: MAX_CONTENT_WIDTH + GUTTER_SIZE * 2,
 };
 
 // type properties

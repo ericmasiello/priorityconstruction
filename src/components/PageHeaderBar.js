@@ -10,7 +10,7 @@ import Logo from './Logo';
 import MainNavLink from './MainNavLink';
 import InvisibleButton from './InvisibleButton';
 import { pxToRem } from '../styles/utils';
-import { PAGE_SPACING, TYPE_SIZE, COLORS, MEDIA_QUERIES } from '../styles/vars';
+import { GUTTER_SIZE, TYPE_SIZE, COLORS, MEDIA_QUERIES } from '../styles/vars';
 import FlatListItem from './FlatListItem';
 
 const LogoLink = styled(Link)`
@@ -53,7 +53,7 @@ const MobileNav = styled(FlatList)`
   background: white;
   z-index: 999;
   flex-direction: column;
-  padding: ${pxToRem(PAGE_SPACING.horizontal)};
+  padding: ${pxToRem(GUTTER_SIZE)};
   font-size: ${pxToRem(TYPE_SIZE.t5[0])};
   transition: transform 0.4s, box-shadow 0.4s;
   transform: translateX(0);

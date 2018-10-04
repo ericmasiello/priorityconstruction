@@ -5,15 +5,13 @@ import styled from 'styled-components';
 import GatsbyImage from './GatsbyImage';
 import HeroBanner from './HeroBanner';
 import * as CustomPropTypes from '../propTypes';
-import { COLORS } from '../styles/vars';
+import { COLORS, MAX_CONTENT_WIDTH, GUTTER_SIZE, MEDIA_QUERIES } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
 const BackgroundImage = styled(GatsbyImage)`
-  left: 0;
-  top: 0;
+  transition: opacity 0.5s;
   width: 100%;
   height: 100%;
-  opacity: ${props => props.opacity};
 `;
 
 export class Hero extends Component {
@@ -30,7 +28,7 @@ export class Hero extends Component {
   };
 
   static defaultProps = {
-    tag: 'div',
+    tag: 'header',
     bgColor: COLORS.bg,
     opacity: 1,
     bgImages: [],
@@ -81,8 +79,6 @@ export class Hero extends Component {
           <BackgroundImage
             key={image.sizes.src}
             style={{
-              position: 'absolute',
-              transition: 'opacity 0.5s',
               opacity: selectedImage.sizes.src === image.sizes.src ? '1' : '0',
             }}
             sizes={image.sizes}
@@ -96,13 +92,28 @@ export class Hero extends Component {
 
 export default styled(Hero)`
   background-color: ${props => props.bgColor};
-  overflow: hidden;
+  overflow: visible;
   position: relative;
+  max-width: ${pxToRem(MAX_CONTENT_WIDTH)};
+  margin-left: auto;
+  margin-right: auto;
   @media (min-height: ${pxToRem(450)}) {
     height: ${({ isFullHeight }) => (isFullHeight ? '70vh' : '20vh')};
   }
-  display: flex;
-  max-height: ${pxToRem(700)};
+  max-height: ${pxToRem(460)};
+
+  .gatsby-image-outer-wrapper {
+    position: absolute !important;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+
+    @media (min-width: ${pxToRem(MEDIA_QUERIES.fullBleed)}) {
+      width: calc(100% + ${pxToRem(GUTTER_SIZE * 2)});
+      left: ${pxToRem(GUTTER_SIZE * -1)};
+    }
+  }
 
   ${HeroBanner} {
     position: relative;

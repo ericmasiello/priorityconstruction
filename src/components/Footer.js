@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { pxToRem } from '../styles/utils';
-import { PAGE_SPACING } from '../styles/vars';
+import { GUTTER_SIZE } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
 import Container from './Container';
 
@@ -33,5 +33,5 @@ Footer.defaultProps = {
 };
 
 export default styled(Footer)`
-  padding: ${pxToRem(40)} ${pxToRem(PAGE_SPACING.horizontal)};
+  padding: ${pxToRem(40)} ${pxToRem(GUTTER_SIZE)};
 `;

@@ -9,7 +9,7 @@ import ContentBlock from '../components/ContentBlock';
 import NavBlockList from '../components/NavBlockList';
 import NavBlockListItem from '../components/NavBlockListItem';
 import { pxToRem } from '../styles/utils';
-import { COLORS, PAGE_SPACING, MAX_CONTENT_WIDTH } from '../styles/vars';
+import { COLORS, GUTTER_SIZE, MAX_CONTENT_WIDTH } from '../styles/vars';
 import { withLayoutContext } from '../layoutContext';
 import { hasScrolledPastBottomOfElement } from '../utils/ui';
 import * as CustomPropTypes from '../propTypes';
@@ -23,8 +23,8 @@ const StickyNavContainer = styled.div`
   width: 100%;
   background-color: ${COLORS.highlight3};
   transition: transform 0.5s;
-  padding-left: ${pxToRem(PAGE_SPACING.horizontal)};
-  padding-right: ${pxToRem(PAGE_SPACING.horizontal)};
+  padding-left: ${pxToRem(GUTTER_SIZE)};
+  padding-right: ${pxToRem(GUTTER_SIZE)};
 
   @media (min-width: ${pxToRem(375)}) {
     display: block;
