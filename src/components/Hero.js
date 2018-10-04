@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import GatsbyImage from './GatsbyImage';
 import HeroBanner from './HeroBanner';
 import * as CustomPropTypes from '../propTypes';
-import { COLORS, MAX_CONTENT_WIDTH_PLUS, MEDIA_QUERIES } from '../styles/vars';
+import { COLORS, MAX_CONTENT_WIDTH_PLUS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
 const BackgroundImage = styled(GatsbyImage)`
