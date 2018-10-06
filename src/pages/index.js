@@ -6,6 +6,7 @@ import * as CustomPropTypes from '../propTypes';
 import Container from '../components/Container';
 import PhotoGrid from '../components/PhotoGrid';
 import TestimonialCarousel from '../components/TestimonialCarousel';
+import MediaQuoate from '../components/MediaQuote';
 import Type4 from '../components/Type4';
 import FlatList from '../components/FlatList';
 import FlatListItem from '../components/FlatListItem';
@@ -61,6 +62,9 @@ priority
             <ServiceItem>Structural Concrete &amp; Steps</ServiceItem>
           </Services>
         </Callout>
+        {contentBlocks.map(block => (
+          <MediaQuoate key={block.author || block.images[0].id} {...block} />
+        ))}
       </Container>
     </React.Fragment>
   );
@@ -80,6 +84,10 @@ export default styled(HomePage)`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   padding-bottom: ${pxToRem(70)};
+
+  ${MediaQuoate} {
+    grid-column: 1 / -1;
+  }
 `;
 
 export const query = graphql`
