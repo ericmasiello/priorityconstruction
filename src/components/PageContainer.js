@@ -7,21 +7,23 @@ import * as CustomPropTypes from '../propTypes';
 import Container from './Container';
 
 export const PageContainer = props => {
-  const { tag: Tag, children, ...rest } = props;
+  const { tag: Tag, children, plus, ...rest } = props;
   return (
-    <Tag {...rest}>
-      <Container>{children}</Container>
+    <Tag {...rest} data-page-container>
+      <Container plus>{children}</Container>
     </Tag>
   );
 };
 
 PageContainer.propTypes = {
   tag: CustomPropTypes.Tag,
+  plus: PropTypes.bool,
   children: PropTypes.node,
 };
 
 PageContainer.defaultProps = {
   tag: 'div',
+  plus: false,
 };
 
 PageContainer.displayName = 'PageContainer';

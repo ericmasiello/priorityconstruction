@@ -18,7 +18,7 @@ export const COLORS = {
   border: tinyColor(baseColor)
     .lighten(50)
     .toRgbString(),
-  placeholder: '#D8D8D8',
+  gray: '#D8D8D8',
   error: '#cc0000',
 };
 

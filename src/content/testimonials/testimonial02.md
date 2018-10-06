@@ -1,8 +1,7 @@
 ---
-author: 'Jim L. Jones'
-date: '2018-07-27'
+title: 'P. Flanigan & Sons, Inc., Baltimore, Maryland'
+author: 'Paul Freas'
+photogroup: 'group02'
 ---
 
-Foobar baz General Paving and Contracting, Inc. things and stuff.
-
-Also, what a team!
+One of my favorite things about Priority is that the owner is involved in every project.

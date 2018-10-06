@@ -1,78 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import tinyColor from 'tinycolor2';
 import * as CustomPropTypes from '../propTypes';
-import PageContainer from '../components/PageContainer';
+import Container from '../components/Container';
 import PhotoGrid from '../components/PhotoGrid';
-import Placeholder from '../components/Placeholder';
-import Type4 from '../components/Type4';
 import TestimonialCarousel from '../components/TestimonialCarousel';
-import { edgesToGallery } from '../utils/gallery';
-import { COLORS } from '../styles/vars';
+import Type4 from '../components/Type4';
+import FlatList from '../components/FlatList';
+import FlatListItem from '../components/FlatListItem';
+import { groupTestimonialsWithImages } from '../utils/gallery';
+import { COLORS, GUTTER_SIZE } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
-import blueprint from '../images/blueprint.svg';
 import markdownRemarkToTestimonial from '../utils/testimonials';
 
-const FPOGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(${pxToRem(280)}, 1fr));
-  grid-gap: 1rem;
-  margin-bottom: ${pxToRem(160)};
-
-  ${Type4} {
-    color: ${COLORS.highlight3};
-    text-transform: uppercase;
-  }
-
-  ${Placeholder} {
-    min-height: ${pxToRem(225)};
-  }
-`;
-
-const MainContentContainer = styled(PageContainer)`
-  background-image: url(${blueprint});
-  background-size: cover;
-  background-position: center center;
-  position: relative;
-  padding-top: ${pxToRem(70)};
-  padding-bottom: ${pxToRem(70)};
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.75);
-  }
-
-  > * {
-    position: relative;
-    z-index: 1;
-  }
+const Callout = styled.hgroup`
+  background-color: ${tinyColor(COLORS.gray)
+    .setAlpha(0.2)
+    .toRgbString()};
+  padding: ${pxToRem(GUTTER_SIZE)};
+  grid-column: 1 / 8;
 `;
 
 const HomePage = props => {
-  const { data } = props;
-  const photoGridProps = edgesToGallery(data.homageGallery.edges, 'courtyard.jpg');
+  const {
+    data: { photos, testimonials },
+    className,
+  } = props;
+  const testimonialGroups = groupTestimonialsWithImages(photos.edges, testimonials.edges);
+  console.log(testimonialGroups);
 
   return (
     <React.Fragment>
-      <MainContentContainer tag="section">
-        <FPOGrid>
-          <Placeholder>
-            <Type4>Our Team</Type4>
-          </Placeholder>
-          <Placeholder>
-            <Type4>Our Expertise</Type4>
-          </Placeholder>
-        </FPOGrid>
-        <PhotoGrid {...photoGridProps} />
-      </MainContentContainer>
-      <TestimonialCarousel
-        testimonials={data.testimonials.edges.map(markdownRemarkToTestimonial)}
-      />
+      <Container tag="section" plus className={className}>
+        <Callout>
+          <Type4 tag="h2">Safety is our number one priority</Type4>
+          <FlatList>
+            <FlatListItem>Brick Paving</FlatListItem>
+            <FlatListItem>Flatwork Concrete</FlatListItem>
+            <FlatListItem>Pervious Concrete</FlatListItem>
+            <FlatListItem>Stamped &amp; Colored Concrete</FlatListItem>
+            <FlatListItem>Structural Concrete &amp; Steps</FlatListItem>
+          </FlatList>
+        </Callout>
+      </Container>
+      <TestimonialCarousel testimonials={testimonials.edges.map(markdownRemarkToTestimonial)} />
     </React.Fragment>
   );
 };
@@ -81,19 +53,23 @@ HomePage.displayName = 'HomePage';
 
 HomePage.propTypes = {
   data: PropTypes.shape({
-    homageGallery: CustomPropTypes.AllImageSharp,
+    photos: CustomPropTypes.AllImageSharp,
     testimonials: CustomPropTypes.AllTestimonials,
   }).isRequired,
   className: PropTypes.string,
 };
 
-export default HomePage;
+export default styled(HomePage)`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding-bottom: ${pxToRem(70)};
+`;
 
 export const query = graphql`
   query HomePage {
-    homageGallery: allImageSharp(
-      limit: 20
+    photos: allImageSharp(
       filter: { id: { regex: "/src/images/photos/homepage-gallery/" } }
+      sort: { order: ASC, fields: [id] }
     ) {
       edges {
         node {
@@ -106,7 +82,7 @@ export const query = graphql`
     }
 
     testimonials: allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date, id] }
+      sort: { order: DESC, fields: [frontmatter___photogroup, id] }
       limit: 10
       filter: { id: { regex: "/content/testimonials/" } }
     ) {
@@ -114,7 +90,7 @@ export const query = graphql`
         node {
           frontmatter {
             title
-            date
+            photogroup
             author
           }
           html
