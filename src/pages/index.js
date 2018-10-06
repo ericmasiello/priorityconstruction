@@ -9,10 +9,9 @@ import TestimonialCarousel from '../components/TestimonialCarousel';
 import Type4 from '../components/Type4';
 import FlatList from '../components/FlatList';
 import FlatListItem from '../components/FlatListItem';
-import { groupTestimonialsWithImages } from '../utils/gallery';
 import { COLORS, GUTTER_SIZE } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
-import markdownRemarkToTestimonial from '../utils/testimonials';
+import mergeContentWithImages from '../utils/homepage';
 
 const Services = styled(FlatList)`
   flex-wrap: wrap;
@@ -37,11 +36,11 @@ const Callout = styled.hgroup`
 
 const HomePage = props => {
   const {
-    data: { photos, testimonials },
+    data: { content, photos },
     className,
   } = props;
-  const testimonialGroups = groupTestimonialsWithImages(photos.edges, testimonials.edges);
-  console.log(testimonialGroups);
+  const contentBlocks = mergeContentWithImages(content, photos);
+  console.log(contentBlocks);
 
   return (
     <React.Fragment>
@@ -63,7 +62,6 @@ priority
           </Services>
         </Callout>
       </Container>
-      <TestimonialCarousel testimonials={testimonials.edges.map(markdownRemarkToTestimonial)} />
     </React.Fragment>
   );
 };
@@ -73,7 +71,7 @@ HomePage.displayName = 'HomePage';
 HomePage.propTypes = {
   data: PropTypes.shape({
     photos: CustomPropTypes.AllImageSharp,
-    testimonials: CustomPropTypes.AllTestimonials,
+    content: CustomPropTypes.AllHomepageContent,
   }).isRequired,
   className: PropTypes.string,
 };
@@ -87,7 +85,7 @@ export default styled(HomePage)`
 export const query = graphql`
   query HomePage {
     photos: allImageSharp(
-      filter: { id: { regex: "/src/images/photos/homepage-gallery/" } }
+      filter: { id: { regex: "/src/images/photos/homepage/" } }
       sort: { order: ASC, fields: [id] }
     ) {
       edges {
@@ -100,17 +98,20 @@ export const query = graphql`
       }
     }
 
-    testimonials: allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___photogroup, id] }
+    content: allMarkdownRemark(
+      sort: { order: ASC, fields: [id] }
       limit: 10
-      filter: { id: { regex: "/content/testimonials/" } }
+      filter: { id: { regex: "/content/homepage/" } }
     ) {
       edges {
         node {
           frontmatter {
-            title
-            photogroup
+            location
             author
+            images {
+              image
+              alt
+            }
           }
           html
         }
