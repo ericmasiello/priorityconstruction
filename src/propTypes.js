@@ -41,19 +41,24 @@ export const AllGalleryMeta = PropTypes.shape({
   ),
 });
 
-export const Testimonial = PropTypes.shape({
+export const HomepageContent = PropTypes.shape({
   frontmatter: PropTypes.shape({
-    author: PropTypes.string.isRequired,
-    date: PropTypes.string,
-    title: PropTypes.string,
+    author: PropTypes.string,
+    location: PropTypes.string,
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        image: PropTypes.string.isRequired,
+        alt: PropTypes.string.isRequired,
+      }),
+    ),
   }),
-  html: PropTypes.string.isRequired,
+  html: PropTypes.string,
 });
 
-export const AllTestimonials = PropTypes.shape({
+export const AllHomepageContent = PropTypes.shape({
   edges: PropTypes.arrayOf(
     PropTypes.shape({
-      node: Testimonial,
+      node: HomepageContent,
     }),
   ),
 });
