@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
 import * as CustomPropTypes from '../propTypes';
 import Container from '../components/Container';
-import PhotoGrid from '../components/PhotoGrid';
-import TestimonialCarousel from '../components/TestimonialCarousel';
 import MediaQuoate from '../components/MediaQuote';
 import Type4 from '../components/Type4';
 import FlatList from '../components/FlatList';
