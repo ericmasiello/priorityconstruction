@@ -14,12 +14,25 @@ import { COLORS, GUTTER_SIZE } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 import markdownRemarkToTestimonial from '../utils/testimonials';
 
+const Services = styled(FlatList)`
+  flex-wrap: wrap;
+`;
+
+const ServiceItem = styled(FlatListItem)`
+  &:not(:last-child)::after {
+    content: '·';
+    display: inline-block;
+    padding-left: 0.5rem;
+  }
+`;
+
 const Callout = styled.hgroup`
   background-color: ${tinyColor(COLORS.gray)
     .setAlpha(0.2)
     .toRgbString()};
   padding: ${pxToRem(GUTTER_SIZE)};
   grid-column: 1 / 8;
+  text-transform: uppercase;
 `;
 
 const HomePage = props => {
@@ -34,14 +47,20 @@ const HomePage = props => {
     <React.Fragment>
       <Container tag="section" plus className={className}>
         <Callout>
-          <Type4 tag="h2">Safety is our number one priority</Type4>
-          <FlatList>
-            <FlatListItem>Brick Paving</FlatListItem>
-            <FlatListItem>Flatwork Concrete</FlatListItem>
-            <FlatListItem>Pervious Concrete</FlatListItem>
-            <FlatListItem>Stamped &amp; Colored Concrete</FlatListItem>
-            <FlatListItem>Structural Concrete &amp; Steps</FlatListItem>
-          </FlatList>
+          <Type4 tag="h2">
+            Safety is our 
+            {' '}
+            <strong>number one</strong>
+            {' '}
+priority
+          </Type4>
+          <Services>
+            <ServiceItem>Brick Paving</ServiceItem>
+            <ServiceItem>Flatwork Concrete</ServiceItem>
+            <ServiceItem>Pervious Concrete</ServiceItem>
+            <ServiceItem>Stamped &amp; Colored Concrete</ServiceItem>
+            <ServiceItem>Structural Concrete &amp; Steps</ServiceItem>
+          </Services>
         </Callout>
       </Container>
       <TestimonialCarousel testimonials={testimonials.edges.map(markdownRemarkToTestimonial)} />
