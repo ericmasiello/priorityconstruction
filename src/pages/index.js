@@ -31,7 +31,7 @@ const Callout = styled.hgroup`
     .setAlpha(0.2)
     .toRgbString()};
   padding: ${pxToRem(GUTTER_SIZE)};
-  grid-column: 1 / 8;
+  grid-column: 1 / 9;
   text-transform: uppercase;
 `;
 
