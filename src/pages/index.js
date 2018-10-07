@@ -39,7 +39,6 @@ const HomePage = props => {
     className,
   } = props;
   const contentBlocks = mergeContentWithImages(content, photos);
-  console.log(contentBlocks);
 
   return (
     <React.Fragment>
@@ -60,8 +59,13 @@ priority
             <ServiceItem>Structural Concrete &amp; Steps</ServiceItem>
           </Services>
         </Callout>
-        {contentBlocks.map(block => (
-          <MediaQuoate key={block.author || block.images[0].id} {...block} />
+        {contentBlocks.map((block, i) => (
+          <MediaQuoate
+            key={block.author || block.images[0].id}
+            {...block}
+            grayed={i === 1}
+            padQuoteEvenly={i === 1}
+          />
         ))}
       </Container>
     </React.Fragment>
