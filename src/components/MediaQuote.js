@@ -3,28 +3,35 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import GatsbyImage from './GatsbyImage';
 import Blockquote from './Blockquote';
-import Quote from './Quote';
 import Citation from './Citation';
 import * as CustomPropTypes from '../propTypes';
+import { MAX_CONTENT_WIDTH_PLUS } from '../styles/vars';
+import { pxToRem } from '../styles/utils';
 
 export const MediaQuote = props => {
   const { tag: Tag, author, testimonial, location, images, ...rest } = props;
   const quote = testimonial ? (
     <Blockquote>
-      <Quote dangerouslySetInnerHTML={{ __html: testimonial }} />
+      <div dangerouslySetInnerHTML={{ __html: testimonial }} />
       <Citation>
-        <p>{author}</p>
-        {location && <p>{location}</p>}
+        {author}
+        {location && (
+          <React.Fragment>
+            <br />
+            {location}
+          </React.Fragment>
+        )}
       </Citation>
     </Blockquote>
   ) : null;
 
+  // TODO: update to map over images
+  const image = images[0] ? <GatsbyImage sizes={images[0].sizes} alt={images[0].alt} /> : null;
+
   return (
     <Tag {...rest}>
       {quote}
-      {images.map(image => (
-        <GatsbyImage sizes={image.sizes} alt={image.alt} key={image.id} />
-      ))}
+      {image}
     </Tag>
   );
 };
@@ -42,4 +49,42 @@ MediaQuote.defaultProps = {
   images: [],
 };
 
-export default styled(MediaQuote)``;
+export default styled(MediaQuote)`
+  display: grid;
+
+  ${Blockquote} {
+    grid-row: 2;
+  }
+
+  .gatsby-image-outer-wrapper {
+    grid-row: 1;
+  }
+
+  @media (min-width: ${pxToRem(850)}) {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1;
+
+    ${Blockquote}, .gatsby-image-outer-wrapper {
+      grid-row: 1;
+    }
+
+    ${Blockquote} {
+      grid-column: 7 / -1;
+      padding-left: calc((1 / 12) * 100vw);
+    }
+
+    .gatsby-image-outer-wrapper {
+      grid-column: 1 / 7;
+    }
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: ${pxToRem(MAX_CONTENT_WIDTH_PLUS)}) {
+    ${Blockquote} {
+      padding-left: ${pxToRem(MAX_CONTENT_WIDTH_PLUS * (1 / 12))};
+    }
+  }
+`;
