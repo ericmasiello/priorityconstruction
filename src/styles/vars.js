@@ -7,7 +7,7 @@ export const scaler = 1.333;
 export const COLORS = {
   bg: '#fff',
   base: baseColor,
-  brand: ['#1D293B'],
+  brand: ['#1D293B', '#FBDB1E'],
   muted: '#787575',
   highlight: '#FBDB1E',
   highlight2: '#4D1017',
