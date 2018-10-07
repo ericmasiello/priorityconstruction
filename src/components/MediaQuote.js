@@ -28,7 +28,7 @@ export const MediaQuote = props => {
     ...rest
   } = props;
   const quote = testimonial ? (
-    <Blockquote>
+    <Blockquote quoteColor={grayed ? COLORS.gray : undefined}>
       <div dangerouslySetInnerHTML={{ __html: testimonial }} />
       <Citation>
         {author}
