@@ -1,15 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import tinyColor from 'tinycolor2';
 import GatsbyImage from './GatsbyImage';
 import Blockquote from './Blockquote';
 import Citation from './Citation';
 import * as CustomPropTypes from '../propTypes';
-import { MAX_CONTENT_WIDTH_PLUS } from '../styles/vars';
+import { MAX_CONTENT_WIDTH_PLUS, COLORS, GUTTER_SIZE } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
+const SINGLE_ROW_BREAKPOINT = 850;
+
+const MEDIUM_SIZE_PADDING = `calc(((1 / 12) * 100vw) - ${pxToRem(GUTTER_SIZE)})`;
+const FULL_SIZE_PADDING = `calc(${pxToRem(MAX_CONTENT_WIDTH_PLUS * (1 / 12))} - ${pxToRem(
+  GUTTER_SIZE,
+)})`;
+
 export const MediaQuote = props => {
-  const { tag: Tag, author, testimonial, location, images, ...rest } = props;
+  const {
+    tag: Tag,
+    author,
+    testimonial,
+    location,
+    images,
+    grayed,
+    padQuoteEvenly,
+    ...rest
+  } = props;
   const quote = testimonial ? (
     <Blockquote>
       <div dangerouslySetInnerHTML={{ __html: testimonial }} />
@@ -42,6 +59,8 @@ MediaQuote.propTypes = {
   testimonial: PropTypes.string,
   location: PropTypes.string,
   images: PropTypes.arrayOf(CustomPropTypes.ImageSharp),
+  grayed: PropTypes.bool,
+  padQuoteEvenly: PropTypes.bool,
 };
 
 MediaQuote.defaultProps = {
@@ -54,15 +73,22 @@ export default styled(MediaQuote)`
 
   ${Blockquote} {
     grid-row: 2;
+    background-color: ${({ grayed }) =>
+      grayed
+        ? tinyColor(COLORS.gray)
+            .setAlpha(0.2)
+            .toRgbString()
+        : 'transparent'};
   }
 
   .gatsby-image-outer-wrapper {
     grid-row: 1;
   }
 
-  @media (min-width: ${pxToRem(850)}) {
+  @media (min-width: ${pxToRem(SINGLE_ROW_BREAKPOINT)}) {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1;
+    grid-gap: ${pxToRem(GUTTER_SIZE)};
 
     ${Blockquote}, .gatsby-image-outer-wrapper {
       grid-row: 1;
@@ -70,7 +96,8 @@ export default styled(MediaQuote)`
 
     ${Blockquote} {
       grid-column: 7 / -1;
-      padding-left: calc((1 / 12) * 100vw);
+      padding-left: ${MEDIUM_SIZE_PADDING};
+      ${({ padQuoteEvenly }) => padQuoteEvenly && `padding-right: ${MEDIUM_SIZE_PADDING}`};
     }
 
     .gatsby-image-outer-wrapper {
@@ -84,7 +111,8 @@ export default styled(MediaQuote)`
 
   @media (min-width: ${pxToRem(MAX_CONTENT_WIDTH_PLUS)}) {
     ${Blockquote} {
-      padding-left: ${pxToRem(MAX_CONTENT_WIDTH_PLUS * (1 / 12))};
+      padding-left: ${FULL_SIZE_PADDING};
+      ${({ padQuoteEvenly }) => padQuoteEvenly && `padding-right: ${FULL_SIZE_PADDING}`};
     }
   }
 `;
