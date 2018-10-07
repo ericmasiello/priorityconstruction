@@ -2,13 +2,20 @@
 
 exports[`should render 1`] = `
 .c0 {
-  overflow: hidden;
+  overflow: visible;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  max-height: 43.75rem;
+  max-width: 77.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 28.75rem;
+}
+
+.c0 .gatsby-image-outer-wrapper {
+  position: absolute !important;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
 }
 
 .c0 .c1 {
@@ -22,7 +29,7 @@ exports[`should render 1`] = `
   }
 }
 
-<div
+<header
   className="c0"
 />
 `;

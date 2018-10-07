@@ -40,7 +40,7 @@ it('should display additional classes', () => {
 it('should render as a <div> by default', () => {
   const wrapper = shallow(<Raw {...props} />);
 
-  expect(wrapper.type()).toBe('div');
+  expect(wrapper.type()).toBe('header');
 });
 
 it('should render with a custom tag', () => {

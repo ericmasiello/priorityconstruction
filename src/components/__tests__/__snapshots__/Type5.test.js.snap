@@ -12,9 +12,9 @@ exports[`should render 1`] = `
   }
 }
 
-@media (min-width:13rem) {
+@media (min-width:13.33rem) {
   .c0 {
-    font-size: 1.3rem;
+    font-size: 1.333rem;
   }
 }
 
