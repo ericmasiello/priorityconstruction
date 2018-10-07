@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import tinyColor from 'tinycolor2';
 import QuoteMarksIcon from './QuoteMarksIcon';
 import { COLORS } from '../styles/vars';
 
@@ -8,7 +9,7 @@ const Content = styled.div`
   position: relative;
 `;
 
-export const Blockquote = ({ tag: Tag, children, ...rest }) => (
+export const Blockquote = ({ tag: Tag, children, quoteColor, ...rest }) => (
   <Tag {...rest}>
     <Content>
       {children}
@@ -19,6 +20,7 @@ export const Blockquote = ({ tag: Tag, children, ...rest }) => (
 
 Blockquote.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  quoteColor: PropTypes.string,
 };
 
 Blockquote.defaultProps = {
@@ -27,14 +29,13 @@ Blockquote.defaultProps = {
 
 Blockquote.displayName = 'Blockquote';
 
-export default styled(Blockquote)`
+const StyledBlockquote = styled(Blockquote)`
   display: flex;
   align-items: center;
   padding: 2rem;
 
   ${QuoteMarksIcon} {
-    fill: ${COLORS.brand[1]};
-    opacity: 0.6;
+    fill: ${({ quoteColor }) => quoteColor};
     height: 2.25rem;
     position: absolute;
     bottom: 0;
@@ -42,3 +43,15 @@ export default styled(Blockquote)`
     transform: translateY(150%);
   }
 `;
+
+StyledBlockquote.propTypes = {
+  quoteColor: PropTypes.string,
+};
+
+StyledBlockquote.defaultProps = {
+  quoteColor: tinyColor(COLORS.brand[1])
+    .setAlpha(0.6)
+    .toRgbString(),
+};
+
+export default StyledBlockquote;
