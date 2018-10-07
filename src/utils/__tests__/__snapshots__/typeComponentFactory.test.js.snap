@@ -14,9 +14,9 @@ exports[`should create a renderable styled component 1`] = `
   }
 }
 
-@media (min-width:30rem) {
+@media (min-width:42.08726912921893rem) {
   .c0 {
-    font-size: 3rem;
+    font-size: 4.208726912921893rem;
   }
 }
 
