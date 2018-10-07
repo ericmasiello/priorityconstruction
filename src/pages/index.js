@@ -8,7 +8,7 @@ import MediaQuoate from '../components/MediaQuote';
 import Type4 from '../components/Type4';
 import FlatList from '../components/FlatList';
 import FlatListItem from '../components/FlatListItem';
-import { COLORS, GUTTER_SIZE } from '../styles/vars';
+import { COLORS, GUTTER_SIZE, MEDIA_QUERIES, MAX_CONTENT_WIDTH } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 import mergeContentWithImages from '../utils/homepage';
 
@@ -29,8 +29,27 @@ const Callout = styled.hgroup`
     .setAlpha(0.2)
     .toRgbString()};
   padding: ${pxToRem(GUTTER_SIZE)};
-  grid-column: 1 / 9;
+  grid-column: 1 / -1;
   text-transform: uppercase;
+  margin-top: ${pxToRem(GUTTER_SIZE * 2)};
+  margin-bottom: 3rem;
+
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.heroL)}) {
+    ${Type4} {
+      max-width: calc(50vw - ${pxToRem(GUTTER_SIZE * 2)});
+    }
+  }
+
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.heroXL)}) {
+    grid-column: 1 / 9;
+    margin-top: 0;
+  }
+
+  @media (min-width: ${pxToRem(MAX_CONTENT_WIDTH)}) {
+    ${Type4} {
+      max-width: ${pxToRem(MAX_CONTENT_WIDTH / 2 - GUTTER_SIZE)};
+    }
+  }
 `;
 
 const customBlockProps = index => {
