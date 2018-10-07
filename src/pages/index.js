@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
 import * as CustomPropTypes from '../propTypes';
 import Container from '../components/Container';
-import MediaQuoate from '../components/MediaQuote';
+import MediaQuote from '../components/MediaQuote';
 import Type4 from '../components/Type4';
 import FlatList from '../components/FlatList';
 import FlatListItem from '../components/FlatListItem';
@@ -22,6 +22,13 @@ const ServiceItem = styled(FlatListItem)`
     display: inline-block;
     padding-left: 0.5rem;
   }
+`;
+
+const Blocks = styled.div`
+  display: grid;
+  grid-column: 1 / -1;
+  max-width: ${pxToRem(MAX_CONTENT_WIDTH)};
+  margin: auto;
 `;
 
 const Callout = styled.hgroup`
@@ -102,13 +109,15 @@ priority
             <ServiceItem>Structural Concrete &amp; Steps</ServiceItem>
           </Services>
         </Callout>
-        {contentBlocks.map((block, i) => (
-          <MediaQuoate
-            key={block.author || block.images[0].id}
-            {...block}
-            {...customBlockProps(i)}
-          />
-        ))}
+        <Blocks>
+          {contentBlocks.map((block, i) => (
+            <MediaQuote
+              key={block.author || block.images[0].id}
+              {...block}
+              {...customBlockProps(i)}
+            />
+          ))}
+        </Blocks>
       </Container>
     </React.Fragment>
   );
@@ -129,7 +138,7 @@ export default styled(HomePage)`
   grid-template-columns: repeat(12, 1fr);
   padding-bottom: ${pxToRem(70)};
 
-  ${MediaQuoate} {
+  ${MediaQuote} {
     grid-column: 1 / -1;
   }
 `;

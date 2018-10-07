@@ -6,13 +6,13 @@ import GatsbyImage from './GatsbyImage';
 import Blockquote from './Blockquote';
 import Citation from './Citation';
 import * as CustomPropTypes from '../propTypes';
-import { MAX_CONTENT_WIDTH_PLUS, COLORS, GUTTER_SIZE } from '../styles/vars';
+import { MAX_CONTENT_WIDTH, COLORS, GUTTER_SIZE } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
 const SINGLE_ROW_BREAKPOINT = 850;
 
 const MEDIUM_SIZE_PADDING = `calc(((1 / 12) * 100vw) - ${pxToRem(GUTTER_SIZE)})`;
-const FULL_SIZE_PADDING = `calc(${pxToRem(MAX_CONTENT_WIDTH_PLUS * (1 / 12))} - ${pxToRem(
+const FULL_SIZE_PADDING = `calc(${pxToRem(MAX_CONTENT_WIDTH * (1 / 12))} - ${pxToRem(
   GUTTER_SIZE,
 )})`;
 
@@ -113,7 +113,7 @@ const StyledMediaQuote = styled(MediaQuote)`
     margin-bottom: 3rem;
   }
 
-  @media (min-width: ${pxToRem(MAX_CONTENT_WIDTH_PLUS)}) {
+  @media (min-width: ${pxToRem(MAX_CONTENT_WIDTH)}) {
     ${Blockquote} {
       padding-left: ${FULL_SIZE_PADDING};
       ${({ padQuoteEvenly }) => padQuoteEvenly && `padding-right: ${FULL_SIZE_PADDING}`};
