@@ -33,6 +33,30 @@ const Callout = styled.hgroup`
   text-transform: uppercase;
 `;
 
+const customBlockProps = index => {
+  switch (index) {
+    case 1:
+      return {
+        grayed: true,
+        padQuoteEvenly: true,
+        imageGridSize: '7 / 12',
+        quoteGridSize: '1 / 7',
+      };
+    case 2:
+      return {
+        imageGridSize: '2 / -1',
+      };
+    case 3:
+      return {
+        padQuoteEvenly: true,
+        imageGridSize: '1 / 6',
+        quoteGridSize: '6 / -1',
+      };
+    default:
+      return {};
+  }
+};
+
 const HomePage = props => {
   const {
     data: { content, photos },
@@ -63,10 +87,7 @@ priority
           <MediaQuoate
             key={block.author || block.images[0].id}
             {...block}
-            grayed={i === 1}
-            padQuoteEvenly={i === 1}
-            imageGridSize={i === 1 ? '7 / -1' : undefined}
-            quoteGridSize={i === 1 ? '1 / 7' : undefined}
+            {...customBlockProps(i)}
           />
         ))}
       </Container>
