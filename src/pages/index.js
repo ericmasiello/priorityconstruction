@@ -65,6 +65,8 @@ priority
             {...block}
             grayed={i === 1}
             padQuoteEvenly={i === 1}
+            imageGridSize={i === 1 ? '7 / -1' : undefined}
+            quoteGridSize={i === 1 ? '1 / 7' : undefined}
           />
         ))}
       </Container>

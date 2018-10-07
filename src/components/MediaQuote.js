@@ -25,6 +25,8 @@ export const MediaQuote = props => {
     images,
     grayed,
     padQuoteEvenly,
+    imageGridSize,
+    quoteGridSize,
     ...rest
   } = props;
   const quote = testimonial ? (
@@ -61,6 +63,8 @@ MediaQuote.propTypes = {
   images: PropTypes.arrayOf(CustomPropTypes.ImageSharp),
   grayed: PropTypes.bool,
   padQuoteEvenly: PropTypes.bool,
+  imageGridSize: PropTypes.string,
+  quoteGridSize: PropTypes.string,
 };
 
 MediaQuote.defaultProps = {
@@ -68,7 +72,7 @@ MediaQuote.defaultProps = {
   images: [],
 };
 
-export default styled(MediaQuote)`
+const StyledMediaQuote = styled(MediaQuote)`
   display: grid;
 
   ${Blockquote} {
@@ -95,13 +99,13 @@ export default styled(MediaQuote)`
     }
 
     ${Blockquote} {
-      grid-column: 7 / -1;
+      grid-column: ${({ quoteGridSize }) => quoteGridSize};
       padding-left: ${MEDIUM_SIZE_PADDING};
       ${({ padQuoteEvenly }) => padQuoteEvenly && `padding-right: ${MEDIUM_SIZE_PADDING}`};
     }
 
     .gatsby-image-outer-wrapper {
-      grid-column: 1 / 7;
+      grid-column: ${({ imageGridSize }) => imageGridSize};
     }
   }
 
@@ -116,3 +120,15 @@ export default styled(MediaQuote)`
     }
   }
 `;
+
+StyledMediaQuote.propTypes = {
+  imageGridSize: PropTypes.string,
+  quoteGridSize: PropTypes.string,
+};
+
+StyledMediaQuote.defaultProps = {
+  imageGridSize: '1 / 7',
+  quoteGridSize: '7 / -1',
+};
+
+export default StyledMediaQuote;
