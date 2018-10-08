@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
 import * as CustomPropTypes from '../propTypes';
 import Container from '../components/Container';
-import MediaQuote from '../components/MediaQuote';
+import HomePageMediaBlock from '../components/HomePageMediaBlock';
 import Type4 from '../components/Type4';
 import FlatList from '../components/FlatList';
 import FlatListItem from '../components/FlatListItem';
@@ -79,7 +79,7 @@ priority
           </Services>
         </Callout>
         {contentBlocks.map(block => (
-          <MediaQuote
+          <HomePageMediaBlock
             key={block.author || block.images[0].id}
             {...block}
             applyLeftMargin={applyLeftMargin}
@@ -106,7 +106,7 @@ export default styled(HomePage)`
   grid-template-columns: repeat(12, 1fr);
   padding-bottom: ${pxToRem(70)};
 
-  ${MediaQuote} {
+  ${HomePageMediaBlock} {
     grid-column: 1 / -1;
   }
 `;
