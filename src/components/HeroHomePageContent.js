@@ -5,12 +5,11 @@ import Link from 'gatsby-link';
 import Type3 from './Type3';
 import Type4 from './Type4';
 import Button from './Button';
-import ContentWrapper from './ContentWrapper';
 import HeroContent from './HeroContent';
 import { GUTTER_SIZE, COLORS, MEDIA_QUERIES, MAX_CONTENT_WIDTH } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
-const HGroup = styled(ContentWrapper)`
+const HGroup = styled.hgroup`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -39,7 +38,7 @@ const HGroup = styled(ContentWrapper)`
 
 export const HeroHomePageContent = props => (
   <HeroContent {...props}>
-    <HGroup tag="hgroup">
+    <HGroup>
       <Type3 tag="h1">Bringing Concrete Ideas to Life</Type3>
       <Type4 tag="p">Quality workmanship & excellent customer service</Type4>
       <Button color="light" large tag={Link} to="/quote">
