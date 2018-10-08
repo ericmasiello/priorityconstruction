@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
 import Link from 'gatsby-link';
-import List from '../components/List';
-import ListItem from '../components/ListItem';
-import Container from '../components/Container';
+import List from './List';
+import ListItem from './ListItem';
+import Container from './Container';
 import { pxToRem } from '../styles/utils';
 import { COLORS, TYPE_SIZE, GUTTER_SIZE } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
@@ -47,11 +47,11 @@ const Address = styled.address`
   }
 `;
 
-export const ComposedFooter = props => {
+export const Footer = props => {
   const { tag: Tag, streetAddress, city, state, zip, phone, ...rest } = props;
   return (
     <Tag {...rest}>
-      <BackgroundContainer>
+      <BackgroundContainer plus>
         <Address>
           <a href="https://www.google.com/maps/place/1315+W+Hamburg+St,+Baltimore,+MD+21230/">
             <List>
@@ -88,9 +88,9 @@ export const ComposedFooter = props => {
   );
 };
 
-ComposedFooter.displayName = 'ComposedFooter';
+Footer.displayName = 'Footer';
 
-ComposedFooter.propTypes = {
+Footer.propTypes = {
   tag: CustomPropTypes.Tag,
   streetAddress: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
@@ -99,11 +99,11 @@ ComposedFooter.propTypes = {
   phone: PropTypes.string.isRequired,
 };
 
-ComposedFooter.defaultProps = {
+Footer.defaultProps = {
   tag: 'footer',
 };
 
-export default styled(ComposedFooter)`
+export default styled(Footer)`
   font-size: ${pxToRem(TYPE_SIZE.small[0])};
   line-height: ${TYPE_SIZE.small[1]};
 
