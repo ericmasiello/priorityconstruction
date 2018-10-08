@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
 import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
-import ComposedFooter from '../composed/Footer';
+import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import LayoutContext from '../layoutContext';
 import HeroHomePageContent from '../components/HeroHomePageContent';
@@ -120,7 +120,7 @@ class Layout extends React.Component {
             </Hero>
             <LayoutChildren>{children()}</LayoutChildren>
           </div>
-          <ComposedFooter {...address} phone={phone} />
+          <Footer {...address} phone={phone} />
         </div>
         {this.state.toggleElement}
       </LayoutContext.Provider>
