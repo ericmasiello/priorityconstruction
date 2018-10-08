@@ -1,13 +1,28 @@
 import { GUTTER_SIZE, TOTAL_GRID_UNITS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
+export const cleanPropsForReact = props => {
+  if (!props) {
+    return {};
+  }
+  return Object.keys(props).reduce((acc, key) => {
+    if (props[key] !== null && props[key] !== undefined) {
+      acc[key] = props[key];
+    }
+    return acc;
+  }, {});
+};
+
 export const mergeContentWithImages = (content, images) =>
   content.edges.reduce((acc, { node: { frontmatter, html } }) => {
+    const props = cleanPropsForReact(frontmatter.props);
+
     const result = {
       location: frontmatter.location,
       author: frontmatter.author,
       testimonial: html,
       images: [],
+      ...props,
     };
 
     result.images = frontmatter.images.reduce((imageAcc, imageMeta) => {

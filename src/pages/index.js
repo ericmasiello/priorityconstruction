@@ -52,31 +52,6 @@ const Callout = styled.hgroup`
   }
 `;
 
-// TODO: move the output of this function to the Block.md files
-const customBlockProps = index => {
-  switch (index) {
-    case 1:
-      return {
-        grayed: true,
-        padQuoteEvenly: true,
-        imageGridSize: '7 / 12',
-        quoteGridSize: '1 / 7',
-      };
-    case 2:
-      return {
-        imageGridSize: '2 / -1',
-      };
-    case 3:
-      return {
-        padQuoteEvenly: true,
-        imageGridSize: '1 / 6',
-        quoteGridSize: '6 / -1',
-      };
-    default:
-      return {};
-  }
-};
-
 const HomePage = props => {
   const {
     data: { content, photos },
@@ -103,13 +78,12 @@ priority
             <ServiceItem>Structural Concrete &amp; Steps</ServiceItem>
           </Services>
         </Callout>
-        {contentBlocks.map((block, i) => (
+        {contentBlocks.map(block => (
           <MediaQuote
             key={block.author || block.images[0].id}
             {...block}
             applyLeftMargin={applyLeftMargin}
             applyRightMargin={applyRightMargin}
-            {...customBlockProps(i)}
           />
         ))}
       </Container>
@@ -166,6 +140,12 @@ export const query = graphql`
             images {
               image
               alt
+            }
+            props {
+              grayed
+              padQuoteEvenly
+              imageGridSize
+              quoteGridSize
             }
           }
           html
