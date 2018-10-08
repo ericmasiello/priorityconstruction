@@ -16,7 +16,7 @@ const FULL_SIZE_PADDING = `calc(${pxToRem(
   MAX_CONTENT_WIDTH_PLUS * (1 / TOTAL_GRID_UNITS),
 )} - ${pxToRem(GUTTER_SIZE)})`;
 
-export const MediaQuote = props => {
+export const HomePageMediaBlock = props => {
   const {
     tag: Tag,
     author,
@@ -57,7 +57,7 @@ export const MediaQuote = props => {
   );
 };
 
-MediaQuote.propTypes = {
+HomePageMediaBlock.propTypes = {
   tag: CustomPropTypes.Tag,
   author: PropTypes.string,
   testimonial: PropTypes.string,
@@ -71,7 +71,7 @@ MediaQuote.propTypes = {
   applyRightMargin: PropTypes.func,
 };
 
-MediaQuote.defaultProps = {
+HomePageMediaBlock.defaultProps = {
   tag: 'div',
   images: [],
   imageGridSize: '1 / 7',
@@ -80,7 +80,7 @@ MediaQuote.defaultProps = {
   applyRightMargin: () => 0,
 };
 
-const StyledMediaQuote = styled(MediaQuote)`
+const StyledHomePageMediaBlock = styled(HomePageMediaBlock)`
   display: grid;
 
   ${Blockquote} {
@@ -133,13 +133,13 @@ const StyledMediaQuote = styled(MediaQuote)`
   }
 `;
 
-StyledMediaQuote.propTypes = {
+StyledHomePageMediaBlock.propTypes = {
   imageGridSize: PropTypes.string,
   quoteGridSize: PropTypes.string,
   applyLeftMargin: PropTypes.func,
   applyRightMargin: PropTypes.func,
 };
 
-StyledMediaQuote.defaultProps = MediaQuote.defaultProps;
+StyledHomePageMediaBlock.defaultProps = HomePageMediaBlock.defaultProps;
 
-export default StyledMediaQuote;
+export default StyledHomePageMediaBlock;
