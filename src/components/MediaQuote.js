@@ -6,15 +6,15 @@ import GatsbyImage from './GatsbyImage';
 import Blockquote from './Blockquote';
 import Citation from './Citation';
 import * as CustomPropTypes from '../propTypes';
-import { MAX_CONTENT_WIDTH, COLORS, GUTTER_SIZE } from '../styles/vars';
+import { MAX_CONTENT_WIDTH_PLUS, COLORS, GUTTER_SIZE, TOTAL_GRID_UNITS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 
 const SINGLE_ROW_BREAKPOINT = 850;
 
-const MEDIUM_SIZE_PADDING = `calc(((1 / 12) * 100vw) - ${pxToRem(GUTTER_SIZE)})`;
-const FULL_SIZE_PADDING = `calc(${pxToRem(MAX_CONTENT_WIDTH * (1 / 12))} - ${pxToRem(
-  GUTTER_SIZE,
-)})`;
+const MEDIUM_SIZE_PADDING = `calc(((1 / ${TOTAL_GRID_UNITS}) * 100vw) - ${pxToRem(GUTTER_SIZE)})`;
+const FULL_SIZE_PADDING = `calc(${pxToRem(
+  MAX_CONTENT_WIDTH_PLUS * (1 / TOTAL_GRID_UNITS),
+)} - ${pxToRem(GUTTER_SIZE)})`;
 
 export const MediaQuote = props => {
   const {
@@ -27,6 +27,8 @@ export const MediaQuote = props => {
     padQuoteEvenly,
     imageGridSize,
     quoteGridSize,
+    applyLeftMargin,
+    applyRightMargin,
     ...rest
   } = props;
   const quote = testimonial ? (
@@ -65,11 +67,17 @@ MediaQuote.propTypes = {
   padQuoteEvenly: PropTypes.bool,
   imageGridSize: PropTypes.string,
   quoteGridSize: PropTypes.string,
+  applyLeftMargin: PropTypes.func,
+  applyRightMargin: PropTypes.func,
 };
 
 MediaQuote.defaultProps = {
   tag: 'div',
   images: [],
+  imageGridSize: '1 / 7',
+  quoteGridSize: '7 / -1',
+  applyLeftMargin: () => 0,
+  applyRightMargin: () => 0,
 };
 
 const StyledMediaQuote = styled(MediaQuote)`
@@ -90,7 +98,7 @@ const StyledMediaQuote = styled(MediaQuote)`
   }
 
   @media (min-width: ${pxToRem(SINGLE_ROW_BREAKPOINT)}) {
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(${TOTAL_GRID_UNITS}, 1fr);
     grid-template-rows: 1;
     grid-gap: ${pxToRem(GUTTER_SIZE)};
 
@@ -102,10 +110,14 @@ const StyledMediaQuote = styled(MediaQuote)`
       grid-column: ${({ quoteGridSize }) => quoteGridSize};
       padding-left: ${MEDIUM_SIZE_PADDING};
       ${({ padQuoteEvenly }) => padQuoteEvenly && `padding-right: ${MEDIUM_SIZE_PADDING}`};
+      margin-left: ${({ applyLeftMargin, quoteGridSize }) => applyLeftMargin(quoteGridSize)};
+      margin-right: ${({ applyRightMargin, quoteGridSize }) => applyRightMargin(quoteGridSize)};
     }
 
     .gatsby-image-outer-wrapper {
       grid-column: ${({ imageGridSize }) => imageGridSize};
+      margin-left: ${({ applyLeftMargin, imageGridSize }) => applyLeftMargin(imageGridSize)};
+      margin-right: ${({ applyRightMargin, imageGridSize }) => applyRightMargin(imageGridSize)};
     }
   }
 
@@ -113,7 +125,7 @@ const StyledMediaQuote = styled(MediaQuote)`
     margin-bottom: 3rem;
   }
 
-  @media (min-width: ${pxToRem(MAX_CONTENT_WIDTH)}) {
+  @media (min-width: ${pxToRem(MAX_CONTENT_WIDTH_PLUS)}) {
     ${Blockquote} {
       padding-left: ${FULL_SIZE_PADDING};
       ${({ padQuoteEvenly }) => padQuoteEvenly && `padding-right: ${FULL_SIZE_PADDING}`};
@@ -124,11 +136,10 @@ const StyledMediaQuote = styled(MediaQuote)`
 StyledMediaQuote.propTypes = {
   imageGridSize: PropTypes.string,
   quoteGridSize: PropTypes.string,
+  applyLeftMargin: PropTypes.func,
+  applyRightMargin: PropTypes.func,
 };
 
-StyledMediaQuote.defaultProps = {
-  imageGridSize: '1 / 7',
-  quoteGridSize: '7 / -1',
-};
+StyledMediaQuote.defaultProps = MediaQuote.defaultProps;
 
 export default StyledMediaQuote;

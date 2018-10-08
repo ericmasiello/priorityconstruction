@@ -1,4 +1,7 @@
-const mergeContentWithImages = (content, images) =>
+import { GUTTER_SIZE, TOTAL_GRID_UNITS } from '../styles/vars';
+import { pxToRem } from '../styles/utils';
+
+export const mergeContentWithImages = (content, images) =>
   content.edges.reduce((acc, { node: { frontmatter, html } }) => {
     const result = {
       location: frontmatter.location,
@@ -22,4 +25,14 @@ const mergeContentWithImages = (content, images) =>
     return acc;
   }, []);
 
-export default mergeContentWithImages;
+export const applyLeftMargin = (elmGridPosition = '') =>
+  parseInt(elmGridPosition, 10) === 1 ? pxToRem(GUTTER_SIZE) : 0;
+
+export const applyRightMargin = (elmGridPosition = '') => {
+  const gridPositions = elmGridPosition.split('/');
+  if (!gridPositions.length === 2) {
+    return 0;
+  }
+  const endPosition = parseInt(gridPositions[1], 10);
+  return endPosition === -1 || endPosition === TOTAL_GRID_UNITS + 1 ? pxToRem(GUTTER_SIZE) : 0;
+};

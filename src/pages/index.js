@@ -10,7 +10,7 @@ import FlatList from '../components/FlatList';
 import FlatListItem from '../components/FlatListItem';
 import { COLORS, GUTTER_SIZE, MEDIA_QUERIES, MAX_CONTENT_WIDTH } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
-import mergeContentWithImages from '../utils/homepage';
+import { mergeContentWithImages, applyLeftMargin, applyRightMargin } from '../utils/homepage';
 
 const Services = styled(FlatList)`
   flex-wrap: wrap;
@@ -22,13 +22,6 @@ const ServiceItem = styled(FlatListItem)`
     display: inline-block;
     padding-left: 0.5rem;
   }
-`;
-
-const Blocks = styled.div`
-  display: grid;
-  grid-column: 1 / -1;
-  max-width: ${pxToRem(MAX_CONTENT_WIDTH)};
-  margin: auto;
 `;
 
 const Callout = styled.hgroup`
@@ -59,6 +52,7 @@ const Callout = styled.hgroup`
   }
 `;
 
+// TODO: move the output of this function to the Block.md files
 const customBlockProps = index => {
   switch (index) {
     case 1:
@@ -109,15 +103,15 @@ priority
             <ServiceItem>Structural Concrete &amp; Steps</ServiceItem>
           </Services>
         </Callout>
-        <Blocks>
-          {contentBlocks.map((block, i) => (
-            <MediaQuote
-              key={block.author || block.images[0].id}
-              {...block}
-              {...customBlockProps(i)}
-            />
-          ))}
-        </Blocks>
+        {contentBlocks.map((block, i) => (
+          <MediaQuote
+            key={block.author || block.images[0].id}
+            {...block}
+            applyLeftMargin={applyLeftMargin}
+            applyRightMargin={applyRightMargin}
+            {...customBlockProps(i)}
+          />
+        ))}
       </Container>
     </React.Fragment>
   );
