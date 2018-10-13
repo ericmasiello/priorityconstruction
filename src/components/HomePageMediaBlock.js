@@ -88,7 +88,13 @@ HomePageMediaBlock.defaultProps = {
 };
 
 const StyledHomePageMediaBlock = styled(HomePageMediaBlock)`
-  display: grid;
+  ${
+    /*
+    When there is no testimonial, render element as a block.
+    This works around a Moblie Safari issue.
+    */ ''
+  }
+  display: ${({ testimonial }) => (testimonial ? 'grid' : 'block')};
 
   ${Blockquote} {
     grid-row: 2;
@@ -105,6 +111,7 @@ const StyledHomePageMediaBlock = styled(HomePageMediaBlock)`
   }
 
   @media (min-width: ${pxToRem(SINGLE_ROW_BREAKPOINT)}) {
+    display: grid;
     grid-template-columns: repeat(${TOTAL_GRID_UNITS}, 1fr);
     grid-gap: ${pxToRem(GUTTER_SIZE)};
 
