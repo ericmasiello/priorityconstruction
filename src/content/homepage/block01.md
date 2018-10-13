@@ -3,9 +3,9 @@ location: 'Barton Malow Company, Baltimore, Maryland'
 author: 'Everett Smith'
 images:
   [
-    { image: 'sample1.jpg', alt: 'Lorem ipsum' },
-    { image: 'sample2.jpg', alt: 'Lorem ipsum' },
-    { image: 'sample3.jpg', alt: 'Lorem ipsum' },
+    { image: 'CoppinState-4.jpg', alt: 'Lorem ipsum' },
+    { image: 'Fells-2.jpg', alt: 'Lorem ipsum' },
+    { image: 'AnthemHouse-7.jpg', alt: 'Lorem ipsum' },
   ]
 ---
 
