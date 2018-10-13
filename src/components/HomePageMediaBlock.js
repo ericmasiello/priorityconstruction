@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
 import GatsbyImage from './GatsbyImage';
+import MediaBlockImageGroup from './MediaBlockImageGroup';
 import Blockquote from './Blockquote';
 import Citation from './Citation';
 import * as CustomPropTypes from '../propTypes';
 import { MAX_CONTENT_WIDTH_PLUS, COLORS, GUTTER_SIZE, TOTAL_GRID_UNITS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
+import { take } from '../utils/arrayUtil';
 
 const SINGLE_ROW_BREAKPOINT = 850;
 
@@ -15,6 +17,8 @@ const MEDIUM_SIZE_PADDING = `calc(((1 / ${TOTAL_GRID_UNITS}) * 100vw) - ${pxToRe
 const FULL_SIZE_PADDING = `calc(${pxToRem(
   MAX_CONTENT_WIDTH_PLUS * (1 / TOTAL_GRID_UNITS),
 )} - ${pxToRem(GUTTER_SIZE)})`;
+
+const take3 = take(3);
 
 export const HomePageMediaBlock = props => {
   const {
@@ -46,13 +50,16 @@ export const HomePageMediaBlock = props => {
     </Blockquote>
   ) : null;
 
-  // TODO: update to map over images
-  const image = images[0] ? <GatsbyImage sizes={images[0].sizes} alt={images[0].alt} /> : null;
+  const renderImages = take3(images);
 
   return (
     <Tag {...rest}>
       {quote}
-      {image}
+      <MediaBlockImageGroup size={renderImages.length}>
+        {renderImages.map(img => (
+          <GatsbyImage key={img.id} sizes={img.sizes} alt={images.alt} />
+        ))}
+      </MediaBlockImageGroup>
     </Tag>
   );
 };
@@ -72,7 +79,7 @@ HomePageMediaBlock.propTypes = {
 };
 
 HomePageMediaBlock.defaultProps = {
-  tag: 'div',
+  tag: 'article',
   images: [],
   imageGridSize: '1 / 7',
   quoteGridSize: '7 / -1',
@@ -93,16 +100,15 @@ const StyledHomePageMediaBlock = styled(HomePageMediaBlock)`
         : 'transparent'};
   }
 
-  .gatsby-image-outer-wrapper {
+  ${MediaBlockImageGroup} {
     grid-row: 1;
   }
 
   @media (min-width: ${pxToRem(SINGLE_ROW_BREAKPOINT)}) {
     grid-template-columns: repeat(${TOTAL_GRID_UNITS}, 1fr);
-    grid-template-rows: 1;
     grid-gap: ${pxToRem(GUTTER_SIZE)};
 
-    ${Blockquote}, .gatsby-image-outer-wrapper {
+    ${Blockquote}, ${MediaBlockImageGroup} {
       grid-row: 1;
     }
 
@@ -114,7 +120,7 @@ const StyledHomePageMediaBlock = styled(HomePageMediaBlock)`
       margin-right: ${({ applyRightMargin, quoteGridSize }) => applyRightMargin(quoteGridSize)};
     }
 
-    .gatsby-image-outer-wrapper {
+    ${MediaBlockImageGroup} {
       grid-column: ${({ imageGridSize }) => imageGridSize};
       margin-left: ${({ applyLeftMargin, imageGridSize }) => applyLeftMargin(imageGridSize)};
       margin-right: ${({ applyRightMargin, imageGridSize }) => applyRightMargin(imageGridSize)};
