@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render an apporpriate number of grid rows 1`] = `
+.c0 {
+  display: grid;
+  grid-gap: 0.5rem;
+  position: relative;
+  grid-template-rows: repeat(5,1fr);
+  grid-template-columns: repeat(2,1fr);
+}
+
+.c0 .c1 {
+  height: 100%;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`should render default styles 1`] = `
+.c0 .c1 {
+  height: 100%;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`should render styles for the last image when displaying an odd number of images 1`] = `
+.c0 {
+  display: grid;
+  grid-gap: 0.5rem;
+  position: relative;
+  grid-template-rows: repeat(2,1fr);
+  grid-template-columns: repeat(2,1fr);
+}
+
+.c0 .c1 {
+  height: 100%;
+}
+
+.c0 > :last-child {
+  grid-row: 2;
+  position: absolute !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`should set grid styles when rendering more than one image 1`] = `
+.c0 {
+  display: grid;
+  grid-gap: 0.5rem;
+  position: relative;
+  grid-template-rows: repeat(1,1fr);
+  grid-template-columns: repeat(2,1fr);
+}
+
+.c0 .c1 {
+  height: 100%;
+}
+
+<div
+  className="c0"
+/>
+`;
