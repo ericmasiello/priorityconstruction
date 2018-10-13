@@ -50,6 +50,9 @@ class Layout extends React.Component {
       isFullHeight: false,
       heroChildren: <HeroContactPageContent />,
     },
+    gallery: {
+      background: this.props.data.backgroundGallery,
+    },
   };
 
   displayLayoutElement = (Component, props) => {
@@ -113,7 +116,11 @@ class Layout extends React.Component {
             />
             <Hero
               selectedImage={this.state.background}
-              bgImages={[this.props.data.backgroundHome, this.props.data.backgroundAbout]}
+              bgImages={[
+                this.props.data.backgroundHome,
+                this.props.data.backgroundAbout,
+                this.props.data.backgroundGallery,
+              ]}
               isFullHeight={this.state.isFullHeight}
             >
               {this.state.heroChildren}
@@ -147,6 +154,7 @@ Layout.propTypes = {
     }),
     backgroundHome: CustomPropTypes.ImageSharp,
     backgroundAbout: CustomPropTypes.ImageSharp,
+    backgroundGallery: CustomPropTypes.ImageSharp,
   }).isRequired,
   location: CustomPropTypes.Location.isRequired,
   className: PropTypes.string,
@@ -179,14 +187,20 @@ export const query = graphql`
       }
     }
 
-    backgroundHome: imageSharp(id: { regex: "/src/images/photos/heroes/poolside/" }) {
-      sizes(maxWidth: 1240) {
+    backgroundHome: imageSharp(id: { regex: "/src/images/photos/heroes/CoppinState-2/" }) {
+      sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
     }
 
-    backgroundAbout: imageSharp(id: { regex: "/src/images/photos/heroes/underpass/" }) {
-      sizes(maxWidth: 1240) {
+    backgroundAbout: imageSharp(id: { regex: "/src/images/photos/heroes/Fells-27/" }) {
+      sizes(maxWidth: 1500) {
+        ...GatsbyImageSharpSizes
+      }
+    }
+
+    backgroundGallery: imageSharp(id: { regex: "/src/images/photos/heroes/Fells-19/" }) {
+      sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
     }
