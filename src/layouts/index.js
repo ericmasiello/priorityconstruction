@@ -43,6 +43,7 @@ class Layout extends React.Component {
       heroChildren: <HeroAboutPageContent />,
     },
     careers: {
+      background: this.props.data.backgroundCareers,
       isFullHeight: false,
       heroChildren: <HeroCareersPageContent />,
     },
@@ -120,6 +121,7 @@ class Layout extends React.Component {
                 this.props.data.backgroundHome,
                 this.props.data.backgroundAbout,
                 this.props.data.backgroundGallery,
+                this.props.data.backgroundCareers,
               ]}
               isFullHeight={this.state.isFullHeight}
             >
@@ -155,6 +157,7 @@ Layout.propTypes = {
     backgroundHome: CustomPropTypes.ImageSharp,
     backgroundAbout: CustomPropTypes.ImageSharp,
     backgroundGallery: CustomPropTypes.ImageSharp,
+    backgroundCareers: CustomPropTypes.ImageSharp,
   }).isRequired,
   location: CustomPropTypes.Location.isRequired,
   className: PropTypes.string,
@@ -200,6 +203,12 @@ export const query = graphql`
     }
 
     backgroundGallery: imageSharp(id: { regex: "/src/images/photos/heroes/Fells-19/" }) {
+      sizes(maxWidth: 1500) {
+        ...GatsbyImageSharpSizes
+      }
+    }
+
+    backgroundCareers: imageSharp(id: { regex: "/src/images/photos/heroes/PriorityShovel/" }) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
