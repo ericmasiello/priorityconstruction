@@ -14,15 +14,21 @@ const GalleryOverlayPrimaryImage = styled(GatsbyImage)`
   height: 100%;
 `;
 const GalleryOverviewList = styled(FlatList)`
+  display: none;
+
+  @media (min-height: ${pxToRem(500)}) {
+    display: flex;
+  }
+
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   background-color: #000;
   height: ${GalleryOverlayTileImageHeight};
-  display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
+  transform: translateY(100%);
 
   .gatsby-image-outer-wrapper {
     position: absolute !important;
@@ -74,6 +80,17 @@ const GalleryTileButton = styled(InvisibleButton)`
     &:focus {
       outline: none;
     }
+  }
+`;
+
+const GalleryInner = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 1500px;
+  width: 100%;
+
+  > .gatsby-image-outer-wrapper {
+    flex: 1;
   }
 `;
 
@@ -151,10 +168,12 @@ export class GalleryOverlay extends React.Component {
     } = this.props;
     return (
       <Tag {...rest}>
-        <GalleryOverviewCloseButton onClick={this.handleResetSelection}>
-          <CloseIcon />
-        </GalleryOverviewCloseButton>
-        <GalleryOverlayPrimaryImage sizes={this.selectedImage().sizes} />
+        <GalleryInner>
+          <GalleryOverviewCloseButton onClick={this.handleResetSelection}>
+            <CloseIcon />
+          </GalleryOverviewCloseButton>
+          <GalleryOverlayPrimaryImage sizes={this.selectedImage().sizes} />
+        </GalleryInner>
         <GalleryOverviewList>
           {images.edges.map((edge, i) => (
             <GalleryOverviewListItem key={edge.node.id}>
@@ -181,9 +200,10 @@ export default styled(GalleryOverlay)`
   bottom: 0;
   z-index: 999;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  > .gatsby-image-outer-wrapper {
-    flex: 1;
+  @media (min-height: ${pxToRem(500)}) {
+    bottom: ${GalleryOverlayTileImageHeight};
   }
 `;
