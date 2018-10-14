@@ -15,6 +15,10 @@ const GalleryCopy = styled.div`
   transition: transform 0.3s ease-in;
   transform: translateY(100%);
 
+  @media (hover: none) {
+    transform: translateY(0);
+  }
+
   p,
   h4 {
     margin-bottom: 0;
