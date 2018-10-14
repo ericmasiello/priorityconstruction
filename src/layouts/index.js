@@ -8,9 +8,7 @@ import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import LayoutContext from '../layoutContext';
 import HeroHomePageContent from '../components/HeroHomePageContent';
-import HeroAboutPageContent from '../components/HeroAboutPageContent';
-import HeroCareersPageContent from '../components/HeroCareersPageContent';
-import HeroContactPageContent from '../components/HeroContactPageContent';
+import HeroWithBanner from '../components/HeroWithBanner';
 import PageHeaderBar from '../components/PageHeaderBar';
 
 const LayoutChildren = styled.main``;
@@ -40,16 +38,16 @@ class Layout extends React.Component {
     about: {
       background: this.props.data.backgroundAbout,
       isFullHeight: true,
-      heroChildren: <HeroAboutPageContent />,
+      heroChildren: <HeroWithBanner title="About Us" />,
     },
     careers: {
       background: this.props.data.backgroundCareers,
       isFullHeight: false,
-      heroChildren: <HeroCareersPageContent />,
+      heroChildren: <HeroWithBanner title="Career Opportunities" />,
     },
     contact: {
       isFullHeight: false,
-      heroChildren: <HeroContactPageContent />,
+      heroChildren: <HeroWithBanner title="Contact Us" />,
     },
     gallery: {
       background: this.props.data.backgroundGallery,
