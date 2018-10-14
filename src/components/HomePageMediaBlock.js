@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
-import GatsbyImage from './GatsbyImage';
+import ZoomImage from './ZoomImage';
 import MediaBlockImageGroup from './MediaBlockImageGroup';
 import Blockquote from './Blockquote';
 import Citation from './Citation';
@@ -57,7 +57,7 @@ export const HomePageMediaBlock = props => {
       {quote}
       <MediaBlockImageGroup size={renderImages.length}>
         {renderImages.map(img => (
-          <GatsbyImage key={img.id} sizes={img.sizes} alt={images.alt} />
+          <ZoomImage key={img.id} sizes={img.sizes} alt={images.alt} />
         ))}
       </MediaBlockImageGroup>
     </Tag>
