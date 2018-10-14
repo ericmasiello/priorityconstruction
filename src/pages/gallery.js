@@ -6,7 +6,7 @@ import PageContainer from '../components/PageContainer';
 import Gallery from '../components/Gallery';
 import GalleryItemWrapper from '../components/GalleryItemWrapper';
 import GalleryCopy from '../components/GalleryCopy';
-import GalleryImage from '../components/GalleryImage';
+import ZoomImage from '../components/ZoomImage';
 import GalleryItem from '../components/GalleryItem';
 import * as CustomPropTypes from '../propTypes';
 import { composeGalleryLandingMedia } from '../utils/gallery';
@@ -23,7 +23,7 @@ const GalleryPage = ({ className, data }) => {
         {landingGallery.map(media => (
           <GalleryItemWrapper key={media.id}>
             <GalleryItem tag={Link} to={media.href}>
-              <GalleryImage sizes={media.sizes} />
+              <ZoomImage sizes={media.sizes} />
               <GalleryCopy>
                 <h4>{media.name}</h4>
                 <p>{media.location}</p>

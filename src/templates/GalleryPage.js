@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PageContainer from '../components/PageContainer';
 import Gallery from '../components/Gallery';
 import GalleryItemWrapper from '../components/GalleryItemWrapper';
-import GalleryImage from '../components/GalleryImage';
+import ZoomImage from '../components/ZoomImage';
 import Type1 from '../components/Type1';
 import Type5 from '../components/Type5';
 import GalleryItem from '../components/GalleryItem';
@@ -55,7 +55,7 @@ class GalleryPage extends React.Component {
           {data.images.edges.map((edge, i) => (
             <GalleryItemWrapper key={edge.node.id}>
               <GalleryItem role="button" onClick={this.handleSelectImageByIndex(i)}>
-                <GalleryImage sizes={edge.node.sizes} />
+                <ZoomImage sizes={edge.node.sizes} />
               </GalleryItem>
             </GalleryItemWrapper>
           ))}
