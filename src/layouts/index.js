@@ -11,8 +11,6 @@ import HeroHomePageContent from '../components/HeroHomePageContent';
 import HeroWithBanner from '../components/HeroWithBanner';
 import PageHeaderBar from '../components/PageHeaderBar';
 
-const LayoutChildren = styled.main``;
-
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
   ${base}
@@ -108,7 +106,7 @@ class Layout extends React.Component {
           ]}
         />
         <div className={className} style={styles}>
-          <div>
+          <main>
             <PageHeaderBar
               navRef={this.state.navRef}
               currentPathname={this.props.location.pathname}
@@ -125,8 +123,8 @@ class Layout extends React.Component {
             >
               {this.state.heroChildren}
             </Hero>
-            <LayoutChildren>{children()}</LayoutChildren>
-          </div>
+            {children()}
+          </main>
           <Footer {...address} phone={phone} />
         </div>
         {this.state.toggleElement}
