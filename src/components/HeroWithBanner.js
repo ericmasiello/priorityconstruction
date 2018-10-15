@@ -32,6 +32,7 @@ export default styled(HeroWithBanner)`
     min-height: ${pxToRem(140)};
     height: 33%;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    padding-bottom: 2rem;
   }
 `;
