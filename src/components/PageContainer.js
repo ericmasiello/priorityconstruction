@@ -10,7 +10,7 @@ export const PageContainer = props => {
   const { tag: Tag, children, plus, ...rest } = props;
   return (
     <Tag {...rest} data-page-container>
-      <Container plus>{children}</Container>
+      <Container>{children}</Container>
     </Tag>
   );
 };
