@@ -113,7 +113,7 @@ export class GalleryOverlay extends React.Component {
   state = { selectedIndex: this.props.selectedIndex || 0 };
 
   componentDidMount() {
-    document.addEventListener('keydown', this.handleClose, false);
+    document.addEventListener('keydown', this.handleKeyDown, false);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -123,7 +123,7 @@ export class GalleryOverlay extends React.Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleClose, false);
+    document.removeEventListener('keydown', this.handleKeyDown, false);
   }
 
   handleSelectImageByIndex = selectedIndex => () => {
@@ -151,9 +151,33 @@ export class GalleryOverlay extends React.Component {
     return edge.node;
   };
 
-  handleClose = event => {
+  handleSelectLeft = () => {
+    if (this.state.selectedIndex === 0) {
+      this.setState({ selectedIndex: this.props.images.edges.length - 1 });
+    } else {
+      this.setState(state => ({
+        selectedIndex: state.selectedIndex - 1,
+      }));
+    }
+  };
+
+  handleSelectRight = () => {
+    if (this.state.selectedIndex === this.props.images.edges.length - 1) {
+      this.setState({ selectedIndex: 0 });
+    } else {
+      this.setState(state => ({
+        selectedIndex: state.selectedIndex + 1,
+      }));
+    }
+  };
+
+  handleKeyDown = event => {
     if (event.keyCode === 27 && this.props.onClose) {
       this.props.onClose();
+    } else if (event.keyCode === 39) {
+      this.handleSelectRight();
+    } else if (event.keyCode === 37) {
+      this.handleSelectLeft();
     }
   };
 
