@@ -30,13 +30,18 @@ class GalleryPage extends React.Component {
     this.props.hideLayoutElement();
   }
 
-  handleSelectImageByIndex = selectedIndex => () => {
-    this.props.displayLayoutElement(GalleryOverlay, {
-      selectedIndex,
-      onClose: this.props.hideLayoutElement,
-      onResetSelection: this.props.hideLayoutElement,
-      images: this.props.data.images,
-    });
+  handleSelectImageByIndex = selectedIndex => event => {
+    if (
+      event.type === 'click' ||
+      (event.type === 'keypress' && (event.key === ' ' || event.key === 'Enter'))
+    ) {
+      this.props.displayLayoutElement(GalleryOverlay, {
+        selectedIndex,
+        onClose: this.props.hideLayoutElement,
+        onResetSelection: this.props.hideLayoutElement,
+        images: this.props.data.images,
+      });
+    }
   };
 
   render() {
@@ -54,7 +59,12 @@ class GalleryPage extends React.Component {
         <Gallery>
           {data.images.edges.map((edge, i) => (
             <GalleryItemWrapper key={edge.node.id}>
-              <GalleryItem role="button" onClick={this.handleSelectImageByIndex(i)}>
+              <GalleryItem
+                role="button"
+                tabIndex={0}
+                onClick={this.handleSelectImageByIndex(i)}
+                onKeyPress={this.handleSelectImageByIndex(i)}
+              >
                 <ZoomImage sizes={edge.node.sizes} />
               </GalleryItem>
             </GalleryItemWrapper>
