@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Type3 from './Type3';
+import Type2 from './Type2';
 
-export default styled(Type3)`
+export default styled(Type2)`
   position: relative;
   z-index: 2;
   color: #fff;

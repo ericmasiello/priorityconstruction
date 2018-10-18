@@ -6,7 +6,7 @@ import Gallery from '../components/Gallery';
 import GalleryItemWrapper from '../components/GalleryItemWrapper';
 import ZoomImage from '../components/ZoomImage';
 import Type1 from '../components/Type1';
-import Type5 from '../components/Type5';
+import Type4 from '../components/Type4';
 import GalleryItem from '../components/GalleryItem';
 import * as CustomPropTypes from '../propTypes';
 import { pxToRem } from '../styles/utils';
@@ -49,7 +49,7 @@ class GalleryPage extends React.Component {
       <PageContainer tag="section" className={className}>
         <hgroup>
           <Type1>{data.meta.frontmatter.name}</Type1>
-          <Type5>{data.meta.frontmatter.location}</Type5>
+          <Type4>{data.meta.frontmatter.location}</Type4>
         </hgroup>
         <Gallery>
           {data.images.edges.map((edge, i) => (

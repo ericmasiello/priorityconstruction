@@ -8,9 +8,9 @@ import Input from '../components/Input';
 import Textarea from '../components/Textarea';
 import Select from '../components/Select';
 import Button from '../components/Button';
-import Type2 from '../components/Type2';
+import Type1 from '../components/Type1';
+import Type3 from '../components/Type3';
 import Type4 from '../components/Type4';
-import Type5 from '../components/Type5';
 import InvisibleButton from '../components/InvisibleButton';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import ErrorMessage from '../components/ErrorMessage';
@@ -22,7 +22,7 @@ import * as CustomPropTypes from '../propTypes';
 import { fields, views, viewFields } from '../config/careers';
 import { validateFields } from '../utils/form';
 
-const TabTitle = styled(Type5)`
+const TabTitle = styled(Type4)`
   margin-bottom: 0;
   text-transform: uppercase;
 `;
@@ -137,10 +137,10 @@ class Careers extends React.Component {
                     innerRef={this.thankYouMessage}
                   >
                     <div>
-                      <Type2 tag="p">Thanks! We&rsquo;ll be in touch.</Type2>
-                      <Type4 tag={InvisibleButton} onClick={state.handleResetFormSubmission}>
+                      <Type1 tag="p">Thanks! We&rsquo;ll be in touch.</Type1>
+                      <Type3 tag={InvisibleButton} onClick={state.handleResetFormSubmission}>
                         All done.
-                      </Type4>
+                      </Type3>
                     </div>
                   </FormSuccessMessage>
                   <ContactForm {...state.form}>

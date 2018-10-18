@@ -38,7 +38,7 @@ it('should allow the default tag to be customized', () => {
 it('should set a default displayName', () => {
   const Wrapper = typeComponentFactory(TYPE_SIZE.t1);
 
-  expect(Wrapper.Type.displayName).toBe('Type(67.33963060675029,1.1)');
+  expect(Wrapper.Type.displayName).toBe('Type(50.517352293136,1.2)');
 });
 
 it('should set custom displayName', () => {
