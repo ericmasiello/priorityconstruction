@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import GatsbyImage from './GatsbyImage';
@@ -181,6 +182,14 @@ export class GalleryOverlay extends React.Component {
     }
   };
 
+  scrollSelectedIntoView = elm => {
+    // eslint-disable-next-line react/no-find-dom-node
+    const node = ReactDOM.findDOMNode(elm);
+    if (node && node.scrollIntoView) {
+      node.scrollIntoView();
+    }
+  };
+
   render() {
     const {
       tag: Tag,
@@ -204,6 +213,7 @@ export class GalleryOverlay extends React.Component {
               <GalleryTileButton
                 onClick={this.handleSelectImageByIndex(i)}
                 aria-pressed={i === this.state.selectedIndex}
+                ref={i === this.state.selectedIndex && this.scrollSelectedIntoView}
               >
                 <GatsbyImage sizes={edge.node.sizes} />
               </GalleryTileButton>
