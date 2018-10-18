@@ -3,7 +3,7 @@
 exports[`should render 1`] = `
 .c0 {
   font-size: 10vw;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 @media (max-width:10rem) {
@@ -12,9 +12,9 @@ exports[`should render 1`] = `
   }
 }
 
-@media (min-width:23.685930369999998rem) {
+@media (min-width:17.76889rem) {
   .c0 {
-    font-size: 2.3685930369999997rem;
+    font-size: 1.776889rem;
   }
 }
 

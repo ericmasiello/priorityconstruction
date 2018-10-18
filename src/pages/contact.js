@@ -9,8 +9,8 @@ import Input from '../components/Input';
 import Textarea from '../components/Textarea';
 import Button from '../components/Button';
 import Small from '../components/Small';
-import Type2 from '../components/Type2';
-import Type4 from '../components/Type4';
+import Type1 from '../components/Type1';
+import Type3 from '../components/Type3';
 import InvisibleButton from '../components/InvisibleButton';
 import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
@@ -129,10 +129,10 @@ class Contact extends React.Component {
                   innerRef={this.thankYouMessage}
                 >
                   <div>
-                    <Type2 tag="p">Thanks! We&rsquo;ll be in touch.</Type2>
-                    <Type4 tag={InvisibleButton} onClick={state.handleResetFormSubmission}>
+                    <Type1 tag="p">Thanks! We&rsquo;ll be in touch.</Type1>
+                    <Type3 tag={InvisibleButton} onClick={state.handleResetFormSubmission}>
                       All done.
-                    </Type4>
+                    </Type3>
                   </div>
                 </FormSuccessMessage>
                 <ContactForm {...state.form}>

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
 import Link from 'gatsby-link';
+import Type2 from './Type2';
 import Type3 from './Type3';
-import Type4 from './Type4';
 import Button from './Button';
 import HeroContent from './HeroContent';
 import { GUTTER_SIZE, COLORS, MEDIA_QUERIES, MAX_CONTENT_WIDTH } from '../styles/vars';
@@ -39,8 +39,8 @@ const HGroup = styled.hgroup`
 export const HeroHomePageContent = props => (
   <HeroContent {...props}>
     <HGroup>
-      <Type3 tag="h1">Bringing Concrete Ideas to Life</Type3>
-      <Type4 tag="p">Quality workmanship & excellent customer service</Type4>
+      <Type2 tag="h1">Bringing Concrete Ideas to Life</Type2>
+      <Type3 tag="p">Quality workmanship & excellent customer service</Type3>
       <Button color="light" large tag={Link} to="/quote">
         Get a quote
       </Button>
@@ -56,12 +56,12 @@ export default styled(HeroHomePageContent)`
   display: flex;
   justify-content: flex-end;
 
-  ${Type3} {
+  ${Type2} {
     text-transform: uppercase;
     margin-bottom: 0;
   }
 
-  ${Type3}, ${Type4} {
+  ${Type2}, ${Type3} {
     text-shadow: 0 0 2px
       ${tinyColor(COLORS.highlight)
         .darken(30)

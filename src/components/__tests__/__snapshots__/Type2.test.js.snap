@@ -12,9 +12,9 @@ exports[`should render 1`] = `
   }
 }
 
-@media (min-width:31.57334518321rem) {
+@media (min-width:23.685930369999998rem) {
   .c0 {
-    font-size: 3.157334518321rem;
+    font-size: 2.3685930369999997rem;
   }
 }
 

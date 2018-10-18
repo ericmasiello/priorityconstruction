@@ -54,7 +54,7 @@ const MobileNav = styled(FlatList)`
   z-index: 999;
   flex-direction: column;
   padding: ${pxToRem(GUTTER_SIZE)};
-  font-size: ${pxToRem(TYPE_SIZE.t5[0])};
+  font-size: ${pxToRem(TYPE_SIZE.t4[0])};
   transition: transform 0.4s, box-shadow 0.4s;
   transform: translateX(0);
   box-shadow: 1px 1px 1rem rgba(0, 0, 0, 0.5);
@@ -65,7 +65,7 @@ const MobileNav = styled(FlatList)`
   }
 
   @media (min-width: ${pxToRem(600)}) {
-    font-size: ${pxToRem(TYPE_SIZE.t4[0])};
+    font-size: ${pxToRem(TYPE_SIZE.t3[0])};
   }
 
   @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {

@@ -5,7 +5,7 @@ import tinyColor from 'tinycolor2';
 import * as CustomPropTypes from '../propTypes';
 import Container from '../components/Container';
 import HomePageMediaBlock from '../components/HomePageMediaBlock';
-import Type4 from '../components/Type4';
+import Type3 from '../components/Type3';
 import FlatList from '../components/FlatList';
 import FlatListItem from '../components/FlatListItem';
 import { COLORS, GUTTER_SIZE, MEDIA_QUERIES, MAX_CONTENT_WIDTH } from '../styles/vars';
@@ -35,7 +35,7 @@ const Callout = styled.hgroup`
   margin-bottom: 3rem;
 
   @media (min-width: ${pxToRem(MEDIA_QUERIES.heroL)}) {
-    ${Type4} {
+    ${Type3} {
       max-width: calc(50vw - ${pxToRem(GUTTER_SIZE * 2)});
     }
   }
@@ -46,7 +46,7 @@ const Callout = styled.hgroup`
   }
 
   @media (min-width: ${pxToRem(MAX_CONTENT_WIDTH)}) {
-    ${Type4} {
+    ${Type3} {
       max-width: ${pxToRem(MAX_CONTENT_WIDTH / 2 - GUTTER_SIZE)};
     }
   }
@@ -63,13 +63,13 @@ const HomePage = props => {
     <React.Fragment>
       <Container tag="section" plus className={className}>
         <Callout>
-          <Type4 tag="h2">
+          <Type3 tag="h2">
             Safety is our 
             {' '}
             <strong>number one</strong>
             {' '}
 priority
-          </Type4>
+          </Type3>
           <Services>
             <ServiceItem>Brick Paving</ServiceItem>
             <ServiceItem>Flatwork Concrete</ServiceItem>

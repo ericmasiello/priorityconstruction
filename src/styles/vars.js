@@ -37,16 +37,13 @@ export const MEDIA_QUERIES = {
 };
 
 // type properties
-// TODO: only have small, base, t1 - t4
 export const TYPE_SIZE = {
   small: [unitToPx(0.8125), 1.5],
   base: [unitToPx(1), 1.5],
-  t5: [unitToPx(scaler), 1.5],
-  t4: [unitToPx(scaler ** 2), 1.3],
-  t3: [unitToPx(scaler ** 3), 1.2],
-  t2: [unitToPx(scaler ** 4), 1.2],
-  t1: [unitToPx(scaler ** 5), 1.1],
-  jumbo: [unitToPx(scaler ** 6), 1.1],
+  t4: [unitToPx(scaler), 1.5],
+  t3: [unitToPx(scaler ** 2), 1.3],
+  t2: [unitToPx(scaler ** 3), 1.2],
+  t1: [unitToPx(scaler ** 4), 1.2],
 };
 
 export const BODY_WEIGHTS = {
