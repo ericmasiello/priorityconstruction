@@ -85,8 +85,8 @@ export default styled(withLayoutContext(GalleryPage))`
       grid-template-columns: repeat(auto-fit, minmax(${pxToRem(300)}, 1fr));
     }
 
-    ${Gallery.Item} {
-      &:nth-child(3n + 1) {
+    ${GalleryItemWrapper} {
+      &:nth-child(5n + 1) {
         grid-column: span 2;
         grid-row: span 2;
       }
