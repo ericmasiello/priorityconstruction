@@ -251,7 +251,6 @@ class Contact extends React.Component {
                       <Field nameAs="comments" fragment>
                         <Label>Additional comments</Label>
                         <Textarea
-                          type="comments"
                           value={values.comments}
                           onChange={handleChange}
                           onBlur={handleBlur}
