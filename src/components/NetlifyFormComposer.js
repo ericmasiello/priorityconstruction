@@ -1,103 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { encode, fieldsToKeyValues, fieldsToFieldState } from '../utils/form';
+import { encode } from '../utils/form';
 
+/* eslint-disable react/sort-comp */
 export default class NetlifyFormComposer extends React.Component {
   static propTypes = {
     children: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    // eslint-disable-next-line react/no-unused-prop-types
-    fields: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.shape({})]),
+    formName: PropTypes.string.isRequired,
     onSubmitSuccess: PropTypes.func,
     onSubmitError: PropTypes.func,
   };
 
   static defaultProps = {
-    fields: [],
     onSubmitSuccess: () => {},
     onSubmitError: () => {},
   };
 
-  constructor(...args) {
-    super(...args);
-    this.state = this.initState(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(this.initState(nextProps));
-  }
-
-  initState = props => {
-    const { name, fields } = props;
-
-    return {
-      form: {
-        onSubmit: this.handleSubmit,
-        method: 'POST',
-        'data-netlify': true,
-        name,
-      },
-      fields: fieldsToFieldState(fields, this.handleChange),
-      submissionState: null,
-      handleResetFormSubmission: this.handleResetFormSubmission,
-    };
+  handleResetFormSubmission = handleReset => () => {
+    this.setState({ submitted: false, submissionError: false });
+    if (typeof handleReset === 'function') {
+      handleReset();
+    }
   };
 
-  handleChange = event => {
-    const elm = event.target;
-    this.setState(prevState => {
-      const value = elm.type === 'checkbox' && elm.checked === false ? undefined : elm.value;
-      return {
-        fields: {
-          ...prevState.fields,
-          [elm.name]: {
-            ...prevState.fields[elm.name],
-            value,
-          },
-        },
-      };
-    });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = (values, actions) => {
     // optimistically render a success message
-    this.setState({ submissionState: 'success' }, this.props.onSubmitSuccess);
+    this.setState({ submitted: true, submissionError: false }, this.props.onSubmitSuccess);
 
     return fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': this.props.name, ...fieldsToKeyValues(this.state.fields) }),
+      body: encode({ 'form-name': this.props.formName, ...values }),
     })
       .then(() => {
-        this.setState(prevState => {
-          // once we know everything is submitted successfully,
-          // clear the fields
-          const fields = Object.keys(prevState.fields).reduce((acc, key) => {
-            acc[key] = {
-              ...prevState.fields[key],
-              value: '',
-            };
-            return acc;
-          }, {});
-
-          return { fields };
-        });
+        if (actions && typeof actions.setSubmitting === 'function') {
+          actions.setSubmitting(false);
+        }
       })
       .catch(error => {
         // eslint-disable-next-line
         console.error(error);
-
-        this.setState(
-          {
-            submissionState: 'error',
-          },
-          this.props.onSubmitError,
-        );
+        this.setState({ submitted: false, submissionError: true }, this.props.onSubmitError);
       });
   };
 
-  handleResetFormSubmission = () => this.setState({ submissionState: null });
+  state = {
+    formName: this.props.formName,
+    submitted: false,
+    submissionError: false,
+    handleResetFormSubmission: this.handleResetFormSubmission,
+    handleSubmit: this.handleSubmit,
+  };
 
   render() {
     return this.props.children(this.state);
