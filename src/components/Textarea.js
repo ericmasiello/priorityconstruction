@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { COLORS, BODY_WEIGHTS } from '../styles/vars';
 
-export const Textarea = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
+export const Textarea = ({ tag: Tag, error, ...rest }) => <Tag {...rest} />;
 
 Textarea.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  error: PropTypes.bool,
 };
 
 Textarea.defaultProps = {
