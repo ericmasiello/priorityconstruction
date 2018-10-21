@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import styled from 'styled-components';
 import PageContainer from '../components/PageContainer';
+import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import Field from '../components/Field';
 import Label from '../components/Label';
 import Input from '../components/Input';
@@ -11,11 +14,12 @@ import Select from '../components/Select';
 import Type1 from '../components/Type1';
 import Type3 from '../components/Type3';
 import InvisibleButton from '../components/InvisibleButton';
-import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
+import BaseFieldError from '../components/FieldError';
 import { pxToRem } from '../styles/utils';
 import * as CustomPropTypes from '../propTypes';
+import '../utils/validation/phone';
 
 const FormErrorMessage = styled(ErrorMessage)`
   margin-top: 1rem;
@@ -23,6 +27,12 @@ const FormErrorMessage = styled(ErrorMessage)`
   @media (min-width: ${pxToRem(500)}) {
     grid-column: span 2;
     margin-top: 0;
+  }
+`;
+
+const FieldError = styled(BaseFieldError)`
+  @media (min-width: ${pxToRem(500)}) {
+    grid-column: 2 / -1;
   }
 `;
 
@@ -70,7 +80,34 @@ const ContactForm = styled.form`
   }
 `;
 
+const config = {
+  initialValues: {
+    name: '',
+    company: '',
+    phone: '',
+    fax: '',
+    email: '',
+    comments: '',
+    howDidYouHear: '',
+    projectType: '',
+  },
+  validationSchema: Yup.object().shape({
+    name: Yup.string().required('Enter your name'),
+    email: Yup.string()
+      .email()
+      .required('Enter a valid email address'),
+    phone: Yup.string()
+      .phone()
+      .required('Enter your phone number'),
+    fax: Yup.string().phone(),
+    comments: Yup.string().required('Enter your comment'),
+    howDidYouHear: Yup.string(),
+    projectType: Yup.string().required('Select a type of project'),
+  }),
+};
+
 const projecTypes = [
+  '',
   'Brick Paving',
   'Flatwork Concrete',
   'Pervious Concrete',
@@ -89,8 +126,6 @@ class Quote extends React.Component {
     }).isRequired,
   };
 
-  fields = ['name', 'company', 'phone', 'fax', 'email', 'comments', 'howDidYouHear', 'projectType'];
-
   thankYouMessage = React.createRef();
 
   errorMessage = React.createRef();
@@ -107,99 +142,169 @@ class Quote extends React.Component {
     const { className, data } = this.props;
 
     return (
-      <PageContainer tag="section" className={className}>
-        <div dangerouslySetInnerHTML={{ __html: data.intro.html }} />
-        <PageLayout>
-          <NetlifyFormComposer
-            name="quote"
-            fields={this.fields}
-            onSubmitError={this.handleSetErrorFocus}
-            onSubmitSuccess={this.handleSetThankYouFocus}
-          >
-            {state => (
-              <React.Fragment>
-                <FormSuccessMessage
-                  aria-hidden={state.submissionState !== 'success'}
-                  show={state.submissionState === 'success'}
-                  tabIndex={-1}
-                  innerRef={this.thankYouMessage}
-                >
-                  <div>
-                    <Type1 tag="p">Thanks! We&rsquo;ll be in touch.</Type1>
-                    <Type3 tag={InvisibleButton} onClick={state.handleResetFormSubmission}>
-                      All done.
-                    </Type3>
-                  </div>
-                </FormSuccessMessage>
-                <ContactForm {...state.form}>
-                  <input type="hidden" name="form-name" value={state.form.name} />
-                  <Field nameAs="name" fragment>
-                    <Label>Name</Label>
-                    <Input required {...state.fields.name} />
-                  </Field>
-                  <Field nameAs="company" fragment>
-                    <Label>Company</Label>
-                    <Input {...state.fields.company} />
-                  </Field>
-                  <Field nameAs="phone" fragment>
-                    <Label>Phone</Label>
-                    <Input
-                      {...state.fields.phone}
-                      type="tel"
-                      placeholder="123-456-7890"
-                      pattern="[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}"
-                      required
-                    />
-                  </Field>
-                  <Field nameAs="fax" fragment>
-                    <Label>Fax</Label>
-                    <Input
-                      {...state.fields.fax}
-                      type="tel"
-                      placeholder="123-456-7890"
-                      pattern="[0-9]{0,1}-{0,1}[0-9]{3}-{0,1}[0-9]{3}-{0,1}?[0-9]{4}"
-                    />
-                  </Field>
-                  <Field nameAs="email" fragment>
-                    <Label>Email</Label>
-                    <Input {...state.fields.email} type="email" required />
-                  </Field>
-                  <Field nameAs="projectType" fragment>
-                    <Label>Project type</Label>
-                    <Select {...state.fields.projectType}>
-                      {projecTypes.map(type => (
-                        <option key={type} value={type}>
-                          {type}
-                        </option>
-                      ))}
-                    </Select>
-                  </Field>
-                  <Field stack nameAs="comments" fragment>
-                    <Label>Project description and comments</Label>
-                    <Textarea {...state.fields.comments} required />
-                  </Field>
-                  <Field nameAs="howDidYouHear" fragment>
-                    <Label>How did you hear about us?</Label>
-                    <Input {...state.fields.howDidYouHear} />
-                  </Field>
-                  <Button type="submit">Submit</Button>
-                  {state.submissionState === 'error' && (
-                    <FormErrorMessage tabIndex={-1} innerRef={this.errorMessage}>
-                      Sorry.
-                      {' '}
-                      <span role="img" aria-label="Sad face">
-                        😔
-                      </span>
-                      {' '}
-                      There was an problem submitting your message. Please try again.
-                    </FormErrorMessage>
-                  )}
-                </ContactForm>
-              </React.Fragment>
-            )}
-          </NetlifyFormComposer>
-        </PageLayout>
-      </PageContainer>
+      <NetlifyFormComposer
+        formName="quote"
+        onSubmitSuccess={this.handleSetThankYouFocus}
+        onSubmitError={this.handleSetErrorFocus}
+      >
+        {netlifyState => (
+          <Formik {...config} onSubmit={netlifyState.handleSubmit}>
+            {props => {
+              const {
+                values,
+                touched,
+                errors,
+                isSubmitting,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                handleReset,
+              } = props;
+              return (
+                <PageContainer tag="section" className={className}>
+                  <div dangerouslySetInnerHTML={{ __html: data.intro.html }} />
+                  <PageLayout>
+                    <React.Fragment>
+                      <FormSuccessMessage
+                        aria-hidden={!netlifyState.submitted}
+                        show={netlifyState.submitted}
+                        tabIndex={-1}
+                        innerRef={this.thankYouMessage}
+                      >
+                        <div>
+                          <Type1 tag="p">Thanks! We&rsquo;ll be in touch.</Type1>
+                          <Type3
+                            tag={InvisibleButton}
+                            onClick={netlifyState.handleResetFormSubmission(handleReset)}
+                          >
+                            All done.
+                          </Type3>
+                        </div>
+                      </FormSuccessMessage>
+                      {netlifyState.submissionError === 'error' && (
+                        <FormErrorMessage tabIndex={-1} innerRef={this.errorMessage}>
+                          Sorry.
+                          {' '}
+                          <span role="img" aria-label="Sad face">
+                            😔
+                          </span>
+                          {' '}
+                          There was an problem submitting your message. Please try again.
+                        </FormErrorMessage>
+                      )}
+                      <ContactForm name={netlifyState.formName} onSubmit={handleSubmit}>
+                        <input type="hidden" name="form-name" value={netlifyState.formName} />
+                        <Field nameAs="name" fragment>
+                          <Label>Name</Label>
+                          <Input
+                            value={values.name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.name && touched.name}
+                          />
+                        </Field>
+                        <FieldError component="div" name="name" />
+
+                        <Field nameAs="company" fragment>
+                          <Label>Company</Label>
+                          <Input
+                            value={values.company}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.company && touched.company}
+                          />
+                        </Field>
+                        <FieldError component="div" name="company" />
+
+                        <Field nameAs="phone" fragment>
+                          <Label>Phone</Label>
+                          <Input
+                            type="tel"
+                            placeholder="123-456-7890"
+                            value={values.phone}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.phone && touched.phone}
+                          />
+                        </Field>
+                        <FieldError component="div" name="phone" />
+
+                        <Field nameAs="fax" fragment>
+                          <Label>Fax</Label>
+                          <Input
+                            type="tel"
+                            placeholder="123-456-7890"
+                            value={values.fax}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.fax && touched.fax}
+                          />
+                        </Field>
+                        <FieldError component="div" name="fax" />
+
+                        <Field nameAs="email" fragment>
+                          <Label>Email</Label>
+                          <Input
+                            type="email"
+                            value={values.email}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.email && touched.email}
+                          />
+                        </Field>
+                        <FieldError component="div" name="email" />
+
+                        <Field nameAs="projectType" fragment>
+                          <Label>Project type</Label>
+                          <Select
+                            value={values.projectType}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.projectType && touched.projectType}
+                          >
+                            {projecTypes.map(type => (
+                              <option key={type} value={type}>
+                                {type}
+                              </option>
+                            ))}
+                          </Select>
+                        </Field>
+                        <FieldError component="div" name="projectType" />
+
+                        <Field stack nameAs="comments" fragment>
+                          <Label>Project description and comments</Label>
+                          <Textarea
+                            value={values.comments}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.comments && touched.comments}
+                          />
+                        </Field>
+                        <FieldError component="div" name="comments" />
+
+                        <Field nameAs="howDidYouHear" fragment>
+                          <Label>How did you hear about us?</Label>
+                          <Input
+                            value={values.howDidYouHear}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={errors.howDidYouHear && touched.howDidYouHear}
+                          />
+                        </Field>
+                        <FieldError component="div" name="howDidYouHear" />
+
+                        <Button type="submit" disabled={isSubmitting}>
+                          Submit
+                        </Button>
+                      </ContactForm>
+                    </React.Fragment>
+                  </PageLayout>
+                </PageContainer>
+              );
+            }}
+          </Formik>
+        )}
+      </NetlifyFormComposer>
     );
   }
 }
