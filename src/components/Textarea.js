@@ -21,4 +21,5 @@ export default styled(Textarea)`
   font-weight: ${BODY_WEIGHTS.medium};
   background-color: ${COLORS.bg};
   padding: 0.5rem;
+  ${({ error }) => error && `border-color: ${COLORS.error}`};
 `;
