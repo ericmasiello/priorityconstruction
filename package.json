@@ -5,6 +5,7 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "dotenv": "^6.0.0",
+    "formik": "^1.3.1",
     "gatsby": "^1.9.277",
     "gatsby-image": "^1.0.55",
     "gatsby-link": "^1.6.46",
@@ -15,13 +16,15 @@
     "gatsby-source-filesystem": "^1.5.21",
     "gatsby-transformer-remark": "^1.7.33",
     "gatsby-transformer-sharp": "^1.6.20",
+    "google-libphonenumber": "^3.1.15",
     "hoist-non-react-statics": "^3.0.1",
     "react": "~16.5.1",
     "react-anchor-link-smooth-scroll": "^1.0.11",
     "react-dom": "~16.5.1",
     "react-helmet": "^5.2.0",
     "styled-components": "^3.4.8",
-    "tinycolor2": "~1.4.1"
+    "tinycolor2": "~1.4.1",
+    "yup": "^0.26.6"
   },
   "keywords": [
     "gatsby",
