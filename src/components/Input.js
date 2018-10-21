@@ -70,7 +70,7 @@ const StyledRadio = styled(Radio)`
   }
 `;
 
-export const Input = ({ tag: Tag, ...rest }) => <Tag {...rest} />;
+export const Input = ({ tag: Tag, error, ...rest }) => <Tag {...rest} />;
 
 Input.propTypes = {
   tag: CustomPropTypes.Tag,
