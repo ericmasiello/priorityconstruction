@@ -147,7 +147,6 @@ class Contact extends React.Component {
                 values,
                 touched,
                 errors,
-                dirty,
                 isSubmitting,
                 handleChange,
                 handleBlur,
@@ -258,10 +257,6 @@ class Contact extends React.Component {
                         />
                       </Field>
                       <FieldError component={Small} name="comments" />
-
-                      <Button type="button" onClick={handleReset} disabled={!dirty || isSubmitting}>
-                        Reset
-                      </Button>
 
                       <Button type="submit" disabled={isSubmitting}>
                         Submit
