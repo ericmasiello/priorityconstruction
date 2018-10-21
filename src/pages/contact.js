@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Formik, ErrorMessage as FormikErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
 import PageContainer from '../components/PageContainer';
@@ -17,9 +17,9 @@ import OfficeMap from '../components/OfficeMap';
 import InvisibleButton from '../components/InvisibleButton';
 import FormSuccessMessage from '../components/FormSuccessMessage';
 import ErrorMessage from '../components/ErrorMessage';
+import BaseFieldError from '../components/FieldError';
 import * as CustomPropTypes from '../propTypes';
 import { pxToRem } from '../styles/utils';
-import { COLORS } from '../styles/vars';
 import '../utils/validation/phone';
 
 const PageLayout = styled.div`
@@ -40,8 +40,7 @@ const FormErrorMessage = styled(ErrorMessage)`
   }
 `;
 
-const FieldError = styled(FormikErrorMessage)`
-  color: ${COLORS.error};
+const FieldError = styled(BaseFieldError)`
   @media (min-width: ${pxToRem(500)}) {
     grid-column: 2 / -1;
   }
@@ -196,7 +195,7 @@ class Contact extends React.Component {
                           error={errors.name && touched.name}
                         />
                       </Field>
-                      <FieldError component={Small} name="name" />
+                      <FieldError component="div" name="name" />
 
                       <Field nameAs="company" fragment>
                         <Label>Company</Label>
@@ -207,7 +206,7 @@ class Contact extends React.Component {
                           error={errors.company && touched.company}
                         />
                       </Field>
-                      <FieldError component={Small} name="company" />
+                      <FieldError component="div" name="company" />
 
                       <Field nameAs="phone" fragment>
                         <Label>Phone</Label>
@@ -220,7 +219,7 @@ class Contact extends React.Component {
                           error={errors.phone && touched.phone}
                         />
                       </Field>
-                      <FieldError component={Small} name="phone" />
+                      <FieldError component="div" name="phone" />
 
                       <Field nameAs="fax" fragment>
                         <Label>Fax</Label>
@@ -233,7 +232,7 @@ class Contact extends React.Component {
                           error={errors.fax && touched.fax}
                         />
                       </Field>
-                      <FieldError component={Small} name="fax" />
+                      <FieldError component="div" name="fax" />
 
                       <Field nameAs="email" fragment>
                         <Label>Email</Label>
@@ -245,7 +244,7 @@ class Contact extends React.Component {
                           error={errors.email && touched.email}
                         />
                       </Field>
-                      <FieldError component={Small} name="email" />
+                      <FieldError component="div" name="email" />
 
                       <Field nameAs="comments" fragment>
                         <Label>Additional comments</Label>
@@ -256,7 +255,7 @@ class Contact extends React.Component {
                           error={errors.comments && touched.comments}
                         />
                       </Field>
-                      <FieldError component={Small} name="comments" />
+                      <FieldError component="div" name="comments" />
 
                       <Button type="submit" disabled={isSubmitting}>
                         Submit
