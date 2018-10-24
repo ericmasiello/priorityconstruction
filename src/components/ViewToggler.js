@@ -71,3 +71,18 @@ export default class Toggler extends React.Component {
     );
   }
 }
+
+export const withToggler = (views, initialSelection) => Component => {
+  const TogglerWrapper = props => (
+    <Toggler views={views} initialSelection={initialSelection}>
+      <Toggler.Consumer>
+        {toggleState => <Component togglerState={toggleState} {...props} />}
+      </Toggler.Consumer>
+    </Toggler>
+  );
+
+  // TODO: add displayName
+  // TODO: hoist non react statics
+
+  return TogglerWrapper;
+};
