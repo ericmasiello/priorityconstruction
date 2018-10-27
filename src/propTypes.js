@@ -19,6 +19,14 @@ export const AllImageSharp = PropTypes.shape({
   edges: PropTypes.arrayOf(Edge),
 });
 
+export const Service = PropTypes.shape({
+  frontmatter: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+  html: PropTypes.string.isRequired,
+});
+
 export const Markdown = PropTypes.shape({
   html: PropTypes.string.isRequired,
 });

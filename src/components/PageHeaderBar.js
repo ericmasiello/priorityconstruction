@@ -83,7 +83,7 @@ const MobileNav = styled(FlatList)`
 
 const links = [
   {
-    to: '/placeholder',
+    to: '/services',
     children: 'Services',
   },
   {
