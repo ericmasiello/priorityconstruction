@@ -1,6 +1,6 @@
 ---
-location: 'P. Flanigan & Sons, Inc., Baltimore, Maryland'
-author: 'Paul Freas'
+location: 'Brawner Builders, Inc., Hunt Valley, Maryland'
+author: 'Eric Linder'
 images: [{ image: 'workers.jpg', alt: 'Lorem ipsum' }]
 props:
   grayed: true
@@ -9,4 +9,4 @@ props:
   quoteGridSize: '1 / 7'
 ---
 
-One of my favorite things about Priority is that the owner is involved in every project.
+The high quality of work has constantly surpassed expectations.

@@ -1,5 +1,6 @@
 ---
-author: 'Tim Davis, Lafarge'
+location: 'General Paving & Contracting, Inc., Halethorpe, Maryland'
+author: 'Robert L. Quinn, Jr.'
 images: [{ image: 'anthemhousePool.jpg', alt: 'Lorem ipsum' }]
 props:
   padQuoteEvenly: true
@@ -7,4 +8,4 @@ props:
   quoteGridSize: '6 / -1'
 ---
 
-From their professional conduct in an office setting to their diligent experts in the field, Priority Construction makes working with them easy...
+General Paving and Contracting, Inc. regularly use Priority Construction Corp. on a range of construction projects. Priority's crews are punctual and highly skilled in a variety of concrete jobs. Over the years, they have proven to be easy to work with and have consistently performed excellent work.
