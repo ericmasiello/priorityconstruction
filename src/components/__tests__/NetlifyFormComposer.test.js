@@ -3,263 +3,177 @@ import { shallow } from 'enzyme';
 import NetlifyFormComposer from '../NetlifyFormComposer';
 
 it('should render', () => {
-  const wrapper = shallow(<NetlifyFormComposer name="test">{jest.fn()}</NetlifyFormComposer>);
+  const wrapper = shallow(<NetlifyFormComposer formName="test">{jest.fn()}</NetlifyFormComposer>);
 
   expect(wrapper).toHaveLength(1);
 });
 
 it('should call children function with state', () => {
   const children = jest.fn();
-  const wrapper = shallow(<NetlifyFormComposer name="test">{children}</NetlifyFormComposer>);
+  const wrapper = shallow(<NetlifyFormComposer formName="test">{children}</NetlifyFormComposer>);
 
   expect(children).toBeCalledWith({
-    fields: {},
-    form: {
-      onSubmit: wrapper.instance().handleSubmit,
-      method: 'POST',
-      'data-netlify': true,
-      name: 'test',
-    },
-    submissionState: null,
+    formName: 'test',
+    submitted: false,
+    submissionError: false,
+    handleSubmit: wrapper.instance().handleSubmit,
     handleResetFormSubmission: wrapper.instance().handleResetFormSubmission,
   });
 });
 
-it('should render field objects', () => {
-  const children = jest.fn();
-  const wrapper = shallow(
-    <NetlifyFormComposer fields={['foo', 'bar', 'baz']} name="test">
-      {children}
-    </NetlifyFormComposer>,
-  );
-
-  expect(wrapper.state().fields).toEqual({
-    foo: {
-      name: 'foo',
-      onChange: wrapper.instance().handleChange,
-      value: '',
-    },
-    bar: {
-      name: 'bar',
-      onChange: wrapper.instance().handleChange,
-      value: '',
-    },
-    baz: {
-      name: 'baz',
-      onChange: wrapper.instance().handleChange,
-      value: '',
-    },
-  });
-});
-
-it('should update the value of a text field', () => {
-  const children = jest.fn();
-  const wrapper = shallow(
-    <NetlifyFormComposer fields={['foo', 'bar', 'baz']} name="test">
-      {children}
-    </NetlifyFormComposer>,
-  );
-
-  wrapper.instance().handleChange({
-    target: {
-      name: 'bar',
-      type: 'text',
-      value: 'updated value',
-    },
-  });
-
-  expect(wrapper.state().fields.bar).toEqual({
-    name: 'bar',
-    onChange: wrapper.instance().handleChange,
-    value: 'updated value',
-  });
-});
-
-// FIXME: does this work correctly?
-// it('should update the value of a checkbox/radio field', () => {
-//   const children = jest.fn();
-//   const wrapper = shallow(
-//     <NetlifyFormComposer
-//       fields={{
-//         foo: {},
-//         bar: {
-//           type: 'checkbox',
-//           checked: false,
-//         },
-//       }}
-//       name="test"
-//     >
-//       {children}
-//     </NetlifyFormComposer>,
-//   );
-
-//   wrapper.instance().handleChange({
-//     target: {
-//       name: 'bar',
-//       type: 'checkbox',
-//       checked: true,
-//     },
-//   });
-
-//   expect(wrapper.state().fields.bar).toEqual({
-//     name: 'bar',
-//     type: 'checkbox',
-//     onChange: wrapper.instance().handleChange,
-//   });
-// });
-
 describe('handleSubmit', () => {
-  describe('success', () => {
+  describe('all cases optimistically', () => {
     let oldFetch;
+
     beforeEach(() => {
-      oldFetch = window.fetch;
-      window.fetch = jest.fn(() => Promise.resolve({ success: true }));
+      oldFetch = global.fetch;
+      global.fetch = jest.fn(() => Promise.resolve({}));
+      global.console.error = jest.fn();
     });
 
     afterEach(() => {
-      window.fetch = oldFetch;
+      global.fetch = oldFetch;
     });
 
-    it('prevents default', () => {
-      const preventDefault = jest.fn();
+    it('should set state', () => {
       const wrapper = shallow(
-        <NetlifyFormComposer fields={['foo', 'bar', 'baz']} name="test">
-          {jest.fn()}
-        </NetlifyFormComposer>,
+        <NetlifyFormComposer formName="test">{jest.fn()}</NetlifyFormComposer>,
       );
 
-      wrapper.instance().handleSubmit({
-        preventDefault,
-      });
-
-      expect(preventDefault).toBeCalled();
-    });
-
-    it('resets state', () => {
-      const preventDefault = jest.fn();
-      const wrapper = shallow(
-        <NetlifyFormComposer fields={['foo', 'bar', 'baz']} name="test">
-          {jest.fn()}
-        </NetlifyFormComposer>,
-      );
-
-      wrapper.instance().handleChange({
-        target: {
-          name: 'foo',
-          type: 'text',
-          value: 'foo',
-        },
-      });
-
-      wrapper.instance().handleChange({
-        target: {
-          name: 'bar',
-          type: 'text',
-          value: 'bar',
-        },
-      });
-
-      wrapper.instance().handleChange({
-        target: {
-          name: 'baz',
-          type: 'text',
-          value: 'baz',
-        },
-      });
-
-      return wrapper
+      wrapper
         .instance()
-        .handleSubmit({
-          preventDefault,
-        })
+        .handleSubmit({}, {})
         .then(() => {
-          expect(wrapper.state().fields).toEqual({
-            foo: {
-              name: 'foo',
-              onChange: wrapper.instance().handleChange,
-              value: '',
-            },
-            bar: {
-              name: 'bar',
-              onChange: wrapper.instance().handleChange,
-              value: '',
-            },
-            baz: {
-              name: 'baz',
-              onChange: wrapper.instance().handleChange,
-              value: '',
-            },
-          });
+          expect(wrapper.state().submitted).toBe(true);
+          expect(wrapper.state().submissionError).toBe(false);
+        });
+    });
+
+    it('should call onSubmitSuccess prop', () => {
+      const onSubmitSuccess = jest.fn();
+      const wrapper = shallow(
+        <NetlifyFormComposer formName="test" onSubmitSuccess={onSubmitSuccess}>
+          {jest.fn()}
+        </NetlifyFormComposer>,
+      );
+
+      wrapper
+        .instance()
+        .handleSubmit({}, {})
+        .then(() => {
+          expect(onSubmitSuccess).toBeCalled();
         });
     });
   });
 
   describe('success', () => {
     let oldFetch;
-    let oldError;
-    const error = new Error('oh no!');
+
     beforeEach(() => {
-      oldFetch = window.fetch;
-      oldError = console.error;
-      window.fetch = jest.fn(() => Promise.reject(error));
-      console.error = jest.fn();
+      oldFetch = global.fetch;
+      global.fetch = jest.fn(() => Promise.resolve({}));
+      global.console.error = jest.fn();
     });
 
     afterEach(() => {
-      window.fetch = oldFetch;
-      console.error = oldError;
+      global.fetch = oldFetch;
+    });
+
+    it('should call fetch with the encoded headers', () => {
+      const wrapper = shallow(
+        <NetlifyFormComposer formName="test">{jest.fn()}</NetlifyFormComposer>,
+      );
+      return wrapper
+        .instance()
+        .handleSubmit(
+          {
+            name: 'Eric',
+            phone: '123-456-7890',
+            email: 'test@test.com',
+          },
+          {},
+        )
+        .then(() => {
+          expect(global.fetch).toBeCalledWith('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'form-name=test&name=Eric&phone=123-456-7890&email=test%40test.com',
+          });
+        });
+    });
+
+    it('should call setSubmitting action when defined', () => {
+      const setSubmitting = jest.fn();
+      const wrapper = shallow(
+        <NetlifyFormComposer formName="test">{jest.fn()}</NetlifyFormComposer>,
+      );
+      return wrapper
+        .instance()
+        .handleSubmit(
+          {},
+          {
+            setSubmitting,
+          },
+        )
+        .then(() => {
+          expect(setSubmitting).toBeCalledWith(false);
+        });
+    });
+  });
+
+  describe('error', () => {
+    let oldFetch;
+    let oldError;
+    const error = new Error('oh no!');
+
+    beforeEach(() => {
+      oldFetch = global.fetch;
+      oldError = global.console.error;
+      global.fetch = jest.fn(() => Promise.reject(error));
+      global.console.error = jest.fn();
+    });
+
+    afterEach(() => {
+      global.fetch = oldFetch;
+      global.console.error = oldError;
     });
 
     it('logs the error', () => {
       const wrapper = shallow(
-        <NetlifyFormComposer fields={['foo', 'bar', 'baz']} name="test">
-          {jest.fn()}
-        </NetlifyFormComposer>,
+        <NetlifyFormComposer formName="test">{jest.fn()}</NetlifyFormComposer>,
       );
       return wrapper
         .instance()
-        .handleSubmit({
-          preventDefault: jest.fn(),
-        })
-        .catch(() => {
-          expect(window.error).toBeCalledWith(error);
+        .handleSubmit({}, {})
+        .then(() => {
+          expect(global.console.error).toBeCalledWith(error);
         });
     });
 
-    it('sets submissionState to error', () => {
+    it('sets submissionError to true', () => {
       const wrapper = shallow(
-        <NetlifyFormComposer fields={['foo', 'bar', 'baz']} name="test">
-          {jest.fn()}
-        </NetlifyFormComposer>,
+        <NetlifyFormComposer formName="test">{jest.fn()}</NetlifyFormComposer>,
       );
       return wrapper
         .instance()
-        .handleSubmit({
-          preventDefault: jest.fn(),
-        })
-        .catch(() => {
-          expect(wrapper.state().submissionState).toEqual('error');
+        .handleSubmit({}, {})
+        .then(() => {
+          expect(wrapper.state().submissionError).toBe(true);
         });
     });
 
-    it('calls the onSubmitError prop', () => {
+    it('calls the onSubmitError prop with the error', () => {
       const onSubmitError = jest.fn();
       const wrapper = shallow(
-        <NetlifyFormComposer
-          onSubmitError={onSubmitError}
-          fields={['foo', 'bar', 'baz']}
-          name="test"
-        >
+        <NetlifyFormComposer formName="test" onSubmitError={onSubmitError}>
           {jest.fn()}
         </NetlifyFormComposer>,
       );
       return wrapper
         .instance()
-        .handleSubmit({
-          preventDefault: jest.fn(),
-        })
-        .catch(() => {
-          expect(onSubmitError).toBeCalled();
+        .handleSubmit({}, {})
+        .then(() => {
+          expect(onSubmitError).toBeCalledWith(error);
         });
     });
   });

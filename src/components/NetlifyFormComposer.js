@@ -40,7 +40,9 @@ export default class NetlifyFormComposer extends React.Component {
       .catch(error => {
         // eslint-disable-next-line
         console.error(error);
-        this.setState({ submitted: false, submissionError: true }, this.props.onSubmitError);
+        this.setState({ submitted: false, submissionError: true }, () => {
+          this.props.onSubmitError(error);
+        });
       });
   };
 
