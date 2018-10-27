@@ -56,7 +56,7 @@ export const query = graphql`
     galleryMeta: allMarkdownRemark(
       sort: { order: ASC, fields: [frontmatter___name] }
       limit: 20
-      filter: { id: { regex: "/gallery/" } }
+      filter: { id: { regex: "/content/gallery/" } }
     ) {
       edges {
         node {
@@ -73,7 +73,7 @@ export const query = graphql`
         }
       }
     }
-    gallery: allImageSharp(limit: 100, filter: { id: { regex: "/src/gallery/photos/" } }) {
+    gallery: allImageSharp(limit: 100, filter: { id: { regex: "/src/content/gallery/photos/" } }) {
       edges {
         node {
           id

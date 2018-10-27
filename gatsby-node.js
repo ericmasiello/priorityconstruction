@@ -40,7 +40,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   return new Promise(resolve => {
     graphql(`
       {
-        gallery: allMarkdownRemark(filter: { id: { regex: "/gallery/" } }) {
+        gallery: allMarkdownRemark(filter: { id: { regex: "/content/gallery/" } }) {
           edges {
             node {
               frontmatter {
