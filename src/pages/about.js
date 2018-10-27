@@ -47,16 +47,24 @@ const StickyNavContainer = styled.div`
 
 const navItems = [
   {
+    href: '#intro',
+    children: 'Priority Construction',
+  },
+  {
     href: '#history',
-    children: 'Our History',
+    children: 'History',
   },
   {
     href: '#mission',
-    children: 'Our Mission',
+    children: 'Mission',
   },
   {
     href: '#certifications',
-    children: 'Our Certifications',
+    children: 'Certifications',
+  },
+  {
+    href: '#awards',
+    children: 'Awards',
   },
 ];
 
@@ -194,6 +202,12 @@ class About extends React.Component {
           <div>
             <ContentBlock
               tag="section"
+              id="intro"
+              tabIndex={-1}
+              dangerouslySetInnerHTML={{ __html: data.intro.html }}
+            />
+            <ContentBlock
+              tag="section"
               id="history"
               tabIndex={-1}
               dangerouslySetInnerHTML={{ __html: data.history.html }}
@@ -210,6 +224,12 @@ class About extends React.Component {
               tabIndex={-1}
               dangerouslySetInnerHTML={{ __html: data.certifications.html }}
             />
+            <ContentBlock
+              tag="section"
+              id="awards"
+              tabIndex={-1}
+              dangerouslySetInnerHTML={{ __html: data.awards.html }}
+            />
           </div>
         </AboutContent>
       </PageContainer>
@@ -225,6 +245,8 @@ About.propTypes = {
     mission: CustomPropTypes.Markdown,
     history: CustomPropTypes.Markdown,
     certifications: CustomPropTypes.Markdown,
+    intro: CustomPropTypes.Markdown,
+    awards: CustomPropTypes.Markdown,
   }),
   navRef: PropTypes.shape({
     current: PropTypes.shape({}),
@@ -237,15 +259,23 @@ export default styled(withLayoutContext(About))`
 
 export const query = graphql`
   query AboutPage {
-    mission: markdownRemark(id: { regex: "/content/mission/" }) {
+    intro: markdownRemark(id: { regex: "/content/about/intro/" }) {
       html
     }
 
-    history: markdownRemark(id: { regex: "/content/history/" }) {
+    mission: markdownRemark(id: { regex: "/content/about/mission/" }) {
       html
     }
 
-    certifications: markdownRemark(id: { regex: "/content/certifications/" }) {
+    history: markdownRemark(id: { regex: "/content/about/history/" }) {
+      html
+    }
+
+    certifications: markdownRemark(id: { regex: "/content/about/certifications/" }) {
+      html
+    }
+
+    awards: markdownRemark(id: { regex: "/content/about/awards/" }) {
       html
     }
   }
