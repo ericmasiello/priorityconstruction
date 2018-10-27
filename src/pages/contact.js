@@ -292,7 +292,7 @@ export const query = graphql`
       }
     }
 
-    intro: markdownRemark(id: { regex: "/content/contact/" }) {
+    intro: markdownRemark(id: { regex: "/content/contact/intro/" }) {
       html
     }
   }

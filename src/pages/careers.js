@@ -585,11 +585,11 @@ export default styled(Careers)`
 
 export const query = graphql`
   query CareersPage {
-    intro: markdownRemark(id: { regex: "/content/careers/" }) {
+    intro: markdownRemark(id: { regex: "/content/careers/intro/" }) {
       html
     }
 
-    additionalInfo: markdownRemark(id: { regex: "/content/careersAdditionalInfo/" }) {
+    additionalInfo: markdownRemark(id: { regex: "/content/careers/additional-info/" }) {
       html
     }
   }

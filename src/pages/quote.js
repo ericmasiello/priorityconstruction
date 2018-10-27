@@ -315,7 +315,7 @@ export default styled(Quote)`
 
 export const query = graphql`
   query QuoteQuery {
-    intro: markdownRemark(id: { regex: "/content/quote/" }) {
+    intro: markdownRemark(id: { regex: "/content/quote/intro/" }) {
       html
     }
   }
