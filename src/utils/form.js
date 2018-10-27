@@ -36,3 +36,17 @@ export const validateFields = (validationFields, values) => {
   }, defaultValidationResult);
   return result;
 };
+
+export const telephoneProps = {
+  type: 'tel',
+  placeholder: '123-456-7890',
+};
+
+export const emailProps = {
+  type: 'email',
+};
+
+export const dateProps = {
+  placeholder: 'MM/DD/YYYY',
+  maxLength: '10',
+};
