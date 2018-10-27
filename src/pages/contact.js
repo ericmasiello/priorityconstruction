@@ -154,8 +154,8 @@ class Contact extends React.Component {
               } = props;
               return (
                 <PageContainer tag="section" className={className}>
+                  <div dangerouslySetInnerHTML={{ __html: data.intro.html }} />
                   <PageLayout>
-                    <div dangerouslySetInnerHTML={{ __html: data.intro.html }} />
                     <FormSuccessMessage
                       aria-hidden={!netlifyState.submitted}
                       show={netlifyState.submitted}
