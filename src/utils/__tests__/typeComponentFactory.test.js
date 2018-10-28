@@ -35,12 +35,6 @@ it('should allow the default tag to be customized', () => {
   expect(wrapper.type()).toBe('span');
 });
 
-it('should set a default displayName', () => {
-  const Wrapper = typeComponentFactory(TYPE_SIZE.t1);
-
-  expect(Wrapper.Type.displayName).toBe('Type(50.517352293136,1.2)');
-});
-
 it('should set custom displayName', () => {
   const Wrapper = typeComponentFactory(TYPE_SIZE.t1, { displayName: 'Foo' });
 

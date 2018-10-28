@@ -38,7 +38,6 @@ export const composeGalleryLandingMedia = (images, contentMeta) =>
       href: matchContent.node.fields.slug,
       location: matchContent.node.frontmatter.location,
       name: matchContent.node.frontmatter.name,
-      description: matchContent.node.html,
       imageId: image.node.id,
       sizes: image.node.sizes,
     });

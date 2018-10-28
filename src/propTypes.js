@@ -38,7 +38,6 @@ export const GalleryMeta = PropTypes.shape({
     coverPhoto: PropTypes.string,
     imageDir: PropTypes.string,
   }),
-  html: PropTypes.string.isRequired,
 });
 
 export const AllGalleryMeta = PropTypes.shape({
