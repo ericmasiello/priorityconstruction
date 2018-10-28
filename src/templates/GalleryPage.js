@@ -5,13 +5,36 @@ import PageContainer from '../components/PageContainer';
 import Gallery from '../components/Gallery';
 import GalleryItemWrapper from '../components/GalleryItemWrapper';
 import ZoomImage from '../components/ZoomImage';
-import Type1 from '../components/Type1';
+import Type2 from '../components/Type2';
 import Type4 from '../components/Type4';
 import GalleryItem from '../components/GalleryItem';
+import List from '../components/List';
+import ListItem from '../components/ListItem';
 import * as CustomPropTypes from '../propTypes';
-import { pxToRem } from '../styles/utils';
 import { withLayoutContext } from '../layoutContext';
 import GalleryOverlay from '../components/GalleryOverlay';
+import { GRID_SIZE, GUTTER_SIZE, BODY_WEIGHTS } from '../styles/vars';
+import { pxToRem } from '../styles/utils';
+
+const MetaList = styled.dl`
+  display: flex;
+  margin: 0 0 1rem;
+`;
+
+const MetaTerm = styled.dt`
+  font-weight: ${BODY_WEIGHTS.medium};
+  margin-right: 0.5rem;
+`;
+
+const MetaDescription = styled.dd`
+  margin: 0;
+`;
+
+const Layout = styled.div`
+  display: grid;
+  grid-template-columns: 1fr ${pxToRem(GRID_SIZE * 4 + GUTTER_SIZE * 3)};
+  grid-gap: 1rem;
+`;
 
 class GalleryPage extends React.Component {
   static displayName = 'GalleryPage';
@@ -45,31 +68,56 @@ class GalleryPage extends React.Component {
   };
 
   render() {
-    const { className, data } = this.props;
+    const { className, data: { meta: { frontmatter: meta } = {}, images } = {} } = this.props;
 
-    if (!data.images) {
+    if (!images) {
       return null;
     }
     return (
       <PageContainer tag="section" className={className}>
-        <hgroup>
-          <Type1>{data.meta.frontmatter.name}</Type1>
-          <Type4>{data.meta.frontmatter.location}</Type4>
-        </hgroup>
-        <Gallery>
-          {data.images.edges.map((edge, i) => (
-            <GalleryItemWrapper key={edge.node.id}>
-              <GalleryItem
-                role="button"
-                tabIndex={0}
-                onClick={this.handleSelectImageByIndex(i)}
-                onKeyPress={this.handleSelectImageByIndex(i)}
-              >
-                <ZoomImage sizes={edge.node.sizes} />
-              </GalleryItem>
-            </GalleryItemWrapper>
-          ))}
-        </Gallery>
+        <Layout>
+          {/* TODO: figure out how to flip the order of these with grid */}
+          <Gallery>
+            {images.edges.map((edge, i) => (
+              <GalleryItemWrapper key={edge.node.id}>
+                <GalleryItem
+                  role="button"
+                  tabIndex={0}
+                  onClick={this.handleSelectImageByIndex(i)}
+                  onKeyPress={this.handleSelectImageByIndex(i)}
+                >
+                  <ZoomImage sizes={edge.node.sizes} />
+                </GalleryItem>
+              </GalleryItemWrapper>
+            ))}
+          </Gallery>
+          <hgroup>
+            <Type2 tag="h1">{meta.name}</Type2>
+            <Type4>{meta.location}</Type4>
+            <MetaList>
+              <MetaTerm>Client:</MetaTerm>
+              <MetaDescription>{meta.client}</MetaDescription>
+            </MetaList>
+            <MetaList>
+              <MetaTerm>Scope:</MetaTerm>
+              <MetaDescription>
+                <List>
+                  {(meta.scope || []).map(item => (
+                    <ListItem key={item}>{item}</ListItem>
+                  ))}
+                </List>
+              </MetaDescription>
+            </MetaList>
+            <MetaList>
+              <MetaTerm>Completion Date:</MetaTerm>
+              <MetaDescription>{meta.completionDate}</MetaDescription>
+            </MetaList>
+            <MetaList>
+              <MetaTerm>Project Value:</MetaTerm>
+              <MetaDescription>{meta.value}</MetaDescription>
+            </MetaList>
+          </hgroup>
+        </Layout>
       </PageContainer>
     );
   }
@@ -78,7 +126,7 @@ class GalleryPage extends React.Component {
 export default styled(withLayoutContext(GalleryPage))`
   padding-top: 4rem;
 
-  ${Type1} {
+  ${Type2} {
     margin-bottom: 0;
   }
 
@@ -111,6 +159,10 @@ export const query = graphql`
         name
         location
         coverPhoto
+        client
+        scope
+        completionDate
+        value
       }
       html
     }
