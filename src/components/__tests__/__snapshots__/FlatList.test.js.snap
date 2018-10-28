@@ -2,9 +2,10 @@
 
 exports[`should render <FlatList> 1`] = `
 .c1 {
-  list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding-left: 1.5rem;
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .c0 {

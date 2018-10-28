@@ -11,6 +11,13 @@ it('should render <List>', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('should render a decorated <List>', () => {
+  const component = renderer.create(<List decorated />);
+
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
 it('should render children', () => {
   const wrapper = shallow(<RawList>Test</RawList>);
 

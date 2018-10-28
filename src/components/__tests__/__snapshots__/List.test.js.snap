@@ -2,9 +2,21 @@
 
 exports[`should render <List> 1`] = `
 .c0 {
-  list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding-left: 1.5rem;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+<ul
+  className="c0"
+/>
+`;
+
+exports[`should render a decorated <List> 1`] = `
+.c0 {
+  margin: 0;
+  padding-left: 1.5rem;
 }
 
 <ul
