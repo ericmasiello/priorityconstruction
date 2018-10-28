@@ -11,6 +11,9 @@ module.exports = {
   settings: {
     // These packages are provided 'magically' by Gatsby
     'import/core-modules': ['react', 'prop-types', 'react-dom'],
+    react: {
+      version: '16.5.1',
+    },
   },
   rules: {
     'function-paren-newline': 'off',

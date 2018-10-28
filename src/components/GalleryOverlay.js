@@ -114,12 +114,6 @@ export class GalleryOverlay extends React.Component {
     document.addEventListener('keydown', this.handleKeyDown, false);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedIndex !== this.state.selectedIndex) {
-      this.setState({ selectedIndex: nextProps.selectedIndex });
-    }
-  }
-
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyDown, false);
   }
