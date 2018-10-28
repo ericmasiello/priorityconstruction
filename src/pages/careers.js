@@ -545,7 +545,9 @@ class Careers extends React.Component {
                       </Field>
                       <FieldError component="div" name="date" />
 
-                      <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.additionalInfo.html }} />
+                      <MarkdownBlock
+                        dangerouslySetInnerHTML={{ __html: data.additionalInfo.html }}
+                      />
 
                       <Field nameAs="certification" fragment>
                         <Label>
