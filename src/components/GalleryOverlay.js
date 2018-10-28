@@ -87,12 +87,9 @@ const GalleryTileButton = styled(InvisibleButton)`
 const GalleryInner = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 1500px;
+  max-width: ${pxToRem(1500)};
+  max-height: calc(100vh - ${GalleryOverlayTileImageHeight});
   width: 100%;
-
-  > .gatsby-image-outer-wrapper {
-    flex: 1;
-  }
 `;
 
 export class GalleryOverlay extends React.Component {
