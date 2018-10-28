@@ -120,7 +120,7 @@ export const query = graphql`
       edges {
         node {
           id
-          sizes {
+          sizes(quality: 85) {
             ...GatsbyImageSharpSizes
           }
         }
