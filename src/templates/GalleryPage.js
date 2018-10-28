@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import PageContainer from '../components/PageContainer';
+import Container from '../components/Container';
 import Gallery from '../components/Gallery';
 import GalleryItemWrapper from '../components/GalleryItemWrapper';
 import ZoomImage from '../components/ZoomImage';
@@ -14,16 +14,30 @@ import * as CustomPropTypes from '../propTypes';
 import { withLayoutContext } from '../layoutContext';
 import GalleryOverlay from '../components/GalleryOverlay';
 import { GRID_SIZE, GUTTER_SIZE, BODY_WEIGHTS } from '../styles/vars';
+import MarkdownBlock from '../components/MarkdownBlock';
 import { pxToRem } from '../styles/utils';
 
+const TitleBlock = styled(Container)`
+  padding-left: ${pxToRem(GUTTER_SIZE)};
+  padding-right: ${pxToRem(GUTTER_SIZE)};
+`;
+
+const MetaBlock = styled.aside`
+  padding-left: ${pxToRem(GUTTER_SIZE)};
+  padding-right: ${pxToRem(GUTTER_SIZE)};
+
+  @media (min-width: ${pxToRem(1000)}) {
+    grid-column: 2;
+    padding-left: 0;
+  }
+`;
+
 const MetaList = styled.dl`
-  display: flex;
   margin: 0 0 1rem;
 `;
 
 const MetaTerm = styled.dt`
-  font-weight: ${BODY_WEIGHTS.medium};
-  margin-right: 0.5rem;
+  font-weight: ${BODY_WEIGHTS.bold};
 `;
 
 const MetaDescription = styled.dd`
@@ -31,9 +45,15 @@ const MetaDescription = styled.dd`
 `;
 
 const Layout = styled.div`
-  display: grid;
-  grid-template-columns: 1fr ${pxToRem(GRID_SIZE * 4 + GUTTER_SIZE * 3)};
-  grid-gap: 1rem;
+  @media (min-width: ${pxToRem(1000)}) {
+    display: grid;
+    grid-gap: 1rem;
+    grid-auto-flow: dense;
+    grid-template-columns: 1fr ${pxToRem(GRID_SIZE * 3 + GUTTER_SIZE * 2)};
+  }
+  @media (min-width: ${pxToRem(1100)}) {
+    grid-template-columns: 1fr ${pxToRem(GRID_SIZE * 4 + GUTTER_SIZE * 3)};
+  }
 `;
 
 class GalleryPage extends React.Component {
@@ -68,32 +88,24 @@ class GalleryPage extends React.Component {
   };
 
   render() {
-    const { className, data: { meta: { frontmatter: meta } = {}, images } = {} } = this.props;
+    const {
+      className,
+      data: { meta: { frontmatter: meta, html: metaContent } = {}, images } = {},
+    } = this.props;
 
     if (!images) {
       return null;
     }
     return (
-      <PageContainer tag="section" className={className}>
+      <Container plus tag="section" className={className}>
+        <TitleBlock plus tag="hgroup">
+          <Type2 tag="h1">{meta.name}</Type2>
+          <Type4>{meta.location}</Type4>
+        </TitleBlock>
         <Layout>
           {/* TODO: figure out how to flip the order of these with grid */}
-          <Gallery>
-            {images.edges.map((edge, i) => (
-              <GalleryItemWrapper key={edge.node.id}>
-                <GalleryItem
-                  role="button"
-                  tabIndex={0}
-                  onClick={this.handleSelectImageByIndex(i)}
-                  onKeyPress={this.handleSelectImageByIndex(i)}
-                >
-                  <ZoomImage sizes={edge.node.sizes} />
-                </GalleryItem>
-              </GalleryItemWrapper>
-            ))}
-          </Gallery>
-          <hgroup>
-            <Type2 tag="h1">{meta.name}</Type2>
-            <Type4>{meta.location}</Type4>
+          <MetaBlock>
+            <MarkdownBlock dangerouslySetInnerHTML={{ __html: metaContent }} />
             <MetaList>
               <MetaTerm>Client:</MetaTerm>
               <MetaDescription>{meta.client}</MetaDescription>
@@ -101,7 +113,7 @@ class GalleryPage extends React.Component {
             <MetaList>
               <MetaTerm>Scope:</MetaTerm>
               <MetaDescription>
-                <List>
+                <List decorated>
                   {(meta.scope || []).map(item => (
                     <ListItem key={item}>{item}</ListItem>
                   ))}
@@ -116,15 +128,30 @@ class GalleryPage extends React.Component {
               <MetaTerm>Project Value:</MetaTerm>
               <MetaDescription>{meta.value}</MetaDescription>
             </MetaList>
-          </hgroup>
+          </MetaBlock>
+          <Gallery>
+            {images.edges.map((edge, i) => (
+              <GalleryItemWrapper key={edge.node.id}>
+                <GalleryItem
+                  role="button"
+                  tabIndex={0}
+                  onClick={this.handleSelectImageByIndex(i)}
+                  onKeyPress={this.handleSelectImageByIndex(i)}
+                >
+                  <ZoomImage sizes={edge.node.sizes} />
+                </GalleryItem>
+              </GalleryItemWrapper>
+            ))}
+          </Gallery>
         </Layout>
-      </PageContainer>
+      </Container>
     );
   }
 }
 
 export default styled(withLayoutContext(GalleryPage))`
   padding-top: 4rem;
+  padding-bottom: 1rem;
 
   ${Type2} {
     margin-bottom: 0;
@@ -138,7 +165,7 @@ export default styled(withLayoutContext(GalleryPage))`
     cursor: pointer;
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: ${pxToRem(700)}) {
     ${Gallery} {
       grid-template-columns: repeat(auto-fit, minmax(${pxToRem(300)}, 1fr));
     }
