@@ -5,6 +5,7 @@ import tinyColor from 'tinycolor2';
 import ZoomImage from './ZoomImage';
 import MediaBlockImageGroup from './MediaBlockImageGroup';
 import Blockquote from './Blockquote';
+import MarkdownBlock from './MarkdownBlock';
 import Citation from './Citation';
 import * as CustomPropTypes from '../propTypes';
 import { MAX_CONTENT_WIDTH_PLUS, COLORS, GUTTER_SIZE, TOTAL_GRID_UNITS } from '../styles/vars';
@@ -37,7 +38,7 @@ export const HomePageMediaBlock = props => {
   } = props;
   const quote = testimonial ? (
     <Blockquote quoteColor={grayed ? COLORS.gray : undefined}>
-      <div dangerouslySetInnerHTML={{ __html: testimonial }} />
+      <MarkdownBlock dangerouslySetInnerHTML={{ __html: testimonial }} />
       <Citation>
         {author}
         {location && (

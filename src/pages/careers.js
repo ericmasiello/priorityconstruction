@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 import PageContainer from '../components/PageContainer';
+import MarkdownBlock from '../components/MarkdownBlock';
 import Field from '../components/Field';
 import Label from '../components/Label';
 import Input from '../components/Input';
@@ -137,7 +138,7 @@ class Careers extends React.Component {
                         There was an problem submitting your message. Please try again.
                       </FormErrorMessage>
                     )}
-                    <div dangerouslySetInnerHTML={{ __html: data.intro.html }} />
+                    <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.intro.html }} />
                     <ContactForm name={netlifyState.formName} onSubmit={handleSubmit}>
                       <input type="hidden" name="form-name" value={netlifyState.formName} />
 
@@ -544,7 +545,7 @@ class Careers extends React.Component {
                       </Field>
                       <FieldError component="div" name="date" />
 
-                      <div dangerouslySetInnerHTML={{ __html: data.additionalInfo.html }} />
+                      <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.additionalInfo.html }} />
 
                       <Field nameAs="certification" fragment>
                         <Label>

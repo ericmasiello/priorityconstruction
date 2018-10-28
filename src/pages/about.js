@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import Small from '../components/Small';
 import PageContainer from '../components/PageContainer';
-import ContentBlock from '../components/ContentBlock';
+import MarkdownBlock from '../components/MarkdownBlock';
 import NavBlockList from '../components/NavBlockList';
 import NavBlockListItem from '../components/NavBlockListItem';
 import { pxToRem } from '../styles/utils';
@@ -84,7 +84,10 @@ const AboutContent = styled.div`
     margin-bottom: ${pxToRem(20)};
   }
 
-  ${ContentBlock} {
+  ${MarkdownBlock} {
+    border-left: 1px solid ${COLORS.highlight2};
+    padding-left: ${pxToRem(20)};
+
     &:not(:last-child) {
       margin-bottom: ${pxToRem(70)};
     }
@@ -200,31 +203,31 @@ class About extends React.Component {
           </div>
 
           <div>
-            <ContentBlock
+            <MarkdownBlock
               tag="section"
               id="intro"
               tabIndex={-1}
               dangerouslySetInnerHTML={{ __html: data.intro.html }}
             />
-            <ContentBlock
+            <MarkdownBlock
               tag="section"
               id="history"
               tabIndex={-1}
               dangerouslySetInnerHTML={{ __html: data.history.html }}
             />
-            <ContentBlock
+            <MarkdownBlock
               tag="section"
               id="mission"
               tabIndex={-1}
               dangerouslySetInnerHTML={{ __html: data.mission.html }}
             />
-            <ContentBlock
+            <MarkdownBlock
               tag="section"
               id="certifications"
               tabIndex={-1}
               dangerouslySetInnerHTML={{ __html: data.certifications.html }}
             />
-            <ContentBlock
+            <MarkdownBlock
               tag="section"
               id="awards"
               tabIndex={-1}

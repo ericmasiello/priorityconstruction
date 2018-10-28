@@ -8,6 +8,7 @@ import GalleryItemWrapper from '../components/GalleryItemWrapper';
 import GalleryCopy from '../components/GalleryCopy';
 import ZoomImage from '../components/ZoomImage';
 import GalleryItem from '../components/GalleryItem';
+import MarkdownBlock from '../components/MarkdownBlock';
 import * as CustomPropTypes from '../propTypes';
 import { composeGalleryLandingMedia } from '../utils/gallery';
 
@@ -27,7 +28,7 @@ const GalleryPage = ({ className, data }) => {
               <GalleryCopy>
                 <h4>{media.name}</h4>
                 <p>{media.location}</p>
-                <div dangerouslySetInnerHTML={{ __html: media.description }} />
+                <MarkdownBlock dangerouslySetInnerHTML={{ __html: media.description }} />
               </GalleryCopy>
             </GalleryItem>
           </GalleryItemWrapper>

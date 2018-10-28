@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
 import PageContainer from '../components/PageContainer';
+import MarkdownBlock from '../components/MarkdownBlock';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import Field from '../components/Field';
 import Label from '../components/Label';
@@ -162,7 +163,7 @@ class Quote extends React.Component {
               } = props;
               return (
                 <PageContainer tag="section" className={className}>
-                  <div dangerouslySetInnerHTML={{ __html: data.intro.html }} />
+                  <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.intro.html }} />
                   <PageLayout>
                     <React.Fragment>
                       <FormSuccessMessage

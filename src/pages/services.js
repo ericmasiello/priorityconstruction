@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import PageContainer from '../components/PageContainer';
+import MarkdownBlock from '../components/MarkdownBlock';
 import * as CustomPropTypes from '../propTypes';
 import Type3 from '../components/Type3';
 
@@ -25,15 +26,15 @@ class Services extends React.Component {
       <PageContainer tag="section" className={className}>
         <section>
           <Type3 tag="h1">{data.concreteFlatwork.frontmatter.title}</Type3>
-          <div dangerouslySetInnerHTML={{ __html: data.concreteFlatwork.html }} />
+          <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.concreteFlatwork.html }} />
         </section>
         <section>
           <Type3 tag="h1">{data.hardscapes.frontmatter.title}</Type3>
-          <div dangerouslySetInnerHTML={{ __html: data.hardscapes.html }} />
+          <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.hardscapes.html }} />
         </section>
         <section>
           <Type3 tag="h1">{data.structuralConcrete.frontmatter.title}</Type3>
-          <div dangerouslySetInnerHTML={{ __html: data.structuralConcrete.html }} />
+          <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.structuralConcrete.html }} />
         </section>
       </PageContainer>
     );
