@@ -79,7 +79,8 @@ class Layout extends React.Component {
     hideLayoutElement: this.hideLayoutElement,
   };
 
-  componentWillReceiveProps(nextProps) {
+  /* eslint-disable camelcase */
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
       const config = getConfigFromPathname(this.pageConfigs, nextProps.location.pathname);
 
