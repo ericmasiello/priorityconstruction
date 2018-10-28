@@ -42,8 +42,8 @@ export const TYPE_SIZE = {
   base: [unitToPx(1), 1.5],
   t4: [unitToPx(scaler), 1.5],
   t3: [unitToPx(scaler ** 2), 1.3],
-  t2: [unitToPx(scaler ** 3), 1.2],
-  t1: [unitToPx(scaler ** 4), 1.2],
+  t2: [unitToPx(scaler ** 3), 1.1],
+  t1: [unitToPx(scaler ** 4), 1.1],
 };
 
 export const BODY_WEIGHTS = {
