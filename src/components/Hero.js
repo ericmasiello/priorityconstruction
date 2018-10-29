@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import GatsbyImage from './GatsbyImage';
-import HeroBanner from './HeroBanner';
 import * as CustomPropTypes from '../propTypes';
 import { COLORS, MAX_CONTENT_WIDTH_PLUS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
@@ -108,10 +107,5 @@ export default styled(Hero)`
     height: 100%;
     left: 0;
     top: 0;
-  }
-
-  ${HeroBanner} {
-    position: relative;
-    z-index: 2;
   }
 `;
