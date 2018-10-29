@@ -28,7 +28,10 @@ export const composeGalleryLandingMedia = (images, contentMeta) =>
   images.reduce((acc, image) => {
     // check to see if each image exists in the contentMeta...
     const matchContent = contentMeta.find(
-      meta => !!image.node.id.match(meta.node.frontmatter.coverPhoto),
+      meta =>
+        !!image.node.id.match(
+          meta.node.frontmatter.coverPhoto.substr(0, meta.node.frontmatter.coverPhoto.length - 1),
+        ),
     );
     if (!matchContent) {
       return acc;

@@ -45,6 +45,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             node {
               frontmatter {
                 imageDir
+                coverPhoto
               }
               fields {
                 slug
@@ -57,11 +58,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       result.data.gallery.edges.forEach(({ node }) => {
         createPage({
           path: node.fields.slug,
+          layout: 'gallery', // this uses the layout template found in layouts/gallery.js
           component: path.resolve(`./src/templates/GalleryPage.js`),
           context: {
             // Data passed to context is available in page queries as GraphQL variables.
             slug: node.fields.slug,
             imageDir: node.frontmatter.imageDir,
+            coverPhoto: node.frontmatter.coverPhoto,
           },
         });
       });

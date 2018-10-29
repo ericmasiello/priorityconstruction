@@ -21,8 +21,36 @@ const getConfigFromPathname = (configs, pathname) => {
   return Object.assign({}, configs.base, configs[path]);
 };
 
+/* eslint-disable react/sort-comp, react/no-unused-state */
 class Layout extends React.Component {
-  /* eslint-disable react/sort-comp */
+  static displayName = 'Layout';
+
+  static propTypes = {
+    children: PropTypes.func.isRequired,
+    data: PropTypes.shape({
+      site: PropTypes.shape({
+        siteMetadata: PropTypes.shape({
+          title: PropTypes.string,
+          desc: PropTypes.string,
+          keywords: PropTypes.arrayOf(PropTypes.string),
+          address: PropTypes.shape({
+            streetAddress: PropTypes.string.isRequired,
+            city: PropTypes.string.isRequired,
+            state: PropTypes.string.isRequired,
+            zip: PropTypes.number.isRequired,
+          }),
+          phone: PropTypes.string.isRequired,
+        }),
+      }),
+      backgroundHome: CustomPropTypes.ImageSharp,
+      backgroundAbout: CustomPropTypes.ImageSharp,
+      backgroundGallery: CustomPropTypes.ImageSharp,
+      backgroundCareers: CustomPropTypes.ImageSharp,
+    }).isRequired,
+    location: CustomPropTypes.Location.isRequired,
+    className: PropTypes.string,
+  };
+
   pageConfigs = {
     base: {
       background: this.props.data.backgroundHome,
@@ -52,20 +80,6 @@ class Layout extends React.Component {
     },
   };
 
-  displayLayoutElement = (Component, props) => {
-    this.setState({
-      toggleElement: <Component {...props} />,
-      scrollX: window.pageXOffset,
-      scrollY: window.pageYOffset,
-    });
-  };
-
-  hideLayoutElement = () =>
-    this.setState({ toggleElement: null }, () =>
-      window.scrollTo(this.state.scrollX, this.state.scrollY),
-    );
-
-  /* eslint-disable react/no-unused-state */
   state = {
     title: this.props.data.site.siteMetadata.title,
     heroChildren: getConfigFromPathname(this.pageConfigs, this.props.location.pathname)
@@ -74,12 +88,9 @@ class Layout extends React.Component {
       .isFullHeight,
     background: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).background,
     navRef: React.createRef(),
-    toggleElement: null,
-    displayLayoutElement: this.displayLayoutElement,
-    hideLayoutElement: this.hideLayoutElement,
   };
 
-  /* eslint-disable camelcase */
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
       const config = getConfigFromPathname(this.pageConfigs, nextProps.location.pathname);
@@ -93,9 +104,6 @@ class Layout extends React.Component {
   render() {
     const { children, data, className } = this.props;
     const { title, desc, keywords, address, phone } = data.site.siteMetadata;
-    const styles = {
-      display: this.state.toggleElement ? 'none' : undefined,
-    };
 
     return (
       <LayoutContext.Provider value={this.state}>
@@ -106,7 +114,7 @@ class Layout extends React.Component {
             { name: 'keywords', content: keywords.join(', ') },
           ]}
         />
-        <div className={className} style={styles}>
+        <div className={className}>
           <main>
             <PageHeaderBar
               navRef={this.state.navRef}
@@ -128,39 +136,10 @@ class Layout extends React.Component {
           </main>
           <Footer {...address} phone={phone} />
         </div>
-        {this.state.toggleElement}
       </LayoutContext.Provider>
     );
   }
 }
-
-Layout.propTypes = {
-  children: PropTypes.func.isRequired,
-  data: PropTypes.shape({
-    site: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        title: PropTypes.string,
-        desc: PropTypes.string,
-        keywords: PropTypes.arrayOf(PropTypes.string),
-        address: PropTypes.shape({
-          streetAddress: PropTypes.string.isRequired,
-          city: PropTypes.string.isRequired,
-          state: PropTypes.string.isRequired,
-          zip: PropTypes.number.isRequired,
-        }),
-        phone: PropTypes.string.isRequired,
-      }),
-    }),
-    backgroundHome: CustomPropTypes.ImageSharp,
-    backgroundAbout: CustomPropTypes.ImageSharp,
-    backgroundGallery: CustomPropTypes.ImageSharp,
-    backgroundCareers: CustomPropTypes.ImageSharp,
-  }).isRequired,
-  location: CustomPropTypes.Location.isRequired,
-  className: PropTypes.string,
-};
-
-Layout.displayName = 'Layout';
 
 export default styled(Layout)`
   display: flex;
