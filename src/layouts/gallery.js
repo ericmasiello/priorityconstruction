@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
+import memoize from 'memoize-one';
 import base from '../styles/base.css';
 import Footer from '../components/Footer';
 import LayoutContext from '../layoutContext';
@@ -58,9 +59,29 @@ class LayoutGallery extends React.Component {
     displayLayoutElement: this.displayLayoutElement,
   };
 
+  galleryTitle = memoize(pathname => {
+    if (this.props.data && this.props.data.galleryMeta && this.props.data.galleryMeta.edges) {
+      const result = this.props.data.galleryMeta.edges
+        .filter(({ node }) => node.fields.slug === pathname)
+        .map(({ node }) => node.frontmatter.name);
+      if (result.length) {
+        return result[0];
+      }
+      return '';
+    }
+    return '';
+  });
+
   render() {
-    const { children, className, data } = this.props;
-    const { title, desc, keywords, address, phone } = data.site.siteMetadata;
+    const {
+      children,
+      className,
+      data: {
+        site: { siteMetadata },
+      },
+    } = this.props;
+    const { title, desc, keywords, address, phone } = siteMetadata;
+    const galleryTitle = this.galleryTitle(this.props.location.pathname);
     const styles = {
       display: this.state.toggleElement ? 'none' : undefined,
     };
@@ -68,7 +89,7 @@ class LayoutGallery extends React.Component {
     return (
       <LayoutContext.Provider value={this.state}>
         <Helmet
-          title={title}
+          title={`${title}: ${galleryTitle}`}
           meta={[
             { name: 'description', content: desc },
             { name: 'keywords', content: keywords.join(', ') },
@@ -103,6 +124,19 @@ export const query = graphql`
           zip
         }
         phone
+      }
+    }
+
+    galleryMeta: allMarkdownRemark(filter: { id: { regex: "/content/gallery/" } }) {
+      edges {
+        node {
+          frontmatter {
+            name
+          }
+          fields {
+            slug
+          }
+        }
       }
     }
   }

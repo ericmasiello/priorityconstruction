@@ -57,27 +57,38 @@ class Layout extends React.Component {
       background: this.props.data.backgroundHome,
       isFullHeight: false,
       heroChildren: null,
+      title: '',
     },
     '': {
       isFullHeight: true,
       heroChildren: <HeroHomePageContent />,
     },
+    services: {
+      title: 'Services',
+    },
+    quote: {
+      title: 'Request a Quote',
+    },
     about: {
       background: this.props.data.backgroundAbout,
       isFullHeight: true,
       heroChildren: <HeroWithBanner title="About Us" />,
+      title: 'About Us',
     },
     careers: {
       background: this.props.data.backgroundCareers,
       isFullHeight: false,
       heroChildren: <HeroWithBanner title="Career Opportunities" />,
+      title: 'Career Opportunities',
     },
     contact: {
       isFullHeight: false,
       heroChildren: <HeroWithBanner title="Contact Us" />,
+      title: 'Contact Us',
     },
     gallery: {
       background: this.props.data.backgroundGallery,
+      title: 'Project Gallery',
     },
   };
 
@@ -96,7 +107,7 @@ class Layout extends React.Component {
     return (
       <LayoutContext.Provider value={this.state}>
         <Helmet
-          title={title}
+          title={`${title} ${layout.title}`}
           meta={[
             { name: 'description', content: desc },
             { name: 'keywords', content: keywords.join(', ') },
