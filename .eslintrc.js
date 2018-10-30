@@ -12,7 +12,7 @@ module.exports = {
     // These packages are provided 'magically' by Gatsby
     'import/core-modules': ['react', 'prop-types', 'react-dom'],
     react: {
-      version: '16.5.1',
+      version: '16.6.0',
     },
   },
   rules: {
