@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
+import memoize from 'memoize-one';
 import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
 import Footer from '../components/Footer';
@@ -81,29 +82,16 @@ class Layout extends React.Component {
   };
 
   state = {
-    title: this.props.data.site.siteMetadata.title,
-    heroChildren: getConfigFromPathname(this.pageConfigs, this.props.location.pathname)
-      .heroChildren,
-    isFullHeight: getConfigFromPathname(this.pageConfigs, this.props.location.pathname)
-      .isFullHeight,
-    background: getConfigFromPathname(this.pageConfigs, this.props.location.pathname).background,
     navRef: React.createRef(),
   };
 
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.location.pathname !== this.props.location.pathname) {
-      const config = getConfigFromPathname(this.pageConfigs, nextProps.location.pathname);
-
-      this.setState({
-        ...config,
-      });
-    }
-  }
+  layout = memoize(pathname => getConfigFromPathname(this.pageConfigs, pathname));
 
   render() {
     const { children, data, className } = this.props;
     const { title, desc, keywords, address, phone } = data.site.siteMetadata;
+
+    const layout = this.layout(this.props.location.pathname);
 
     return (
       <LayoutContext.Provider value={this.state}>
@@ -121,16 +109,16 @@ class Layout extends React.Component {
               currentPathname={this.props.location.pathname}
             />
             <Hero
-              selectedImage={this.state.background}
+              selectedImage={layout.background}
               bgImages={[
                 this.props.data.backgroundHome,
                 this.props.data.backgroundAbout,
                 this.props.data.backgroundGallery,
                 this.props.data.backgroundCareers,
               ]}
-              isFullHeight={this.state.isFullHeight}
+              isFullHeight={layout.isFullHeight}
             >
-              {this.state.heroChildren}
+              {layout.heroChildren}
             </Hero>
             {children()}
           </main>

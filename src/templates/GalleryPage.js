@@ -99,7 +99,6 @@ class GalleryPage extends React.Component {
         </Hero>
         <Container plus tag="section" className={className}>
           <Layout>
-            {/* TODO: figure out how to flip the order of these with grid */}
             <MetaBlock>
               <MarkdownBlock dangerouslySetInnerHTML={{ __html: metaContent }} />
               <MetaList>
