@@ -102,7 +102,6 @@ const links = [
 
 class PageHeaderBar extends React.Component {
   static propTypes = {
-    navRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     currentPathname: PropTypes.string,
     className: PropTypes.string,
   };
@@ -126,9 +125,9 @@ class PageHeaderBar extends React.Component {
   };
 
   render() {
-    const { className, navRef, currentPathname } = this.props;
+    const { className, currentPathname } = this.props;
     return (
-      <HeaderBar tag="nav" innerRef={navRef} className={className}>
+      <HeaderBar tag="nav" className={className}>
         <LogoLink to="/">
           <SiteTitle>Priority Construction</SiteTitle>
           <Logo />
