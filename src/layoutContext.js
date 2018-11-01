@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 
 const LayoutContext = React.createContext({
-  logo: {},
-  title: '',
-  isFullHeight: false,
-  background: {},
-  navRef: null,
   toggleElement: null,
   displayLayoutElement: () => {},
   hideLayoutElement: () => {},

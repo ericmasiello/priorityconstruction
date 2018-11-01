@@ -7,7 +7,6 @@ import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
-import LayoutContext from '../layoutContext';
 import HeroHomePageContent from '../components/HeroHomePageContent';
 import HeroWithBanner from '../components/HeroWithBanner';
 import PageHeaderBar from '../components/PageHeaderBar';
@@ -92,10 +91,6 @@ class Layout extends React.Component {
     },
   };
 
-  state = {
-    navRef: React.createRef(),
-  };
-
   layout = memoize(pathname => getConfigFromPathname(this.pageConfigs, pathname));
 
   render() {
@@ -105,7 +100,7 @@ class Layout extends React.Component {
     const layout = this.layout(this.props.location.pathname);
 
     return (
-      <LayoutContext.Provider value={this.state}>
+      <React.Fragment>
         <Helmet
           title={`${title} ${layout.title}`}
           meta={[
@@ -115,10 +110,7 @@ class Layout extends React.Component {
         />
         <div className={className}>
           <main>
-            <PageHeaderBar
-              navRef={this.state.navRef}
-              currentPathname={this.props.location.pathname}
-            />
+            <PageHeaderBar currentPathname={this.props.location.pathname} />
             <Hero
               selectedImage={layout.background}
               bgImages={[
@@ -135,7 +127,7 @@ class Layout extends React.Component {
           </main>
           <Footer {...address} phone={phone} />
         </div>
-      </LayoutContext.Provider>
+      </React.Fragment>
     );
   }
 }
