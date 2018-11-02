@@ -21,6 +21,22 @@ it('should create a renderable component', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('should set the text to uppercase', () => {
+  const Wrapper = typeComponentFactory(TYPE_SIZE.t1);
+  const component = renderer.create(<Wrapper.StyledType uppercase />);
+
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('should set the text to bold', () => {
+  const Wrapper = typeComponentFactory(TYPE_SIZE.t1);
+  const component = renderer.create(<Wrapper.StyledType bold />);
+
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
 it('should render a <div /> by default', () => {
   const Wrapper = typeComponentFactory(TYPE_SIZE.t1);
   const wrapper = shallow(<Wrapper.Type />);
