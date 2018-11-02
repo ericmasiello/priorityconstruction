@@ -24,3 +24,51 @@ exports[`should create a renderable styled component 1`] = `
   className="c0"
 />
 `;
+
+exports[`should set the text to bold 1`] = `
+.c0 {
+  font-size: 10vw;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+@media (max-width:10rem) {
+  .c0 {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width:31.57334518321rem) {
+  .c0 {
+    font-size: 3.157334518321rem;
+  }
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`should set the text to uppercase 1`] = `
+.c0 {
+  font-size: 10vw;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+@media (max-width:10rem) {
+  .c0 {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width:31.57334518321rem) {
+  .c0 {
+    font-size: 3.157334518321rem;
+  }
+}
+
+<div
+  className="c0"
+/>
+`;
