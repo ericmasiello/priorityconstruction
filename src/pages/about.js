@@ -8,7 +8,9 @@ import TrophyIcon from '../components/TrophyIcon';
 import Type4 from '../components/Type4';
 import * as CustomPropTypes from '../propTypes';
 import { pxToRem } from '../styles/utils';
-import { TYPE_SIZE, COLORS } from '../styles/vars';
+import { TYPE_SIZE, COLORS, GUTTER_SIZE } from '../styles/vars';
+import HeroHomePageContent from '../components/HeroHomePageContent';
+import Hero from '../components/Hero';
 
 const Intro = styled(MarkdownBlock)`
   font-size: ${pxToRem(TYPE_SIZE.t4[0])};
@@ -45,6 +47,30 @@ const AwardIcon = styled(TrophyIcon)`
   width: ${pxToRem(104)};
 `;
 
+const Mission = styled(({ className, missionHtml }) => (
+  <HeroHomePageContent innerClassName={className}>
+    <Type4 tag="h1" uppercase bold>
+      Our Mission
+    </Type4>
+    <MarkdownBlock tag="section" dangerouslySetInnerHTML={{ __html: missionHtml }} />
+  </HeroHomePageContent>
+))`
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-left: ${pxToRem(GUTTER_SIZE * 2)};
+  padding-right: ${pxToRem(GUTTER_SIZE * 2)};
+
+  ${Type4} {
+    margin-top: 1.25rem;
+  }
+
+  ${MarkdownBlock} {
+    font-size: ${pxToRem(TYPE_SIZE.t5[0])};
+    line-height: ${TYPE_SIZE.t5[1]};
+  }
+`;
+
 class About extends React.PureComponent {
   static displayName = 'About';
 
@@ -56,6 +82,7 @@ class About extends React.PureComponent {
       certifications: CustomPropTypes.Markdown,
       intro: CustomPropTypes.Markdown,
       awards: CustomPropTypes.Markdown,
+      missionBackground: CustomPropTypes.ImageSharp,
     }),
   };
 
@@ -74,7 +101,15 @@ class About extends React.PureComponent {
           </AwardHeader>
           <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.awards.html }} />
         </Awards>
-        <MarkdownBlock tag="section" dangerouslySetInnerHTML={{ __html: data.mission.html }} />
+
+        <Hero
+          tag="section"
+          selectedImage={data.missionBackground}
+          bgImages={[data.missionBackground]}
+          isFullHeight
+        >
+          <Mission missionHtml={data.mission.html} />
+        </Hero>
         <MarkdownBlock tag="section" dangerouslySetInnerHTML={{ __html: data.history.html }} />
         <MarkdownBlock
           tag="section"
@@ -109,6 +144,12 @@ export const query = graphql`
 
     awards: markdownRemark(id: { regex: "/content/about/awards/" }) {
       html
+    }
+
+    missionBackground: imageSharp(id: { regex: "/src/images/photos/heroes/PriorityShovel/" }) {
+      sizes(maxWidth: 1500) {
+        ...GatsbyImageSharpSizes
+      }
     }
   }
 `;

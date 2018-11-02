@@ -1,15 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
-import Link from 'gatsby-link';
-import Type2 from './Type2';
-import Type3 from './Type3';
-import Button from './Button';
 import HeroContent from './HeroContent';
 import { GUTTER_SIZE, COLORS, MEDIA_QUERIES, MAX_CONTENT_WIDTH } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
+import * as CustomPropTypes from '../propTypes';
 
-const HGroup = styled.hgroup`
+const ContentWrapper = ({ tag: Tag, ...props }) => <Tag {...props} />;
+
+ContentWrapper.propTypes = {
+  tag: CustomPropTypes.Tag,
+};
+
+ContentWrapper.defaultProps = {
+  tag: 'div',
+};
+
+ContentWrapper.displayName = 'ContentWrapper';
+
+const StyledContentWrapper = styled(ContentWrapper)`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -36,15 +45,11 @@ const HGroup = styled.hgroup`
   }
 `;
 
-export const HeroHomePageContent = props => (
-  <HeroContent {...props}>
-    <HGroup>
-      <Type2 tag="h1">Bringing Concrete Ideas to Life</Type2>
-      <Type3 tag="p">Quality workmanship & excellent customer service</Type3>
-      <Button color="light" large tag={Link} to="/quote">
-        Get a quote
-      </Button>
-    </HGroup>
+export const HeroHomePageContent = ({ innerTag, innerClassName, children, ...rest }) => (
+  <HeroContent {...rest}>
+    <StyledContentWrapper tag={innerTag} className={innerClassName}>
+      {children}
+    </StyledContentWrapper>
   </HeroContent>
 );
 
@@ -55,16 +60,4 @@ export default styled(HeroHomePageContent)`
   color: #fff;
   display: flex;
   justify-content: flex-end;
-
-  ${Type2} {
-    text-transform: uppercase;
-    margin-bottom: 0;
-  }
-
-  ${Type2}, ${Type3} {
-    text-shadow: 0 0 2px
-      ${tinyColor(COLORS.highlight)
-        .darken(30)
-        .toRgbString()};
-  }
 `;
