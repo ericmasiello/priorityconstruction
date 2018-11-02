@@ -60,6 +60,23 @@ export default `
     -webkit-tap-highlight-color: transparent;
   }
 
+  abbr {
+    position: relative;
+    text-decoration: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: ${pxToRem(2)};
+      left: 0;
+      bottom: ${pxToRem(-3)};
+      background-color: ${COLORS.base};
+      opacity: 0.3;
+    }
+  }
+
   img, svg {
     max-width: 100%;
     height: auto;

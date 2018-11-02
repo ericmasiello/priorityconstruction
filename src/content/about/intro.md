@@ -4,5 +4,5 @@ Priority Construction Corporation depends on over 100 skilled and experienced fi
 - BWI Thurgood Marshall Airport
 - Oriole Park at Camden Yards
 - Towson University
-- University of Maryland, College Park (UMD) / Baltimore County (UMBC)
+- <abbr title="University of Maryland, College Park">UMD</abbr> and <abbr title="University of Maryland, Baltimore County">UMBC</abbr>
 - West Baltimore MARC Train Station Lot
