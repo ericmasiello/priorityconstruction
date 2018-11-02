@@ -29,7 +29,6 @@ const Awards = styled.section`
 
   ${MarkdownBlock} {
     padding: 2rem;
-    border: 1px solid ${COLORS.gray};
     background-color: ${tinyColor(COLORS.gray)
       .setAlpha(0.2)
       .toRgbString()};
@@ -68,7 +67,9 @@ class About extends React.PureComponent {
         <Intro tag="section" dangerouslySetInnerHTML={{ __html: data.intro.html }} />
         <Awards>
           <AwardHeader>
-            <Type4 tag="h1">Awards</Type4>
+            <Type4 tag="h1" uppercase bold>
+              Awards
+            </Type4>
             <AwardIcon />
           </AwardHeader>
           <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.awards.html }} />
