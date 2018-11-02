@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
 import memoize from 'memoize-one';
+import Link from 'gatsby-link';
+import tinyColor from 'tinycolor2';
 import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
 import Footer from '../components/Footer';
@@ -10,10 +12,27 @@ import Hero from '../components/Hero';
 import HeroHomePageContent from '../components/HeroHomePageContent';
 import HeroWithBanner from '../components/HeroWithBanner';
 import PageHeaderBar from '../components/PageHeaderBar';
+import Type2 from '../components/Type2';
+import Type3 from '../components/Type3';
+import Button from '../components/Button';
+import { COLORS } from '../styles/vars';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
   ${base}
+`;
+
+const StyledHeroHomePageContent = styled(HeroHomePageContent)`
+  ${Type2} {
+    margin-bottom: 0;
+  }
+
+  ${Type2}, ${Type3} {
+    text-shadow: 0 0 2px
+      ${tinyColor(COLORS.highlight)
+        .darken(30)
+        .toRgbString()};
+  }
 `;
 
 const getConfigFromPathname = (configs, pathname) => {
@@ -60,7 +79,17 @@ class Layout extends React.Component {
     },
     '': {
       isFullHeight: true,
-      heroChildren: <HeroHomePageContent />,
+      heroChildren: (
+        <StyledHeroHomePageContent innerTag="hgroup">
+          <Type2 tag="h1" uppercase>
+            Bringing Concrete Ideas to Life
+          </Type2>
+          <Type3 tag="p">Quality workmanship & excellent customer service</Type3>
+          <Button color="light" large tag={Link} to="/quote">
+            Get a quote
+          </Button>
+        </StyledHeroHomePageContent>
+      ),
     },
     services: {
       title: 'Services',

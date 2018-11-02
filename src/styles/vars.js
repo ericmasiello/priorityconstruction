@@ -40,6 +40,7 @@ export const MEDIA_QUERIES = {
 export const TYPE_SIZE = {
   small: [unitToPx(0.8125), 1.5],
   base: [unitToPx(1), 1.5],
+  t5: [unitToPx(scaler * 0.85), 1.5],
   t4: [unitToPx(scaler), 1.5],
   t3: [unitToPx(scaler ** 2), 1.3],
   t2: [unitToPx(scaler ** 3), 1.1],
