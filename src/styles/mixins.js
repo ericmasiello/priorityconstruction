@@ -30,8 +30,17 @@ export const scalableType = ([maxSize, lineHeight], minSize = 16) => {
 
 export const siteBg = () => `
   min-height: 100vh;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%,rgba(255, 255, 255, 0.4) 100%), url(${blueprint}), url(${grid});
-  background-size: 100%, contain, ${pxToRem(960)};
-  background-repeat: repeat, no-repeat, repeat;
+  background-image: 
+    url(${blueprint}),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%,rgba(255, 255, 255, 0.6) 100%),
+    url(${grid});
+  background-size:
+    contain,
+    100%,
+    ${pxToRem(960)};
+  background-repeat: 
+    no-repeat,
+    repeat,
+    repeat;
   background-position: bottom left;
 `;

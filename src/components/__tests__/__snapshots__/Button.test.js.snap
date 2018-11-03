@@ -2,9 +2,10 @@
 
 exports[`should render 1`] = `
 .c0 {
-  border: 1px solid #424141;
+  border: 1px solid rgb(117,116,116);
   font-weight: 500;
   background-color: #fff;
+  border-radius: 2px;
   text-transform: uppercase;
   padding: 0.5rem 1.5rem;
   -webkit-transition: background-color 0.2s;
@@ -14,7 +15,8 @@ exports[`should render 1`] = `
 
 .c0:hover,
 .c0:focus {
-  background-color: rgb(245,245,245);
+  border-color: #424141;
+  background-color: rgba(230,230,230,0.5);
 }
 
 .c0:disabled {

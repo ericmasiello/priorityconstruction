@@ -8,10 +8,8 @@ import MarkdownBlock from '../components/MarkdownBlock';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import Field from '../components/Field';
 import Label from '../components/Label';
-import Input from '../components/Input';
-import Textarea from '../components/Textarea';
+import Input, { StyledTextarea } from '../components/Input';
 import Button from '../components/Button';
-import Select from '../components/Select';
 import Type1 from '../components/Type1';
 import Type3 from '../components/Type3';
 import InvisibleButton from '../components/InvisibleButton';
@@ -54,7 +52,7 @@ const ContactForm = styled.form`
     }
   }
 
-  ${Textarea} {
+  ${StyledTextarea} {
     min-height: ${pxToRem(250)};
   }
 
@@ -257,7 +255,8 @@ class Quote extends React.Component {
 
                         <Field nameAs="projectType" fragment>
                           <Label>Project type</Label>
-                          <Select
+                          <Input
+                            type="select"
                             value={values.projectType}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -268,13 +267,14 @@ class Quote extends React.Component {
                                 {type}
                               </option>
                             ))}
-                          </Select>
+                          </Input>
                         </Field>
                         <FieldError component="div" name="projectType" />
 
                         <Field stack nameAs="comments" fragment>
                           <Label>Project description and comments</Label>
-                          <Textarea
+                          <Input
+                            type="textarea"
                             value={values.comments}
                             onChange={handleChange}
                             onBlur={handleBlur}

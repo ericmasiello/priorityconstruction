@@ -21,9 +21,13 @@ Button.defaultProps = {
 Button.displayName = 'Button';
 
 export default styled(Button)`
-  border: 1px solid ${COLORS.base};
+  border: 1px solid
+    ${tinyColor(COLORS.base)
+      .lighten(20)
+      .toRgbString()};
   font-weight: ${BODY_WEIGHTS.medium};
   background-color: ${COLORS.bg};
+  border-radius: 2px;
   text-transform: uppercase;
   ${({ large }) =>
     large ? `padding: ${pxToRem(12)} ${pxToRem(24)}` : `padding: ${pxToRem(8)} ${pxToRem(24)}`};
@@ -32,8 +36,10 @@ export default styled(Button)`
 
   &:hover,
   &:focus {
+    border-color: ${COLORS.base};
     background-color: ${tinyColor(COLORS.bg)
-      .darken(4)
+      .darken(10)
+      .setAlpha(0.5)
       .toRgbString()};
   }
 

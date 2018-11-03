@@ -8,8 +8,7 @@ import PageContainer from '../components/PageContainer';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import Field from '../components/Field';
 import Label from '../components/Label';
-import Input from '../components/Input';
-import Textarea from '../components/Textarea';
+import Input, { StyledTextarea } from '../components/Input';
 import Button from '../components/Button';
 import Small from '../components/Small';
 import Type1 from '../components/Type1';
@@ -18,9 +17,10 @@ import OfficeMap from '../components/OfficeMap';
 import InvisibleButton from '../components/InvisibleButton';
 import FormSuccessMessage from '../components/FormSuccessMessage';
 import ErrorMessage from '../components/ErrorMessage';
-import BaseFieldError from '../components/FieldError';
+import FieldError from '../components/FieldError';
 import * as CustomPropTypes from '../propTypes';
 import { pxToRem } from '../styles/utils';
+import { TYPE_SIZE } from '../styles/vars';
 import '../utils/validation/phone';
 
 const PageLayout = styled.div`
@@ -41,49 +41,22 @@ const FormErrorMessage = styled(ErrorMessage)`
   }
 `;
 
-const FieldError = styled(BaseFieldError)`
-  @media (min-width: ${pxToRem(500)}) {
-    grid-column: 2 / -1;
-  }
-`;
-
 const ContactForm = styled.form`
-  display: grid;
-
-  @media (min-width: ${pxToRem(500)}) {
-    grid-template-columns: ${pxToRem(150)} 1fr;
-    grid-gap: 1rem;
-    align-items: start;
-
-    ${Button} {
-      grid-column: span 2;
-    }
+  ${Input} {
+    width: 100%;
   }
-
-  ${Textarea} {
+  ${StyledTextarea} {
     min-height: ${pxToRem(250)};
   }
 
   ${Label} {
-    padding-top: ${pxToRem(6)};
-
     &:not(:first-of-type) {
-      margin-top: 1rem;
-    }
-
-    @media (min-width: ${pxToRem(500)}) {
-      &:not(:first-of-type) {
-        margin-top: 0;
-      }
+      margin-top: 0.75rem;
     }
   }
 
   ${Button} {
-    margin-top: 1rem;
-
-    @media (min-width: ${pxToRem(500)}) {
-      margin-top: 0;
-    }
+    margin-top: 0.75rem;
   }
 `;
 
@@ -249,7 +222,8 @@ class Contact extends React.Component {
 
                       <Field nameAs="comments" fragment>
                         <Label>Additional comments</Label>
-                        <Textarea
+                        <Input
+                          type="textarea"
                           value={values.comments}
                           onChange={handleChange}
                           onBlur={handleBlur}
@@ -283,6 +257,11 @@ class Contact extends React.Component {
 
 export default styled(Contact)`
   padding-top: 2rem;
+
+  ${MarkdownBlock} {
+    font-size: ${pxToRem(TYPE_SIZE.t5[0])};
+    line-height: ${TYPE_SIZE.t5[1]};
+  }
 `;
 
 export const query = graphql`
