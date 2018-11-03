@@ -19,6 +19,11 @@ const BackgroundContainer = styled(Container)`
   &,
   a {
     color: #fff;
+
+    &::after {
+      background-color: rgba(255, 255, 255, 0.3);
+      z-index: 0;
+    }
   }
 `;
 
@@ -53,9 +58,9 @@ export const Footer = props => {
     <Tag {...rest}>
       <BackgroundContainer plus>
         <Address>
-          <a href="https://www.google.com/maps/place/1315+W+Hamburg+St,+Baltimore,+MD+21230/">
-            <List>
-              <ListItem>
+          <List>
+            <ListItem>
+              <a href="https://www.google.com/maps/place/1315+W+Hamburg+St,+Baltimore,+MD+21230/">
                 {streetAddress} 
                 {' '}
                 {city}
@@ -63,9 +68,10 @@ export const Footer = props => {
                 {state} 
                 {' '}
                 {zip}
-              </ListItem>
-            </List>
-          </a>
+              </a>
+            </ListItem>
+          </List>
+
           <List>
             <ListItem>
               <a href={`tel:${phone}`}>
