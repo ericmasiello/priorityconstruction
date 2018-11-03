@@ -41,13 +41,13 @@ export default styled(Button)`
     switch (color) {
       case 'light':
         return `
-          background-color: ${COLORS.highlight};
-          border-color: ${COLORS.highlight};
+          background-color: ${COLORS.brand[1]};
+          border-color: ${COLORS.brand[1]};
           color: ${COLORS.base};
 
           &:hover,
           &:focus {
-            background-color: ${tinyColor(COLORS.highlight)
+            background-color: ${tinyColor(COLORS.brand[1])
               .lighten(7)
               .toRgbString()};
           }

@@ -2,23 +2,24 @@ import tinyColor from 'tinycolor2';
 
 const unitToPx = unit => unit * 16;
 const baseColor = '#424141';
+const baseGray = '#D8D8D8';
 export const scaler = 1.333;
 
 export const COLORS = {
   bg: '#fff',
   base: baseColor,
-  brand: ['#1D293B', '#FBDB1E'],
+  brand: ['#1D293B', '#FBDB1E', '#4D1017', '#304461'],
   muted: '#787575',
-  highlight: '#FBDB1E',
-  highlight2: '#4D1017',
-  highlight3: tinyColor('#385072')
-    .darken(5)
-    .toRgbString(),
   link: '#18232C',
   border: tinyColor(baseColor)
     .lighten(50)
     .toRgbString(),
-  gray: '#D8D8D8',
+  gray: [
+    baseGray,
+    tinyColor(baseGray)
+      .setAlpha(0.35)
+      .toRgbString(),
+  ],
   error: '#cc0000',
 };
 

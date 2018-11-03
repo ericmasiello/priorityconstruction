@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { COLORS } from '../styles/vars';
 
 const FormSuccessMessage = styled.div`
-  background-color: ${COLORS.highlight3};
+  background-color: ${COLORS.brand[3]};
   color: #fff;
   display: flex;
   justify-content: center;

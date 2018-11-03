@@ -192,13 +192,13 @@ export default styled(PageHeaderBar)`
   }
 
   ${MenuIcon}, ${CloseIcon} {
-    fill: ${COLORS.highlight3};
+    fill: ${COLORS.brand[3]};
     width: ${pxToRem(20)};
     height: ${pxToRem(20)};
   }
 
   ${CloseIcon} {
-    stroke: ${COLORS.highlight3};
+    stroke: ${COLORS.brand[3]};
   }
 
   @media (min-width: ${pxToRem(MEDIA_QUERIES.navTransition)}) {

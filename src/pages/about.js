@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import tinyColor from 'tinycolor2';
 import PageContainer from '../components/PageContainer';
 import MarkdownBlock from '../components/MarkdownBlock';
 import TrophyIcon from '../components/TrophyIcon';
@@ -12,10 +11,6 @@ import Hero from '../components/Hero';
 import * as CustomPropTypes from '../propTypes';
 import { pxToRem, grids } from '../styles/utils';
 import { TYPE_SIZE, COLORS, GUTTER_SIZE, MEDIA_QUERIES, GRID_SIZE } from '../styles/vars';
-
-const fadedGray = tinyColor(COLORS.gray)
-  .setAlpha(0.2)
-  .toRgbString();
 
 const Intro = styled(MarkdownBlock)`
   font-size: ${pxToRem(TYPE_SIZE.t4[0])};
@@ -46,7 +41,7 @@ const Awards = styled.section`
   ${MarkdownBlock} {
     margin-top: 2rem;
     padding: 2rem;
-    background-color: ${fadedGray};
+    background-color: ${COLORS.gray[1]};
 
     @media (min-width: ${pxToRem(750)}) {
       margin-top: 0;
@@ -89,9 +84,7 @@ const Mission = styled(({ className, missionHtml }) => (
 `;
 
 const History = styled.section`
-  background-color: ${tinyColor(COLORS.gray)
-    .setAlpha(0.2)
-    .toRgbString()};
+  background-color: ${COLORS.gray[1]};
   padding: ${pxToRem(GUTTER_SIZE)};
   margin-top: 3rem;
   margin-bottom: 3rem;
@@ -136,7 +129,7 @@ const CertHGroup = styled.hgroup`
   align-items: center;
   text-align: center;
   padding: 2rem;
-  background-color: ${fadedGray};
+  background-color: ${COLORS.gray[1]};
   flex-basis: ${pxToRem(grids(3))};
   margin-bottom: 2rem;
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import tinyColor from 'tinycolor2';
 import ZoomImage from './ZoomImage';
 import MediaBlockImageGroup from './MediaBlockImageGroup';
 import Blockquote from './Blockquote';
@@ -37,7 +36,7 @@ export const HomePageMediaBlock = props => {
     ...rest
   } = props;
   const quote = testimonial ? (
-    <Blockquote quoteColor={grayed ? COLORS.gray : undefined}>
+    <Blockquote quoteColor={grayed ? COLORS.gray[0] : undefined}>
       <MarkdownBlock dangerouslySetInnerHTML={{ __html: testimonial }} />
       <Citation>
         {author}
@@ -99,12 +98,7 @@ const StyledHomePageMediaBlock = styled(HomePageMediaBlock)`
 
   ${Blockquote} {
     grid-row: 2;
-    background-color: ${({ grayed }) =>
-      grayed
-        ? tinyColor(COLORS.gray)
-            .setAlpha(0.2)
-            .toRgbString()
-        : 'transparent'};
+    background-color: ${({ grayed }) => (grayed ? COLORS.gray[1] : 'transparent')};
   }
 
   ${MediaBlockImageGroup} {
