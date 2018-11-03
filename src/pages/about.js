@@ -7,8 +7,8 @@ import MarkdownBlock from '../components/MarkdownBlock';
 import TrophyIcon from '../components/TrophyIcon';
 import Type4 from '../components/Type4';
 import * as CustomPropTypes from '../propTypes';
-import { pxToRem } from '../styles/utils';
-import { TYPE_SIZE, COLORS, GUTTER_SIZE } from '../styles/vars';
+import { pxToRem, grids } from '../styles/utils';
+import { TYPE_SIZE, COLORS, GUTTER_SIZE, MEDIA_QUERIES } from '../styles/vars';
 import HeroHomePageContent from '../components/HeroHomePageContent';
 import Hero from '../components/Hero';
 
@@ -71,6 +71,30 @@ const Mission = styled(({ className, missionHtml }) => (
   }
 `;
 
+const History = styled.section`
+  background-color: ${tinyColor(COLORS.gray)
+    .setAlpha(0.2)
+    .toRgbString()};
+  padding: ${pxToRem(GUTTER_SIZE)};
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  max-width: ${pxToRem(grids(10))};
+
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.heroL)}) {
+    margin-top: 0;
+
+    ${Type4} {
+      max-width: calc(25% - ${pxToRem(GUTTER_SIZE * 1.5)});
+    }
+  }
+
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.heroXL)}) {
+    ${Type4} {
+      max-width: calc(50% - ${pxToRem(GUTTER_SIZE * 1.5)});
+    }
+  }
+`;
+
 class About extends React.PureComponent {
   static displayName = 'About';
 
@@ -110,7 +134,12 @@ class About extends React.PureComponent {
         >
           <Mission missionHtml={data.mission.html} />
         </Hero>
-        <MarkdownBlock tag="section" dangerouslySetInnerHTML={{ __html: data.history.html }} />
+        <History>
+          <Type4 tag="h1" uppercase bold>
+            Our History
+          </Type4>
+          <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.history.html }} />
+        </History>
         <MarkdownBlock
           tag="section"
           dangerouslySetInnerHTML={{ __html: data.certifications.html }}
