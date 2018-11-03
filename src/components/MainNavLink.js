@@ -15,7 +15,7 @@ const MainNavLink = styled(Link)`
     height: 0;
     left: 0;
     bottom: ${pxToRem(-5)};
-    background-color: ${COLORS.highlight};
+    background-color: ${COLORS.brand[1]};
     transition: all 0.3s ease;
   }
 

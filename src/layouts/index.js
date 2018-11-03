@@ -30,7 +30,7 @@ const StyledHeroHomePageContent = styled(HeroHomePageContent)`
 
   ${Type2}, ${Type3} {
     text-shadow: 0 0 2px
-      ${tinyColor(COLORS.highlight)
+      ${tinyColor(COLORS.brand[1])
         .darken(30)
         .toRgbString()};
   }

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import tinyColor from 'tinycolor2';
 import * as CustomPropTypes from '../propTypes';
 import Container from '../components/Container';
 import HomePageMediaBlock from '../components/HomePageMediaBlock';
@@ -25,9 +24,7 @@ const ServiceItem = styled(FlatListItem)`
 `;
 
 const Callout = styled.hgroup`
-  background-color: ${tinyColor(COLORS.gray)
-    .setAlpha(0.2)
-    .toRgbString()};
+  background-color: ${COLORS.gray[1]};
   padding: ${pxToRem(GUTTER_SIZE)};
   grid-column: 1 / -1;
   text-transform: uppercase;
