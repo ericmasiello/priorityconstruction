@@ -16,6 +16,7 @@ import Type2 from '../components/Type2';
 import Type3 from '../components/Type3';
 import Button from '../components/Button';
 import { COLORS } from '../styles/vars';
+import { siteBg } from '../styles/mixins';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -162,11 +163,7 @@ class Layout extends React.Component {
 }
 
 export default styled(Layout)`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-  position: relative;
+  ${siteBg()};
 `;
 
 export const query = graphql`
