@@ -15,24 +15,14 @@ import Type3 from '../components/Type3';
 import InvisibleButton from '../components/InvisibleButton';
 import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
-import BaseFieldError from '../components/FieldError';
+import FieldError from '../components/FieldError';
 import { pxToRem } from '../styles/utils';
+import { TYPE_SIZE } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
 import '../utils/validation/phone';
 
 const FormErrorMessage = styled(ErrorMessage)`
   margin-top: 1rem;
-
-  @media (min-width: ${pxToRem(500)}) {
-    grid-column: span 2;
-    margin-top: 0;
-  }
-`;
-
-const FieldError = styled(BaseFieldError)`
-  @media (min-width: ${pxToRem(500)}) {
-    grid-column: 2 / -1;
-  }
 `;
 
 const PageLayout = styled.div`
@@ -40,42 +30,22 @@ const PageLayout = styled.div`
 `;
 
 const ContactForm = styled.form`
-  display: grid;
-
-  @media (min-width: ${pxToRem(500)}) {
-    grid-template-columns: ${pxToRem(150)} 1fr;
-    grid-gap: 1rem;
-    align-items: start;
-
-    ${Button} {
-      grid-column: span 2;
-    }
-  }
-
   ${StyledTextarea} {
     min-height: ${pxToRem(250)};
   }
 
+  ${Input} {
+    width: 100%;
+  }
+
   ${Label} {
-    padding-top: ${pxToRem(6)};
-
     &:not(:first-of-type) {
-      margin-top: 1rem;
-    }
-
-    @media (min-width: ${pxToRem(500)}) {
-      &:not(:first-of-type) {
-        margin-top: 0;
-      }
+      margin-top: 0.75rem;
     }
   }
 
   ${Button} {
-    margin-top: 1rem;
-
-    @media (min-width: ${pxToRem(500)}) {
-      margin-top: 0;
-    }
+    margin-top: 0.75rem;
   }
 `;
 
@@ -312,6 +282,11 @@ class Quote extends React.Component {
 
 export default styled(Quote)`
   padding-top: 2rem;
+
+  ${MarkdownBlock} {
+    font-size: ${pxToRem(TYPE_SIZE.t5[0])};
+    line-height: ${TYPE_SIZE.t5[1]};
+  }
 `;
 
 export const query = graphql`
