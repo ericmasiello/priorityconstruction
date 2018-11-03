@@ -15,9 +15,13 @@ import FlatListItem from './FlatListItem';
 
 const LogoLink = styled(Link)`
   display: inline-block;
-  height: 45px;
-  width: 197px;
+  height: ${pxToRem(45)};
+  width: ${pxToRem(197)};
   position: relative;
+
+  &::after {
+    content: none;
+  }
 `;
 
 const SiteTitle = styled.h1`

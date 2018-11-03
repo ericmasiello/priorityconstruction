@@ -23,7 +23,7 @@ export default `
   body {
     margin: 0;
     font-size: ${pxToRem(16)};
-    line-height: ${scaler};
+    line-height: ${scaler * 1.05};
     font-weight: ${BODY_WEIGHTS.regular};
   }
 
@@ -54,10 +54,23 @@ export default `
   }
 
   a {
+    position: relative;
+    display: inline-block;
     background-color: transparent;
     color: ${COLORS.link};
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: 0.1875em;
+      left: 0;
+      bottom: 0;
+      background-color: ${COLORS.brand[1]};
+    }
   }
 
   abbr {
