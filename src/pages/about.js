@@ -5,35 +5,52 @@ import tinyColor from 'tinycolor2';
 import PageContainer from '../components/PageContainer';
 import MarkdownBlock from '../components/MarkdownBlock';
 import TrophyIcon from '../components/TrophyIcon';
+import CertificateIcon from '../components/CertificateIcon';
 import Type4 from '../components/Type4';
-import * as CustomPropTypes from '../propTypes';
-import { pxToRem, grids } from '../styles/utils';
-import { TYPE_SIZE, COLORS, GUTTER_SIZE, MEDIA_QUERIES } from '../styles/vars';
 import HeroHomePageContent from '../components/HeroHomePageContent';
 import Hero from '../components/Hero';
+import * as CustomPropTypes from '../propTypes';
+import { pxToRem, grids } from '../styles/utils';
+import { TYPE_SIZE, COLORS, GUTTER_SIZE, MEDIA_QUERIES, GRID_SIZE } from '../styles/vars';
+
+const fadedGray = tinyColor(COLORS.gray)
+  .setAlpha(0.2)
+  .toRgbString();
 
 const Intro = styled(MarkdownBlock)`
   font-size: ${pxToRem(TYPE_SIZE.t4[0])};
   line-height: ${TYPE_SIZE.t4[1]};
-  text-align: center;
   margin-bottom: 3rem;
 
   ul {
-    columns: 2;
+    text-align: center;
+    @media (min-width: ${pxToRem(750)}) {
+      columns: 2;
+    }
+  }
+
+  @media (min-width: ${pxToRem(900)}) {
+    text-align: center;
   }
 `;
 
 const Awards = styled.section`
   display: grid;
-  grid-template-columns: 1fr 3fr;
   align-items: center;
   margin-bottom: 3rem;
 
+  @media (min-width: ${pxToRem(750)}) {
+    grid-template-columns: 1fr 3fr;
+  }
+
   ${MarkdownBlock} {
+    margin-top: 2rem;
     padding: 2rem;
-    background-color: ${tinyColor(COLORS.gray)
-      .setAlpha(0.2)
-      .toRgbString()};
+    background-color: ${fadedGray};
+
+    @media (min-width: ${pxToRem(750)}) {
+      margin-top: 0;
+    }
   }
 `;
 
@@ -95,6 +112,40 @@ const History = styled.section`
   }
 `;
 
+const Certs = styled.section`
+  margin-bottom: 3rem;
+
+  @media (min-width: ${pxToRem(750)}) {
+    display: flex;
+  }
+
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.heroXL)}) {
+    margin-left: ${pxToRem(GRID_SIZE)};
+  }
+
+  ${CertificateIcon} {
+    fill: #333e4f;
+    width: ${pxToRem(104)};
+  }
+`;
+
+const CertHGroup = styled.hgroup`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  background-color: ${fadedGray};
+  flex-basis: ${pxToRem(grids(3))};
+  margin-bottom: 2rem;
+
+  @media (min-width: ${pxToRem(750)}) {
+    margin-right: ${pxToRem(GUTTER_SIZE * 2)};
+    margin-bottom: 0;
+  }
+`;
+
 class About extends React.PureComponent {
   static displayName = 'About';
 
@@ -140,10 +191,15 @@ class About extends React.PureComponent {
           </Type4>
           <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.history.html }} />
         </History>
-        <MarkdownBlock
-          tag="section"
-          dangerouslySetInnerHTML={{ __html: data.certifications.html }}
-        />
+        <Certs>
+          <CertHGroup>
+            <Type4 tag="h1" uppercase bold>
+              Certifications &amp; Associations
+            </Type4>
+            <CertificateIcon />
+          </CertHGroup>
+          <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.certifications.html }} />
+        </Certs>
       </PageContainer>
     );
   }
