@@ -1,5 +1,7 @@
 import { pxToRem } from './utils';
 import { BODY_FONT_STACK } from './vars';
+import blueprint from '../images/blueprint.svg';
+import grid from '../images/grid.svg';
 
 export const baseFont = () => `font-family: ${BODY_FONT_STACK}`;
 export const headerFont = () => `font-family: ${BODY_FONT_STACK}`;
@@ -25,3 +27,11 @@ export const scalableType = ([maxSize, lineHeight], minSize = 16) => {
     }
   `;
 };
+
+export const siteBg = () => `
+  min-height: 100vh;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%,rgba(255, 255, 255, 0.4) 100%), url(${blueprint}), url(${grid});
+  background-size: 100%, contain, ${pxToRem(960)};
+  background-repeat: repeat, no-repeat, repeat;
+  background-position: bottom left;
+`;

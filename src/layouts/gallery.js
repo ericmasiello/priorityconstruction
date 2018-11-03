@@ -7,6 +7,7 @@ import base from '../styles/base.css';
 import Footer from '../components/Footer';
 import LayoutContext from '../layoutContext';
 import PageHeaderBar from '../components/PageHeaderBar';
+import { siteBg } from '../styles/mixins';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -108,7 +109,9 @@ class LayoutGallery extends React.Component {
   }
 }
 
-export default styled(LayoutGallery)``;
+export default styled(LayoutGallery)`
+  ${siteBg()};
+`;
 
 export const query = graphql`
   query LayoutGalleryPageQuery {
