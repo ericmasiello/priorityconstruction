@@ -6,9 +6,7 @@ import PageContainer from '../components/PageContainer';
 import MarkdownBlock from '../components/MarkdownBlock';
 import Field from '../components/Field';
 import Label from '../components/Label';
-import Input from '../components/Input';
-import Textarea from '../components/Textarea';
-import Select from '../components/Select';
+import Input, { StyledTextarea } from '../components/Input';
 import Button from '../components/Button';
 import Type1 from '../components/Type1';
 import Type3 from '../components/Type3';
@@ -46,7 +44,7 @@ const PageLayout = styled.div`
 const ContactForm = styled.form`
   display: grid;
 
-  ${Textarea} {
+  ${StyledTextarea} {
     min-height: ${pxToRem(250)};
   }
 
@@ -321,7 +319,8 @@ class Careers extends React.Component {
                         <React.Fragment>
                           <Field nameAs="felonyExplanation" fragment>
                             <Label>Please explain:</Label>
-                            <Textarea
+                            <Input
+                              type="textarea"
                               value={values.felonyExplanation}
                               onChange={handleChange}
                               onBlur={handleBlur}
@@ -372,7 +371,8 @@ class Careers extends React.Component {
                               When did you work for Priority Construction and who was your
                               supervisor?
                             </Label>
-                            <Textarea
+                            <Input
+                              type="textarea"
                               value={values.previousWorkforPriorityDetails}
                               onChange={handleChange}
                               onBlur={handleBlur}
@@ -424,7 +424,8 @@ class Careers extends React.Component {
 
                       <Field nameAs="previousEmployerState" fragment>
                         <Label>State</Label>
-                        <Select
+                        <Input
+                          type="select"
                           value={values.previousEmployerState}
                           onChange={handleChange}
                           onBlur={handleBlur}
@@ -436,7 +437,7 @@ class Careers extends React.Component {
                               {states[key]}
                             </option>
                           ))}
-                        </Select>
+                        </Input>
                       </Field>
                       <FieldError component="div" name="previousEmployerState" />
 
@@ -455,7 +456,8 @@ class Careers extends React.Component {
 
                       <Field nameAs="previousEmployerResponsibilities" fragment>
                         <Label>Responsibilities</Label>
-                        <Textarea
+                        <Input
+                          type="textarea"
                           value={values.previousEmployerResponsibilities}
                           onChange={handleChange}
                           onBlur={handleBlur}
@@ -495,7 +497,8 @@ class Careers extends React.Component {
 
                       <Field nameAs="previousEmployerReasonForLeaving" fragment>
                         <Label>Reason for leaving</Label>
-                        <Textarea
+                        <Input
+                          type="textarea"
                           value={values.previousEmployerReasonForLeaving}
                           onChange={handleChange}
                           onBlur={handleBlur}
@@ -509,7 +512,8 @@ class Careers extends React.Component {
 
                       <Field nameAs="additionalQualifications" fragment>
                         <Label>Additional Qualifications</Label>
-                        <Textarea
+                        <Input
+                          type="textarea"
                           value={values.additionalQualifications}
                           onChange={handleChange}
                           onBlur={handleBlur}

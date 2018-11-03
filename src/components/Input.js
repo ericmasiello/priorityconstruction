@@ -3,13 +3,27 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import tinyColor from 'tinycolor2';
 import { COLORS, BODY_WEIGHTS } from '../styles/vars';
+import { pxToRem } from '../styles/utils';
 import * as CustomPropTypes from '../propTypes';
+
+const border = tinyColor(COLORS.gray[0])
+  .setAlpha(0.5)
+  .toRgbString();
+
+const commonStyles = `
+  border-style: solid;
+  border-color: ${border};
+  border-width: 1px;
+  background-color: ${tinyColor(COLORS.bg)
+    .setAlpha(0.7)
+    .toRgbString()};
+`;
 
 const RadioMark = styled.span`
   justify-content: center;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: ${pxToRem(20)};
+  height: ${pxToRem(20)};
   border: 1px solid ${COLORS.border};
   position: relative;
   ${({ error }) => error && `border-color: ${COLORS.error};`};
@@ -41,7 +55,7 @@ Radio.defaultProps = {
 
 Radio.displayName = 'Radio';
 
-const StyledRadio = styled(Radio)`
+export const StyledRadio = styled(Radio)`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -82,24 +96,115 @@ Input.defaultProps = {
 
 Input.displayName = 'Input';
 
-const StyledInput = styled(Input)`
-  border: 1px solid ${COLORS.border};
+export const StyledInput = styled(Input)`
+  ${commonStyles};
   font-weight: ${BODY_WEIGHTS.medium};
-  background-color: ${COLORS.bg};
   padding: 0.5rem;
 
+  &::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    font-weight: ${BODY_WEIGHTS.regular};
+  }
+  &::-moz-placeholder {
+    /* Firefox 19+ */
+    font-weight: ${BODY_WEIGHTS.regular};
+  }
+  &:-ms-input-placeholder {
+    /* IE 10+ */
+    font-weight: ${BODY_WEIGHTS.regular};
+  }
+  &:-moz-placeholder {
+    /* Firefox 18- */
+    font-weight: ${BODY_WEIGHTS.regular};
+  }
+
   ${({ error }) => error && `border-color: ${COLORS.error}`};
+`;
+
+export const Textarea = ({ tag: Tag, error, ...rest }) => <Tag {...rest} />;
+
+Textarea.propTypes = {
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  error: PropTypes.bool,
+};
+
+Textarea.defaultProps = {
+  tag: 'textarea',
+};
+
+Textarea.displayName = 'Textarea';
+
+export const StyledTextarea = styled(Textarea)`
+  ${commonStyles};
+  font-weight: ${BODY_WEIGHTS.medium};
+  padding: 0.5rem;
+  ${({ error }) => error && `border-color: ${COLORS.error}`};
+`;
+
+export const SelectElement = styled.select`
+  position: relative;
+  z-index: 2;
+  padding: 0.5rem 1.25rem 0.5rem 0.5rem;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+`;
+
+export const Select = props => {
+  const { tag: Tag, className, children, ...rest } = props;
+  return (
+    <Tag className={className}>
+      <SelectElement {...rest}>{children}</SelectElement>
+    </Tag>
+  );
+};
+
+Select.propTypes = {
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  className: PropTypes.string,
+  children: PropTypes.node,
+};
+
+Select.defaultProps = {
+  tag: 'span',
+};
+
+Select.displayName = 'Select';
+
+export const StyledSelect = styled(Select)`
+  ${commonStyles};
+  position: relative;
+  display: inline-block;
+  font-weight: ${BODY_WEIGHTS.medium};
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 4px solid ${COLORS.base};
+  }
 `;
 
 const Component = props => {
   switch (props.type) {
     case 'radio':
       return <StyledRadio {...props} />;
+    case 'textarea':
+      return <StyledTextarea {...props} />;
+    case 'select':
+      return <StyledSelect {...props} />;
     default:
       return <StyledInput {...props} />;
   }
 };
 
-Component.displayName = 'Input';
+Component.displayName = 'InputWrapper';
 
 export default styled(Component)``;
