@@ -7,8 +7,9 @@ import PageContainer from '../components/PageContainer';
 import MarkdownBlock from '../components/MarkdownBlock';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import Field from '../components/Field';
+import Form from '../components/Form';
 import Label from '../components/Label';
-import Input, { StyledTextarea } from '../components/Input';
+import Input from '../components/Input';
 import Button from '../components/Button';
 import Type1 from '../components/Type1';
 import Type3 from '../components/Type3';
@@ -27,26 +28,6 @@ const FormErrorMessage = styled(ErrorMessage)`
 
 const PageLayout = styled.div`
   position: relative;
-`;
-
-const ContactForm = styled.form`
-  ${StyledTextarea} {
-    min-height: ${pxToRem(250)};
-  }
-
-  ${Input} {
-    width: 100%;
-  }
-
-  ${Label} {
-    &:not(:first-of-type) {
-      margin-top: 0.75rem;
-    }
-  }
-
-  ${Button} {
-    margin-top: 0.75rem;
-  }
 `;
 
 const config = {
@@ -161,7 +142,7 @@ class Quote extends React.Component {
                           There was an problem submitting your message. Please try again.
                         </FormErrorMessage>
                       )}
-                      <ContactForm name={netlifyState.formName} onSubmit={handleSubmit}>
+                      <Form name={netlifyState.formName} onSubmit={handleSubmit}>
                         <input type="hidden" name="form-name" value={netlifyState.formName} />
                         <Field nameAs="name" fragment>
                           <Label>Name</Label>
@@ -267,7 +248,7 @@ class Quote extends React.Component {
                         <Button type="submit" disabled={isSubmitting}>
                           Submit
                         </Button>
-                      </ContactForm>
+                      </Form>
                     </React.Fragment>
                   </PageLayout>
                 </PageContainer>

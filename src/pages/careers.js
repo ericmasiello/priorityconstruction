@@ -6,7 +6,8 @@ import PageContainer from '../components/PageContainer';
 import MarkdownBlock from '../components/MarkdownBlock';
 import Field from '../components/Field';
 import Label from '../components/Label';
-import Input, { StyledTextarea } from '../components/Input';
+import Input from '../components/Input';
+import Form from '../components/Form';
 import Button from '../components/Button';
 import Type1 from '../components/Type1';
 import Type3 from '../components/Type3';
@@ -30,7 +31,10 @@ const FieldError = styled(BaseFieldError)`
 
 const SectionTitle = styled(Type4)`
   margin-bottom: 0;
-  text-transform: uppercase;
+
+  &:not(:first-of-type) {
+    margin-top: 3rem;
+  }
 `;
 
 const FormErrorMessage = styled(ErrorMessage)`
@@ -41,24 +45,13 @@ const PageLayout = styled.div`
   position: relative;
 `;
 
-const ContactForm = styled.form`
-  display: grid;
-
-  ${StyledTextarea} {
-    min-height: ${pxToRem(250)};
-  }
-
-  ${Label}, fieldset {
-    margin-top: 1rem;
-  }
-`;
-
 const FieldGroups = styled.div`
   display: flex;
   align-items: center;
 
   ${Input} {
     margin-right: 1rem;
+    width: auto;
   }
 `;
 
@@ -137,10 +130,12 @@ class Careers extends React.Component {
                       </FormErrorMessage>
                     )}
                     <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.intro.html }} />
-                    <ContactForm name={netlifyState.formName} onSubmit={handleSubmit}>
+                    <Form name={netlifyState.formName} onSubmit={handleSubmit}>
                       <input type="hidden" name="form-name" value={netlifyState.formName} />
 
-                      <SectionTitle tag="h2">Personal Information</SectionTitle>
+                      <SectionTitle uppercase tag="h2">
+                        Personal Information
+                      </SectionTitle>
 
                       <Field nameAs="name" fragment>
                         <Label>Name</Label>
@@ -386,7 +381,9 @@ class Careers extends React.Component {
                         </React.Fragment>
                       )}
 
-                      <SectionTitle tag="h2">Previous Employment Experience</SectionTitle>
+                      <SectionTitle uppercase tag="h2">
+                        Previous Employment Experience
+                      </SectionTitle>
 
                       <Field nameAs="previousEmployerCompany" fragment>
                         <Label>Company</Label>
@@ -524,7 +521,9 @@ class Careers extends React.Component {
                       </Field>
                       <FieldError component="div" name="additionalQualifications" />
 
-                      <SectionTitle tag="h2">Disclaimer and Signature</SectionTitle>
+                      <SectionTitle uppercase tag="h2">
+                        Disclaimer and Signature
+                      </SectionTitle>
 
                       <Field nameAs="signature" fragment>
                         <Label>Signature</Label>
@@ -574,7 +573,7 @@ class Careers extends React.Component {
                       <Button type="submit" disabled={isSubmitting}>
                         Submit
                       </Button>
-                    </ContactForm>
+                    </Form>
                   </PageLayout>
                 </PageContainer>
               );
