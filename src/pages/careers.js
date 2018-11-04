@@ -590,6 +590,7 @@ class Careers extends React.Component {
 
 export default styled(Careers)`
   padding-top: 2rem;
+  padding-bottom: 3rem;
 `;
 
 export const query = graphql`

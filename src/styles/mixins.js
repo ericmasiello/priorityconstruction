@@ -43,4 +43,6 @@ export const siteBg = () => `
     repeat,
     repeat;
   background-position: bottom left;
+  display: grid;
+  grid-template-rows: 1fr auto;
 `;

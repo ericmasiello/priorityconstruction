@@ -43,6 +43,7 @@ class Services extends React.Component {
 
 export default styled(Services)`
   padding-top: 2rem;
+  padding-bottom: 3rem;
 `;
 
 export const query = graphql`

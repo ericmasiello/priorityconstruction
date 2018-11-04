@@ -239,6 +239,7 @@ class Contact extends React.Component {
 
 export default styled(Contact)`
   padding-top: 2rem;
+  padding-bottom: 3rem;
 
   ${MarkdownBlock} {
     font-size: ${pxToRem(TYPE_SIZE.t5[0])};
