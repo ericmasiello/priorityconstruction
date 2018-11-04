@@ -21,7 +21,7 @@ exports[`should render 1`] = `
 }
 
 .c0 .c2,
-.c0 .sc-gzVnrw {
+.c0 .sc-dnqmqq {
   width: 100%;
 }
 
@@ -47,7 +47,7 @@ exports[`should render as stack 1`] = `
 }
 
 .c0 .c1,
-.c0 .sc-gzVnrw {
+.c0 .sc-dnqmqq {
   width: 100%;
 }
 
