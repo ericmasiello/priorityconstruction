@@ -5,6 +5,7 @@ import tinyColor from 'tinycolor2';
 import { COLORS, BODY_WEIGHTS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
 import * as CustomPropTypes from '../propTypes';
+import tick from '../images/tick.svg';
 
 const border = tinyColor(COLORS.gray[0])
   .setAlpha(0.5)
@@ -17,6 +18,67 @@ const commonStyles = `
   background-color: ${tinyColor(COLORS.bg)
     .setAlpha(0.7)
     .toRgbString()};
+  box-shadow: 0 3px 0 ${tinyColor(COLORS.gray[1])
+    .darken(20)
+    .toRgbString()};
+`;
+
+const Checkmark = styled.span`
+  justify-content: center;
+  width: ${pxToRem(20)};
+  height: ${pxToRem(20)};
+  border: 1px solid ${COLORS.border};
+  position: relative;
+  ${({ error }) => error && `border-color: ${COLORS.error};`};
+`;
+
+/* eslint-disable jsx-a11y/label-has-associated-control */
+export const Checkbox = ({ children, error, className, ...rest }) => (
+  <label className={className}>
+    <input {...rest} />
+    <Checkmark error={error} />
+    {children && <LabelText>{children}</LabelText>}
+  </label>
+);
+
+Checkbox.propTypes = {
+  tag: CustomPropTypes.Tag,
+  className: PropTypes.string,
+  children: PropTypes.node,
+  error: PropTypes.bool,
+};
+
+Checkbox.defaultProps = {
+  tag: 'input',
+};
+
+Checkbox.displayName = 'Checkbox';
+
+export const StyledCheckbox = styled(Checkbox)`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+
+  input {
+    position: absolute;
+    left: -9999px;
+  }
+
+  input:checked + ${Checkmark} {
+    &::before {
+      content: '';
+      position: absolute;
+      width: 1em;
+      height: 1em;
+      left: 50%;
+      top: 50%;
+      background-image: url(${tick});
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
 `;
 
 const RadioMark = styled.span`
@@ -196,6 +258,8 @@ const Component = props => {
   switch (props.type) {
     case 'radio':
       return <StyledRadio {...props} />;
+    case 'checkbox':
+      return <StyledCheckbox {...props} />;
     case 'textarea':
       return <StyledTextarea {...props} />;
     case 'select':
