@@ -66,6 +66,7 @@ class Layout extends React.Component {
       backgroundAbout: CustomPropTypes.ImageSharp,
       backgroundGallery: CustomPropTypes.ImageSharp,
       backgroundCareers: CustomPropTypes.ImageSharp,
+      backgroundServices: CustomPropTypes.ImageSharp,
     }).isRequired,
     location: CustomPropTypes.Location.isRequired,
     className: PropTypes.string,
@@ -93,6 +94,8 @@ class Layout extends React.Component {
       ),
     },
     services: {
+      background: this.props.data.backgroundServices,
+      isFullHeight: true,
       title: 'Services',
     },
     quote: {
@@ -143,12 +146,12 @@ class Layout extends React.Component {
             <PageHeaderBar currentPathname={this.props.location.pathname} />
             <Hero
               selectedImage={layout.background}
-              bgImages={[
-                this.props.data.backgroundHome,
-                this.props.data.backgroundAbout,
-                this.props.data.backgroundGallery,
-                this.props.data.backgroundCareers,
-              ]}
+              bgImages={Object.keys(this.props.data)
+                .filter(key => key !== 'site')
+                .reduce((acc, key) => {
+                  acc.push(this.props.data[key]);
+                  return acc;
+                }, [])}
               isFullHeight={layout.isFullHeight}
             >
               {layout.heroChildren}
@@ -190,6 +193,12 @@ export const query = graphql`
     }
 
     backgroundAbout: imageSharp(id: { regex: "/src/images/photos/heroes/Fells-27/" }) {
+      sizes(maxWidth: 1500) {
+        ...GatsbyImageSharpSizes
+      }
+    }
+
+    backgroundServices: imageSharp(id: { regex: "/src/images/photos/heroes/Workers/" }) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
