@@ -56,6 +56,7 @@ export default styled(Button)`
             background-color: ${tinyColor(COLORS.brand[1])
               .lighten(7)
               .toRgbString()};
+            border-color: ${COLORS.brand[1]};
           }
         `;
       default:
