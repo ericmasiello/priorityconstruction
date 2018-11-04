@@ -7,8 +7,9 @@ import MarkdownBlock from '../components/MarkdownBlock';
 import PageContainer from '../components/PageContainer';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import Field from '../components/Field';
+import Form from '../components/Form';
 import Label from '../components/Label';
-import Input, { StyledTextarea } from '../components/Input';
+import Input from '../components/Input';
 import Button from '../components/Button';
 import Small from '../components/Small';
 import Type1 from '../components/Type1';
@@ -38,25 +39,6 @@ const FormErrorMessage = styled(ErrorMessage)`
 
   @media (min-width: ${pxToRem(500)}) {
     grid-column: 2 / -1;
-  }
-`;
-
-const ContactForm = styled.form`
-  ${Input} {
-    width: 100%;
-  }
-  ${StyledTextarea} {
-    min-height: ${pxToRem(250)};
-  }
-
-  ${Label} {
-    &:not(:first-of-type) {
-      margin-top: 0.75rem;
-    }
-  }
-
-  ${Button} {
-    margin-top: 0.75rem;
   }
 `;
 
@@ -157,7 +139,7 @@ class Contact extends React.Component {
                         There was an problem submitting your message. Please try again.
                       </FormErrorMessage>
                     )}
-                    <ContactForm name={netlifyState.formName} onSubmit={handleSubmit}>
+                    <Form name={netlifyState.formName} onSubmit={handleSubmit}>
                       <input type="hidden" name="form-name" value={netlifyState.formName} />
 
                       <Field nameAs="name" fragment>
@@ -235,7 +217,7 @@ class Contact extends React.Component {
                       <Button type="submit" disabled={isSubmitting}>
                         Submit
                       </Button>
-                    </ContactForm>
+                    </Form>
                     <div>
                       <OfficeMap width="100%" mapKey={data.site.siteMetadata.googleMapKey} />
                       <p>
