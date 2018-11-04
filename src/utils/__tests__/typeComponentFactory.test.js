@@ -31,7 +31,7 @@ it('should set the text to uppercase', () => {
 
 it('should set the text to bold', () => {
   const Wrapper = typeComponentFactory(TYPE_SIZE.t1);
-  const component = renderer.create(<Wrapper.StyledType bold />);
+  const component = renderer.create(<Wrapper.StyledType weight="bold" />);
 
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();

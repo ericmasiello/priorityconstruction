@@ -122,7 +122,7 @@ class Services extends React.PureComponent {
       <PageContainer plus className={className}>
         <Intro tag="section">
           <Content>
-            <Type3 tag="h1" uppercase bold>
+            <Type3 tag="h1" uppercase weight="bold">
               {intro.title}
             </Type3>
             <MarkdownBlock dangerouslySetInnerHTML={{ __html: intro.content }} />
@@ -132,7 +132,7 @@ class Services extends React.PureComponent {
 
         <ConcreteFlatwork plus tag="section">
           <Content>
-            <Type3 tag="h1" uppercase bold>
+            <Type3 tag="h1" uppercase weight="medium">
               {concreteFlatwork.title}
             </Type3>
             <MarkdownBlock dangerouslySetInnerHTML={{ __html: concreteFlatwork.content }} />

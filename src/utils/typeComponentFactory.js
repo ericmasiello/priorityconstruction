@@ -9,7 +9,7 @@ const typeComponentFactory = (
   { defaultTag = 'div', displayName = `Type(${typeSize})` } = {},
 ) => {
   const Type = props => {
-    const { tag: Tag, scale, uppercase, bold, ...rest } = props;
+    const { tag: Tag, scale, uppercase, weight, ...rest } = props;
     return <Tag {...rest} />;
   };
 
@@ -23,7 +23,7 @@ const typeComponentFactory = (
     className: PropTypes.string,
     scale: PropTypes.bool,
     uppercase: PropTypes.bool,
-    bold: PropTypes.bool,
+    weight: PropTypes.oneOf(['regular', 'medium', 'bold']),
   };
 
   Type.displayName = displayName;
@@ -31,11 +31,10 @@ const typeComponentFactory = (
   // TODO: add code for making type capitlize and bold
   const StyledType = styled(Type)`
     ${props => {
-      const { scale, bold, uppercase } = { ...Type.defaultProps, ...props };
+      const { scale, weight, uppercase } = { ...Type.defaultProps, ...props };
       const styles = [scale ? scalableType(typeSize) : type(typeSize)];
-
-      if (bold) {
-        styles.push(`font-weight: ${BODY_WEIGHTS.bold};`);
+      if (weight && weight !== 'regular') {
+        styles.push(`font-weight: ${BODY_WEIGHTS[weight]};`);
       }
 
       if (uppercase) {
