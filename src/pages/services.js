@@ -13,7 +13,7 @@ import { pxToRem } from '../styles/utils';
 import { type } from '../styles/mixins';
 
 const blockStyles = `
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   @media (min-width: ${pxToRem(850)}) {
     display: grid;
     grid-gap: 1rem;
@@ -21,7 +21,9 @@ const blockStyles = `
   }
 `;
 
-const Content = styled.div``;
+const Content = styled.div`
+  ${type(TYPE_SIZE.t5)};
+`;
 
 const Intro = styled(Container)`
   ${blockStyles};
@@ -33,10 +35,6 @@ const Intro = styled(Container)`
     align-items: center;
     text-align: center;
     grid-column: 1 / 8;
-  }
-
-  ${MarkdownBlock} {
-    ${type(TYPE_SIZE.t5)};
   }
 
   .gatsby-image-outer-wrapper {
@@ -95,6 +93,37 @@ const ConcreteFlatwork = styled(Container)`
   }
 `;
 
+const Hardscapes = styled(Container)`
+  ${blockStyles};
+
+  ${Content} {
+    grid-column: 7 / -1;
+    grid-row: 1 / 3;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  ${GatsbyImage} {
+    height: 100%;
+  }
+
+  .gatsby-image-outer-wrapper {
+    &:nth-child(2) {
+      grid-column: 1 / 7;
+      grid-row: 1 / 2;
+    }
+
+    &:nth-child(3) {
+      grid-column: 1 / 7;
+      grid-row: 2 / 3;
+    }
+  }
+`;
+
 class Services extends React.PureComponent {
   static displayName = 'Services';
 
@@ -140,10 +169,17 @@ class Services extends React.PureComponent {
           ))}
         </ConcreteFlatwork>
 
-        <section>
-          <Type3 tag="h1">{hardscapes.title}</Type3>
-          <MarkdownBlock dangerouslySetInnerHTML={{ __html: hardscapes.content }} />
-        </section>
+        <Hardscapes tag="section">
+          <Content>
+            <Type3 tag="h1" uppercase weight="bold">
+              {hardscapes.title}
+            </Type3>
+            <MarkdownBlock dangerouslySetInnerHTML={{ __html: hardscapes.content }} />
+          </Content>
+          {hardscapes.images.map(image => (
+            <GatsbyImage {...image} key={image.id} />
+          ))}
+        </Hardscapes>
         <section>
           <Type3 tag="h1">{structuralConcrete.title}</Type3>
           <MarkdownBlock dangerouslySetInnerHTML={{ __html: structuralConcrete.content }} />
