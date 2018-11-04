@@ -8,20 +8,23 @@ import MarkdownBlock from '../components/MarkdownBlock';
 import * as CustomPropTypes from '../propTypes';
 import Type3 from '../components/Type3';
 import mergeServiceWithImages from '../utils/services';
-import { TYPE_SIZE, COLORS } from '../styles/vars';
-import { pxToRem, grids } from '../styles/utils';
+import { TYPE_SIZE, COLORS, MAX_CONTENT_WIDTH_PLUS, MAX_CONTENT_WIDTH } from '../styles/vars';
+import { pxToRem } from '../styles/utils';
 import { type } from '../styles/mixins';
+
+const blockStyles = `
+  margin-bottom: 3rem;
+  @media (min-width: ${pxToRem(850)}) {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(12, 1fr);
+  }
+`;
 
 const Content = styled.div``;
 
 const Intro = styled(Container)`
-  margin-bottom: 3rem;
-
-  @media (min-width: ${pxToRem(750)}) {
-    display: grid;
-    grid-template-columns: minmax(50%, 1fr) minmax(${pxToRem(200)}, ${pxToRem(grids(5))});
-    column-gap: ${pxToRem(grids(1))};
-  }
+  ${blockStyles};
 
   ${Content} {
     display: flex;
@@ -29,6 +32,7 @@ const Intro = styled(Container)`
     justify-content: center;
     align-items: center;
     text-align: center;
+    grid-column: 1 / 8;
   }
 
   ${MarkdownBlock} {
@@ -36,20 +40,14 @@ const Intro = styled(Container)`
   }
 
   .gatsby-image-outer-wrapper {
-    grid-column: 2 / -1;
+    grid-column: 8 / -1;
   }
 `;
 
 const ConcreteFlatwork = styled(Container)`
-  margin-bottom: 3rem;
+  ${blockStyles};
   background-color: ${COLORS.gray[1]};
-  padding: 1rem;
-
-  @media (min-width: ${pxToRem(750)}) {
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(8, 1fr) ${(4 / 12) * 100}%;
-  }
+  padding: 1rem ${pxToRem((MAX_CONTENT_WIDTH_PLUS - MAX_CONTENT_WIDTH) / 2)};
 
   ${Content} {
     grid-column: 1 / 9;
