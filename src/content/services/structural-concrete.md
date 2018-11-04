@@ -1,6 +1,6 @@
 ---
 title: 'Structural Concrete'
-images: []
+images: [{ image: 'services/concrete-hampstead-steps.jpg', alt: 'Hampstead concrete steps' }]
 ---
 
 - Cast in Place Structures

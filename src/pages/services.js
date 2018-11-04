@@ -5,36 +5,47 @@ import PageContainer from '../components/PageContainer';
 import MarkdownBlock from '../components/MarkdownBlock';
 import * as CustomPropTypes from '../propTypes';
 import Type3 from '../components/Type3';
+import mergeServiceWithImages from '../utils/services';
 
-/* eslint-disable react/prefer-stateless-function */
-class Services extends React.Component {
+class Services extends React.PureComponent {
   static displayName = 'Services';
 
   static propTypes = {
     className: PropTypes.string,
     data: PropTypes.shape({
+      intro: CustomPropTypes.Service,
       concreteFlatwork: CustomPropTypes.Service,
       hardscapes: CustomPropTypes.Service,
       structuralConcrete: CustomPropTypes.Service,
+      images: CustomPropTypes.AllImageSharp,
     }).isRequired,
   };
 
   render() {
     const { className, data } = this.props;
 
+    const intro = mergeServiceWithImages(data.intro, data.images.edges);
+    const concreteFlatwork = mergeServiceWithImages(data.concreteFlatwork, data.images.edges);
+    const hardscapes = mergeServiceWithImages(data.hardscapes, data.images.edges);
+    const structuralConcrete = mergeServiceWithImages(data.structuralConcrete, data.images.edges);
+
     return (
       <PageContainer tag="section" className={className}>
         <section>
-          <Type3 tag="h1">{data.concreteFlatwork.frontmatter.title}</Type3>
-          <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.concreteFlatwork.html }} />
+          <Type3 tag="h1">{intro.title}</Type3>
+          <MarkdownBlock dangerouslySetInnerHTML={{ __html: intro.content }} />
         </section>
         <section>
-          <Type3 tag="h1">{data.hardscapes.frontmatter.title}</Type3>
-          <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.hardscapes.html }} />
+          <Type3 tag="h1">{concreteFlatwork.title}</Type3>
+          <MarkdownBlock dangerouslySetInnerHTML={{ __html: concreteFlatwork.content }} />
         </section>
         <section>
-          <Type3 tag="h1">{data.structuralConcrete.frontmatter.title}</Type3>
-          <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.structuralConcrete.html }} />
+          <Type3 tag="h1">{hardscapes.title}</Type3>
+          <MarkdownBlock dangerouslySetInnerHTML={{ __html: hardscapes.content }} />
+        </section>
+        <section>
+          <Type3 tag="h1">{structuralConcrete.title}</Type3>
+          <MarkdownBlock dangerouslySetInnerHTML={{ __html: structuralConcrete.content }} />
         </section>
       </PageContainer>
     );
@@ -48,6 +59,17 @@ export default styled(Services)`
 
 export const query = graphql`
   query ServicesPage {
+    intro: markdownRemark(id: { regex: "/content/services/intro/" }) {
+      html
+      frontmatter {
+        title
+        images {
+          image
+          alt
+        }
+      }
+    }
+
     concreteFlatwork: markdownRemark(id: { regex: "/content/services/concrete-flatwork/" }) {
       html
       frontmatter {
@@ -77,6 +99,17 @@ export const query = graphql`
         images {
           image
           alt
+        }
+      }
+    }
+
+    images: allImageSharp(limit: 100, filter: { id: { regex: "/images/photos/services/" } }) {
+      edges {
+        node {
+          id
+          sizes(quality: 85) {
+            ...GatsbyImageSharpSizes
+          }
         }
       }
     }

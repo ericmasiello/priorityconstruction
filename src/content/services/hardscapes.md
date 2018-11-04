@@ -1,6 +1,6 @@
 ---
 title: 'Hardscapes'
-images: []
+images: [{ image: 'services/fells-bricks.jpg', alt: 'Bricks in Fells Point' }]
 ---
 
 - Granite

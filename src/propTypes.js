@@ -22,7 +22,12 @@ export const AllImageSharp = PropTypes.shape({
 export const Service = PropTypes.shape({
   frontmatter: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string),
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        image: PropTypes.string,
+        alt: PropTypes.string,
+      }),
+    ),
   }).isRequired,
   html: PropTypes.string.isRequired,
 });
