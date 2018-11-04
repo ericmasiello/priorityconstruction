@@ -32,6 +32,11 @@ export default `
     font-family: inherit;
     font-weight: inherit;
     color: inherit;
+
+    &:focus {
+      outline-color: ${COLORS.brand[3]};
+      outline-width: ${pxToRem(3)};
+    }
   }
 
   label,
