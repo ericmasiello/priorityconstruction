@@ -61,7 +61,7 @@ const AwardIcon = styled(TrophyIcon)`
 
 const Mission = styled(({ className, missionHtml }) => (
   <HeroHomePageContent innerClassName={className}>
-    <Type4 tag="h1" uppercase bold>
+    <Type4 tag="h1" uppercase weight="bold">
       Our Mission
     </Type4>
     <MarkdownBlock tag="section" dangerouslySetInnerHTML={{ __html: missionHtml }} />
@@ -162,7 +162,7 @@ class About extends React.PureComponent {
         <Intro tag="section" dangerouslySetInnerHTML={{ __html: data.intro.html }} />
         <Awards>
           <AwardHeader>
-            <Type4 tag="h1" uppercase bold>
+            <Type4 tag="h1" uppercase weight="bold">
               Awards
             </Type4>
             <AwardIcon />
@@ -179,14 +179,14 @@ class About extends React.PureComponent {
           <Mission missionHtml={data.mission.html} />
         </Hero>
         <History>
-          <Type4 tag="h1" uppercase bold>
+          <Type4 tag="h1" uppercase weight="bold">
             Our History
           </Type4>
           <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.history.html }} />
         </History>
         <Certs>
           <CertHGroup>
-            <Type4 tag="h1" uppercase bold>
+            <Type4 tag="h1" uppercase weight="bold">
               Certifications &amp; Associations
             </Type4>
             <CertificateIcon />
