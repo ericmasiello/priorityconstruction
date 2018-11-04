@@ -1,6 +1,7 @@
 ---
 title: 'Concrete Flatwork'
-images: []
+images:
+  [{ image: 'services/stamped-concrete-westminster.jpg', alt: 'Westminster stamped concrete' }]
 ---
 
 - Curbs
