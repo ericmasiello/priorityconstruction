@@ -47,7 +47,8 @@ GalleryPage.propTypes = {
 };
 
 export default styled(GalleryPage)`
-  padding-top: 4rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 `;
 
 export const query = graphql`
