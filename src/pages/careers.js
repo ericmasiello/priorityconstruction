@@ -55,6 +55,10 @@ const FieldGroups = styled.div`
   }
 `;
 
+const Instructions = styled(MarkdownBlock)`
+  margin-top: 1.5rem;
+`;
+
 class Careers extends React.Component {
   static displayName = 'Careers';
 
@@ -548,17 +552,11 @@ class Careers extends React.Component {
                       </Field>
                       <FieldError component="div" name="date" />
 
-                      <MarkdownBlock
+                      <Instructions
                         dangerouslySetInnerHTML={{ __html: data.additionalInfo.html }}
                       />
 
                       <Field nameAs="certification" fragment>
-                        <Label>
-                          I certify that my answers are true and complete to the best of my
-                          knowledge. If this application leads to employment, I understand that
-                          false or misleading information in my application or interview may result
-                          in my release.
-                        </Label>
                         <Input
                           name="certification"
                           type="checkbox"
@@ -566,7 +564,12 @@ class Careers extends React.Component {
                           onChange={handleChange}
                           onBlur={handleBlur}
                           error={errors.certification && touched.certification}
-                        />
+                        >
+                          I certify that my answers are true and complete to the best of my
+                          knowledge. If this application leads to employment, I understand that
+                          false or misleading information in my application or interview may result
+                          in my release.
+                        </Input>
                       </Field>
                       <FieldError component="div" name="certification" />
 

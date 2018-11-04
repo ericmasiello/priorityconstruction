@@ -29,6 +29,7 @@ const Checkmark = styled.span`
   height: ${pxToRem(20)};
   border: 1px solid ${COLORS.border};
   position: relative;
+  flex-shrink: 0;
   ${({ error }) => error && `border-color: ${COLORS.error};`};
 `;
 
@@ -88,6 +89,7 @@ const RadioMark = styled.span`
   height: ${pxToRem(20)};
   border: 1px solid ${COLORS.border};
   position: relative;
+  flex-shrink: 0;
   ${({ error }) => error && `border-color: ${COLORS.error};`};
 `;
 
