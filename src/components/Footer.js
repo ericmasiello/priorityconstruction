@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import tinyColor from 'tinycolor2';
 import Link from 'gatsby-link';
 import List from './List';
 import ListItem from './ListItem';
@@ -12,9 +11,7 @@ import * as CustomPropTypes from '../propTypes';
 
 const BackgroundContainer = styled(Container)`
   padding: ${pxToRem(40)} ${pxToRem(GUTTER_SIZE)};
-  background-color: ${tinyColor(COLORS.brand[0])
-    .setAlpha(0.9)
-    .toRgbString()};
+  background-color: ${COLORS.brand[4]};
 
   &,
   a {

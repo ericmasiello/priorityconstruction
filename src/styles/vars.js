@@ -3,12 +3,21 @@ import tinyColor from 'tinycolor2';
 const unitToPx = unit => unit * 16;
 const baseColor = '#424141';
 const baseGray = '#D8D8D8';
+const brandBlue = '#1D293B';
 export const scaler = 1.333;
 
 export const COLORS = {
   bg: '#fff',
   base: baseColor,
-  brand: ['#1D293B', '#FBDB1E', '#4D1017', '#304461'],
+  brand: [
+    brandBlue,
+    '#FBDB1E',
+    '#4D1017',
+    '#304461',
+    tinyColor(brandBlue)
+      .setAlpha(0.9)
+      .toRgbString(),
+  ],
   muted: '#787575',
   link: '#18232C',
   border: tinyColor(baseColor)

@@ -53,7 +53,7 @@ const ConcreteFlatwork = styled(Container)`
   ${Content} {
     grid-column: 1 / 9;
     grid-row: 1 / 2;
-    background-color: ${COLORS.brand[0]};
+    background-color: ${COLORS.brand[4]};
     color: #fff;
     padding: 1rem;
   }
@@ -135,7 +135,7 @@ const StructuralConcrete = styled(Container)`
   ${Content} {
     grid-column: 1 / 7;
     grid-row: 1 / 2;
-    background-color: ${COLORS.brand[0]};
+    background-color: ${COLORS.brand[4]};
     color: #fff;
     padding: 1rem;
   }
