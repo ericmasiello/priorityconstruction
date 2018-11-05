@@ -84,14 +84,23 @@ const ConcreteFlatwork = styled(Container)`
       grid-row: 1 / 3;
     }
 
+    &:nth-child(3),
+    &:nth-child(4) {
+      grid-row: 2 / 3;
+
+      ${GatsbyImage} {
+        @media (min-width: ${pxToRem(850)}) {
+          max-height: ${pxToRem(300)};
+        }
+      }
+    }
+
     &:nth-child(3) {
       grid-column: 1 / 6;
-      grid-row: 2 / 3;
     }
 
     &:nth-child(4) {
       grid-column: 6 / 9;
-      grid-row: 2 / 3;
     }
   }
 `;
@@ -112,6 +121,9 @@ const Hardscapes = styled(Container)`
 
   ${GatsbyImage} {
     height: 100%;
+    @media (min-width: ${pxToRem(850)}) {
+      max-height: ${pxToRem(300)};
+    }
   }
 
   .gatsby-image-outer-wrapper {
@@ -174,6 +186,12 @@ const StructuralConcrete = styled(Container)`
     &:nth-child(4) {
       grid-column: 1 / 7;
       grid-row: 2 / 3;
+
+      ${GatsbyImage} {
+        @media (min-width: ${pxToRem(850)}) {
+          max-height: ${pxToRem(300)};
+        }
+      }
     }
   }
 `;
