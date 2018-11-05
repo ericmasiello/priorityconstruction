@@ -13,7 +13,10 @@ import { pxToRem } from '../styles/utils';
 import { type } from '../styles/mixins';
 
 const blockStyles = `
-  margin-bottom: 4rem;
+  &:not(:last-of-type) {
+    margin-bottom: 4rem;
+  }
+
   @media (min-width: ${pxToRem(850)}) {
     display: grid;
     grid-gap: 1rem;
@@ -124,6 +127,57 @@ const Hardscapes = styled(Container)`
   }
 `;
 
+const StructuralConcrete = styled(Container)`
+  ${blockStyles};
+  background-color: ${COLORS.gray[1]};
+  padding: 1rem ${pxToRem((MAX_CONTENT_WIDTH_PLUS - MAX_CONTENT_WIDTH) / 2)};
+
+  ${Content} {
+    grid-column: 1 / 7;
+    grid-row: 1 / 2;
+    background-color: ${COLORS.brand[0]};
+    color: #fff;
+    padding: 1rem;
+  }
+
+  ${GatsbyImage} {
+    height: 100%;
+  }
+
+  ${MarkdownBlock} {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    li {
+      &:not(:last-child)::after {
+        content: '·';
+        font-weight: bold;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .gatsby-image-outer-wrapper {
+    &:nth-child(2) {
+      grid-column: 7 / 10;
+      grid-row: 1 / 3;
+    }
+
+    &:nth-child(3) {
+      grid-column: 10 / -1;
+      grid-row: 1 / 3;
+    }
+
+    &:nth-child(4) {
+      grid-column: 1 / 7;
+      grid-row: 2 / 3;
+    }
+  }
+`;
+
 class Services extends React.PureComponent {
   static displayName = 'Services';
 
@@ -180,10 +234,18 @@ class Services extends React.PureComponent {
             <GatsbyImage {...image} key={image.id} />
           ))}
         </Hardscapes>
-        <section>
-          <Type3 tag="h1">{structuralConcrete.title}</Type3>
-          <MarkdownBlock dangerouslySetInnerHTML={{ __html: structuralConcrete.content }} />
-        </section>
+
+        <StructuralConcrete plus tag="section">
+          <Content>
+            <Type3 tag="h1" uppercase weight="medium">
+              {structuralConcrete.title}
+            </Type3>
+            <MarkdownBlock dangerouslySetInnerHTML={{ __html: structuralConcrete.content }} />
+          </Content>
+          {structuralConcrete.images.map(image => (
+            <GatsbyImage {...image} key={image.id} />
+          ))}
+        </StructuralConcrete>
       </PageContainer>
     );
   }
