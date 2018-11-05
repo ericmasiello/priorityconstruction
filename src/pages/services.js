@@ -12,14 +12,17 @@ import { TYPE_SIZE, COLORS, MAX_CONTENT_WIDTH_PLUS, MAX_CONTENT_WIDTH } from '..
 import { pxToRem } from '../styles/utils';
 import { type } from '../styles/mixins';
 
+const BREAK_POINT = 900;
+
 const blockStyles = `
+  display: grid;
+  grid-gap: 1rem;
+
   &:not(:last-of-type) {
     margin-bottom: 4rem;
   }
 
-  @media (min-width: ${pxToRem(850)}) {
-    display: grid;
-    grid-gap: 1rem;
+  @media (min-width: ${pxToRem(BREAK_POINT)}) {
     grid-template-columns: repeat(12, 1fr);
   }
 `;
@@ -37,11 +40,15 @@ const Intro = styled(Container)`
     justify-content: center;
     align-items: center;
     text-align: center;
-    grid-column: 1 / 8;
+    @media (min-width: ${pxToRem(BREAK_POINT)}) {
+      grid-column: 1 / 8;
+    }
   }
 
-  .gatsby-image-outer-wrapper {
-    grid-column: 8 / -1;
+  @media (min-width: ${pxToRem(BREAK_POINT)}) {
+    .gatsby-image-outer-wrapper {
+      grid-column: 8 / -1;
+    }
   }
 `;
 
@@ -51,11 +58,13 @@ const ConcreteFlatwork = styled(Container)`
   padding: 1rem ${pxToRem((MAX_CONTENT_WIDTH_PLUS - MAX_CONTENT_WIDTH) / 2)};
 
   ${Content} {
-    grid-column: 1 / 9;
-    grid-row: 1 / 2;
     background-color: ${COLORS.brand[4]};
     color: #fff;
     padding: 1rem;
+    @media (min-width: ${pxToRem(BREAK_POINT)}) {
+      grid-column: 1 / 9;
+      grid-row: 1 / 2;
+    }
   }
 
   ${GatsbyImage} {
@@ -78,29 +87,29 @@ const ConcreteFlatwork = styled(Container)`
     }
   }
 
-  .gatsby-image-outer-wrapper {
-    &:nth-child(2) {
-      grid-column: 9 / -1;
-      grid-row: 1 / 3;
-    }
+  @media (min-width: ${pxToRem(BREAK_POINT)}) {
+    .gatsby-image-outer-wrapper {
+      &:nth-child(2) {
+        grid-column: 9 / -1;
+        grid-row: 1 / 3;
+      }
 
-    &:nth-child(3),
-    &:nth-child(4) {
-      grid-row: 2 / 3;
+      &:nth-child(3),
+      &:nth-child(4) {
+        grid-row: 2 / 3;
 
-      ${GatsbyImage} {
-        @media (min-width: ${pxToRem(850)}) {
+        ${GatsbyImage} {
           max-height: ${pxToRem(300)};
         }
       }
-    }
 
-    &:nth-child(3) {
-      grid-column: 1 / 6;
-    }
+      &:nth-child(3) {
+        grid-column: 1 / 6;
+      }
 
-    &:nth-child(4) {
-      grid-column: 6 / 9;
+      &:nth-child(4) {
+        grid-column: 6 / 9;
+      }
     }
   }
 `;
@@ -109,32 +118,37 @@ const Hardscapes = styled(Container)`
   ${blockStyles};
 
   ${Content} {
-    grid-column: 7 / -1;
-    grid-row: 1 / 3;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+
+    @media (min-width: ${pxToRem(BREAK_POINT)}) {
+      grid-column: 7 / -1;
+      grid-row: 1 / 3;
+    }
   }
 
   ${GatsbyImage} {
     height: 100%;
-    @media (min-width: ${pxToRem(850)}) {
+    @media (min-width: ${pxToRem(BREAK_POINT)}) {
       max-height: ${pxToRem(300)};
     }
   }
 
-  .gatsby-image-outer-wrapper {
-    &:nth-child(2) {
-      grid-column: 1 / 7;
-      grid-row: 1 / 2;
-    }
+  @media (min-width: ${pxToRem(BREAK_POINT)}) {
+    .gatsby-image-outer-wrapper {
+      &:nth-child(2) {
+        grid-column: 1 / 7;
+        grid-row: 1 / 2;
+      }
 
-    &:nth-child(3) {
-      grid-column: 1 / 7;
-      grid-row: 2 / 3;
+      &:nth-child(3) {
+        grid-column: 1 / 7;
+        grid-row: 2 / 3;
+      }
     }
   }
 `;
@@ -145,11 +159,14 @@ const StructuralConcrete = styled(Container)`
   padding: 1rem ${pxToRem((MAX_CONTENT_WIDTH_PLUS - MAX_CONTENT_WIDTH) / 2)};
 
   ${Content} {
-    grid-column: 1 / 7;
-    grid-row: 1 / 2;
     background-color: ${COLORS.brand[4]};
     color: #fff;
     padding: 1rem;
+
+    @media (min-width: ${pxToRem(BREAK_POINT)}) {
+      grid-column: 1 / 7;
+      grid-row: 1 / 2;
+    }
   }
 
   ${GatsbyImage} {
@@ -172,23 +189,23 @@ const StructuralConcrete = styled(Container)`
     }
   }
 
-  .gatsby-image-outer-wrapper {
-    &:nth-child(2) {
-      grid-column: 7 / 10;
-      grid-row: 1 / 3;
-    }
+  @media (min-width: ${pxToRem(BREAK_POINT)}) {
+    .gatsby-image-outer-wrapper {
+      &:nth-child(2) {
+        grid-column: 7 / 10;
+        grid-row: 1 / 3;
+      }
 
-    &:nth-child(3) {
-      grid-column: 10 / -1;
-      grid-row: 1 / 3;
-    }
+      &:nth-child(3) {
+        grid-column: 10 / -1;
+        grid-row: 1 / 3;
+      }
 
-    &:nth-child(4) {
-      grid-column: 1 / 7;
-      grid-row: 2 / 3;
+      &:nth-child(4) {
+        grid-column: 1 / 7;
+        grid-row: 2 / 3;
 
-      ${GatsbyImage} {
-        @media (min-width: ${pxToRem(850)}) {
+        ${GatsbyImage} {
           max-height: ${pxToRem(300)};
         }
       }
