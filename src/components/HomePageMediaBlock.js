@@ -105,6 +105,11 @@ const StyledHomePageMediaBlock = styled(HomePageMediaBlock)`
     grid-row: 1;
   }
 
+  ${ZoomImage} .gatsby-image-outer-wrapper,
+  ${ZoomImage} .gatsby-image-outer-wrapper > div {
+    height: 100%;
+  }
+
   @media (min-width: ${pxToRem(SINGLE_ROW_BREAKPOINT)}) {
     display: grid;
     grid-template-columns: repeat(${TOTAL_GRID_UNITS}, 1fr);
