@@ -17,6 +17,10 @@ const Intro = styled(MarkdownBlock)`
   line-height: ${TYPE_SIZE.t4[1]};
   margin-bottom: 3rem;
 
+  p:last-of-type {
+    margin-bottom: 3rem;
+  }
+
   ul {
     text-align: center;
     @media (min-width: ${pxToRem(750)}) {
