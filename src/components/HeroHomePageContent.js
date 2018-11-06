@@ -33,7 +33,8 @@ const StyledContentWrapper = styled(ContentWrapper)`
 
   @media (min-width: ${pxToRem(MEDIA_QUERIES.heroL)}) {
     width: 75%;
-    padding-left: calc((1 / 12) * 100vw);
+    padding-left: ${pxToRem(GUTTER_SIZE * 3)};
+    padding-right: ${pxToRem(GUTTER_SIZE * 3)};
   }
 
   @media (min-width: ${pxToRem(MEDIA_QUERIES.heroXL)}) {
