@@ -13,7 +13,7 @@ import HeroHomePageContent from '../components/HeroHomePageContent';
 import HeroWithBanner from '../components/HeroWithBanner';
 import PageHeaderBar from '../components/PageHeaderBar';
 import Type2 from '../components/Type2';
-import Type3 from '../components/Type3';
+import Type4 from '../components/Type4';
 import Button from '../components/Button';
 import { COLORS } from '../styles/vars';
 import { siteBg } from '../styles/mixins';
@@ -25,10 +25,10 @@ injectGlobal`
 
 const StyledHeroHomePageContent = styled(HeroHomePageContent)`
   ${Type2} {
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
-  ${Type2}, ${Type3} {
+  ${Type2}, ${Type4} {
     text-shadow: 0 0 2px
       ${tinyColor(COLORS.brand[1])
         .darken(30)
@@ -86,7 +86,7 @@ class Layout extends React.Component {
           <Type2 tag="h1" uppercase>
             Bringing Concrete Ideas to Life
           </Type2>
-          <Type3 tag="p">Quality workmanship & excellent customer service</Type3>
+          <Type4 tag="p">Quality workmanship & excellent customer service</Type4>
           <Button color="light" large tag={Link} to="/quote">
             Get a quote
           </Button>
