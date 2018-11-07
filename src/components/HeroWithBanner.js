@@ -18,7 +18,7 @@ const Content = styled.hgroup`
   min-height: ${pxToRem(140)};
   height: 33%;
   padding-bottom: 2rem;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   padding-top: 1rem;
   text-transform: uppercase;
@@ -32,7 +32,9 @@ const Content = styled.hgroup`
 const HeroWithBanner = ({ title, subtitle, tag: Tag, ...rest }) => (
   <Tag {...rest}>
     <Content>
-      <Type2 tag="h1">{title}</Type2>
+      <Type2 tag="h1" weight="medium">
+        {title}
+      </Type2>
       {subtitle && <Type4 tag="h2">{subtitle}</Type4>}
     </Content>
   </Tag>
