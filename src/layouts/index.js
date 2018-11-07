@@ -95,10 +95,11 @@ class Layout extends React.Component {
     },
     services: {
       background: this.props.data.backgroundServices,
-      isFullHeight: true,
+      heroChildren: <HeroWithBanner title="Services" />,
       title: 'Services',
     },
     quote: {
+      heroChildren: <HeroWithBanner title="Request a Quote" />,
       title: 'Request a Quote',
     },
     about: {
@@ -120,6 +121,7 @@ class Layout extends React.Component {
     },
     gallery: {
       background: this.props.data.backgroundGallery,
+      heroChildren: <HeroWithBanner title="Project Gallery" />,
       title: 'Project Gallery',
     },
   };
