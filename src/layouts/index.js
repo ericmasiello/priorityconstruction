@@ -74,6 +74,7 @@ class Layout extends React.Component {
       backgroundGallery: CustomPropTypes.ImageSharp,
       backgroundCareers: CustomPropTypes.ImageSharp,
       backgroundServices: CustomPropTypes.ImageSharp,
+      backgroundRequestQuote: CustomPropTypes.ImageSharp,
     }).isRequired,
     location: CustomPropTypes.Location.isRequired,
     className: PropTypes.string,
@@ -103,10 +104,16 @@ class Layout extends React.Component {
     },
     services: {
       background: this.props.data.backgroundServices,
+      isFullHeight: true,
       heroChildren: <HeroWithBanner title="Services" />,
       title: 'Services',
+      imgStyle: {
+        objectPosition: 'bottom center',
+      },
     },
     quote: {
+      background: this.props.data.backgroundRequestQuote,
+      isFullHeight: true,
       heroChildren: <HeroWithBanner title="Request a Quote" />,
       title: 'Request a Quote',
     },
@@ -121,7 +128,7 @@ class Layout extends React.Component {
     },
     careers: {
       background: this.props.data.backgroundCareers,
-      isFullHeight: false,
+      isFullHeight: true,
       heroChildren: <HeroWithBanner title="Career Opportunities" />,
       title: 'Career Opportunities',
     },
@@ -221,7 +228,9 @@ export const query = graphql`
       }
     }
 
-    backgroundServices: imageSharp(id: { regex: "/src/images/photos/heroes/Workers/" }) {
+    backgroundServices: imageSharp(
+      id: { regex: "/src/images/photos/heroes/anthem-house-plants-sidewalk-crop2/" }
+    ) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
@@ -234,6 +243,12 @@ export const query = graphql`
     }
 
     backgroundCareers: imageSharp(id: { regex: "/src/images/photos/heroes/PriorityShovel/" }) {
+      sizes(maxWidth: 1500) {
+        ...GatsbyImageSharpSizes
+      }
+    }
+
+    backgroundRequestQuote: imageSharp(id: { regex: "/src/images/photos/heroes/CoppinState-2/" }) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
