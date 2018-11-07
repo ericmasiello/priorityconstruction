@@ -5,7 +5,7 @@ author: 'Adam Strauch'
 images:
   [
     { image: 'CoppinState-4.jpg', alt: 'Lorem ipsum' },
-    { image: 'Fells-2.jpg', alt: 'Lorem ipsum' },
+    { image: 'coppin-step-finished-crop.jpg', alt: 'Copin State steps' },
     { image: 'AnthemHouse-7.jpg', alt: 'Lorem ipsum' },
   ]
 ---

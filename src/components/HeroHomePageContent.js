@@ -18,7 +18,7 @@ ContentWrapper.defaultProps = {
 
 ContentWrapper.displayName = 'ContentWrapper';
 
-const StyledContentWrapper = styled(ContentWrapper)`
+export const StyledContentWrapper = styled(ContentWrapper)`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

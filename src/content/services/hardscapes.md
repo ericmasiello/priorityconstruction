@@ -2,7 +2,7 @@
 title: 'Hardscapes'
 images: [
   { image: 'services/fells-bricks.jpg', alt: 'Bricks in Fells Point' },
-  { image: 'services/concrete-anthem-house.jpg', alt: 'Anthem House concrete' }
+  { image: 'services/anthem-house-12.jpg', alt: 'Anthem House hardscape' }
 ]
 ---
 

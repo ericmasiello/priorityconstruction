@@ -9,14 +9,15 @@ import base from '../styles/base.css';
 import * as CustomPropTypes from '../propTypes';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
-import HeroHomePageContent from '../components/HeroHomePageContent';
+import HeroHomePageContent, { StyledContentWrapper } from '../components/HeroHomePageContent';
 import HeroWithBanner from '../components/HeroWithBanner';
 import PageHeaderBar from '../components/PageHeaderBar';
 import Type2 from '../components/Type2';
 import Type4 from '../components/Type4';
 import Button from '../components/Button';
-import { COLORS } from '../styles/vars';
+import { COLORS, MEDIA_QUERIES } from '../styles/vars';
 import { siteBg } from '../styles/mixins';
+import { pxToRem } from '../styles/utils';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -24,6 +25,12 @@ injectGlobal`
 `;
 
 const StyledHeroHomePageContent = styled(HeroHomePageContent)`
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.heroL)}) {
+    ${StyledContentWrapper} {
+      background-color: ${COLORS.brand[0]};
+    }
+  }
+
   ${Type2} {
     margin-bottom: 0.5rem;
   }
@@ -92,6 +99,7 @@ class Layout extends React.Component {
           </Button>
         </StyledHeroHomePageContent>
       ),
+      className: 'hero-image-left',
     },
     services: {
       background: this.props.data.backgroundServices,
@@ -159,6 +167,7 @@ class Layout extends React.Component {
                 }, [])}
               isFullHeight={layout.isFullHeight}
               imgStyle={layout.imgStyle}
+              className={layout.className}
             >
               {layout.heroChildren}
             </Hero>
@@ -173,6 +182,14 @@ class Layout extends React.Component {
 
 export default styled(Layout)`
   ${siteBg()};
+
+  @media (min-width: ${pxToRem(MEDIA_QUERIES.heroL)}) {
+    .hero-image-left {
+      .gatsby-image-outer-wrapper {
+        width: 50%;
+      }
+    }
+  }
 `;
 
 export const query = graphql`
@@ -192,7 +209,7 @@ export const query = graphql`
       }
     }
 
-    backgroundHome: imageSharp(id: { regex: "/src/images/photos/heroes/CoppinState-2/" }) {
+    backgroundHome: imageSharp(id: { regex: "/src/images/photos/heroes/Fells-20/" }) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
