@@ -67,6 +67,7 @@ export class Hero extends Component {
       isFullHeight,
       children,
       opacity,
+      imgStyle,
       tag: Tag,
       ...rest
     } = this.props;
@@ -82,6 +83,7 @@ export class Hero extends Component {
             }}
             sizes={image.sizes}
             opacity={opacity}
+            imgStyle={imgStyle}
           />
         ))}
       </Tag>

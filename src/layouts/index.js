@@ -107,6 +107,9 @@ class Layout extends React.Component {
       isFullHeight: true,
       heroChildren: <HeroWithBanner title="About Us" />,
       title: 'About Us',
+      imgStyle: {
+        objectPosition: 'top center',
+      },
     },
     careers: {
       background: this.props.data.backgroundCareers,
@@ -155,6 +158,7 @@ class Layout extends React.Component {
                   return acc;
                 }, [])}
               isFullHeight={layout.isFullHeight}
+              imgStyle={layout.imgStyle}
             >
               {layout.heroChildren}
             </Hero>
@@ -194,7 +198,7 @@ export const query = graphql`
       }
     }
 
-    backgroundAbout: imageSharp(id: { regex: "/src/images/photos/heroes/Fells-27/" }) {
+    backgroundAbout: imageSharp(id: { regex: "/src/images/photos/heroes/pigtown-crop2/" }) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
