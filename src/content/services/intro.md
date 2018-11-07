@@ -1,6 +1,6 @@
 ---
 title: 'Services'
-images: [{ image: 'services/priority-worker.jpg', alt: 'Priority construction worker' }]
+images: [{ image: 'services/priority-truck.jpg', alt: 'Priority construction truck' }]
 ---
 
 Introductory paragraph about your expertise in concrete should go&nbsp;here.
