@@ -238,9 +238,6 @@ class Services extends React.PureComponent {
       <PageContainer plus className={className}>
         <Intro tag="section">
           <Content>
-            <Type3 tag="h1" uppercase weight="bold">
-              {intro.title}
-            </Type3>
             <MarkdownBlock dangerouslySetInnerHTML={{ __html: intro.content }} />
           </Content>
           <GatsbyImage {...intro.images[0]} />
