@@ -6,7 +6,7 @@ images:
   [
     { image: 'CoppinState-4.jpg', alt: 'Lorem ipsum' },
     { image: 'coppin-step-finished-crop.jpg', alt: 'Copin State steps' },
-    { image: 'AnthemHouse-7.jpg', alt: 'Lorem ipsum' },
+    { image: 'AnthemHouse-13-crop.jpg', alt: 'Lorem ipsum' },
   ]
 ---
 
