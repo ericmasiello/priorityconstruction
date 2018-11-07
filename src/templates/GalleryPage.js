@@ -24,7 +24,6 @@ const MetaBlock = styled.aside`
 
   @media (min-width: ${pxToRem(1000)}) {
     grid-column: 2;
-    padding-left: 0;
   }
 `;
 
