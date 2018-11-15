@@ -1,5 +1,5 @@
 ---
-location: 'P. Flanigan &amp; Sons, Inc., Baltimore, Maryland'
+location: 'P. Flanigan & Sons, Inc., Baltimore, Maryland'
 author: 'Jim Coudon Flanigan'
 images: [{ image: 'threeworkers.jpg', alt: 'Three Priority Construction workers working' }]
 props:
