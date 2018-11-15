@@ -68,11 +68,9 @@ const HomePage = props => {
 priority
           </Type3>
           <Services>
-            <ServiceItem>Brick Paving</ServiceItem>
-            <ServiceItem>Flatwork Concrete</ServiceItem>
-            <ServiceItem>Pervious Concrete</ServiceItem>
-            <ServiceItem>Stamped &amp; Colored Concrete</ServiceItem>
-            <ServiceItem>Structural Concrete &amp; Steps</ServiceItem>
+            <ServiceItem>Concrete Flatwork</ServiceItem>
+            <ServiceItem>Hardscapes</ServiceItem>
+            <ServiceItem>Structural Concrete</ServiceItem>
           </Services>
         </Callout>
         {contentBlocks.map(block => (
