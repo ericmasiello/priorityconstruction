@@ -16,12 +16,20 @@ import InvisibleButton from '../components/InvisibleButton';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
+import List from '../components/List';
+import ListItem from '../components/ListItem';
 import { pxToRem } from '../styles/utils';
 import states from '../content/usStates.json';
 import BaseFieldError from '../components/FieldError';
 import * as CustomPropTypes from '../propTypes';
 import config from '../config/careers';
 import { telephoneProps, emailProps, dateProps } from '../utils/form';
+import englishApplication from '../content/careers/Job-Application-Form-english.pdf';
+import spanishApplication from '../content/careers/Job-Application-Form-spanish.pdf';
+
+const Applications = styled.div`
+  margin-bottom: 2rem;
+`;
 
 const FieldError = styled(BaseFieldError)`
   @media (min-width: ${pxToRem(500)}) {
@@ -134,6 +142,21 @@ class Careers extends React.Component {
                       </FormErrorMessage>
                     )}
                     <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.intro.html }} />
+                    <Applications>
+                      <List decorated>
+                        <ListItem>
+                          <a href={englishApplication}>
+                            Download the Printable Application Form (ENGLISH) PDF
+                          </a>
+                        </ListItem>
+                        <ListItem>
+                          <a href={spanishApplication}>
+                            Descargue el formulario de solicitud para imprimir (ESPAÑOL) PDF
+                          </a>
+                        </ListItem>
+                      </List>
+                    </Applications>
+
                     <Form name={netlifyState.formName} onSubmit={handleSubmit}>
                       <input type="hidden" name="form-name" value={netlifyState.formName} />
 
