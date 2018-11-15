@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import tinyColor from 'tinycolor2';
 import { pxToRem } from '../styles/utils';
 import { COLORS, MAX_CONTENT_WIDTH, GUTTER_SIZE, MEDIA_QUERIES } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
@@ -55,17 +56,21 @@ HeaderBar.defaultProps = {
 };
 
 export default styled(HeaderBar)`
-  background-color: ${COLORS.bg};
+  background-color: ${tinyColor(COLORS.bg)
+    .setAlpha(0.7)
+    .toRgbString()};
   padding: 1.25rem ${pxToRem(GUTTER_SIZE)};
   position: sticky;
   top: -1px;
   z-index: 10;
+  transition: background-color 0.3s;
 
   @media (min-width: ${pxToRem(MEDIA_QUERIES.max)}) {
     padding-top: 2rem;
   }
 
   &[data-stuck='true'] {
+    background-color: ${COLORS.bg};
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   }
 `;
