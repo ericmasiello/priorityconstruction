@@ -12,24 +12,36 @@ import InvisibleButton from './InvisibleButton';
 import { pxToRem } from '../styles/utils';
 import { GUTTER_SIZE, TYPE_SIZE, COLORS, MEDIA_QUERIES } from '../styles/vars';
 import FlatListItem from './FlatListItem';
+const logoOriginalHeight = 45;
+const logoSizeRatio = logoOriginalHeight / 197;
+const logoHeight = 50;
+const logoWidth = logoHeight / logoSizeRatio;
+const logoMarginDelta = ((logoHeight - logoOriginalHeight) / 2) * -1;
 
 const LogoLink = styled(Link)`
   display: inline-block;
-  height: ${pxToRem(45)};
-  width: ${pxToRem(197)};
+  height: ${pxToRem(logoHeight)};
+  width: ${pxToRem(logoWidth)};
+  margin-top: ${pxToRem(logoMarginDelta)};
+  margin-bottom: ${pxToRem(logoMarginDelta)};
   position: relative;
 
   &::after {
     content: none;
   }
+
+  ${Logo} {
+    display: block;
+  }
 `;
 
 const SiteTitle = styled.h1`
-  text-indent: -9999px;
+  clip: rect(1px, 1px, 1px, 1px);
   overflow: hidden;
   position: absolute;
-  left: 0;
   top: 0;
+  bottom: 0;
+  margin: 0;
 `;
 
 const DesktopNav = styled(FlatList)`
