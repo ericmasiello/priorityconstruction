@@ -8,6 +8,7 @@ import Container from './Container';
 import { pxToRem } from '../styles/utils';
 import { COLORS, TYPE_SIZE, GUTTER_SIZE } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
+import links from '../config/links';
 
 const BackgroundContainer = styled(Container)`
   padding: ${pxToRem(40)} ${pxToRem(GUTTER_SIZE)};
@@ -78,12 +79,11 @@ export const Footer = props => {
             </ListItem>
           </List>
           <List>
-            <ListItem>
-              <Link to="/contact">Contact Us</Link>
-            </ListItem>
-            <ListItem>
-              <Link to="/careers">Career Opportunities</Link>
-            </ListItem>
+            {links.filter(link => link.footer).map(link => (
+              <ListItem key={link.to}>
+                <Link to={link.to}>{link.children}</Link>
+              </ListItem>
+            ))}
           </List>
         </Address>
       </BackgroundContainer>
