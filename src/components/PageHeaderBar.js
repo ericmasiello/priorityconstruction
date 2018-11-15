@@ -12,6 +12,8 @@ import InvisibleButton from './InvisibleButton';
 import { pxToRem } from '../styles/utils';
 import { GUTTER_SIZE, TYPE_SIZE, COLORS, MEDIA_QUERIES } from '../styles/vars';
 import FlatListItem from './FlatListItem';
+import links from '../config/links';
+
 const logoOriginalHeight = 45;
 const logoSizeRatio = logoOriginalHeight / 197;
 const logoHeight = 50;
@@ -97,25 +99,6 @@ const MobileNav = styled(FlatList)`
   }
 `;
 
-const links = [
-  {
-    to: '/services',
-    children: 'Services',
-  },
-  {
-    to: '/about',
-    children: 'About',
-  },
-  {
-    to: '/gallery',
-    children: 'Project Gallery',
-  },
-  {
-    to: '/quote',
-    children: 'Request Quote',
-  },
-];
-
 class PageHeaderBar extends React.Component {
   static propTypes = {
     currentPathname: PropTypes.string,
@@ -159,41 +142,27 @@ class PageHeaderBar extends React.Component {
             <FlatListItem key={link.children}>
               <MainNavLink
                 selected={currentPathname === link.to}
-                {...link}
+                to={link.to}
                 onClick={this.handleHideMenu}
-              />
+              >
+                {link.children}
+              </MainNavLink>
             </FlatListItem>
           ))}
-          <FlatListItem>
-            <MainNavLink
-              selected={currentPathname === '/careers'}
-              onClick={this.handleHideMenu}
-              to="/careers"
-            >
-              Career Opportunities
-            </MainNavLink>
-          </FlatListItem>
-          <FlatListItem>
-            <MainNavLink
-              selected={currentPathname === '/contact'}
-              onClick={this.handleHideMenu}
-              to="/contact"
-            >
-              Contact Us
-            </MainNavLink>
-          </FlatListItem>
         </MobileNav>
         <InvisibleButton onClick={this.state.showMenu ? this.handleHideMenu : this.handleShowMenu}>
           {this.state.showMenu ? <CloseIcon /> : <MenuIcon />}
         </InvisibleButton>
         <DesktopNav>
-          {links.map(link => (
+          {links.filter(link => link.desktop).map(link => (
             <FlatListItem key={link.children}>
               <MainNavLink
                 selected={currentPathname === link.to}
-                {...link}
+                to={link.to}
                 onClick={this.handleHideMenu}
-              />
+              >
+                {link.children}
+              </MainNavLink>
             </FlatListItem>
           ))}
         </DesktopNav>
