@@ -1,6 +1,5 @@
 ---
-location: 'Engineering Manager, Municipal & Commercial Business  
-VEOLIA NORTH AMERICA'
+location: 'Engineering Manager, Municipal & Commercial Business Veolia North America'
 author: 'Adam Strauch'
 images:
   [
