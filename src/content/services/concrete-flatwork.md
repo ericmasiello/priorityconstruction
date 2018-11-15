@@ -9,7 +9,7 @@ images:
 ---
 
 - Curbs
-- Concrete Paving (aprons/alleys)
+- Aprons/Alleys
 - Pervious Concrete
 - Roadway Paving
 - Sidewalks
