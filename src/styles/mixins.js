@@ -35,14 +35,14 @@ export const siteBg = () => `
     linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%,rgba(255, 255, 255, 0.6) 100%),
     url(${grid});
   background-size:
-    contain,
+    100%,
     100%,
     ${pxToRem(960)};
   background-repeat: 
-    no-repeat,
+    repeat,
     repeat,
     repeat;
-  background-position: bottom left;
+  background-position: top left;
   display: grid;
   grid-template-rows: 1fr auto;
 `;
