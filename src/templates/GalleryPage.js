@@ -124,18 +124,20 @@ class GalleryPage extends React.Component {
               </MetaList>
             </MetaBlock>
             <Gallery>
-              {images.edges.map((edge, i) => (
-                <GalleryItemWrapper key={edge.node.id}>
-                  <GalleryItem
-                    role="button"
-                    tabIndex={0}
-                    onClick={this.handleSelectImageByIndex(i)}
-                    onKeyPress={this.handleSelectImageByIndex(i)}
-                  >
-                    <ZoomImage sizes={edge.node.sizes} />
-                  </GalleryItem>
-                </GalleryItemWrapper>
-              ))}
+              {images.edges
+                .filter(({ node }) => !node.id.includes(background.id))
+                .map((edge, i) => (
+                  <GalleryItemWrapper key={edge.node.id}>
+                    <GalleryItem
+                      role="button"
+                      tabIndex={0}
+                      onClick={this.handleSelectImageByIndex(i)}
+                      onKeyPress={this.handleSelectImageByIndex(i)}
+                    >
+                      <ZoomImage sizes={edge.node.sizes} />
+                    </GalleryItem>
+                  </GalleryItemWrapper>
+                ))}
             </Gallery>
           </Layout>
         </Container>
@@ -185,7 +187,11 @@ export const query = graphql`
       html
     }
 
-    images: allImageSharp(limit: 100, filter: { id: { regex: $imageDir } }) {
+    images: allImageSharp(
+      limit: 100
+      filter: { id: { regex: $imageDir } }
+      sort: { order: ASC, fields: [id] }
+    ) {
       edges {
         node {
           id
@@ -197,6 +203,7 @@ export const query = graphql`
     }
 
     background: imageSharp(id: { regex: $coverPhoto }) {
+      id
       sizes(quality: 85) {
         ...GatsbyImageSharpSizes
       }
