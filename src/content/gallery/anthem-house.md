@@ -3,10 +3,23 @@ name: 'Anthem House'
 location: 'Baltimore, MD'
 coverPhoto: 'gallery/photos/anthem-house/AnthemHouse-5.jpg/'
 imageDir: 'gallery/photos/anthem-house/'
-client: 'City of Baltimore'
-scope: ['Structural steps', 'Stamped & colored concrete']
-completionDate: 'January 2016'
-value: '$2,200,000'
+client: 'Bozzuto Construction Company'
+scope: [
+  'Reinforced Concrete Paving',
+  'Concrete Sidewalk', 
+  'Stamped Concrete Sidewalk',
+  'Concrete ADA Ramps',
+  'Concrete Curb / Curb & Gutter',
+  'Concrete Retaining Walls, Concrete Steps',
+  'Stone Slab Steps',
+  'Granite Paving',
+  'Cobblestone Paving',
+  'Flagstone Paving',
+  'Brick Paving',
+  'etc.'
+]
+completionDate: 'November 2017'
+value: '$1.45M'
 ---
 
-Priority Construction worked with the city of Baltimore and (architect firm name) to revitalize the historic waterfront neighborhood of Fells Point. This consisted of brick and pavement work to xx square feet of space in Broadway Square.
+Priority Construction was awarded the site concrete, hardscape, and paver package for the construction of the mixed-use building, Anthem House. Located in the heart of Locust Point, Baltimore, Anthem House has become a “lifestyle community” in ever-evolving Baltimore.
