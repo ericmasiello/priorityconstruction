@@ -3,6 +3,4 @@ title: 'Services'
 images: [{ image: 'services/priority-truck.jpg', alt: 'Priority construction truck' }]
 ---
 
-Introductory paragraph about your expertise in concrete should go&nbsp;here.
-
-Mention the planning process, can provide design services, project management/overseeing from start to finish
+Concrete has been our focus since our early days as an 8 member crew. Our concrete services now include slip form curb and gutter, concrete paving, decorative stamped concrete, commercial building footers and slabs, exterior concrete flat work, pervious concrete, and more. Our highly skilled field team has been with us from the start, enabling Priority Construction to take on any challenge, big, small, or complex.
