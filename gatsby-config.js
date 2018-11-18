@@ -9,7 +9,7 @@ module.exports = {
       streetAddress: '1315 West Hamburg Street',
       city: 'Baltimore',
       state: 'MD',
-      zip: 21203,
+      zip: 21230,
     },
     phone: '410-244-6773',
     fax: '410-244-6778',
