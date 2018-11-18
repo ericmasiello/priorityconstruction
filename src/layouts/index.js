@@ -96,7 +96,7 @@ class Layout extends React.Component {
           </Type2>
           <Type4 tag="p">Quality workmanship & excellent customer service</Type4>
           <Button color="light" large tag={Link} to="/services">
-            See our services
+            Our services
           </Button>
         </StyledHeroHomePageContent>
       ),
