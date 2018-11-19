@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
 import memoize from 'memoize-one';
 import Link from 'gatsby-link';
@@ -15,6 +14,7 @@ import PageHeaderBar from '../components/PageHeaderBar';
 import Type2 from '../components/Type2';
 import Type4 from '../components/Type4';
 import Button from '../components/Button';
+import Head from '../components/Head';
 import { COLORS, MEDIA_QUERIES } from '../styles/vars';
 import { siteBg } from '../styles/mixins';
 import { pxToRem } from '../styles/utils';
@@ -154,12 +154,10 @@ class Layout extends React.Component {
 
     return (
       <React.Fragment>
-        <Helmet
+        <Head
           title={`${title} ${layout.title}`}
-          meta={[
-            { name: 'description', content: desc },
-            { name: 'keywords', content: keywords.join(', ') },
-          ]}
+          description={desc}
+          keywords={keywords.join(', ')}
         />
         <div className={className}>
           <main>
