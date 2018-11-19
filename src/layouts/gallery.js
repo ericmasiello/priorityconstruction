@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
 import styled, { injectGlobal } from 'styled-components';
 import memoize from 'memoize-one';
 import base from '../styles/base.css';
+import Head from '../components/Head';
 import Footer from '../components/Footer';
 import LayoutContext from '../layoutContext';
 import PageHeaderBar from '../components/PageHeaderBar';
@@ -89,12 +89,10 @@ class LayoutGallery extends React.Component {
 
     return (
       <LayoutContext.Provider value={this.state}>
-        <Helmet
+        <Head
           title={`${title}: ${galleryTitle}`}
-          meta={[
-            { name: 'description', content: desc },
-            { name: 'keywords', content: keywords.join(', ') },
-          ]}
+          description={desc}
+          keywords={keywords.join(', ')}
         />
         <div className={className} style={styles}>
           <main>
