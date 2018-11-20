@@ -1,7 +1,7 @@
 ---
 location: 'P. Flanigan & Sons, Inc., Baltimore, Maryland'
 author: 'Jim Coudon Flanigan'
-images: [{ image: 'threeworkers.jpg', alt: 'Three Priority Construction workers working' }]
+images: [{ image: 'priority-gloves.jpg', alt: 'Priority Constructor worker' }]
 props:
   grayed: true
   padQuoteEvenly: true

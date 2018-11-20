@@ -2,8 +2,8 @@
 title: 'Concrete Flatwork'
 images:
   [
+    { image: 'services/threeworkers.jpg', alt: 'Three Priority Construction workers working' },
     { image: 'services/stamped-concrete-westminster.jpg', alt: '' },
-    { image: 'services/priority-gloves.jpg', alt: 'Priority Constructor worker' },
     { image: 'services/fells-concrete.jpg', alt: 'Fells Point sidewalk' },
   ]
 ---
