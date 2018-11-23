@@ -104,14 +104,20 @@ const ConcreteFlatwork = styled(Container)`
       }
 
       &:nth-child(3) {
-        grid-column: 1 / 9;
+        grid-column: 1 / 5;
+      }
+
+      &:nth-child(4) {
+        grid-column: 5 / 9;
       }
     }
   }
 `;
 
-const Hardscapes = styled(Container)`
+const StructuralConcrete = styled(Container)`
   ${blockStyles};
+  grid-auto-flow: dense;
+  min-height: ${pxToRem(400)};
 
   ${Content} {
     padding: 1rem;
@@ -123,33 +129,23 @@ const Hardscapes = styled(Container)`
 
     @media (min-width: ${pxToRem(BREAK_POINT)}) {
       grid-column: 7 / -1;
-      grid-row: 1 / 3;
     }
   }
 
   ${GatsbyImage} {
     height: 100%;
-    @media (min-width: ${pxToRem(BREAK_POINT)}) {
-      max-height: ${pxToRem(300)};
-    }
   }
 
   @media (min-width: ${pxToRem(BREAK_POINT)}) {
     .gatsby-image-outer-wrapper {
       &:nth-child(2) {
         grid-column: 1 / 7;
-        grid-row: 1 / 2;
-      }
-
-      &:nth-child(3) {
-        grid-column: 1 / 7;
-        grid-row: 2 / 3;
       }
     }
   }
 `;
 
-const StructuralConcrete = styled(Container)`
+const Hardscapes = styled(Container)`
   ${blockStyles};
   background-color: ${COLORS.gray[1]};
   padding: 1rem ${pxToRem((MAX_CONTENT_WIDTH_PLUS - MAX_CONTENT_WIDTH) / 2)};
@@ -160,7 +156,7 @@ const StructuralConcrete = styled(Container)`
     padding: 1rem;
 
     @media (min-width: ${pxToRem(BREAK_POINT)}) {
-      grid-column: 1 / 7;
+      grid-column: 1 / 10;
       grid-row: 1 / 2;
     }
   }
@@ -188,8 +184,12 @@ const StructuralConcrete = styled(Container)`
   @media (min-width: ${pxToRem(BREAK_POINT)}) {
     .gatsby-image-outer-wrapper {
       &:nth-child(2) {
-        grid-column: 7 / 10;
-        grid-row: 1 / 3;
+        grid-column: 6 / 10;
+        grid-row: 2 / 3;
+
+        ${GatsbyImage} {
+          max-height: ${pxToRem(300)};
+        }
       }
 
       &:nth-child(3) {
@@ -198,7 +198,7 @@ const StructuralConcrete = styled(Container)`
       }
 
       &:nth-child(4) {
-        grid-column: 1 / 7;
+        grid-column: 1 / 6;
         grid-row: 2 / 3;
 
         ${GatsbyImage} {
@@ -251,21 +251,9 @@ class Services extends React.PureComponent {
           ))}
         </ConcreteFlatwork>
 
-        <Hardscapes tag="section">
+        <StructuralConcrete tag="section">
           <Content>
             <Type3 tag="h1" uppercase weight="bold">
-              {hardscapes.title}
-            </Type3>
-            <MarkdownBlock dangerouslySetInnerHTML={{ __html: hardscapes.content }} />
-          </Content>
-          {hardscapes.images.map(image => (
-            <GatsbyImage {...image} key={image.id} />
-          ))}
-        </Hardscapes>
-
-        <StructuralConcrete plus tag="section">
-          <Content>
-            <Type3 tag="h1" uppercase weight="medium">
               {structuralConcrete.title}
             </Type3>
             <MarkdownBlock dangerouslySetInnerHTML={{ __html: structuralConcrete.content }} />
@@ -274,6 +262,18 @@ class Services extends React.PureComponent {
             <GatsbyImage {...image} key={image.id} />
           ))}
         </StructuralConcrete>
+
+        <Hardscapes plus tag="section">
+          <Content>
+            <Type3 tag="h1" uppercase weight="medium">
+              {hardscapes.title}
+            </Type3>
+            <MarkdownBlock dangerouslySetInnerHTML={{ __html: hardscapes.content }} />
+          </Content>
+          {hardscapes.images.map(image => (
+            <GatsbyImage {...image} key={image.id} />
+          ))}
+        </Hardscapes>
       </PageContainer>
     );
   }

@@ -2,11 +2,9 @@
 title: 'Concrete Flatwork'
 images:
   [
+    { image: 'services/stamped-concrete-westminster.jpg', alt: 'Stamped concrete' },
+    { image: 'services/grey-stamped-concrete.jpg', alt: 'Grey concrete' },
     { image: 'services/threeworkers.jpg', alt: 'Three Priority Construction workers working' },
-    {
-      image: 'services/anthem-house-plants-sidewalk-crop.jpg',
-      alt: 'Anthem House top down view showing off sidewalk and plants',
-    },
   ]
 ---
 
