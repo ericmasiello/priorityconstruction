@@ -1,7 +1,7 @@
 ---
 location: 'General Paving & Contracting, Inc., Halethorpe, Maryland'
 author: 'Robert L. Quinn, Jr.'
-images: [{ image: 'anthemhousePool.jpg', alt: 'Lorem ipsum' }]
+images: [{ image: 'anthemhousePool.jpg', alt: 'Pool at Anthem House' }]
 props:
   padQuoteEvenly: true
   imageGridSize: '1 / 6'
