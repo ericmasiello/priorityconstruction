@@ -104,11 +104,7 @@ const ConcreteFlatwork = styled(Container)`
       }
 
       &:nth-child(3) {
-        grid-column: 1 / 6;
-      }
-
-      &:nth-child(4) {
-        grid-column: 6 / 9;
+        grid-column: 1 / 9;
       }
     }
   }
