@@ -1,8 +1,9 @@
 ---
 title: 'Hardscapes'
 images: [
-  { image: 'services/fells-concrete.jpg', alt: 'Fells Point concrete' },
-  { image: 'services/anthem-house-12.jpg', alt: 'Anthem House hardscape' }
+  { image: 'services/fells-28.jpg', alt: 'Fells Point bricks' },
+  { image: 'services/anthem-house-13.jpg', alt: 'Anthem House hardscape' },
+  { image: 'services/coppin-state-12.jpg', alt: 'Coppin State steps' }
 ]
 ---
 
