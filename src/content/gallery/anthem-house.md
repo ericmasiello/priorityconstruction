@@ -19,7 +19,7 @@ scope: [
   'etc.'
 ]
 completionDate: 'November 2017'
-value: '$1.45M'
+value: '<abbr title="$1,450,000">$1.45M</abbr>'
 ---
 
 Priority Construction was awarded the site concrete, hardscape, and paver package for the construction of the mixed-use building, Anthem House. Located in the heart of Locust Point, Baltimore, Anthem House has become a “lifestyle community” in ever-evolving Baltimore.
