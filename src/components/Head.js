@@ -7,6 +7,7 @@ import favicon16 from '../images/favicon-16x16.png';
 
 const Head = ({ title, description, keywords }) => (
   <Helmet>
+    <html lang="en" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
