@@ -22,7 +22,7 @@ const GalleryPage = ({ className, data }) => {
       <Gallery>
         {landingGallery.map(media => (
           <GalleryItemWrapper key={media.id}>
-            <GalleryItem tag={Link} to={media.href}>
+            <GalleryItem tag={Link} to={media.href} aria-label={`${media.name} project details`}>
               <ZoomImage sizes={media.sizes} />
               <GalleryCopy>
                 <h4>{media.name}</h4>
