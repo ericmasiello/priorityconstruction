@@ -90,7 +90,7 @@ class LayoutGallery extends React.Component {
     return (
       <LayoutContext.Provider value={this.state}>
         <Head
-          title={`${title}: ${galleryTitle}`}
+          title={`${title}: ${galleryTitle} Project Gallery`}
           description={desc}
           keywords={keywords.join(', ')}
         />
