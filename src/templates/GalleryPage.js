@@ -120,7 +120,7 @@ class GalleryPage extends React.Component {
               </MetaList>
               <MetaList>
                 <MetaTerm>Project Value:</MetaTerm>
-                <MetaDescription>{meta.value}</MetaDescription>
+                <MetaDescription dangerouslySetInnerHTML={{ __html: meta.value }} />
               </MetaList>
             </MetaBlock>
             <Gallery>
@@ -131,6 +131,7 @@ class GalleryPage extends React.Component {
                     <GalleryItem
                       role="button"
                       tabIndex={0}
+                      aria-label={`View ${meta.name} photo gallery`}
                       onClick={this.handleSelectImageByIndex(i)}
                       onKeyPress={this.handleSelectImageByIndex(i)}
                     >
