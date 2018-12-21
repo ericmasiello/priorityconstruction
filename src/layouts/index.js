@@ -155,7 +155,7 @@ class Layout extends React.Component {
     return (
       <React.Fragment>
         <Head
-          title={`${title} ${layout.title}`}
+          title={`${title}${layout.title ? `: ${layout.title}` : ''}`}
           description={desc}
           keywords={keywords.join(', ')}
         />
