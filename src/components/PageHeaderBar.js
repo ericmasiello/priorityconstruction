@@ -150,7 +150,11 @@ class PageHeaderBar extends React.Component {
             </FlatListItem>
           ))}
         </MobileNav>
-        <InvisibleButton onClick={this.state.showMenu ? this.handleHideMenu : this.handleShowMenu}>
+
+        <InvisibleButton
+          onClick={this.state.showMenu ? this.handleHideMenu : this.handleShowMenu}
+          aria-label={`${this.state.showMenu ? 'Hide' : 'Show'} menu`}
+        >
           {this.state.showMenu ? <CloseIcon /> : <MenuIcon />}
         </InvisibleButton>
         <DesktopNav>
