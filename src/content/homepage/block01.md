@@ -3,8 +3,8 @@ location: 'Engineering Manager, Municipal & Commercial Business Veolia North Ame
 author: 'Adam Strauch'
 images:
   [
-    { image: 'CoppinState-4.jpg', alt: Coppin State steps' },
-    { image: 'coppin-step-finished-crop.jpg', alt: 'Copin State steps' },
+    { image: 'CoppinState-4.jpg', alt: 'Coppin State steps' },
+    { image: 'coppin-step-finished-crop.jpg', alt: 'Coppin State steps' },
     { image: 'AnthemHouse-13-crop.jpg', alt: 'Anthem House bricks' },
   ]
 ---
