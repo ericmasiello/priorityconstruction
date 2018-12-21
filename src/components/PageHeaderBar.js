@@ -131,10 +131,23 @@ class PageHeaderBar extends React.Component {
           <SiteTitle>Priority Construction</SiteTitle>
           <Logo />
         </LogoLink>
+
+        <InvisibleButton
+          onClick={this.state.showMenu ? this.handleHideMenu : this.handleShowMenu}
+          aria-label={`${this.state.showMenu ? 'Hide' : 'Show'} menu`}
+        >
+          {this.state.showMenu ? <CloseIcon /> : <MenuIcon />}
+        </InvisibleButton>
+
         <MobileNav aria-hidden={!this.state.showMenu}>
           <FlatListItem>
             <div ref={this.mobileNav} tabIndex={-1} />
-            <MainNavLink selected={currentPathname === '/'} onClick={this.handleHideMenu} to="/">
+            <MainNavLink
+              selected={currentPathname === '/'}
+              onClick={this.handleHideMenu}
+              to="/"
+              tabIndex={!this.state.showMenu ? -1 : undefined}
+            >
               Home
             </MainNavLink>
           </FlatListItem>
@@ -144,6 +157,7 @@ class PageHeaderBar extends React.Component {
                 selected={currentPathname === link.to}
                 to={link.to}
                 onClick={this.handleHideMenu}
+                tabIndex={!this.state.showMenu ? -1 : undefined}
               >
                 {link.children}
               </MainNavLink>
@@ -151,12 +165,6 @@ class PageHeaderBar extends React.Component {
           ))}
         </MobileNav>
 
-        <InvisibleButton
-          onClick={this.state.showMenu ? this.handleHideMenu : this.handleShowMenu}
-          aria-label={`${this.state.showMenu ? 'Hide' : 'Show'} menu`}
-        >
-          {this.state.showMenu ? <CloseIcon /> : <MenuIcon />}
-        </InvisibleButton>
         <DesktopNav>
           {links.filter(link => link.desktop).map(link => (
             <FlatListItem key={link.children}>
