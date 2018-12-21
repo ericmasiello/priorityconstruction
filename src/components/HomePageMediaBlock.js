@@ -57,7 +57,7 @@ export const HomePageMediaBlock = props => {
       {quote}
       <MediaBlockImageGroup size={renderImages.length}>
         {renderImages.map(img => (
-          <ZoomImage key={img.id} sizes={img.sizes} alt={images.alt} />
+          <ZoomImage key={img.id} sizes={img.sizes} alt={img.alt} />
         ))}
       </MediaBlockImageGroup>
     </Tag>

@@ -1,7 +1,7 @@
 ---
 location: 'P. Flanigan & Sons, Inc., Baltimore, Maryland'
 author: 'Jim Coudon Flanigan'
-images: [{ image: 'priority-gloves.jpg', alt: 'Priority Constructor worker' }]
+images: [{ image: 'priority-gloves.jpg', alt: 'Priority Constructor worker leveling cement' }]
 props:
   grayed: true
   padQuoteEvenly: true
