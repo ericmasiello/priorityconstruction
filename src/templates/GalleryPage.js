@@ -15,6 +15,7 @@ import HeroWithBanner from '../components/HeroWithBanner';
 import * as CustomPropTypes from '../propTypes';
 import { withLayoutContext } from '../layoutContext';
 import { GRID_SIZE, GUTTER_SIZE, BODY_WEIGHTS } from '../styles/vars';
+import { composeImagesWithMetaData } from '../utils/gallery';
 
 import { pxToRem } from '../styles/utils';
 
@@ -85,8 +86,16 @@ class GalleryPage extends React.Component {
   render() {
     const {
       className,
-      data: { meta: { frontmatter: meta, html: metaContent } = {}, images, background } = {},
+      data: {
+        meta: { frontmatter: meta, html: metaContent } = {},
+        images: imageEdges,
+        background,
+      } = {},
     } = this.props;
+
+    const images = composeImagesWithMetaData(imageEdges.edges, meta.images).filter(
+      ({ id }) => !id.includes(background.id),
+    );
 
     if (!images) {
       return null;
@@ -124,21 +133,19 @@ class GalleryPage extends React.Component {
               </MetaList>
             </MetaBlock>
             <Gallery>
-              {images.edges
-                .filter(({ node }) => !node.id.includes(background.id))
-                .map((edge, i) => (
-                  <GalleryItemWrapper key={edge.node.id}>
-                    <GalleryItem
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`View ${meta.name} photo gallery`}
-                      onClick={this.handleSelectImageByIndex(i)}
-                      onKeyPress={this.handleSelectImageByIndex(i)}
-                    >
-                      <ZoomImage sizes={edge.node.sizes} />
-                    </GalleryItem>
-                  </GalleryItemWrapper>
-                ))}
+              {images.map((image, i) => (
+                <GalleryItemWrapper key={image.id}>
+                  <GalleryItem
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View ${meta.name} photo gallery`}
+                    onClick={this.handleSelectImageByIndex(i)}
+                    onKeyPress={this.handleSelectImageByIndex(i)}
+                  >
+                    <ZoomImage sizes={image.sizes} alt={image.alt} />
+                  </GalleryItem>
+                </GalleryItemWrapper>
+              ))}
             </Gallery>
           </Layout>
         </Container>
@@ -184,6 +191,10 @@ export const query = graphql`
         scope
         completionDate
         value
+        images {
+          image
+          alt
+        }
       }
       html
     }
