@@ -214,6 +214,9 @@ class Contact extends React.Component {
                       </Field>
                       <FieldError component="div" name="comments" />
 
+                      {Object.keys(errors).length > 0 && (
+                        <FormErrorMessage>Please correct all errors and resubmit.</FormErrorMessage>
+                      )}
                       <Button type="submit" disabled={isSubmitting}>
                         Submit
                       </Button>
