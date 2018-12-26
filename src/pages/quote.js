@@ -244,7 +244,11 @@ class Quote extends React.Component {
                           />
                         </Field>
                         <FieldError component="div" name="howDidYouHear" />
-
+                        {Object.keys(errors).length > 0 && (
+                          <FormErrorMessage>
+                            Please correct all errors and resubmit.
+                          </FormErrorMessage>
+                        )}
                         <Button type="submit" disabled={isSubmitting}>
                           Submit
                         </Button>
