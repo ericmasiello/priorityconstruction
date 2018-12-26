@@ -11,6 +11,18 @@ export const ImageSharp = PropTypes.shape({
   }),
 });
 
+export const ImageSharpWithAlt = PropTypes.shape({
+  id: PropTypes.string,
+  sizes: PropTypes.shape({
+    aspectRatio: PropTypes.number,
+    base64: PropTypes.string,
+    sizes: PropTypes.string,
+    src: PropTypes.string,
+    srcSet: PropTypes.string,
+  }),
+  alt: PropTypes.string,
+});
+
 export const Edge = PropTypes.shape({
   node: ImageSharp,
 });
