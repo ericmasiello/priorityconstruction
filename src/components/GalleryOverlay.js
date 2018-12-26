@@ -97,7 +97,7 @@ export class GalleryOverlay extends React.Component {
 
   static propTypes = {
     tag: CustomPropTypes.Tag,
-    images: CustomPropTypes.AllImageSharp.isRequired,
+    images: PropTypes.arrayOf(CustomPropTypes.ImageSharpWithAlt),
     selectedIndex: PropTypes.number,
     onResetSelection: PropTypes.func,
     onSelectImage: PropTypes.func,
@@ -106,6 +106,7 @@ export class GalleryOverlay extends React.Component {
 
   static defaultProps = {
     tag: 'section',
+    images: [],
   };
 
   state = { selectedIndex: this.props.selectedIndex || 0 };
@@ -136,16 +137,16 @@ export class GalleryOverlay extends React.Component {
     if (this.state.selectedIndex === null) {
       return {
         sizes: {},
+        alt: '',
       };
     }
 
-    const edge = this.props.images.edges[this.state.selectedIndex];
-    return edge.node;
+    return this.props.images[this.state.selectedIndex];
   };
 
   handleSelectLeft = () => {
     if (this.state.selectedIndex === 0) {
-      this.setState({ selectedIndex: this.props.images.edges.length - 1 });
+      this.setState({ selectedIndex: this.props.images.length - 1 });
     } else {
       this.setState(state => ({
         selectedIndex: state.selectedIndex - 1,
@@ -154,7 +155,7 @@ export class GalleryOverlay extends React.Component {
   };
 
   handleSelectRight = () => {
-    if (this.state.selectedIndex === this.props.images.edges.length - 1) {
+    if (this.state.selectedIndex === this.props.images.length - 1) {
       this.setState({ selectedIndex: 0 });
     } else {
       this.setState(state => ({
@@ -190,23 +191,24 @@ export class GalleryOverlay extends React.Component {
       onSelectImage,
       ...rest
     } = this.props;
+    const selectedImage = this.selectedImage();
     return (
       <Tag {...rest}>
         <GalleryInner>
           <GalleryOverviewCloseButton onClick={this.handleResetSelection}>
             <CloseIcon />
           </GalleryOverviewCloseButton>
-          <GalleryOverlayPrimaryImage sizes={this.selectedImage().sizes} />
+          <GalleryOverlayPrimaryImage sizes={selectedImage.sizes} alt={selectedImage.alt} />
         </GalleryInner>
         <GalleryOverviewList>
-          {images.edges.map((edge, i) => (
-            <GalleryOverviewListItem key={edge.node.id}>
+          {images.map((image, i) => (
+            <GalleryOverviewListItem key={image.id}>
               <GalleryTileButton
                 onClick={this.handleSelectImageByIndex(i)}
                 aria-pressed={i === this.state.selectedIndex}
                 ref={i === this.state.selectedIndex && this.scrollSelectedIntoView}
               >
-                <GatsbyImage sizes={edge.node.sizes} />
+                <GatsbyImage sizes={image.sizes} alt={image.alt} />
               </GalleryTileButton>
             </GalleryOverviewListItem>
           ))}

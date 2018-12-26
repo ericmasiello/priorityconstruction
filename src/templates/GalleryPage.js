@@ -78,7 +78,10 @@ class GalleryPage extends React.Component {
         selectedIndex,
         onClose: this.props.hideLayoutElement,
         onResetSelection: this.props.hideLayoutElement,
-        images: this.props.data.images,
+        images: composeImagesWithMetaData(
+          this.props.data.images.edges,
+          this.props.data.meta.frontmatter.images,
+        ),
       });
     }
   };
