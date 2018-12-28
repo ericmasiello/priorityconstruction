@@ -1,5 +1,5 @@
 ---
-name: 'Fells Point'
+name: 'Fell’s Point Broadway Square'
 location: 'Baltimore, MD'
 coverPhoto: 'gallery/photos/fells-point/Fells-28.jpg/'
 imageDir: 'gallery/photos/fells-point/'
