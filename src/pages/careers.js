@@ -29,7 +29,7 @@ import spanishApplication from '../content/careers/Solicitud-de-Empleo.pdf';
 
 const CertificationInput = styled(Input)`
   margin-top: 0.75rem;
-`
+`;
 
 const Applications = styled.div`
   margin-bottom: 2rem;
