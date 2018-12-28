@@ -228,7 +228,7 @@ export const query = graphql`
       html
     }
 
-    missionBackground: imageSharp(id: { regex: "/src/images/photos/heroes/PriorityShovel/" }) {
+    missionBackground: imageSharp(id: { regex: "/src/content/heroes/PriorityShovel/" }) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }

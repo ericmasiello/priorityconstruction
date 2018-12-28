@@ -214,39 +214,39 @@ export const query = graphql`
       }
     }
 
-    backgroundHome: imageSharp(id: { regex: "/src/images/photos/heroes/Fells-20/" }) {
+    backgroundHome: imageSharp(id: { regex: "/src/content/heroes/Fells-20/" }) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
     }
 
-    backgroundAbout: imageSharp(id: { regex: "/src/images/photos/heroes/pigtown-crop2/" }) {
+    backgroundAbout: imageSharp(id: { regex: "/src/content/heroes/pigtown-crop2/" }) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
     }
 
     backgroundServices: imageSharp(
-      id: { regex: "/src/images/photos/heroes/anthem-house-plants-sidewalk-crop2/" }
+      id: { regex: "/src/content/heroes/anthem-house-plants-sidewalk-crop2/" }
     ) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
     }
 
-    backgroundGallery: imageSharp(id: { regex: "/src/images/photos/heroes/Fells-19/" }) {
+    backgroundGallery: imageSharp(id: { regex: "/src/content/heroes/Fells-19/" }) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
     }
 
-    backgroundCareers: imageSharp(id: { regex: "/src/images/photos/heroes/PriorityShovel/" }) {
+    backgroundCareers: imageSharp(id: { regex: "/src/content/heroes/PriorityShovel/" }) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
     }
 
-    backgroundRequestQuote: imageSharp(id: { regex: "/src/images/photos/heroes/CoppinState-2/" }) {
+    backgroundRequestQuote: imageSharp(id: { regex: "/src/content/heroes/CoppinState-2/" }) {
       sizes(maxWidth: 1500) {
         ...GatsbyImageSharpSizes
       }
