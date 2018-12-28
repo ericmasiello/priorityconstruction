@@ -15,7 +15,7 @@ import HeroWithBanner from '../components/HeroWithBanner';
 import * as CustomPropTypes from '../propTypes';
 import { withLayoutContext } from '../layoutContext';
 import { GRID_SIZE, GUTTER_SIZE, BODY_WEIGHTS } from '../styles/vars';
-import { composeImagesWithMetaData } from '../utils/gallery';
+import composeImagesWithMetaData from '../utils/images';
 
 import { pxToRem } from '../styles/utils';
 

@@ -1,5 +1,6 @@
 import { GUTTER_SIZE, TOTAL_GRID_UNITS } from '../styles/vars';
 import { pxToRem } from '../styles/utils';
+import composeImagesWithMetaData from './images';
 
 export const cleanPropsForReact = props => {
   if (!props) {
@@ -25,16 +26,7 @@ export const mergeContentWithImages = (content, images) =>
       ...props,
     };
 
-    result.images = frontmatter.images.reduce((imageAcc, imageMeta) => {
-      const match = images.edges.find(({ node: { id } }) => id.includes(imageMeta.image));
-      if (match) {
-        imageAcc.push({
-          ...match.node,
-          alt: imageMeta.alt,
-        });
-      }
-      return imageAcc;
-    }, []);
+    result.images = composeImagesWithMetaData(images.edges, frontmatter.images);
 
     acc.push(result);
     return acc;
