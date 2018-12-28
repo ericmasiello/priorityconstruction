@@ -8,8 +8,8 @@ images:
   ]
 ---
 
-- Curbs
 - Aprons/Alleys
+- Curbs
 - Pervious Concrete
 - Roadway Paving
 - Sidewalks
