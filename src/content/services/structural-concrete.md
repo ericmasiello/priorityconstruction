@@ -1,7 +1,7 @@
 ---
 title: 'Structural Concrete'
 images: [
-  { image: 'services/concrete-hampstead-steps.jpg', alt: 'Hampstead concrete steps' },
+  { image: 'concrete-hampstead-steps.jpg', alt: 'Hampstead concrete steps' },
 ]
 ---
 
