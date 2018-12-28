@@ -330,7 +330,7 @@ export const query = graphql`
       }
     }
 
-    images: allImageSharp(limit: 100, filter: { id: { regex: "/images/photos/services/" } }) {
+    images: allImageSharp(limit: 100, filter: { id: { regex: "/src/content/services/photos/" } }) {
       edges {
         node {
           id
