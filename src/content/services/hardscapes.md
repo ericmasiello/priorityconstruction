@@ -3,7 +3,7 @@ title: 'Hardscapes'
 images: [
   { image: 'fells-28.jpg', alt: 'Fells Point bricks' },
   { image: 'anthem-house-13.jpg', alt: 'Anthem House hardscape' },
-  { image: 'coppin-state-12.jpg', alt: 'Coppin State steps' }
+  { image: 'coppin-state-12.jpg', alt: 'Coppin State University steps' }
 ]
 ---
 
