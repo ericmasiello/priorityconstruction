@@ -109,7 +109,7 @@ export default styled(HomePage)`
 export const query = graphql`
   query HomePage {
     photos: allImageSharp(
-      filter: { id: { regex: "/src/images/photos/homepage/" } }
+      filter: { id: { regex: "/src/content/homepage/photos/" } }
       sort: { order: ASC, fields: [id] }
     ) {
       edges {
