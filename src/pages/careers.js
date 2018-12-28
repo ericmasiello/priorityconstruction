@@ -24,8 +24,8 @@ import BaseFieldError from '../components/FieldError';
 import * as CustomPropTypes from '../propTypes';
 import config from '../config/careers';
 import { telephoneProps, emailProps, dateProps } from '../utils/form';
-import englishApplication from '../content/careers/Job-Application-Form-english.pdf';
-import spanishApplication from '../content/careers/Job-Application-Form-spanish.pdf';
+import englishApplication from '../content/careers/Job-Application.pdf';
+import spanishApplication from '../content/careers/Solicitud-de-Empleo.pdf';
 
 const Applications = styled.div`
   margin-bottom: 2rem;
