@@ -27,6 +27,10 @@ import { telephoneProps, emailProps, dateProps } from '../utils/form';
 import englishApplication from '../content/careers/Job-Application.pdf';
 import spanishApplication from '../content/careers/Solicitud-de-Empleo.pdf';
 
+const CertificationInput = styled(Input)`
+  margin-top: 0.75rem;
+`
+
 const Applications = styled.div`
   margin-bottom: 2rem;
 `;
@@ -63,10 +67,6 @@ const FieldGroups = styled.div`
   }
 `;
 
-const Instructions = styled(MarkdownBlock)`
-  margin-top: 1.5rem;
-`;
-
 class Careers extends React.Component {
   static displayName = 'Careers';
 
@@ -74,7 +74,6 @@ class Careers extends React.Component {
     className: PropTypes.string,
     data: PropTypes.shape({
       intro: CustomPropTypes.Markdown,
-      additionalInfo: CustomPropTypes.Markdown,
     }).isRequired,
   };
 
@@ -575,12 +574,8 @@ class Careers extends React.Component {
                       </Field>
                       <FieldError component="div" name="date" />
 
-                      <Instructions
-                        dangerouslySetInnerHTML={{ __html: data.additionalInfo.html }}
-                      />
-
                       <Field nameAs="certification" fragment>
-                        <Input
+                        <CertificationInput
                           name="certification"
                           type="checkbox"
                           value="yes"
@@ -592,7 +587,7 @@ class Careers extends React.Component {
                           knowledge. If this application leads to employment, I understand that
                           false or misleading information in my application or interview may result
                           in my release.
-                        </Input>
+                        </CertificationInput>
                       </Field>
                       <FieldError component="div" name="certification" />
 
@@ -622,10 +617,6 @@ export default styled(Careers)`
 export const query = graphql`
   query CareersPage {
     intro: markdownRemark(id: { regex: "/content/careers/intro/" }) {
-      html
-    }
-
-    additionalInfo: markdownRemark(id: { regex: "/content/careers/additional-info/" }) {
       html
     }
   }
