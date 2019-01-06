@@ -12,6 +12,7 @@ import Button from '../components/Button';
 import Type1 from '../components/Type1';
 import Type3 from '../components/Type3';
 import Type4 from '../components/Type4';
+import VisuallyHidden from '../components/VisuallyHidden';
 import InvisibleButton from '../components/InvisibleButton';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import ErrorMessage from '../components/ErrorMessage';
@@ -91,6 +92,9 @@ class Careers extends React.Component {
 
   render() {
     const { className, data } = this.props;
+    const hiddenPreviousEmploymentPrefix = (
+      <VisuallyHidden hidden>Previous Employment </VisuallyHidden>
+    );
     return (
       <NetlifyFormComposer
         formName="EmploymentSubmission"
@@ -110,6 +114,7 @@ class Careers extends React.Component {
                 handleSubmit,
                 handleReset,
               } = props;
+
               return (
                 <PageContainer tag="section" className={className}>
                   <PageLayout>
@@ -334,10 +339,13 @@ class Careers extends React.Component {
                         <FieldError component="div" name="convictedOfFelony" />
                       </fieldset>
 
-                      {values.convictedOfFelony === 'yes' && (
+                      <VisuallyHidden hidden={values.convictedOfFelony !== 'yes'}>
                         <React.Fragment>
                           <Field nameAs="felonyExplanation" fragment>
-                            <Label>Please explain:</Label>
+                            <Label>
+                              <VisuallyHidden hidden>Convicted of Felony </VisuallyHidden>
+                              Please explain:
+                            </Label>
                             <Input
                               type="textarea"
                               value={values.felonyExplanation}
@@ -348,7 +356,7 @@ class Careers extends React.Component {
                           </Field>
                           <FieldError component="div" name="felonyExplanation" />
                         </React.Fragment>
-                      )}
+                      </VisuallyHidden>
 
                       <fieldset>
                         <legend>Have you previously worked for Priority Construction?</legend>
@@ -383,34 +391,34 @@ class Careers extends React.Component {
                         <FieldError component="div" name="previouslyWorkedForPriority" />
                       </fieldset>
 
-                      {values.previouslyWorkedForPriority === 'yes' && (
-                        <React.Fragment>
-                          <Field nameAs="previousWorkforPriorityDetails" fragment>
-                            <Label>
-                              When did you work for Priority Construction and who was your
-                              supervisor?
-                            </Label>
-                            <Input
-                              type="textarea"
-                              value={values.previousWorkforPriorityDetails}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              error={
-                                errors.previousWorkforPriorityDetails &&
-                                touched.previousWorkforPriorityDetails
-                              }
-                            />
-                          </Field>
-                          <FieldError component="div" name="previousWorkforPriorityDetails" />
-                        </React.Fragment>
-                      )}
+                      <VisuallyHidden hidden={values.previouslyWorkedForPriority !== 'yes'}>
+                        <Field nameAs="previousWorkforPriorityDetails" fragment>
+                          <Label>
+                            When did you work for Priority Construction and who was your supervisor?
+                          </Label>
+                          <Input
+                            type="textarea"
+                            value={values.previousWorkforPriorityDetails}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            error={
+                              errors.previousWorkforPriorityDetails &&
+                              touched.previousWorkforPriorityDetails
+                            }
+                          />
+                        </Field>
+                        <FieldError component="div" name="previousWorkforPriorityDetails" />
+                      </VisuallyHidden>
 
                       <SectionTitle uppercase tag="h2">
                         Previous Employment Experience
                       </SectionTitle>
 
                       <Field nameAs="previousEmployerCompany" fragment>
-                        <Label>Company</Label>
+                        <Label>
+                          {hiddenPreviousEmploymentPrefix}
+                          Company
+                        </Label>
                         <Input
                           value={values.previousEmployerCompany}
                           onChange={handleChange}
@@ -421,7 +429,10 @@ class Careers extends React.Component {
                       <FieldError component="div" name="previousEmployerCompany" />
 
                       <Field nameAs="previousEmployerPhone" fragment>
-                        <Label>Phone</Label>
+                        <Label>
+                          {hiddenPreviousEmploymentPrefix}
+                          Phone
+                        </Label>
                         <Input
                           {...telephoneProps}
                           value={values.previousEmployerPhone}
@@ -433,7 +444,10 @@ class Careers extends React.Component {
                       <FieldError component="div" name="previousEmployerPhone" />
 
                       <Field nameAs="previousEmployerCity" fragment>
-                        <Label>City</Label>
+                        <Label>
+                          {hiddenPreviousEmploymentPrefix}
+                          City
+                        </Label>
                         <Input
                           value={values.previousEmployerCity}
                           onChange={handleChange}
@@ -444,7 +458,10 @@ class Careers extends React.Component {
                       <FieldError component="div" name="previousEmployerCity" />
 
                       <Field nameAs="previousEmployerState" fragment>
-                        <Label>State</Label>
+                        <Label>
+                          {hiddenPreviousEmploymentPrefix}
+                          State
+                        </Label>
                         <Input
                           type="select"
                           value={values.previousEmployerState}
@@ -463,7 +480,10 @@ class Careers extends React.Component {
                       <FieldError component="div" name="previousEmployerState" />
 
                       <Field nameAs="previousEmployerJobTitle" fragment>
-                        <Label>Job title</Label>
+                        <Label>
+                          {hiddenPreviousEmploymentPrefix}
+                          Job title
+                        </Label>
                         <Input
                           value={values.previousEmployerJobTitle}
                           onChange={handleChange}
@@ -476,7 +496,10 @@ class Careers extends React.Component {
                       <FieldError component="div" name="previousEmployerJobTitle" />
 
                       <Field nameAs="previousEmployerResponsibilities" fragment>
-                        <Label>Responsibilities</Label>
+                        <Label>
+                          {hiddenPreviousEmploymentPrefix}
+                          Responsibilities
+                        </Label>
                         <Input
                           type="textarea"
                           value={values.previousEmployerResponsibilities}
@@ -491,7 +514,10 @@ class Careers extends React.Component {
                       <FieldError component="div" name="previousEmployerResponsibilities" />
 
                       <Field nameAs="previousEmployerStartDate" fragment>
-                        <Label>Start date</Label>
+                        <Label>
+                          {hiddenPreviousEmploymentPrefix}
+                          Start date
+                        </Label>
                         <Input
                           {...dateProps}
                           value={values.previousEmployerStartDate}
@@ -505,7 +531,10 @@ class Careers extends React.Component {
                       <FieldError component="div" name="previousEmployerStartDate" />
 
                       <Field nameAs="previousEmployerEndDate" fragment>
-                        <Label>End date</Label>
+                        <Label>
+                          {hiddenPreviousEmploymentPrefix}
+                          End date
+                        </Label>
                         <Input
                           {...dateProps}
                           value={values.previousEmployerEndDate}
@@ -517,7 +546,10 @@ class Careers extends React.Component {
                       <FieldError component="div" name="previousEmployerEndDate" />
 
                       <Field nameAs="previousEmployerReasonForLeaving" fragment>
-                        <Label>Reason for leaving</Label>
+                        <Label>
+                          {hiddenPreviousEmploymentPrefix}
+                          Reason for leaving
+                        </Label>
                         <Input
                           type="textarea"
                           value={values.previousEmployerReasonForLeaving}
@@ -561,7 +593,10 @@ class Careers extends React.Component {
                       <FieldError component="div" name="signature" />
 
                       <Field nameAs="date" fragment>
-                        <Label>Date</Label>
+                        <Label>
+                          <VisuallyHidden hidden>Signature </VisuallyHidden>
+                          Date
+                        </Label>
                         <Input
                           {...dateProps}
                           value={values.date}
