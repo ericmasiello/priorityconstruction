@@ -1,30 +1,27 @@
-# gatsby-starter-default
+# Priority Construction
 
-The default Gatsby starter.
-
-For an overview of the project structure please refer to the [Gatsby documentation - Building with Components](https://www.gatsbyjs.org/docs/building-with-components/).
+This site is built using [Gatsby (1.x)](https://v1.gatsbyjs.org/docs/).
 
 ## Install
 
-Make sure that you have the Gatsby CLI program installed:
+Make sure you have [nvm](https://github.com/creationix/nvm) installed.
 
 ```sh
-npm install --global gatsby-cli
+nvm install
 ```
 
-And run from your CLI:
-
 ```sh
-gatsby new gatsby-example-site
+npm install
 ```
 
-Then you can run it by:
-
 ```sh
-cd gatsby-example-site
 npm run develop
 ```
 
+Visit [http://localhost:8000](http://localhost:8000)
+
+For more information on various Gatsby build commands, see the [Gastby documentation](https://v1.gatsbyjs.org/docs/).
+
 ## Deploy
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+This site is deployed via [Netlify](https://www.netlify.com/).
