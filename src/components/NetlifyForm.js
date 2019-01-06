@@ -7,7 +7,7 @@ import Label from './Label';
 import { pxToRem } from '../styles/utils';
 
 const NetlifyForm = ({ name, children, ...rest }) => (
-  <form data-netlify="true" {...rest}>
+  <form data-netlify="true" method="POST" {...rest}>
     <input type="hidden" name="form-name" value={name} />
     {children}
   </form>
