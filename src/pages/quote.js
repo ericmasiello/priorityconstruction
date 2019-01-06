@@ -93,7 +93,7 @@ class Quote extends React.Component {
 
     return (
       <NetlifyFormComposer
-        formName="quote"
+        formName="Quote"
         onSubmitSuccess={this.handleSetThankYouFocus}
         onSubmitError={this.handleSetErrorFocus}
       >
@@ -107,6 +107,7 @@ class Quote extends React.Component {
                 isSubmitting,
                 handleChange,
                 handleBlur,
+                handleSubmit,
                 handleReset,
               } = props;
               return (
@@ -141,7 +142,7 @@ class Quote extends React.Component {
                           There was an problem submitting your message. Please try again.
                         </FormErrorMessage>
                       )}
-                      <NetlifyForm name={netlifyState.formName}>
+                      <NetlifyForm name={netlifyState.formName} onSubmit={handleSubmit}>
                         <Field nameAs="name" fragment>
                           <Label>Name</Label>
                           <Input
@@ -247,7 +248,6 @@ class Quote extends React.Component {
                             Please correct all errors and resubmit.
                           </FormErrorMessage>
                         )}
-                        <div data-netlify-recaptcha="true" />
                         <Button type="submit" disabled={isSubmitting}>
                           Submit
                         </Button>

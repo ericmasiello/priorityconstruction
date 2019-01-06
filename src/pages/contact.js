@@ -91,7 +91,7 @@ class Contact extends React.Component {
 
     return (
       <NetlifyFormComposer
-        formName="contact"
+        formName="Contact"
         onSubmitSuccess={this.handleSetThankYouFocus}
         onSubmitError={this.handleSetErrorFocus}
       >

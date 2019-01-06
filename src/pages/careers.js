@@ -93,7 +93,7 @@ class Careers extends React.Component {
     const { className, data } = this.props;
     return (
       <NetlifyFormComposer
-        formName="career-opportunities"
+        formName="EmploymentSubmission"
         onSubmitSuccess={this.handleSetThankYouFocus}
         onSubmitError={this.handleSetErrorFocus}
       >
