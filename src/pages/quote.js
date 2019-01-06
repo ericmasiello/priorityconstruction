@@ -7,7 +7,7 @@ import PageContainer from '../components/PageContainer';
 import MarkdownBlock from '../components/MarkdownBlock';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import Field from '../components/Field';
-import Form from '../components/Form';
+import NetlifyForm from '../components/NetlifyForm';
 import Label from '../components/Label';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -142,8 +142,7 @@ class Quote extends React.Component {
                           There was an problem submitting your message. Please try again.
                         </FormErrorMessage>
                       )}
-                      <Form name={netlifyState.formName} onSubmit={handleSubmit}>
-                        <input type="hidden" name="form-name" value={netlifyState.formName} />
+                      <NetlifyForm name={netlifyState.formName} onSubmit={handleSubmit}>
                         <Field nameAs="name" fragment>
                           <Label>Name</Label>
                           <Input
@@ -252,7 +251,7 @@ class Quote extends React.Component {
                         <Button type="submit" disabled={isSubmitting}>
                           Submit
                         </Button>
-                      </Form>
+                      </NetlifyForm>
                     </React.Fragment>
                   </PageLayout>
                 </PageContainer>
