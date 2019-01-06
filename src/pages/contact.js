@@ -139,7 +139,7 @@ class Contact extends React.Component {
                         There was an problem submitting your message. Please try again.
                       </FormErrorMessage>
                     )}
-                    <Form name={netlifyState.formName} onSubmit={handleSubmit}>
+                    <Form data-netlify="true" name={netlifyState.formName} onSubmit={handleSubmit}>
                       <input type="hidden" name="form-name" value={netlifyState.formName} />
 
                       <Field nameAs="name" fragment>
