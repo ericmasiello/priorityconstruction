@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Input, { StyledTextarea } from './Input';
 import Button from './Button';
 import Label from './Label';
+import VisuallyHidden from './VisuallyHidden';
 import { pxToRem } from '../styles/utils';
 
 const NetlifyForm = ({ name, children, ...rest }) => (
@@ -32,6 +33,10 @@ const StyledNetlifyForm = styled(NetlifyForm)`
     &:not(:first-of-type) {
       margin-top: 0.75rem;
     }
+  }
+
+  ${VisuallyHidden} ${Label} {
+    margin-top: 0.75rem;
   }
 
   ${Button}, fieldset {
