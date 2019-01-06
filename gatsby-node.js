@@ -11,22 +11,22 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
     });
 
     /*
-    * Creates a unique slug for each MarkdownRemark node
-    * and attaches it as a queryable property from GraphQL.
-    * Note: this has nothing to do with create a unique url end point
-    * This simply attaches meta data to each node under the "fields"
-    * object that you can query within GraphQL.
-    * 
-    * node {
-    *   frontmatter {
-    *     name
-    *   }
-    *   html
-    *   fields {
-    *     slug
-    *   }
-    * }
-    */
+     * Creates a unique slug for each MarkdownRemark node
+     * and attaches it as a queryable property from GraphQL.
+     * Note: this has nothing to do with create a unique url end point
+     * This simply attaches meta data to each node under the "fields"
+     * object that you can query within GraphQL.
+     *
+     * node {
+     *   frontmatter {
+     *     name
+     *   }
+     *   html
+     *   fields {
+     *     slug
+     *   }
+     * }
+     */
     createNodeField({
       node,
       name: 'slug',

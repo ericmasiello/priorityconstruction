@@ -166,17 +166,19 @@ class PageHeaderBar extends React.Component {
         </MobileNav>
 
         <DesktopNav>
-          {links.filter(link => link.desktop).map(link => (
-            <FlatListItem key={link.children}>
-              <MainNavLink
-                selected={currentPathname === link.to}
-                to={link.to}
-                onClick={this.handleHideMenu}
-              >
-                {link.children}
-              </MainNavLink>
-            </FlatListItem>
-          ))}
+          {links
+            .filter(link => link.desktop)
+            .map(link => (
+              <FlatListItem key={link.children}>
+                <MainNavLink
+                  selected={currentPathname === link.to}
+                  to={link.to}
+                  onClick={this.handleHideMenu}
+                >
+                  {link.children}
+                </MainNavLink>
+              </FlatListItem>
+            ))}
         </DesktopNav>
       </HeaderBar>
     );
