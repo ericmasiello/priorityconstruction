@@ -7,7 +7,7 @@ import MarkdownBlock from '../components/MarkdownBlock';
 import PageContainer from '../components/PageContainer';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
 import Field from '../components/Field';
-import Form from '../components/Form';
+import NetlifyForm from '../components/NetlifyForm';
 import Label from '../components/Label';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -139,9 +139,7 @@ class Contact extends React.Component {
                         There was an problem submitting your message. Please try again.
                       </FormErrorMessage>
                     )}
-                    <Form data-netlify="true" name={netlifyState.formName} onSubmit={handleSubmit}>
-                      <input type="hidden" name="form-name" value={netlifyState.formName} />
-
+                    <NetlifyForm name={netlifyState.formName} onSubmit={handleSubmit}>
                       <Field nameAs="name" fragment>
                         <Label>Name</Label>
                         <Input
@@ -220,7 +218,7 @@ class Contact extends React.Component {
                       <Button type="submit" disabled={isSubmitting}>
                         Submit
                       </Button>
-                    </Form>
+                    </NetlifyForm>
                     <div>
                       <OfficeMap width="100%" mapKey={data.site.siteMetadata.googleMapKey} />
                       <p>
