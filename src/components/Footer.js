@@ -79,11 +79,13 @@ export const Footer = props => {
             </ListItem>
           </List>
           <List>
-            {links.filter(link => link.footer).map(link => (
-              <ListItem key={link.to}>
-                <Link to={link.to}>{link.children}</Link>
-              </ListItem>
-            ))}
+            {links
+              .filter(link => link.footer)
+              .map(link => (
+                <ListItem key={link.to}>
+                  <Link to={link.to}>{link.children}</Link>
+                </ListItem>
+              ))}
           </List>
         </Address>
       </BackgroundContainer>
