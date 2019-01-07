@@ -142,7 +142,11 @@ class Quote extends React.Component {
                           There was an problem submitting your message. Please try again.
                         </FormErrorMessage>
                       )}
-                      <NetlifyForm name={netlifyState.formName} onSubmit={handleSubmit}>
+                      <NetlifyForm
+                        name={netlifyState.formName}
+                        onSubmit={handleSubmit}
+                        handleChange={handleChange}
+                      >
                         <Field nameAs="name" fragment>
                           <Label>Name</Label>
                           <Input
