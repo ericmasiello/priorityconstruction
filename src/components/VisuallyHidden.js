@@ -1,6 +1,22 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import * as CustomPropTypes from '../propTypes';
 
-const VisuallyHidden = styled.span`
+const VisuallyHidden = ({ tag: Tag, hidden, ...rest }) => <Tag {...rest} />;
+
+VisuallyHidden.propTypes = {
+  tag: CustomPropTypes.Tag,
+  hidden: PropTypes.bool,
+};
+
+VisuallyHidden.defaultProps = {
+  tag: 'span',
+};
+
+VisuallyHidden.displayName = 'VisuallyHidden';
+
+const StyledVisuallyHidden = styled(VisuallyHidden)`
   ${({ hidden = false }) =>
     hidden
       ? `
@@ -17,4 +33,4 @@ const VisuallyHidden = styled.span`
       : ''};
 `;
 
-export default VisuallyHidden;
+export default StyledVisuallyHidden;
