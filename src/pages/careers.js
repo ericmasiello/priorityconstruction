@@ -161,7 +161,11 @@ class Careers extends React.Component {
                       </List>
                     </Applications>
 
-                    <NetlifyForm name={netlifyState.formName} onSubmit={handleSubmit}>
+                    <NetlifyForm
+                      name={netlifyState.formName}
+                      onSubmit={handleSubmit}
+                      handleChange={handleChange}
+                    >
                       <SectionTitle uppercase tag="h2">
                         Personal Information
                       </SectionTitle>
