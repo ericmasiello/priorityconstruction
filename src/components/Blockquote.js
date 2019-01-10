@@ -32,7 +32,7 @@ Blockquote.displayName = 'Blockquote';
 const StyledBlockquote = styled(Blockquote)`
   display: flex;
   align-items: center;
-  padding: 2rem;
+  padding: 2rem 2rem 4rem;
 
   ${QuoteMarksIcon} {
     fill: ${({ quoteColor }) => quoteColor};
