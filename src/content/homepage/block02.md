@@ -9,4 +9,4 @@ props:
   quoteGridSize: '1 / 7'
 ---
 
-One of my favorite things about Priority Construction is that no matter the obstacle, jobs are always completed right on schedule. Not only are their employees willing to work through their breaks but the owner, Mr. Ponce, is also involved in every project.
+P. Flanigan & Sons, Inc. started using Priority Construction Corp. about 20 years ago simply to meet our MBE goals. We not only still use Priority today to help fulfill our MBE goals, but we use them consistently on projects that don't even require MBE participation. We repeatedly subcontract with Priority because they represent everything a general contractor looks for in a subcontractor; competitive pricing, wide range of services performed, quality workmanship, safe work habits, cooperative field supervision, the resources to meet the project schedule, and the integrity to stand behind their finished project. I couldn't give Priority Construction a higher recommendation.
