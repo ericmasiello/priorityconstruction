@@ -116,10 +116,14 @@ const ConcreteFlatwork = styled(Container)`
 
 const StructuralConcrete = styled(Container)`
   ${blockStyles};
+  background-color: ${COLORS.gray[1]};
+  padding: 1rem ${pxToRem((MAX_CONTENT_WIDTH_PLUS - MAX_CONTENT_WIDTH) / 2)};
   grid-auto-flow: dense;
   min-height: ${pxToRem(400)};
 
   ${Content} {
+    background-color: ${COLORS.brand[4]};
+    color: #fff;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -251,7 +255,7 @@ class Services extends React.PureComponent {
           ))}
         </ConcreteFlatwork>
 
-        <StructuralConcrete tag="section">
+        <StructuralConcrete plus tag="section">
           <Content>
             <Type3 tag="h1" uppercase weight="bold">
               {structuralConcrete.title}
