@@ -207,7 +207,7 @@ class Contact extends React.Component {
                       <FieldError component="div" name="email" />
 
                       <Field nameAs="comments" fragment>
-                        <Label>Additional comments</Label>
+                        <Label>Comments</Label>
                         <Input
                           type="textarea"
                           value={values.comments}
