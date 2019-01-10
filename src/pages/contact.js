@@ -19,7 +19,6 @@ import InvisibleButton from '../components/InvisibleButton';
 import FormSuccessMessage from '../components/FormSuccessMessage';
 import ErrorMessage from '../components/ErrorMessage';
 import FieldError from '../components/FieldError';
-import * as CustomPropTypes from '../propTypes';
 import { pxToRem } from '../styles/utils';
 import { TYPE_SIZE } from '../styles/vars';
 import '../utils/validation/phone';
@@ -70,7 +69,11 @@ class Contact extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     data: PropTypes.shape({
-      intro: CustomPropTypes.Markdown,
+      site: PropTypes.shape({
+        siteMetadata: PropTypes.shape({
+          googleMapKey: PropTypes.string.isRequired,
+        }),
+      }),
     }).isRequired,
   };
 
@@ -110,7 +113,6 @@ class Contact extends React.Component {
               } = props;
               return (
                 <PageContainer tag="section" className={className}>
-                  <MarkdownBlock dangerouslySetInnerHTML={{ __html: data.intro.html }} />
                   <PageLayout>
                     <FormSuccessMessage
                       aria-hidden={!netlifyState.submitted}
@@ -258,10 +260,6 @@ export const query = graphql`
       siteMetadata {
         googleMapKey
       }
-    }
-
-    intro: markdownRemark(id: { regex: "/content/contact/intro/" }) {
-      html
     }
   }
 `;
