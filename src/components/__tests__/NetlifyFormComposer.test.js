@@ -21,6 +21,48 @@ it('should call children function with state', () => {
   });
 });
 
+describe('handleResetFormSubmission', () => {
+  it('should reset state', () => {
+    const children = jest.fn();
+    const wrapper = shallow(<NetlifyFormComposer formName="test">{children}</NetlifyFormComposer>);
+
+    // force values to be true
+    wrapper.setState({ submitted: true, submissionError: true });
+    wrapper.instance().handleResetFormSubmission()();
+
+    expect(wrapper.state().submitted).toBe(false);
+    expect(wrapper.state().submissionError).toBe(false);
+  });
+
+  it('should call handleReset method', () => {
+    const children = jest.fn();
+    const handleReset = jest.fn();
+    const wrapper = shallow(<NetlifyFormComposer formName="test">{children}</NetlifyFormComposer>);
+
+    wrapper.instance().handleResetFormSubmission(handleReset)();
+
+    expect(handleReset).toBeCalled();
+  });
+
+  it('should reset the recaptcha reference', () => {
+    const children = jest.fn();
+    const recaptchaInstance = {
+      current: {
+        reset: jest.fn(),
+      },
+    };
+    const wrapper = shallow(
+      <NetlifyFormComposer formName="test" recaptchaInstance={recaptchaInstance}>
+        {children}
+      </NetlifyFormComposer>,
+    );
+
+    wrapper.instance().handleResetFormSubmission()();
+
+    expect(recaptchaInstance.current.reset).toBeCalled();
+  });
+});
+
 describe('handleSubmit', () => {
   describe('all cases optimistically', () => {
     let oldFetch;
@@ -81,7 +123,9 @@ describe('handleSubmit', () => {
 
     it('should call fetch with the encoded headers', () => {
       const wrapper = shallow(
-        <NetlifyFormComposer formName="test">{jest.fn()}</NetlifyFormComposer>,
+        <NetlifyFormComposer formName="test" recaptchaValue="value-from-recaptcha">
+          {jest.fn()}
+        </NetlifyFormComposer>,
       );
       return wrapper
         .instance()
@@ -97,7 +141,8 @@ describe('handleSubmit', () => {
           expect(global.fetch).toBeCalledWith('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'form-name=test&name=Eric&phone=123-456-7890&email=test%40test.com',
+            body:
+              'form-name=test&name=Eric&phone=123-456-7890&email=test%40test.com&g-recaptcha-response=value-from-recaptcha',
           });
         });
     });

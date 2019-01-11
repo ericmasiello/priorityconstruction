@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
+import Recaptcha from 'react-recaptcha';
 import PageContainer from '../components/PageContainer';
 import MarkdownBlock from '../components/MarkdownBlock';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
@@ -73,12 +74,27 @@ class Quote extends React.Component {
     className: PropTypes.string,
     data: PropTypes.shape({
       intro: CustomPropTypes.Markdown,
+      site: PropTypes.shape({
+        siteMetadata: PropTypes.shape({
+          recaptchaSecretKey: PropTypes.string.isRequired,
+        }),
+      }),
     }).isRequired,
+  };
+
+  state = {
+    recaptchaValue: null,
   };
 
   thankYouMessage = React.createRef();
 
   errorMessage = React.createRef();
+
+  recaptchaInstance = React.createRef();
+
+  handleVerifyRecaptcha = recaptchaValue => {
+    this.setState({ recaptchaValue });
+  };
 
   handleSetThankYouFocus = () => {
     this.thankYouMessage.current.focus();
@@ -96,6 +112,8 @@ class Quote extends React.Component {
         formName="Quote"
         onSubmitSuccess={this.handleSetThankYouFocus}
         onSubmitError={this.handleSetErrorFocus}
+        recaptchaValue={this.state.recaptchaValue}
+        recaptchaInstance={this.recaptchaInstance}
       >
         {netlifyState => (
           <Formik {...config} onSubmit={netlifyState.handleSubmit}>
@@ -252,6 +270,12 @@ class Quote extends React.Component {
                             Please correct all errors and resubmit.
                           </FormErrorMessage>
                         )}
+                        <Recaptcha
+                          ref={this.recaptchaInstance}
+                          sitekey={data.site.siteMetadata.recaptchaSecretKey}
+                          render="explicit"
+                          verifyCallback={this.handleVerifyRecaptcha}
+                        />
                         <Button type="submit" disabled={isSubmitting}>
                           Submit
                         </Button>
@@ -282,6 +306,12 @@ export const query = graphql`
   query QuoteQuery {
     intro: markdownRemark(id: { regex: "/content/quote/intro/" }) {
       html
+    }
+
+    site {
+      siteMetadata {
+        recaptchaSecretKey
+      }
     }
   }
 `;
