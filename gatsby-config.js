@@ -16,12 +16,19 @@ module.exports = {
     email: 'info@priorityconst.com',
     keywords: ['construction', 'Baltimore', 'Maryland', 'concrete', 'brick', 'flatwork'],
     googleMapKey: process.env.GOOGLE_MAP_KEY,
+    recaptchaSecretKey: process.env.SITE_RECAPTCHA_KEY || '',
     urls: {
       facebook: 'https://www.facebook.com/prorityconstruction/',
       linkedin: 'https://www.linkedin.com/company/priority-construction/',
     },
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-recaptcha',
+      options: {
+        defer: true,
+      },
+    },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
     {

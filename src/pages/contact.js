@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
+import Recaptcha from 'react-recaptcha';
 import MarkdownBlock from '../components/MarkdownBlock';
 import PageContainer from '../components/PageContainer';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
@@ -72,14 +73,25 @@ class Contact extends React.Component {
       site: PropTypes.shape({
         siteMetadata: PropTypes.shape({
           googleMapKey: PropTypes.string.isRequired,
+          recaptchaSecretKey: PropTypes.string.isRequired,
         }),
       }),
     }).isRequired,
   };
 
+  state = {
+    recaptchaValue: null,
+  };
+
   thankYouMessage = React.createRef();
 
   errorMessage = React.createRef();
+
+  recaptchaInstance = React.createRef();
+
+  handleVerifyRecaptcha = recaptchaValue => {
+    this.setState({ recaptchaValue });
+  };
 
   handleSetThankYouFocus = () => {
     this.thankYouMessage.current.focus();
@@ -97,6 +109,8 @@ class Contact extends React.Component {
         formName="Contact"
         onSubmitSuccess={this.handleSetThankYouFocus}
         onSubmitError={this.handleSetErrorFocus}
+        recaptchaValue={this.state.recaptchaValue}
+        recaptchaInstance={this.recaptchaInstance}
       >
         {netlifyState => (
           <Formik {...config} onSubmit={netlifyState.handleSubmit}>
@@ -221,6 +235,12 @@ class Contact extends React.Component {
                       {Object.keys(errors).length > 0 && (
                         <FormErrorMessage>Please correct all errors and resubmit.</FormErrorMessage>
                       )}
+                      <Recaptcha
+                        ref={this.recaptchaInstance}
+                        sitekey={data.site.siteMetadata.recaptchaSecretKey}
+                        render="explicit"
+                        verifyCallback={this.handleVerifyRecaptcha}
+                      />
                       <Button type="submit" disabled={isSubmitting}>
                         Submit
                       </Button>
@@ -259,6 +279,7 @@ export const query = graphql`
     site {
       siteMetadata {
         googleMapKey
+        recaptchaSecretKey
       }
     }
   }
