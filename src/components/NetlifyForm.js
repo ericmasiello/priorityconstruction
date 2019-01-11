@@ -7,29 +7,20 @@ import Label from './Label';
 import VisuallyHidden from './VisuallyHidden';
 import { pxToRem } from '../styles/utils';
 
-const NetlifyForm = ({ name, children, handleChange, ...rest }) => {
-  const honeypot = `${name}-bot-field`;
-  return (
-    <form data-netlify="true" netlify-honeypot={honeypot} method="POST" name={name} {...rest}>
-      <input type="hidden" name="form-name" value={name} />
-      <VisuallyHidden hidden>
-        {/* eslint-disable jsx-a11y/label-has-associated-control */}
-        <label>
-          Don&rsquo;t fill this out if you&rsquo;re human:
-          {' '}
-          <input name={honeypot} onChange={handleChange} />
-        </label>
-      </VisuallyHidden>
-      {children}
-    </form>
-  );
-};
+const NetlifyForm = ({ name, children, handleChange, ...rest }) => (
+  <form data-netlify="true" data-netlify-recaptcha="true" method="POST" name={name} {...rest}>
+    <input type="hidden" name="form-name" value={name} />
+    <noscript>Sorry. This form requires JavaScript.</noscript>
+    {children}
+  </form>
+);
 
 NetlifyForm.displayName = 'NetlifyForm';
 
 NetlifyForm.propTypes = {
   name: PropTypes.string.isRequired,
   handleChange: PropTypes.func,
+  children: PropTypes.node,
 };
 
 const StyledNetlifyForm = styled(NetlifyForm)`
