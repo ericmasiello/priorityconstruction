@@ -5,6 +5,7 @@ import Input, { StyledTextarea } from './Input';
 import Button from './Button';
 import Label from './Label';
 import VisuallyHidden from './VisuallyHidden';
+import Recaptcha from './Recaptcha';
 import { pxToRem } from '../styles/utils';
 
 const NetlifyForm = ({ name, children, handleChange, ...rest }) => (
@@ -42,7 +43,7 @@ const StyledNetlifyForm = styled(NetlifyForm)`
     margin-top: 0.75rem;
   }
 
-  ${Button}, fieldset {
+  ${Button}, ${Recaptcha}, fieldset {
     margin-top: 0.75rem;
   }
 `;
