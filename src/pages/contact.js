@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
-import Recaptcha from 'react-recaptcha';
 import MarkdownBlock from '../components/MarkdownBlock';
 import PageContainer from '../components/PageContainer';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
@@ -20,6 +19,7 @@ import InvisibleButton from '../components/InvisibleButton';
 import FormSuccessMessage from '../components/FormSuccessMessage';
 import ErrorMessage from '../components/ErrorMessage';
 import FieldError from '../components/FieldError';
+import Recaptcha from '../components/Recaptcha';
 import { pxToRem } from '../styles/utils';
 import { TYPE_SIZE } from '../styles/vars';
 import '../utils/validation/phone';
@@ -35,7 +35,7 @@ const PageLayout = styled.div`
 `;
 
 const FormErrorMessage = styled(ErrorMessage)`
-  margin-bottom: 1rem;
+  margin-top: 0.75rem;
 
   @media (min-width: ${pxToRem(500)}) {
     grid-column: 2 / -1;
@@ -94,6 +94,7 @@ class Contact extends React.Component {
   };
 
   handleSetThankYouFocus = () => {
+    this.setState({ recaptchaValue: null });
     this.thankYouMessage.current.focus();
   };
 
@@ -232,16 +233,18 @@ class Contact extends React.Component {
                       </Field>
                       <FieldError component="div" name="comments" />
 
-                      {Object.keys(errors).length > 0 && (
-                        <FormErrorMessage>Please correct all errors and resubmit.</FormErrorMessage>
-                      )}
                       <Recaptcha
-                        ref={this.recaptchaInstance}
+                        recaptchaRef={this.recaptchaInstance}
                         sitekey={data.site.siteMetadata.recaptchaSecretKey}
                         render="explicit"
                         verifyCallback={this.handleVerifyRecaptcha}
                       />
-                      <Button type="submit" disabled={isSubmitting}>
+
+                      {Object.keys(errors).length > 0 && (
+                        <FormErrorMessage>Please correct all errors and resubmit.</FormErrorMessage>
+                      )}
+
+                      <Button type="submit" disabled={isSubmitting || !this.state.recaptchaValue}>
                         Submit
                       </Button>
                     </NetlifyForm>
