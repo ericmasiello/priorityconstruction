@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
-import Recaptcha from 'react-recaptcha';
 import PageContainer from '../components/PageContainer';
 import MarkdownBlock from '../components/MarkdownBlock';
 import NetlifyFormComposer from '../components/NetlifyFormComposer';
@@ -18,13 +17,14 @@ import InvisibleButton from '../components/InvisibleButton';
 import ErrorMessage from '../components/ErrorMessage';
 import FormSuccessMessage from '../components/FormSuccessMessage';
 import FieldError from '../components/FieldError';
+import Recaptcha from '../components/Recaptcha';
 import { pxToRem } from '../styles/utils';
 import { TYPE_SIZE } from '../styles/vars';
 import * as CustomPropTypes from '../propTypes';
 import '../utils/validation/phone';
 
 const FormErrorMessage = styled(ErrorMessage)`
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 `;
 
 const PageLayout = styled.div`
@@ -97,6 +97,7 @@ class Quote extends React.Component {
   };
 
   handleSetThankYouFocus = () => {
+    this.setState({ recaptchaValue: null });
     this.thankYouMessage.current.focus();
   };
 
@@ -265,18 +266,21 @@ class Quote extends React.Component {
                           />
                         </Field>
                         <FieldError component="div" name="howDidYouHear" />
+
+                        <Recaptcha
+                          recaptchaRef={this.recaptchaInstance}
+                          sitekey={data.site.siteMetadata.recaptchaSecretKey}
+                          render="explicit"
+                          verifyCallback={this.handleVerifyRecaptcha}
+                        />
+
                         {Object.keys(errors).length > 0 && (
                           <FormErrorMessage>
                             Please correct all errors and resubmit.
                           </FormErrorMessage>
                         )}
-                        <Recaptcha
-                          ref={this.recaptchaInstance}
-                          sitekey={data.site.siteMetadata.recaptchaSecretKey}
-                          render="explicit"
-                          verifyCallback={this.handleVerifyRecaptcha}
-                        />
-                        <Button type="submit" disabled={isSubmitting}>
+
+                        <Button type="submit" disabled={isSubmitting || !this.state.recaptchaValue}>
                           Submit
                         </Button>
                       </NetlifyForm>
