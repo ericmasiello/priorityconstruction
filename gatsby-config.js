@@ -24,6 +24,12 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
+      },
+    },
+    {
       resolve: 'gatsby-plugin-recaptcha',
       options: {
         defer: true,
