@@ -98,8 +98,9 @@ class Careers extends React.Component {
     this.setState({ recaptchaValue });
   };
 
+  handleResetRecaptcha = () => this.setState({ recaptchaValue: null });
+
   handleSetThankYouFocus = () => {
-    this.setState({ recaptchaValue: null });
     this.thankYouMessage.current.focus();
   };
 
@@ -119,6 +120,7 @@ class Careers extends React.Component {
         onSubmitError={this.handleSetErrorFocus}
         recaptchaValue={this.state.recaptchaValue}
         recaptchaInstance={this.recaptchaInstance}
+        onResetRecaptcha={this.handleResetRecaptcha}
       >
         {netlifyState => (
           <Formik {...config} onSubmit={netlifyState.handleSubmit}>
