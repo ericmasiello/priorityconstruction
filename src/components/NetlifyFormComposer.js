@@ -13,11 +13,13 @@ export default class NetlifyFormComposer extends React.Component {
     recaptchaInstance: PropTypes.shape({
       current: PropTypes.object,
     }),
+    onResetRecaptcha: PropTypes.func,
   };
 
   static defaultProps = {
     onSubmitSuccess: () => {},
     onSubmitError: () => {},
+    onResetRecaptcha: () => {},
   };
 
   handleResetFormSubmission = handleReset => () => {
@@ -51,11 +53,13 @@ export default class NetlifyFormComposer extends React.Component {
         if (actions && typeof actions.setSubmitting === 'function') {
           actions.setSubmitting(false);
         }
+        this.props.onResetRecaptcha();
       })
       .catch(error => {
         // eslint-disable-next-line
         console.error(error);
         this.setState({ submitted: false, submissionError: true }, () => {
+          this.props.onResetRecaptcha();
           this.props.onSubmitError(error);
         });
       });
