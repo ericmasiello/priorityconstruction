@@ -257,7 +257,7 @@ class Services extends React.PureComponent {
 
         <StructuralConcrete plus tag="section">
           <Content>
-            <Type3 tag="h1" uppercase weight="bold">
+            <Type3 tag="h1" uppercase weight="medium">
               {structuralConcrete.title}
             </Type3>
             <MarkdownBlock dangerouslySetInnerHTML={{ __html: structuralConcrete.content }} />
