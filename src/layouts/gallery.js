@@ -21,6 +21,9 @@ class LayoutGallery extends React.Component {
   static propTypes = {
     children: PropTypes.func.isRequired,
     className: PropTypes.string,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
     data: PropTypes.shape({
       site: PropTypes.shape({
         siteMetadata: PropTypes.shape({
@@ -35,6 +38,9 @@ class LayoutGallery extends React.Component {
           }),
           phone: PropTypes.string.isRequired,
         }),
+      }),
+      galleryMeta: PropTypes.shape({
+        edges: PropTypes.array,
       }),
     }).isRequired,
   };

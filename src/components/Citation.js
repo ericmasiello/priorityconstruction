@@ -10,6 +10,7 @@ export const Citation = ({ tag: Tag, children, ...rest }) => (
 
 Citation.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  children: PropTypes.node,
 };
 
 Citation.defaultProps = {

@@ -1,8 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import GatsbyImage from './GatsbyImage';
 
 export const MediaBlockImageGroup = ({ size, ...rest }) => <div {...rest} />;
+
+MediaBlockImageGroup.propTypes = {
+  size: PropTypes.number,
+};
 
 export default styled(MediaBlockImageGroup)`
   ${GatsbyImage} {

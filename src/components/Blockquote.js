@@ -21,6 +21,7 @@ export const Blockquote = ({ tag: Tag, children, quoteColor, ...rest }) => (
 Blockquote.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   quoteColor: PropTypes.string,
+  children: PropTypes.node,
 };
 
 Blockquote.defaultProps = {

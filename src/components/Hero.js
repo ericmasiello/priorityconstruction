@@ -24,6 +24,9 @@ export class Hero extends Component {
     bgColor: PropTypes.string,
     opacity: PropTypes.number,
     bgImages: PropTypes.arrayOf(CustomPropTypes.ImageSharp),
+    imgStyle: PropTypes.shape({
+      objectPosition: PropTypes.string,
+    }),
   };
 
   static defaultProps = {
