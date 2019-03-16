@@ -152,6 +152,7 @@ export const Input = ({ tag: Tag, error, ...rest }) => <Tag {...rest} />;
 
 Input.propTypes = {
   tag: CustomPropTypes.Tag,
+  error: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -272,5 +273,9 @@ const Component = props => {
 };
 
 Component.displayName = 'InputWrapper';
+
+Component.propTypes = {
+  type: PropTypes.string,
+};
 
 export default styled(Component)``;

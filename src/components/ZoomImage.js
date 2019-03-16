@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import GatsbyImage from './GatsbyImage';
 
@@ -19,6 +20,10 @@ const ZoomImageWrapper = ({ className, ...rest }) => (
 );
 
 ZoomImageWrapper.displayName = 'ZoomImageWrapper';
+
+ZoomImageWrapper.propTypes = {
+  className: PropTypes.string,
+};
 
 export default styled(ZoomImageWrapper)`
   overflow: hidden;

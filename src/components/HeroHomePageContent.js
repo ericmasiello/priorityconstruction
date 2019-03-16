@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import tinyColor from 'tinycolor2';
 import HeroContent from './HeroContent';
@@ -53,6 +54,12 @@ export const HeroHomePageContent = ({ innerTag, innerClassName, children, ...res
     </StyledContentWrapper>
   </HeroContent>
 );
+
+HeroHomePageContent.propTypes = {
+  innerTag: CustomPropTypes.Tag,
+  innerClassName: PropTypes.string,
+  children: PropTypes.node,
+};
 
 HeroHomePageContent.displayName = 'HeroHomePageContent';
 

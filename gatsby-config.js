@@ -1,3 +1,4 @@
+// eslint-ignore import/no-extraneous-dependencies
 require('dotenv').config();
 
 module.exports = {
